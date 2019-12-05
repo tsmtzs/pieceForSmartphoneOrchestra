@@ -35,9 +35,5 @@ app.use((err, req, res, next) => {
 });
 
 app.get('/', function(req, res){
-    res.sendFile(__dirname + '/views/index.html');
-});
-
-app.get('/pieceA', function(req, res){
     res.sendFile(__dirname + '/views/pieceA.html');
 });

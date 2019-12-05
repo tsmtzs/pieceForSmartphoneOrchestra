@@ -242,7 +242,7 @@ sensor.addEventListener('error', event => {
 
 sensor.addEventListener('reading', sensorListenerFunc(sound, maxAmp, sensorOptions, screenUpVector, deviceHeadVector));
 
-console.log(sensor);
+// console.log(sensor);
 
 sound.nodeListener = audioNodeListenerFunc(sound);
 
@@ -272,4 +272,4 @@ buttons.forEach((btn, i) => {
     btn.addEventListener('click', buttonListenerFunc(state));
 });
 
-console.log(buttons);
+// console.log(buttons);
