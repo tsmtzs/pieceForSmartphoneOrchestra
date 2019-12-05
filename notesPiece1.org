@@ -1,0 +1,10 @@
+# ##################################################
+# Notes for
+# Piece for smartphones A
+# ##################################################
+
+* Generate encryption key and certificate
+  # Run in terminal under ./certs. 
+  openssl req -nodes -new -x509 -keyout server.key -out server.cert
+
+  Save certificates under directory 'certs'.
