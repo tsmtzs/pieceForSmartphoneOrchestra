@@ -1,0 +1,143 @@
+\documentclass[11pt,letterpage]{book}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\usepackage{xgreek}
+
+\setmainfont[Mapping=tex-text]{Linux Biolinum O}
+
+\usepackage[centering]{geometry}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{calc,decorations.pathmorphing}
+
+\pagestyle{empty}
+
+\title{Piece for smartphone orchestra}
+\author{Tassos Tsesmetzis}
+\date{}
+
+\begin{document}
+\thispagestyle{empty}
+\maketitle
+
+\newpage
+
+\chapter*{ Κομμάτι για ορχήστρα smartphone}
+\section*{Οδηγίες}
+\begin{itemize}
+\item Δε χρειάζεται να παίζεις συνεχώς.
+\item Ξεκίνα βαθμιαία.
+\item Σταμάτα βαθμιαία.
+\item Ενσωματώσου στο συνολικό ήχο.
+\item Επεδίωξε τη συνέχεια του συνολικού ήχου.
+\item Αν θέλεις, πάρε τον ήχο από κάποιο γειτονικό εκτελεστή.
+\item Πριν σταματήσεις, μπορείς να δώσεις τον ήχο σου σε κάποιο διπλανό εκτελεστή.
+\item Διατήρησε την ισορροπία.
+\item Όταν η στιγμή είναι κατάλληλη, δημιούργησε διακρoτήματα.
+\item Μπορείς να κινείσαι στο χώρο.
+\item Ακολούθησε το σχήμα\\
+  \begin{center}
+    \begin{tikzpicture}
+      [%
+      line/.style={line width=0.1pt}
+      ]
+      \coordinate (A) at (0,0);
+      \coordinate (B) at (1,0);
+      \coordinate (C) at (2,0.25);
+      \coordinate (D) at (3,0.5);
+      \coordinate (E) at (4,0.75);
+      \coordinate (F) at (5,1.0);
+      \coordinate (G) at (6,0.75);
+      \coordinate (H) at (7,0.5);
+      \coordinate (I) at (8,0.25);
+      \coordinate (J) at (9,0);
+      \coordinate (K) at (10,0);
+      \coordinate (L) at (11,0);
+      \coordinate (M) at (12,0);
+      \coordinate (N) at (13,0);
+      \foreach \letter in {A,B,...,N} {%
+        \fill (\letter) circle [radius=0.025cm];
+        \fill (\letter |- {{(0,0)}}) circle [radius=0.025cm];
+      }
+      % \draw [line, out=60, in=-160] (0,0) to (2,0);
+      % \draw [line, decorate, decoration={random steps,segment length=0.2cm, amplitude=0.1cm}] (0,0) -- (2,1);
+      % \draw [line, decorate, decoration={random steps,segment length=0.2cm, amplitude=0.1cm},out=30, in=-49] (0,0) to (2,1);
+      % \draw [line, decorate, decoration={snake,segment length=0.8cm},out=50, in=170] (0,0) to (2,-1);
+      \draw [line, decorate, decoration={aspect,amplitude=0.5cm},out=-10, in=-180] (0,0) to (2,-0.5);
+    \end{tikzpicture}
+  \end{center}
+\item Σταμάτα να παίζεις όταν θεωρήσεις ότι επιτεύχθηκε ο σκοπός\footnote{\textit{Σκοπός}: Μια νοητική εικόνα για τη μορφή που πρέπει να έχει το έργο.
+    Πρόκειται για ένα δίκτυο νοητικών χώρων που διαμορφώνονται από τις οδηγίες, τις πρόβες και τις διάφορες εκτελέσεις του κομματιού.}
+  και το κομμάτι μπορεί να τελειώσει.
+\end{itemize}
+\section*{Παρατηρήσεις}
+\begin{itemize}
+\item Οι εκτελεστές βρίσκονται ανάμεσα και γύρω από το ακροατήριο.
+\item Καλύτερος ήχος μπορεί να επιτευχθεί αν χρησιμοποιηθούν φορητά ηχεία.
+\item Οι εκτελεστές πρέπει να είναι τουλάχιστον πέντε.
+\item Υπάρχει μια εγγενής θεατρικότητα στις κινήσεις των εκτελεστών.
+\item Η μεταφορά ενός ήχου από έναν εκτελεστή σε άλλο μπορεί να επιτευχθεί με οπτική ή νευματική επικοινωνία.
+\item Οι εκτελεστές έχουν καταφορτώσει την ιστοσελίδα του έργου πριν την έναρξη. Επίσης, πατώντας στον τίτλο του έργου η συσκευή μεταβαίνει σε κατάσταση πλήρους οθόνης.
+\end{itemize}
+{\footnotesize\phantom{}\hfill Ξάνθη, 2018 -- 2020}
+
+\newpage
+
+\chapter*{Piece for smartphone orchestra}
+\section*{Directions}
+\begin{itemize}
+\item You don't have to play all the time.
+\item Start playing gradually.
+\item Stop playing gradually.
+\item Absorb in the global sound.
+\item Strive for the continuity of the general sound.
+\item You can take the sound of a neighboring performer, if you want.
+\item Before you stop you can give your sound to a close performer.
+\item Strive for balance.
+\item Make beats when the moment is appropriate.
+\item You can move if you like.
+\item Follow the general shape\\
+  \begin{center}
+    \begin{tikzpicture}
+      [%
+      line/.style={line width=0.1pt}
+      ]
+      \coordinate (A) at (0,0);
+      \coordinate (B) at (1,0);
+      \coordinate (C) at (2,0.25);
+      \coordinate (D) at (3,0.5);
+      \coordinate (E) at (4,0.75);
+      \coordinate (F) at (5,1.0);
+      \coordinate (G) at (6,0.75);
+      \coordinate (H) at (7,0.5);
+      \coordinate (I) at (8,0.25);
+      \coordinate (J) at (9,0);
+      \coordinate (K) at (10,0);
+      \coordinate (L) at (11,0);
+      \coordinate (M) at (12,0);
+      \coordinate (N) at (13,0);
+      \foreach \letter in {A,B,...,N} {%
+        \fill (\letter) circle [radius=0.025cm];
+        \fill (\letter |- {{(0,0)}}) circle [radius=0.025cm];
+      }
+      % \draw [line, out=60, in=-160] (0,0) to (2,0);
+      % \draw [line, decorate, decoration={random steps,segment length=0.2cm, amplitude=0.1cm}] (0,0) -- (2,1);
+      % \draw [line, decorate, decoration={random steps,segment length=0.2cm, amplitude=0.1cm},out=30, in=-49] (0,0) to (2,1);
+      % \draw [line, decorate, decoration={snake,segment length=0.8cm},out=50, in=170] (0,0) to (2,-1);
+      \draw [line, decorate, decoration={aspect,amplitude=0.5cm},out=-10, in=-180] (0,0) to (2,-0.5);
+    \end{tikzpicture}
+  \end{center}
+\item Stop your playing when you think that the goal\footnote{\textit{Goal}: A mental picture about the form of the piece. Consists of a web of mental spaces that form according to the directions, the rehearsals and the various performances of the piece.} has accomplished and the piece can now end.
+\end{itemize}
+\section*{Remarks}
+\begin{itemize}
+\item Performers are distributed around and among the audience.
+\item Portable speakers can be used for better sound quality.
+\item The number of the performers should be greater or equak to five.
+\item There is an inherent theatrical element in the movements of the performers.
+\item Distribution of sound between performers can be achieved by using visual signs  or gestures.
+\item Performers download the web page of the piece before the performance starts. Fullscreen mode can be enabled by cicking on the title.
+\end{itemize}
+{\footnotesize\phantom{}\hfill Xanthi, 2018 -- 2020}
+\end{document}
