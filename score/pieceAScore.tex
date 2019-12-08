@@ -9,13 +9,51 @@
 \usepackage{color}
 \usepackage{graphicx}
 \usepackage{tikz}
-\usetikzlibrary{calc,decorations.pathmorphing}
+\usetikzlibrary{calc,math,shadings,decorations.pathmorphing}
 
 \pagestyle{empty}
 
 \title{Piece for smartphone orchestra}
 \author{Tassos Tsesmetzis}
 \date{}
+
+% Drawing
+\newcommand{\graphicScore}[2]{
+  \begin{center}
+    \begin{tikzpicture}
+      [%
+      line/.style={line width=0.1pt},
+      ]
+      \tikzmath{
+        \outAB = 5;
+        \inAB = 200;
+        \xB = 1;
+        \yB = 0.1;
+        \xC = 3;
+        \yC = 1.0;
+        \xD = 5;
+        \yD = 0.25;
+        \outDE = -18;
+        \inDE = 177;
+      }
+      \coordinate (A) at (0,0);
+      \coordinate (B) at (\xB,\yB);
+      \coordinate (B') at (\xB,-1*\yB);
+      \coordinate (C) at (\xC,\yC);
+      \coordinate (C') at (\xC,-\yC);
+      \coordinate (D) at (\xD,\yD);
+      \coordinate (D') at (\xD,-\yD);
+      \coordinate (E) at (7.5,0);
+      % draw shape
+      \node [left] at (A) {\scriptsize #1};
+      \node [right] at (E) {\scriptsize #2};
+      \fill [fill=black!100,shading=radial,inner color=black!60,outer color=black!15] (A) to [out=\outAB,in=\inAB] (B) .. controls (C) .. (D) %
+      to [out=\outDE,in=\inDE] (E) %
+      to [out=-\inDE,in=-\outDE] (D')%
+      .. controls (C') .. (B') to [out=-\inAB,in=-\outAB] (A);
+    \end{tikzpicture}
+  \end{center}
+}
 
 \begin{document}
 \thispagestyle{empty}
@@ -37,36 +75,7 @@
 \item Όταν η στιγμή είναι κατάλληλη, δημιούργησε διακρoτήματα.
 \item Μπορείς να κινείσαι στο χώρο.
 \item Ακολούθησε το σχήμα\\
-  \begin{center}
-    \begin{tikzpicture}
-      [%
-      line/.style={line width=0.1pt}
-      ]
-      \coordinate (A) at (0,0);
-      \coordinate (B) at (1,0);
-      \coordinate (C) at (2,0.25);
-      \coordinate (D) at (3,0.5);
-      \coordinate (E) at (4,0.75);
-      \coordinate (F) at (5,1.0);
-      \coordinate (G) at (6,0.75);
-      \coordinate (H) at (7,0.5);
-      \coordinate (I) at (8,0.25);
-      \coordinate (J) at (9,0);
-      \coordinate (K) at (10,0);
-      \coordinate (L) at (11,0);
-      \coordinate (M) at (12,0);
-      \coordinate (N) at (13,0);
-      \foreach \letter in {A,B,...,N} {%
-        \fill (\letter) circle [radius=0.025cm];
-        \fill (\letter |- {{(0,0)}}) circle [radius=0.025cm];
-      }
-      % \draw [line, out=60, in=-160] (0,0) to (2,0);
-      % \draw [line, decorate, decoration={random steps,segment length=0.2cm, amplitude=0.1cm}] (0,0) -- (2,1);
-      % \draw [line, decorate, decoration={random steps,segment length=0.2cm, amplitude=0.1cm},out=30, in=-49] (0,0) to (2,1);
-      % \draw [line, decorate, decoration={snake,segment length=0.8cm},out=50, in=170] (0,0) to (2,-1);
-      \draw [line, decorate, decoration={aspect,amplitude=0.5cm},out=-10, in=-180] (0,0) to (2,-0.5);
-    \end{tikzpicture}
-  \end{center}
+  \graphicScore{ΑΡΧΗ}{ΤΕΛΟΣ}
 \item Σταμάτα να παίζεις όταν θεωρήσεις ότι επιτεύχθηκε ο σκοπός\footnote{\textit{Σκοπός}: Μια νοητική εικόνα για τη μορφή που πρέπει να έχει το έργο.
     Πρόκειται για ένα δίκτυο νοητικών χώρων που διαμορφώνονται από τις οδηγίες, τις πρόβες και τις διάφορες εκτελέσεις του κομματιού.}
   και το κομμάτι μπορεί να τελειώσει.
@@ -98,36 +107,7 @@
 \item Make beats when the moment is appropriate.
 \item You can move if you like.
 \item Follow the general shape\\
-  \begin{center}
-    \begin{tikzpicture}
-      [%
-      line/.style={line width=0.1pt}
-      ]
-      \coordinate (A) at (0,0);
-      \coordinate (B) at (1,0);
-      \coordinate (C) at (2,0.25);
-      \coordinate (D) at (3,0.5);
-      \coordinate (E) at (4,0.75);
-      \coordinate (F) at (5,1.0);
-      \coordinate (G) at (6,0.75);
-      \coordinate (H) at (7,0.5);
-      \coordinate (I) at (8,0.25);
-      \coordinate (J) at (9,0);
-      \coordinate (K) at (10,0);
-      \coordinate (L) at (11,0);
-      \coordinate (M) at (12,0);
-      \coordinate (N) at (13,0);
-      \foreach \letter in {A,B,...,N} {%
-        \fill (\letter) circle [radius=0.025cm];
-        \fill (\letter |- {{(0,0)}}) circle [radius=0.025cm];
-      }
-      % \draw [line, out=60, in=-160] (0,0) to (2,0);
-      % \draw [line, decorate, decoration={random steps,segment length=0.2cm, amplitude=0.1cm}] (0,0) -- (2,1);
-      % \draw [line, decorate, decoration={random steps,segment length=0.2cm, amplitude=0.1cm},out=30, in=-49] (0,0) to (2,1);
-      % \draw [line, decorate, decoration={snake,segment length=0.8cm},out=50, in=170] (0,0) to (2,-1);
-      \draw [line, decorate, decoration={aspect,amplitude=0.5cm},out=-10, in=-180] (0,0) to (2,-0.5);
-    \end{tikzpicture}
-  \end{center}
+  \graphicScore{START}{END}
 \item Stop your playing when you think that the goal\footnote{\textit{Goal}: A mental picture about the form of the piece. Consists of a web of mental spaces that form according to the directions, the rehearsals and the various performances of the piece.} has accomplished and the piece can now end.
 \end{itemize}
 \section*{Remarks}
