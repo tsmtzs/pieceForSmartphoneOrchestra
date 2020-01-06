@@ -1,16 +1,32 @@
 const fs = require('fs');
 const express = require('express');
 const app = express();
+// http options
+const http = require('http');
+const httpPort = 80;
 // https options
 const https =require('https');	//
-const httpsPort = 8000;
+const httpsPort = 443;
 const key = './certs/server.key';
 const certificate = './certs/server.cert';
 const serverOptions = {
     key: fs.readFileSync(key),
     cert: fs.readFileSync(certificate)
 };
-// Create web server
+
+
+// Redirect http messages to https
+app.use( (request, response) => {
+    if (!request.secure) {
+	console.log('https://' + request.headers.host + request.url);
+	response.redirect('https://' + request.headers.host + request.url);
+    }
+});
+
+// Create http server
+const httpServer = http.createServer(app).listen(httpPort);
+
+// Create https web server
 const httpsServer = https.createServer(serverOptions, app);
 // //////////////////////////////////////////////////
 const path = require('path');
