@@ -1,3 +1,8 @@
+// General
+const path = require('path');
+const bodyParser = require('body-parser');
+// const WebSocketServer = require('ws').Server;
+// const wss = new WebSocketServer({server: httpsServer});
 const fs = require('fs');
 const express = require('express');
 const app = express();
@@ -14,25 +19,21 @@ const serverOptions = {
     cert: fs.readFileSync(certificate)
 };
 
-
-// Redirect http messages to https
-app.use( (request, response) => {
-    if (!request.secure) {
-	console.log('https://' + request.headers.host + request.url);
-	response.redirect('https://' + request.headers.host + request.url);
-    }
+// Create an HTTP server on port `httpPort` and redirect to HTTPS
+// From
+// https://www.grizzlypeaksoftware.com/blog?id=JDcsPW2raSic6oc6MCYaM
+var httpServer = http.createServer( (req,res) => {    
+    // 301 redirect (reclassifies google listings)
+    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+    res.end();
 });
 
-// Create http server
-const httpServer = http.createServer(app).listen(httpPort);
+httpServer.listen(httpPort, function(err){
+    console.log(`Http server listening on port: ${httpPort}`);    
+});
 
 // Create https web server
 const httpsServer = https.createServer(serverOptions, app);
-// //////////////////////////////////////////////////
-const path = require('path');
-const bodyParser = require('body-parser');
-// const WebSocketServer = require('ws').Server;
-// const wss = new WebSocketServer({server: httpsServer});
 
 httpsServer.listen(httpsPort, function(){
     console.log('Https server listening  on port: ', httpsPort);
