@@ -8,3 +8,17 @@
   openssl req -nodes -new -x509 -keyout server.key -out server.cert
 
   Save certificates under directory 'certs'.
+
+* Using Lets Encrypt's ~certbot~
+** Quick tutorials
+   https://medium.com/@yash.kulshrestha/using-lets-encrypt-with-express-e069c7abe625
+   https://itnext.io/node-express-letsencrypt-generate-a-free-ssl-certificate-and-run-an-https-server-in-5-minutes-a730fbe528ca
+
+_*NOTE*_: certbot doesn't work with inexistent domain names.
+
+For a local solution see [[https://smallstep.com/blog/private-acme-server/][here]].
+
+For node.js there is the [[https://github.com/publishlab/node-acme-client][node-acme-client]] package.
+Also, look here:
+https://git.coolaj86.com/coolaj86/greenlock-express.js
+

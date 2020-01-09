@@ -29,7 +29,7 @@ var httpServer = http.createServer( (req,res) => {
 });
 
 httpServer.listen(httpPort, function(err){
-    console.log(`Http server listening on port: ${httpPort}`);    
+    console.log('Http server listening on port: ', httpPort);    
 });
 
 // Create https web server
@@ -42,7 +42,7 @@ httpsServer.listen(httpsPort, function(){
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({extended: true})); // support encoded bodies
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), {dotfiles: 'allow'}));
 app.use(express.static(path.join(__dirname, 'node_modules/')));
 
 // error handling - from https://expressjs.com/en/guide/error-handling.html
