@@ -12,8 +12,8 @@ const httpPort = 80;
 // https options
 const https =require('https');	//
 const httpsPort = 443;
-const key = './certs/server.key';
-const certificate = './certs/server.cert';
+const key = './srv.key';
+const certificate = './srv.crt';
 const serverOptions = {
     key: fs.readFileSync(key),
     cert: fs.readFileSync(certificate)
