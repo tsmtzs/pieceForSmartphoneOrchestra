@@ -1,3 +1,9 @@
+// //////////////////////////////////////////////////
+// Several functions for
+//	Study for smartphone orchestra
+//			by Tassos Tsesmetzis
+// //////////////////////////////////////////////////
+
 // linear mapping [a, b] -> [c, d].
 function map (x, a = 0, b = 1, c = 0, d = 1) {
     let dif = a - b;
@@ -71,5 +77,30 @@ function angleBetweenVectors (v1, v2) {
     return Math.acos(vectorDotProduct(v1, v2) / (vectorLength(v1) * vectorLength(v2)));
 }
 
+// Enable full screen mode
+// adapted from
+//https://developer.mozilla.org/samples/domref/fullscreen.html
+function toggleFullScreen(elem) {
+    if (!document.mozFullScreen && !document.webkitFullScreen) {
+	if (elem.mozRequestFullScreen) {
+            elem.mozRequestFullScreen();
+	} else {
+            elem.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+	}
+    } else {
+	if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+	} else {
+            document.webkitCancelFullScreen();
+	}
+    }
+}
+
+// 'h1' element event listener. Change to full screen.
+function titleEventListener (toggleFullScreen, elem) {
+    return (event) => toggleFullScreen(elem);
+}
+
 export {map, clip, rotateVector};
 export {vectorLength, vectorDotProduct, angleBetweenVectors};
+export {toggleFullScreen, titleEventListener};

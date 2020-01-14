@@ -1,8 +1,10 @@
+// //////////////////////////////////////////////////
+// Study for smartphone orchestra
+//	Piece A
+// //////////////////////////////////////////////////
 // General
 const path = require('path');
 const bodyParser = require('body-parser');
-// const WebSocketServer = require('ws').Server;
-// const wss = new WebSocketServer({server: httpsServer});
 const fs = require('fs');
 const express = require('express');
 const app = express();
@@ -12,8 +14,8 @@ const httpPort = 80;
 // https options
 const https =require('https');	//
 const httpsPort = 443;
-const key = './srv.key';
-const certificate = './srv.crt';
+const key = './certs/server.key';
+const certificate = './certs/server.cert';
 const serverOptions = {
     key: fs.readFileSync(key),
     cert: fs.readFileSync(certificate)

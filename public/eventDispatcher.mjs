@@ -1,3 +1,9 @@
+// //////////////////////////////////////////////////
+// An event dispatcher object object for
+//	Study for smartphone orchestra
+//		Piece A
+//			by Tassos Tsesmetzis
+// //////////////////////////////////////////////////
 // Adapted from
 // http://www.awwwards.com/build-a-simple-javascript-app-the-mvc-way.html
 
