@@ -16,7 +16,8 @@
 
 _*NOTE*_: certbot doesn't work with inexistent domain names.
 
-For a local solution see [[https://smallstep.com/blog/private-acme-server/][here]].
+For a local solution see [[https://smallstep.com/blog/private-acme-server/][here]]. Also look [[https://smallstep.com/docs/getting-started/][here]] and [[https://github.com/smallstep/certificates][here]]. 
+Use these to generate a key pair ~server.crt~, ~server.key~ and ~root.crt~ for clients.
 
 For node.js there is the [[https://github.com/publishlab/node-acme-client][node-acme-client]] package.
 Also, look here:

@@ -15,10 +15,12 @@ const httpPort = 80;
 const https =require('https');	//
 const httpsPort = 443;
 const key = './certs/server.key';
-const certificate = './certs/server.cert';
+const certificate = './certs/server.crt';
+const rootCA = './certs/root.crt';
 const serverOptions = {
     key: fs.readFileSync(key),
-    cert: fs.readFileSync(certificate)
+    cert: fs.readFileSync(certificate),
+    ca: fs.readFileSync(rootCA)
 };
 
 // Create an HTTP server on port `httpPort` and redirect to HTTPS
