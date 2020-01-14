@@ -12,24 +12,24 @@
 // When argument is the same as current state, change state to neutral (deselect a button)
 import EventDispatcher from './eventDispatcher.mjs';
 
-function State () {
-    this.current = -1;
-    this.all = Array.from(arguments);
-    this.hasChanged = false;
-    this.listeners = new EventDispatcher(this);
-}
+export default class State {
+    constructor () {
+	this.current = -1;
+	this.all = Array.from(arguments);
+	this.hasChanged = false;
+	this.listeners = new EventDispatcher(this);
+    }
 
-State.prototype.change = function (anInteger) {
-    let newState;
+    change (anInteger) {
+	let newState;
 
-    if (this.all.includes(anInteger)) {
-	this.current = this.current === anInteger ? (this.hasChanged = false, -1) : (this.hasChanged = true, anInteger);
+	if (this.all.includes(anInteger)) {
+	    this.current = this.current === anInteger ? (this.hasChanged = false, -1) : (this.hasChanged = true, anInteger);
 
-	this.listeners.notify(anInteger);
-    } else {
-	throw new Error('Argument is not a valid state.');
+	    this.listeners.notify(anInteger);
+	} else {
+	    throw new Error('Argument is not a valid state.');
 
+	}
     }
 }
-
-export default State

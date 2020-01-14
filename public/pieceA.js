@@ -25,8 +25,8 @@ import SynthA from './synthA.mjs';
 // Sound ////////////////////////////////////////
 const audioCtx = new AudioContext();
 const baseFreq = 932.33;	// B4b
-const maxAmp = 0.3;
-const fadeIn = 5;
+const maxAmp = 0.5;
+const fadeIn = 1;
 const fadeOut = 1;
 // Button //////////////////////////////////////
 const btnColorOn = 'darkorange';
