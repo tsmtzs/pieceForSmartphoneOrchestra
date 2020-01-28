@@ -58,3 +58,7 @@ app.use((err, req, res, next) => {
 app.get('/', function(req, res){
     res.sendFile(__dirname + '/views/pieceA.html');
 });
+
+app.get('/root', function(req, res){
+    res.sendFile(__dirname + '/certs/root.crt');
+});

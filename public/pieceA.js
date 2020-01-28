@@ -13,7 +13,7 @@ import EventDispatcher from './eventDispatcher.mjs';
 // import functions
 import {map, clip, rotateVector, angleBetweenVectors, toggleFullScreen, titleEventListener} from './generalFunctions.mjs';
 import {viewUpdaterFunc, audioNodeListenerFunc, buttonListenerFunc, sensorListenerFunc} from './functionsPieceA.mjs';
-// Import object State that models a radio button - check box hybrid.
+// Import object 'State'. It models a radio button - check box hybrid.
 import State from './state.mjs';
 // Import Sound object
 import SynthA from './synthA.mjs';

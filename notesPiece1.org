@@ -1,25 +1,12 @@
 # ##################################################
 # Notes for
-# Piece for smartphones A
+# 'Piece for smartphone orchestra A'
 # ##################################################
 
-* Generate encryption key and certificate
-  # Run in terminal under ./certs. 
-  openssl req -nodes -new -x509 -keyout server.key -out server.cert
-
-  Save certificates under directory 'certs'.
-
-* Using Lets Encrypt's ~certbot~
-** Quick tutorials
-   https://medium.com/@yash.kulshrestha/using-lets-encrypt-with-express-e069c7abe625
-   https://itnext.io/node-express-letsencrypt-generate-a-free-ssl-certificate-and-run-an-https-server-in-5-minutes-a730fbe528ca
-
-_*NOTE*_: certbot doesn't work with inexistent domain names.
-
-For a local solution see [[https://smallstep.com/blog/private-acme-server/][here]]. Also look [[https://smallstep.com/docs/getting-started/][here]] and [[https://github.com/smallstep/certificates][here]]. 
-Use these to generate a key pair ~server.crt~, ~server.key~ and ~root.crt~ for clients.
-
-For node.js there is the [[https://github.com/publishlab/node-acme-client][node-acme-client]] package.
-Also, look here:
-https://git.coolaj86.com/coolaj86/greenlock-express.js
-
+* Generate certificates with a local private Certification Authority.
+For this you need ~Smallstep~'s [[https://github.com/smallstep/cli][step-cli]] and [[https://github.com/smallstep/certificates][step-ca]] programmes. Follow the tutorial 
+https://smallstep.com/blog/private-acme-server/ to generate certificates. 
+To get the root certificate from ~step~ CA run
+		~step ca root root.crt~
+see https://github.com/smallstep/certificates.
+Download root certificate by navigating to ~<server-IP>/root~. Then Install root certificate on smartphones.

@@ -15,9 +15,10 @@ header h1 {
 }
 
 header p {
-    text-align: right;
-    margin-right: 3vw;
-    font-size: 1.6rem;
+    margin-top: -1rem;
+    text-align: center;
+    font-size: 1.8rem;
+    font-style: italic;
 }
 
 main {
