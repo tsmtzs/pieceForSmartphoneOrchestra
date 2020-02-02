@@ -24,7 +24,7 @@ import SynthA from './synthA.mjs';
 // //////////////////////////////////////////////////
 // Sound ////////////////////////////////////////
 const audioCtx = new AudioContext();
-const baseFreq = 932.33;	// B4b
+const baseFreq = 1318.5102276515;	// E6
 const maxAmp = 0.5;
 const fadeIn = 1;
 const fadeOut = 1;

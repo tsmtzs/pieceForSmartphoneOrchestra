@@ -17,7 +17,7 @@ SynthDef(\sine, {|out = 0, freq = 200, amp = 0.05, attack = 2, release = 4, gate
 )
 
 (
-var baseFreq = 2 * 932.33;
+var baseFreq = 88.midicps;
 var voices = 15, pat;
 var firstPart = 140, secondPart = 280;
 
