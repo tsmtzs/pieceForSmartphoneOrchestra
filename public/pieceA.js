@@ -24,8 +24,8 @@ import SynthA from './synthA.mjs';
 // //////////////////////////////////////////////////
 // Sound ////////////////////////////////////////
 const audioCtx = new AudioContext();
-const baseFreq = 1318.5102276515;	// E6
-const maxAmp = 0.5;
+const baseFreq = 1244.5079348883;	// Eflat 6
+const maxAmp = 0.6;
 const fadeIn = 1;
 const fadeOut = 1;
 // Button //////////////////////////////////////

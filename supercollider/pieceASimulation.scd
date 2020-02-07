@@ -17,9 +17,10 @@ SynthDef(\sine, {|out = 0, freq = 200, amp = 0.05, attack = 2, release = 4, gate
 )
 
 (
-var baseFreq = 88.midicps;
+var baseFreq = 87.midicps;
 var voices = 15, pat;
 var firstPart = 140, secondPart = 280;
+var path = "./pieceASimulation_15voices.aiff";
 
 pat = Ppar({|i|
 	Pbind(
@@ -34,7 +35,10 @@ pat = Ppar({|i|
 		\dur, Pmeanrand(20, 35)
 	)} ! voices);
 
-Pdef(\a, pat).play;
+// pat.play;
+// Record as 'aiff' file
+pat.record(path);
+
 )
 
 // //////////////////////////////////////////////////
