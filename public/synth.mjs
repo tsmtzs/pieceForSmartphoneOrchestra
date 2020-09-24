@@ -1,8 +1,8 @@
 // //////////////////////////////////////////////////
-// Sound object for
-//	Study for smartphone orchestra
-//		Piece A
+//	Piece for smartphone orchestra
 //			by Tassos Tsesmetzis
+//
+// Sound object.
 // //////////////////////////////////////////////////
 // Object 'SynthA' models sound.
 export default class SynthA {
@@ -44,8 +44,8 @@ export default class SynthA {
 
     stop (index) {
 	const current = this.playing[index];
-	
-	this.playing[index] = undefined;    
+
+	this.playing[index] = undefined;
 
 	current.gain.gain.linearRampToValueAtTime(0, this.context.currentTime + this.fadeOut);
 	current.oscillator.stop(this.context.currentTime + this.fadeOut);

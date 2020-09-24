@@ -1,10 +1,11 @@
 // //////////////////////////////////////////////////
-// Several functions for
 //	Study for smartphone orchestra
-//		Piece A
 //			by Tassos Tsesmetzis
+//
+// This files collects several functions specific
+// to the piece.
 // //////////////////////////////////////////////////
-import {map, clip, rotateVector, angleBetweenVectors} from './generalFunctions.mjs';
+import { map, clip, rotateVector, angleBetweenVectors } from './generalFunctions.mjs';
 
 function viewUpdaterFunc (buttons, sound) {
     return (state, oldState) => {
@@ -28,7 +29,7 @@ function viewUpdaterFunc (buttons, sound) {
 		  .find(btn => btn.isEnabled);
 
 	    if (button) button.disable();
-	    
+
 	    // enable new button
 	    buttons[state.current].enable();
 	} else {
@@ -63,7 +64,7 @@ function sensorListenerFunc (sound, maxAmp, sensorOptions, ampVector, detuneVect
 		rotateVector(event.target.quaternion, ampVector),
 		ampVector
 	    ),
-	    0, Math.PI, 	// 
+	    0, Math.PI,
 	    0, maxAmp
 	),
 			      2);
@@ -97,4 +98,4 @@ function sensorListenerFunc (sound, maxAmp, sensorOptions, ampVector, detuneVect
     };
 }
 
-export {viewUpdaterFunc, audioNodeListenerFunc, buttonListenerFunc, sensorListenerFunc};
+export { viewUpdaterFunc, audioNodeListenerFunc, buttonListenerFunc, sensorListenerFunc };

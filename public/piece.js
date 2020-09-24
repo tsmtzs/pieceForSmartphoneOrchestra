@@ -1,8 +1,8 @@
 // //////////////////////////////////////////////////
-// Main javascript file for
-//	Study for smartphone orchestra
-//		Piece A
+//	Piece for smartphone orchestra
 //			by Tassos Tsesmetzis
+//
+// Main JavaScript file.
 // //////////////////////////////////////////////////
 
 // //////////////////////////////////////////////////
@@ -11,8 +11,8 @@
 // Import EventDispatcher
 import EventDispatcher from './eventDispatcher.mjs';
 // import functions
-import {map, clip, rotateVector, angleBetweenVectors, toggleFullScreen, titleEventListener} from './generalFunctions.mjs';
-import {viewUpdaterFunc, audioNodeListenerFunc, buttonListenerFunc, sensorListenerFunc} from './functionsPieceA.mjs';
+import { map, clip, rotateVector, angleBetweenVectors, toggleFullScreen, titleEventListener } from './generalFunctions.mjs';
+import { viewUpdaterFunc, audioNodeListenerFunc, buttonListenerFunc, sensorListenerFunc } from './functionsPieceA.mjs';
 // Import object 'State'. It models a radio button - check box hybrid.
 import State from './state.mjs';
 // Import Sound object
@@ -38,7 +38,7 @@ const main = document.getElementsByTagName('main')[0]; // show this element in f
 const state = new State(0, 1, 2); // New 'State' object with states 0, 1, 2 and neutral state -1
 const buttons = Array.from(document.getElementsByTagName('button'));
 
-// 
+//
 const sound = new SynthA(baseFreq, fadeIn, fadeOut, audioCtx)
 // Sensor //////////////////////////////////////
 const sensorOptions = {frequency: 60, referenceFrame: 'screen'};

@@ -1,7 +1,8 @@
 // //////////////////////////////////////////////////
-// Several functions for
 //	Study for smartphone orchestra
 //			by Tassos Tsesmetzis
+//
+// General purpose functions.
 // //////////////////////////////////////////////////
 
 // linear mapping [a, b] -> [c, d].
@@ -22,7 +23,7 @@ function clip (x, a, b) {
 // Function 'rotateVector' adapted from the
 // JavaScript library 'Quaternion.js'
 // https://github.com/infusion/Quaternion.js
-// 
+//
 /**
  * Rotates a vector according to the current quaternion
  *
@@ -101,6 +102,6 @@ function titleEventListener (toggleFullScreen, elem) {
     return (event) => toggleFullScreen(elem);
 }
 
-export {map, clip, rotateVector};
-export {vectorLength, vectorDotProduct, angleBetweenVectors};
-export {toggleFullScreen, titleEventListener};
+export { map, clip, rotateVector };
+export { vectorLength, vectorDotProduct, angleBetweenVectors };
+export { toggleFullScreen, titleEventListener };
