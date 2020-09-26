@@ -9,14 +9,14 @@
 // Import statements.
 // //////////////////////////////////////////////////
 // Import EventDispatcher
-import EventDispatcher from './eventDispatcher.mjs';
+import { EventDispatcher } from './eventDispatchers.mjs';
 // import functions
 import { map, clip, rotateVector, angleBetweenVectors, toggleFullScreen, titleEventListener } from './generalFunctions.mjs';
-import { viewUpdaterFunc, audioNodeListenerFunc, buttonListenerFunc, sensorListenerFunc } from './functionsPieceA.mjs';
+import { viewUpdaterFunc, audioNodeListenerFunc, buttonListenerFunc, sensorListenerFunc } from './functionsForPiece.mjs';
 // Import object 'State'. It models a radio button - check box hybrid.
 import State from './state.mjs';
 // Import Sound object
-import SynthA from './synthA.mjs';
+import Synth from './synth.mjs';
 
 
 // //////////////////////////////////////////////////
@@ -39,7 +39,7 @@ const state = new State(0, 1, 2); // New 'State' object with states 0, 1, 2 and 
 const buttons = Array.from(document.getElementsByTagName('button'));
 
 //
-const sound = new SynthA(baseFreq, fadeIn, fadeOut, audioCtx)
+const sound = new Synth(baseFreq, fadeIn, fadeOut, audioCtx)
 // Sensor //////////////////////////////////////
 const sensorOptions = {frequency: 60, referenceFrame: 'screen'};
 const sensor = new AbsoluteOrientationSensor(sensorOptions);

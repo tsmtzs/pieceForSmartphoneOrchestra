@@ -11,7 +11,7 @@
 // The method 'change' changes state (presses - deselects a button).
 // When the argument is different than current state, pass it to current state (press radio button).
 // When the argument is the same as current state, change state to neutral (deselect a button)
-import EventDispatcher from './eventDispatcher.mjs';
+import { EventDispatcher } from './eventDispatchers.mjs';
 
 export default class State {
     constructor () {

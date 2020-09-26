@@ -4,8 +4,8 @@
 //
 // Sound object.
 // //////////////////////////////////////////////////
-// Object 'SynthA' models sound.
-export default class SynthA {
+// Object 'Synth' models sound.
+export default class Synth {
     constructor (baseFreq, fadeIn, fadeOut, audioCtx) {
 	this.baseFreq = baseFreq;
 	this.fadeIn = fadeIn;

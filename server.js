@@ -1,6 +1,7 @@
 // //////////////////////////////////////////////////
-// Study for smartphone orchestra
-//	Piece A
+// Piece for smartphone orchestra
+//
+// Web server main JavaScript file.
 // //////////////////////////////////////////////////
 // General
 const path = require('path');
@@ -26,14 +27,14 @@ const serverOptions = {
 // Create an HTTP server on port `httpPort` and redirect to HTTPS
 // From
 // https://www.grizzlypeaksoftware.com/blog?id=JDcsPW2raSic6oc6MCYaM
-var httpServer = http.createServer( (req,res) => {    
+var httpServer = http.createServer( (req,res) => {
     // 301 redirect (reclassifies google listings)
     res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
     res.end();
 });
 
 httpServer.listen(httpPort, function(err){
-    console.log('Http server listening on port: ', httpPort);    
+    console.log('Http server listening on port: ', httpPort);
 });
 
 // Create https web server
@@ -56,7 +57,7 @@ app.use((err, req, res, next) => {
 });
 
 app.get('/', function(req, res){
-    res.sendFile(__dirname + '/views/pieceA.html');
+    res.sendFile(__dirname + '/views/piece.html');
 });
 
 app.get('/root', function(req, res){
