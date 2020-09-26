@@ -20,7 +20,7 @@ function clip (x, a, b) {
     return Math.max(min, Math.min(max, x));
 }
 
-// Function 'rotateVector' adapted from the
+// Function 'rotateVector' is from the
 // JavaScript library 'Quaternion.js'
 // https://github.com/infusion/Quaternion.js
 //
@@ -97,11 +97,11 @@ function toggleFullScreen(elem) {
     }
 }
 
-// 'h1' element event listener. Change to full screen.
-function titleEventListener (toggleFullScreen, elem) {
-    return (event) => toggleFullScreen(elem);
+// Element event listener. Change to full screen.
+function elementEventListener (toggleFullScreen, elem) {
+    return event => toggleFullScreen(elem);
 }
 
 export { map, clip, rotateVector };
 export { vectorLength, vectorDotProduct, angleBetweenVectors };
-export { toggleFullScreen, titleEventListener };
+export { toggleFullScreen, elementEventListener };

@@ -3,13 +3,17 @@
   <head>
     <meta charset="utf-8">
     <meta name="vieport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Tassos Tsesmetzis">
     <title>Piece for smartphone orchestra</title>
     <link rel="stylesheet" href="stylesheet.css">
+    <!-- A workaround to avoid the annoying chrome error message -->
+    <!-- 'favicon not found' -->
+    <link rel="shortcut icon" href="">
   </head>
   <body>
     <header>
       <h1>Piece for smartphone orchestra</h1>
-      <p id='note'>Click title for fullscreen</p>
+      <p id='note'>Click on title for fullscreen</p>
     </header>
     <main>
       <button type="button"></button>
@@ -18,13 +22,6 @@
     </main>
     <!-- A post console for mobile devices -->
     <!-- <script src="hnl.mobileConsole.js"></script> -->
-    <script type="module" src="eventDispatchers.mjs"></script>
-    <script type="module" src="generalFunctions.mjs"></script>
-    <!-- Functions for Piece are based on 'generalFunctions.mjs' -->
-    <script type="module" src="functionsForPiece.mjs"></script>
-    <!-- State object uses EventDispatcher -->
-    <script type="module" src="state.mjs"></script>
-    <script type="module" src="synth.mjs"></script>
     <script type="module" src="piece.js"></script>
   </body>
 </html>

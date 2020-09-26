@@ -11,7 +11,7 @@
 // Import EventDispatcher
 import { EventDispatcher } from './eventDispatchers.mjs';
 // import functions
-import { map, clip, rotateVector, angleBetweenVectors, toggleFullScreen, titleEventListener } from './generalFunctions.mjs';
+import { map, clip, rotateVector, angleBetweenVectors, toggleFullScreen, elementEventListener } from './generalFunctions.mjs';
 import { viewUpdaterFunc, audioNodeListenerFunc, buttonListenerFunc, sensorListenerFunc } from './functionsForPiece.mjs';
 // Import object 'State'. It models a radio button - check box hybrid.
 import State from './state.mjs';
@@ -32,7 +32,7 @@ const fadeOut = 1;
 const btnColorOn = 'darkorange';
 const btnColorOff = 'darkslategray';
 // Toggle full screen
-const title = document.getElementsByTagName('h1')[0]; // toggle fullscreen when pressed
+const header = document.getElementsByTagName('header')[0]; // toggle fullscreen when pressed
 const main = document.getElementsByTagName('main')[0]; // show this element in fullscreen
 // /////////////////////////////////////////////
 const state = new State(0, 1, 2); // New 'State' object with states 0, 1, 2 and neutral state -1
@@ -59,13 +59,13 @@ sensor.addEventListener('error', event => {
 sensor.addEventListener('reading', sensorListenerFunc(sound, maxAmp, sensorOptions, screenUpVector, deviceHeadVector));
 
 // console.log(sensor);
-
+// //////////////////////////////////////////////////
 sound.nodeListener = audioNodeListenerFunc(sound);
 
 state.listeners.attach(viewUpdaterFunc(buttons, sound));
 
-// Toggle full screen when user touches the title
-title.addEventListener('click', titleEventListener(toggleFullScreen, main));
+// Toggle full screen when user clicks on title
+header.addEventListener('click', elementEventListener(toggleFullScreen, main));
 
 // Extend 'Button' objects and add event listeners
 buttons.forEach((btn, i) => {

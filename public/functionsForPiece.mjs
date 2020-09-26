@@ -14,7 +14,6 @@ function viewUpdaterFunc (buttons, sound) {
 
 	    // Stop playing synths if any
 	    const sndIndxs = Object.values(sound.playing)
-		  .filter(snd => snd)
 		  .filter(snd => indices.includes(snd.oscillator.index))
 		  .map(snd => snd.oscillator.index);
 
@@ -33,10 +32,10 @@ function viewUpdaterFunc (buttons, sound) {
 	    // enable new button
 	    buttons[state.current].enable();
 	} else {
-	    // close playing synth if any
+	    // Stop playing synth if any
 	    sound.stop(oldState);
 
-	    // change color to button if any
+	    // Change color to button
 	    buttons[oldState].disable();
 	}
     };
@@ -56,7 +55,7 @@ function buttonListenerFunc (state) {
 }
 
 function sensorListenerFunc (sound, maxAmp, sensorOptions, ampVector, detuneVector) {
-    const delta = 0.1 / sensorOptions.frequency;
+    const delta = 1 / sensorOptions.frequency;
 
     return (event) => {
 	const amp = Math.pow( map(
@@ -71,8 +70,8 @@ function sensorListenerFunc (sound, maxAmp, sensorOptions, ampVector, detuneVect
 
 	const detune = map(
 	    angleBetweenVectors(
-	    rotateVector(event.target.quaternion, detuneVector),
-	    detuneVector
+		rotateVector(event.target.quaternion, detuneVector),
+		detuneVector
 	    ),
 	    0, Math.PI,
 	    100, -100
