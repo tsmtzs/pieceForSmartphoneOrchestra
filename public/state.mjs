@@ -22,8 +22,6 @@ export default class State {
     }
 
     change (anInteger) {
-	let newState;
-
 	if (this.all.includes(anInteger)) {
 	    this.current = this.current === anInteger ? (this.hasChanged = false, -1) : (this.hasChanged = true, anInteger);
 
