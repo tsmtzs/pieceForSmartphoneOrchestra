@@ -12,7 +12,7 @@ export default class Synth {
 	this.fadeOut = fadeOut;
 
 	this.context = audioCtx;
-	this.playing = {};	// stores playing synths
+	this.playing = [];	// stores playing synths
     }
 
     play (index, freq) {
@@ -28,7 +28,7 @@ export default class Synth {
 	// add a new property 'index'
 	oscillator.index = index;
 
-	gain.gain.value = 0;
+	gain.gain.value = this.amp ? this.amp : 0.0;
 
 	fadeIn.gain.setValueAtTime(0, this.context.currentTime);
 	fadeIn.gain.linearRampToValueAtTime(1, this.context.currentTime + this.fadeIn);
@@ -45,14 +45,20 @@ export default class Synth {
     stop (index) {
 	const current = this.playing[index];
 
-	this.playing[index] = undefined;
+	if (current) {
+	    // Remove sound object at index from playing sounds.
+	    // Otherwise, sensor data will overwrite amp.
+	    this.playing[index] = undefined;
 
-	current.gain.gain.linearRampToValueAtTime(0, this.context.currentTime + this.fadeOut);
-	current.oscillator.stop(this.context.currentTime + this.fadeOut);
-	// console.log(this.playing, index);
+	    current.gain.gain.cancelScheduledValues(0.0);
+	    current.gain.gain.linearRampToValueAtTime(0.0, this.context.currentTime + this.fadeOut);
+	    current.oscillator.stop(this.context.currentTime + this.fadeOut + 0.001);
+	    // console.log(this.playing, index);
+	}
     }
 
     putAtPlaying (index, object) {
+	this.stop(index);
 	this.playing[index] = object;
 	object.oscillator.addEventListener('ended', this.nodeListener);
     }
