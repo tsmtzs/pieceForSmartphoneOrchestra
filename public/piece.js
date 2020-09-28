@@ -12,7 +12,7 @@
 import { EventDispatcher } from './eventDispatchers.mjs';
 // import functions
 import { map, clip, rotateVector, angleBetweenVectors, toggleFullScreen, elementEventListener } from './generalFunctions.mjs';
-import { viewUpdaterFunc, audioNodeListenerFunc, buttonListenerFunc, sensorListenerFunc } from './functionsForPiece.mjs';
+import { viewUpdaterFunc, buttonListenerFunc, sensorListenerFunc } from './functionsForPiece.mjs';
 // Import object 'State'. It models a radio button - check box hybrid.
 import State from './state.mjs';
 // Import Sound object
@@ -64,7 +64,7 @@ buttons.forEach((btn, i) => {
 // console.log(buttons);
 
 // Initially, the 'button' elements are 'hidden'.
-// buttons.forEach(button => button.hidden = true);
+buttons.forEach(button => button.hidden = true);
 // Sensor //////////////////////////////////////
 const sensorOptions = {frequency: 60, referenceFrame: 'screen'};
 const sensor = new AbsoluteOrientationSensor(sensorOptions);
@@ -81,17 +81,16 @@ const deviceHeadVector = [0, 1, 0];	// This vector will be rotated as the user m
 	elementEventListener(toggleFullScreen, main)(event);
 	return event;
     })
-    // .then(event => {
-    // 	// Initially, the 'button' elements are 'hidden'.
-    // 	buttons.forEach(button => button.hidden = false);
+    .then(event => {
+	// Initially, the 'button' elements are 'hidden'.
+	buttons.forEach(button => button.hidden = false);
 
-    // 	return event;
-    // })
+	return event;
+    })
     .then(event => {
 	const audioCtx = new AudioContext();
 	const sound = new Synth(baseFreq, fadeIn, fadeOut, audioCtx)
 
-	sound.nodeListener = audioNodeListenerFunc(sound);
 	state.listeners.attach(viewUpdaterFunc(buttons, sound));
 
 	return sound;

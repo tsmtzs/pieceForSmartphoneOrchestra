@@ -28,7 +28,7 @@ export default class Synth {
 	// add a new property 'index'
 	oscillator.index = index;
 
-	gain.gain.value = 0.0;
+	gain.gain.value = this.amp ? this.amp : 0.0;
 
 	fadeIn.gain.setValueAtTime(0, this.context.currentTime);
 	fadeIn.gain.linearRampToValueAtTime(1, this.context.currentTime + this.fadeIn);
@@ -44,10 +44,13 @@ export default class Synth {
 
     stop (index) {
 	const current = this.playing[index];
-	// this.playing[index] = undefined;
 
 	if (current) {
-	    current.gain.gain.cancelScheduledValues(0);
+	    // Remove sound object at index from playing sounds.
+	    // Otherwise, sensor data will overwrite amp.
+	    this.playing[index] = undefined;
+
+	    current.gain.gain.cancelScheduledValues(0.0);
 	    current.gain.gain.linearRampToValueAtTime(0.0, this.context.currentTime + this.fadeOut);
 	    current.oscillator.stop(this.context.currentTime + this.fadeOut + 0.001);
 	    // console.log(this.playing, index);

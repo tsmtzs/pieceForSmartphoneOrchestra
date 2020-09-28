@@ -8,18 +8,18 @@
 import { map, clip, rotateVector, angleBetweenVectors } from './generalFunctions.mjs';
 
 function viewUpdaterFunc (buttons, sound) {
-    let oldState = -1;
+    let previousState = -1;
 
     return state => {
-	console.log('*** State', state, '\tOldState:', oldState);
+	console.log('*** State', state, '\tOldState:', previousState);
 	// Stop playing synth if any
-	if (oldState > -1) sound.stop(oldState);
+	if (previousState > -1) sound.stop(previousState);
 
 	if (state.hasChanged) {
 	    const indices = state.all.filter(st => st !== state.current);
 
-	    // Set 'oldState'
-	    oldState = state.current;
+	    // Set 'previousState'
+	    previousState = state.current;
 
 	    // start new synth
 	    sound.play(state.current, (state.current + 1) * sound.baseFreq);
@@ -42,16 +42,10 @@ function viewUpdaterFunc (buttons, sound) {
 	    buttons[state.current].enable();
 	} else {
 	    // Change color to button
-	    buttons[oldState].disable();
+	    buttons[previousState].disable();
 
 	    console.log('State did not change');
 	}
-    };
-}
-
-function audioNodeListenerFunc (sound) {
-    return (event) => {
-	sound.playing[event.target.index] = undefined;
     };
 }
 
@@ -64,16 +58,18 @@ function buttonListenerFunc (state) {
 function sensorListenerFunc (sound, maxAmp, sensorOptions, ampVector, detuneVector) {
     const delta = 0.1 / sensorOptions.frequency;
 
-    return (event) => {
-	const amp = Math.pow( map(
-	    angleBetweenVectors(
-		rotateVector(event.target.quaternion, ampVector),
-		ampVector
+    return event => {
+	const amp = maxAmp * Math.pow(
+	    map(
+		angleBetweenVectors(
+		    rotateVector(event.target.quaternion, ampVector),
+		    ampVector
+		),
+		0, Math.PI,
+		0, 1
 	    ),
-	    0, Math.PI,
-	    0, maxAmp
-	),
-			      2);
+	    2
+	);
 
 	const detune = map(
 	    angleBetweenVectors(
@@ -106,4 +102,4 @@ function sensorListenerFunc (sound, maxAmp, sensorOptions, ampVector, detuneVect
     };
 }
 
-export { viewUpdaterFunc, audioNodeListenerFunc, buttonListenerFunc, sensorListenerFunc };
+export { viewUpdaterFunc, buttonListenerFunc, sensorListenerFunc };
