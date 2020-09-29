@@ -57,7 +57,11 @@ app.use((err, req, res, next) => {
 });
 
 app.get('/', function(req, res){
-    res.sendFile(__dirname + '/views/piece.html');
+    res.sendFile(__dirname + '/views/soundCheck.html');
+});
+
+app.get('/instrument', function(req, res){
+    res.sendFile(__dirname + '/views/pieceInstrument.html');
 });
 
 app.get('/root', function(req, res){

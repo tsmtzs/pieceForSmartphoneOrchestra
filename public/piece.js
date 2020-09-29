@@ -2,7 +2,7 @@
 //	Piece for smartphone orchestra
 //			by Tassos Tsesmetzis
 //
-// Main JavaScript file.
+// Main JavaScript file for views/piece.html
 // //////////////////////////////////////////////////
 
 // //////////////////////////////////////////////////
@@ -25,7 +25,7 @@ import Synth from './synth.mjs';
 // Sound ////////////////////////////////////////
 // const audioCtx = new AudioContext();
 const baseFreq = 1244.5079348883;	// Eflat 6
-const maxAmp = 0.6;
+const maxAmp = 0.9;
 const fadeIn = 1;
 const fadeOut = 1;
 // Button //////////////////////////////////////
@@ -64,7 +64,7 @@ buttons.forEach((btn, i) => {
 // console.log(buttons);
 
 // Initially, the 'button' elements are 'hidden'.
-buttons.forEach(button => button.hidden = true);
+// buttons.forEach(button => button.hidden = true);
 // Sensor //////////////////////////////////////
 const sensorOptions = {frequency: 60, referenceFrame: 'screen'};
 const sensor = new AbsoluteOrientationSensor(sensorOptions);
@@ -81,12 +81,12 @@ const deviceHeadVector = [0, 1, 0];	// This vector will be rotated as the user m
 	elementEventListener(toggleFullScreen, main)(event);
 	return event;
     })
-    .then(event => {
-	// Initially, the 'button' elements are 'hidden'.
-	buttons.forEach(button => button.hidden = false);
+    // .then(event => {
+    // 	// Initially, the 'button' elements are 'hidden'.
+    // 	buttons.forEach(button => button.hidden = false);
 
-	return event;
-    })
+    // 	return event;
+    // })
     .then(event => {
 	const audioCtx = new AudioContext();
 	const sound = new Synth(baseFreq, fadeIn, fadeOut, audioCtx)

@@ -1,54 +1,94 @@
 html {
     font-size: 12px;
-    background-color: seashell;
+}
+
+body {
+    /* background-color: seashell; */
+    background-color: lightblue;
     color: maroon;
+    padding: 0px 10px 0;
 }
 
 header {
-    height: 15vh;
-    /* background-color: white; */
+    /* height: 15vh; */
+    background-color: white;
+    margin-top: -10px;
 }
 
 header h1 {
     text-align: center;
     font-size: 3.4rem;
-}
-
-header p {
-    margin-top: -1rem;
-    text-align: center;
-    font-size: 1.8rem;
-    font-style: italic;
+    /* width: 50vw; */
 }
 
 main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 80vh;
-    background-color: seashell;
+    /* justify-content: center; */
+    /* height: 80vh; */
+    background-color: lightgray;
+    /* width: 80vw; */
+}
+
+section {
+    /* width: 70%; */
+    background-color: lightgreen;
 }
 
 button {
+    /* display: inline-block; */
     margin-left: 25vw;
     margin-right: 25vw;
-    margin-top: 1%;
+    margin-top: 3vh;
     margin-bottom: 1%;
-    height: 35%;
+    width: 50%;
+    height: 25vh;
     background: darkslategray;
     border-radius: 2em;
 }
 
-button:active {
-    background: darkorange;
+/* button:active { */
+/*     background: darkorange; */
+/* } */
+
+/* Adapted from */
+/* https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Switch_role */
+button.switch {
+  padding: 0;
+  width: 25%;
+  height: 20vh;
+  display: inline-block;
+  margin-right: 0.25em;
+  margin-top: 3vh;
+  margin-left: 26%;
+  line-height: 20px;
+  vertical-align: middle;
+  text-align: center;
+  font: 3.2rem sans-serif;
+  border-radius: 1em;
 }
 
-ul {
-    text-align: center;
+button.switch span {
+  padding: 0 10%;
+  pointer-events: none;
 }
 
-li {
-    list-style: none;
-    font-size: 2.8rem;
-    margin-bottom: 4%;
+[role="switch"][aria-checked="false"] :first-child,
+[role="switch"][aria-checked="true"] :last-child {
+  background: orange;
+  color: white;
+}
+
+[role="switch"][aria-checked="false"] :last-child,
+[role="switch"][aria-checked="true"] :first-child {
+  color: white;
+}
+
+label.switch {
+  font: 3.2rem sans-serif;
+  line-height: 20px;
+  user-select: none;
+  vertical-align: middle;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
 }
