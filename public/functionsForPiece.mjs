@@ -77,7 +77,7 @@ function sensorListenerFunc (sound, maxAmp, sensorOptions, ampVector, detuneVect
 		detuneVector
 	    ),
 	    0, Math.PI,
-	    100, -100
+	    -100, 100
 	);
 
 	// console.log(detune);

@@ -27,7 +27,7 @@
 	  vertical. The player can rotate the device around the horizontal axis from 0 degrees, in
 	  neutral position, to 180 degrees, when the screen points downwards. This rotation sets the
 	  amplitude of a selected tone. Rotating around the vertical axis from 0 to 180 degrees
-	  deviates the frequency of a selected tone from 100 cents to -100 cents, respectively.</p>
+	  deviates the frequency of a selected tone from -100 cents to 100 cents, respectively.</p>
 	<p>At neutral position no sound should be heard, even if a tone button is pressed. This
 	  position might not be the same for all devices. The player is expected to find the exact
 	  position on his device, where no sound is heard and the frequency deviation is 0 cents.</p>
@@ -38,15 +38,15 @@
 	  on the page will work fine for this.</p>
 	<h2>Tests with the instrument</h2>
 	<p>This page provides a reduction of the instrument with just one tone.</p>
-	  <button type="button"></button>
+	  <button type="button" id="instrument"></button>
 	  <!-- The next button is adapted from -->
 	  <!-- https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Switch_role -->
 	  <button type="button" role="switch" aria-checked="false"
-		  id="speakerPower" class="switch">
+		  id="refTone" class="switch">
 	    <span>off</span>
 	    <span>on</span>
 	  </button>
-	  <label for="speakerPower" class="switch">Base tone</label>
+	  <label for="refTone" class="switch">Base tone</label>
       </section>
     </main>
     <!-- A post console for mobile devices -->

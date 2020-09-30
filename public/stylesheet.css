@@ -3,15 +3,14 @@ html {
 }
 
 body {
-    /* background-color: seashell; */
-    background-color: lightblue;
+    background-color: seashell;
     color: maroon;
     padding: 0px 10px 0;
 }
 
 header {
     /* height: 15vh; */
-    background-color: white;
+    background-color: seashell;
     margin-top: -10px;
 }
 
@@ -24,13 +23,17 @@ header h1 {
 main {
     /* justify-content: center; */
     /* height: 80vh; */
-    background-color: lightgray;
+    background-color: seashell;
     /* width: 80vw; */
 }
 
 section {
     /* width: 70%; */
-    background-color: lightgreen;
+    background-color: seashell;
+}
+
+.italics {
+    font-style: italic;
 }
 
 button {
@@ -41,8 +44,10 @@ button {
     margin-bottom: 1%;
     width: 50%;
     height: 25vh;
-    background: darkslategray;
+    /* background: darkslategray; */
+    background: seashell;
     border-radius: 2em;
+    border: 2px solid black;
 }
 
 /* button:active { */
@@ -83,7 +88,7 @@ button.switch span {
 }
 
 label.switch {
-  font: 3.2rem sans-serif;
+  font: 3.3rem sans-serif;
   line-height: 20px;
   user-select: none;
   vertical-align: middle;

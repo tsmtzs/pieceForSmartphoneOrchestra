@@ -74,7 +74,7 @@ const deviceHeadVector = [0, 1, 0];	// This vector will be rotated as the user m
 
 // Toggle full screen when user clicks on title
 (() =>  new Promise(resolve => {
-    header.onclick = resolve;
+    header.addEventListener('click', resolve, {once: true});
 })
 )()
     .then(event => {
