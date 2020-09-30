@@ -30,6 +30,7 @@ main {
 section {
     /* width: 70%; */
     background-color: seashell;
+    margin-bottom: 120px;
 }
 
 .italics {
@@ -96,4 +97,10 @@ label.switch {
   -ms-user-select: none;
   -webkit-user-select: none;
   -o-user-select: none;
+}
+
+#goToInstr {
+    text-align: right;
+    font-size: 0.9rem;
+    padding-right: 10px;
 }
