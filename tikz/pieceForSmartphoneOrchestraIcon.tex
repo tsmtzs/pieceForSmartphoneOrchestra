@@ -1,0 +1,39 @@
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%       Piece for Smartphone Orchestra
+%
+% This XeLaTex file produces a pdf file with an icon. It should be
+% used in the PWA web manifest file.
+% 
+% Convert the output pdf file to png:
+%       pdftoppm -r 720 -png smartphoneOrchestra.pdf smartphoneOrchestra
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{standalone}
+\usepackage{fontspec}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\usepackage{xgreek}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+
+\setmainfont[Mapping=tex-text]{Linux Biolinum O}
+
+% Picture size.
+\def\squareSize{10cm}
+% Inner--outer rectangle diagonal distance
+\def\diagonal{2cm}
+% Inner--outer square side ratio
+\def\ratio{0.75}
+
+% Colors
+\definecolor{seashell}{HTML}{FFF5EE}
+\definecolor{darkslategray}{HTML}{2F4F4F}
+
+\begin{document}
+\begin{tikzpicture}
+  \fill [seashell] (0,0) rectangle (\squareSize, \squareSize);
+  \begin{scope}[scale=\ratio, xshift=\diagonal, yshift=\diagonal]
+    \fill [darkslategray, rounded corners=2ex] (0,0) rectangle (\squareSize, \squareSize);
+  \end{scope}
+\end{tikzpicture}
+\end{document}

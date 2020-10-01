@@ -1,5 +1,6 @@
 // //////////////////////////////////////////////////
 //	Piece for smartphone orchestra
+//			by Tassos Tsesmetzis
 //
 // Web server main JavaScript file.
 // //////////////////////////////////////////////////
@@ -57,11 +58,11 @@ app.use((err, req, res, next) => {
 });
 
 app.get('/', function(req, res){
-    res.sendFile(__dirname + '/public/views/soundCheck.html');
+    res.sendFile(__dirname + '/public/views/index.html');
 });
 
 app.get('/instrument', function(req, res){
-    res.sendFile(__dirname + '/public/views/pieceInstrument.html');
+    res.sendFile(__dirname + '/public/views/instrument.html');
 });
 
 app.get('/root', function(req, res){
