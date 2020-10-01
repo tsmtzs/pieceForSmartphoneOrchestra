@@ -1,0 +1,20 @@
+{
+    "name": "Piece for Smartphone Orchestra",
+    "short_name": "Smartphone Orchestra",
+    "description": "A music piece for a smartphone orchestra.",
+    "display": "fullscreen",
+    "background_color": "#fff5ee",
+    "icons": [
+	{
+	    "src": "/icons/smartphoneOrchestraIcon_513x513.png",
+	    "sizes": "512x512",
+	    "type": "image/png"
+	},
+	{
+	    "src": "/icons/smartphoneOrchestraIcon_192x192.png",
+	    "sizes": "192x192",
+	    "type": "image/png"
+	}
+    ],
+    "start_url": "/"
+}

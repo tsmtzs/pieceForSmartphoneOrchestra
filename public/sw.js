@@ -42,7 +42,7 @@ self.addEventListener('install', event => {
 		    './javascript/state.mjs',
 		    './javascript/synth.mjs',
 		    './icons/smartphoneOrchestraIcon_192x192.png',
-		    './icons/smartphoneOrchestraIcon_513x513.png'
+		    './icons/smartphoneOrchestraIcon_512x512.png'
     	    	]);
     	    })
 	    .catch(console.log)
