@@ -30,7 +30,7 @@ self.addEventListener('install', event => {
     	    .then(cache => {
     	    	return cache.addAll([
     	    	    './',
-		    './hss.webmanifest',
+		    './smartphoneOrchestra.webmanifest',
     	    	    './views/index.html',
     	    	    './views/pieceInstrument.html',
     	    	    './stylesheet.css',

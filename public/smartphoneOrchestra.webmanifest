@@ -6,7 +6,7 @@
     "background_color": "#fff5ee",
     "icons": [
 	{
-	    "src": "/icons/smartphoneOrchestraIcon_513x513.png",
+	    "src": "/icons/smartphoneOrchestraIcon_512x512.png",
 	    "sizes": "512x512",
 	    "type": "image/png"
 	},

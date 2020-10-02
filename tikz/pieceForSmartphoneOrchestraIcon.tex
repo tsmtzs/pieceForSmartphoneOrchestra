@@ -15,15 +15,14 @@
 \usepackage{xcolor}
 
 \usepackage{tikz}
+\usetikzlibrary{calc}
 
 \setmainfont[Mapping=tex-text]{Linux Biolinum O}
 
 % Picture size.
 \def\squareSize{10cm}
-% Inner--outer rectangle diagonal distance
-\def\diagonal{2cm}
-% Inner--outer square side ratio
-\def\ratio{0.75}
+% Half the diagonal of the inner square
+\def\diagonal{3cm}
 
 % Colors
 \definecolor{seashell}{HTML}{FFF5EE}
@@ -31,9 +30,11 @@
 
 \begin{document}
 \begin{tikzpicture}
+  % Rectangle common center
+  \coordinate (K) at (0.5*\squareSize, 0.5*\squareSize);
+  % Diagonal distance as point
+  \coordinate (D) at (\diagonal, \diagonal);
   \fill [seashell] (0,0) rectangle (\squareSize, \squareSize);
-  \begin{scope}[scale=\ratio, xshift=\diagonal, yshift=\diagonal]
-    \fill [darkslategray, rounded corners=2ex] (0,0) rectangle (\squareSize, \squareSize);
-  \end{scope}
+  \fill [darkslategray, rounded corners=2ex] ($(K) - (D)$) rectangle ($(K) + (D)$);
 \end{tikzpicture}
 \end{document}
