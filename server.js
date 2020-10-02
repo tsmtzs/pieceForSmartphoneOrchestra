@@ -1,5 +1,6 @@
 // //////////////////////////////////////////////////
-// Piece for smartphone orchestra
+//	Piece for smartphone orchestra
+//			by Tassos Tsesmetzis
 //
 // Web server main JavaScript file.
 // //////////////////////////////////////////////////
@@ -15,13 +16,11 @@ const httpPort = 80;
 // https options
 const https =require('https');	//
 const httpsPort = 443;
-const key = './certs/server.key';
-const certificate = './certs/server.crt';
-const rootCA = './certs/root.crt';
+const key = './certs/smartphoneOrchestra-key.pem';
+const certificate = './certs/smartphoneOrchestra-crt.pem';
 const serverOptions = {
-    key: fs.readFileSync(key),
-    cert: fs.readFileSync(certificate),
-    ca: fs.readFileSync(rootCA)
+    key: fs.readFileSync(key, 'utf8'),
+    cert: fs.readFileSync(certificate, 'utf8')
 };
 
 // Create an HTTP server on port `httpPort` and redirect to HTTPS
@@ -57,11 +56,11 @@ app.use((err, req, res, next) => {
 });
 
 app.get('/', function(req, res){
-    res.sendFile(__dirname + '/views/soundCheck.html');
+    res.sendFile(__dirname + '/public/views/index.html');
 });
 
 app.get('/instrument', function(req, res){
-    res.sendFile(__dirname + '/views/pieceInstrument.html');
+    res.sendFile(__dirname + '/public/views/instrument.html');
 });
 
 app.get('/root', function(req, res){
