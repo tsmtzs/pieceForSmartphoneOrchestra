@@ -1,5 +1,5 @@
 // //////////////////////////////////////////////////
-//	Study for smartphone orchestra
+//	Piece for smartphone orchestra
 //			by Tassos Tsesmetzis
 //
 // This file defines the object 'State'. It is a

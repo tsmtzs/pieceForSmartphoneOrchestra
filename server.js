@@ -56,11 +56,11 @@ app.use((err, req, res, next) => {
 });
 
 app.get('/', function(req, res){
-    res.sendFile(__dirname + '/public/views/index.html');
+    res.sendFile(__dirname + '/views/index.html');
 });
 
 app.get('/instrument', function(req, res){
-    res.sendFile(__dirname + '/public/views/instrument.html');
+    res.sendFile(__dirname + '/views/instrument.html');
 });
 
 app.get('/root', function(req, res){

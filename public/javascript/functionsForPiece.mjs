@@ -1,5 +1,5 @@
 // //////////////////////////////////////////////////
-//	Study for smartphone orchestra
+//	Piece for smartphone orchestra
 //			by Tassos Tsesmetzis
 //
 // This files collects several functions specific

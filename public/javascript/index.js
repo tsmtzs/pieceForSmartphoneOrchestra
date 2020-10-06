@@ -21,8 +21,8 @@ if ('serviceWorker' in navigator) {
     // Register a service worker hosted at the root of the
     // site using the default scope.
     navigator.serviceWorker
-	.register('./sw.js')
-	.then( registration => console.log('Service worker registration succeeded:', registration))
+	.register('/sw.js')
+	.then(registration => console.log('Service worker registration succeeded:', registration))
 	.catch( error => console.log('Service worker registration failed:', error))
 } else {
     console.log('Service workers are not supported.');
@@ -32,7 +32,6 @@ if ('serviceWorker' in navigator) {
 // Set parameters
 // //////////////////////////////////////////////////
 // Sound ////////////////////////////////////////
-// const audioCtx = new AudioContext();
 const baseFreq = 1244.5079348883;	// Eflat 6
 const maxAmp = 0.9;
 const refToneAmp = 0.1;
@@ -139,3 +138,7 @@ const deviceHeadVector = [0, -1, 0];	// This vector will be rotated as the user 
 	sensor.addEventListener('reading', sensorListenerFunc(sound, maxAmp, sensorOptions, screenUpVector, deviceHeadVector));
     })
     .catch(console.error);
+
+//
+// let a = document.getElementsByTagName('a');
+// Array.from(a).forEach(link => link.addEventListener('click', event => event.preventDefault()));
