@@ -9,7 +9,6 @@
 // Import statements.
 // //////////////////////////////////////////////////
 // import functions
-import { elementEventListener } from './generalFunctions.mjs';
 import { viewUpdaterFunc, buttonListenerFunc, sensorListenerFunc } from './functionsForPiece.mjs';
 // Import object 'State'. It models a radio button - check box hybrid.
 import State from './state.mjs';
@@ -56,13 +55,9 @@ buttons.forEach((btn, i) => {
 	this.style.backgroundColor = btnColorOff;
     };
 
-    btn.addEventListener('click', buttonListenerFunc(state));
+    btn.addEventListener('clickdown', buttonListenerFunc(state));
 });
 
-// console.log(buttons);
-
-// Initially, the 'button' elements are 'hidden'.
-// buttons.forEach(button => button.hidden = true);
 // Sensor //////////////////////////////////////
 const sensorOptions = { frequency: 60, referenceFrame: 'screen' };
 const sensor = new AbsoluteOrientationSensor(sensorOptions);
@@ -70,9 +65,9 @@ const screenUpVector = [0, 0, 1];	// This vector will be rotated as the user mov
 const deviceHeadVector = [0, 1, 0];	// This vector will be rotated as the user moves the device.
 // //////////////////////////////////////////////////
 
-// Toggle full screen when user clicks on title
+// Enable buttons when user points on title
 (() =>  new Promise(resolve => {
-    body.addEventListener('click', resolve, {once: true});
+    body.addEventListener('pointerdown', resolve, {once: true});
 })
 )()
     .then(event => {

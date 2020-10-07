@@ -40,9 +40,9 @@ const fadeOut = 1;
 // Button //////////////////////////////////////
 const btnColorOn = 'darkorange';
 const btnColorOff = 'darkslategray';
-// // Element 'body' is attached a click event.
+// // Element 'body' is attached a pointer event.
 const body = document.getElementsByTagName('body')[0];
-// Base tone 'click' listener function.
+// Base tone 'pointer' listener function.
 // Adapted from
 // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Switch_role
 const switchClickEvent = (sound, freq) => {
@@ -84,7 +84,7 @@ instrButton.disable = function () {
     this.style.backgroundColor = btnColorOff;
 };
 
-instrButton.addEventListener('click', buttonListenerFunc(state));
+instrButton.addEventListener('pointerdown', buttonListenerFunc(state));
 
 // Sensor //////////////////////////////////////
 const sensorOptions = {frequency: 60, referenceFrame: 'screen'};
@@ -94,7 +94,7 @@ const deviceHeadVector = [0, -1, 0];	// This vector will be rotated as the user 
 
 // //////////////////////////////////////////////////
 (() =>  new Promise(resolve => {
-    body.addEventListener('click', resolve, {once: true});;
+    body.addEventListener('pointerdown', resolve, {once: true});;
 })
 )()
     .then(event => {
@@ -115,11 +115,11 @@ const deviceHeadVector = [0, -1, 0];	// This vector will be rotated as the user 
 	// Set 'amp' for base tone.
 	refSound.amp = refToneAmp;
 
-	// Add 'click' listener on base note button.
+	// Add 'pointer' listener on base note button.
 	// Adapted from
 	// https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Switch_role
 	document.querySelectorAll(".switch").forEach(function(theSwitch) {
-	    theSwitch.addEventListener("click", switchClickEvent(refSound, baseFreq), false);
+	    theSwitch.addEventListener("pointerdown", switchClickEvent(refSound, baseFreq), false);
 	});
 
 	return sound;
@@ -138,7 +138,3 @@ const deviceHeadVector = [0, -1, 0];	// This vector will be rotated as the user 
 	sensor.addEventListener('reading', sensorListenerFunc(sound, maxAmp, sensorOptions, screenUpVector, deviceHeadVector));
     })
     .catch(console.error);
-
-//
-// let a = document.getElementsByTagName('a');
-// Array.from(a).forEach(link => link.addEventListener('click', event => event.preventDefault()));
