@@ -17,10 +17,12 @@ self.addEventListener('install', event => {
     	    	return cache.addAll([
     	    	    '/',
 		    '/instrument',
+		    '/directions',
 		    '/smartphoneOrchestra.webmanifest',
     	    	    '/stylesheet.css',
     	    	    '/javascript/index.js',
 		    '/javascript/instrument.js',
+		    '/javascript/discription.js',
 		    '/javascript/eventDispatchers.mjs',
 		    '/javascript/functionsForPiece.mjs',
 		    '/javascript/generalFunctions.mjs',
@@ -38,7 +40,7 @@ self.addEventListener('install', event => {
 self.addEventListener('fetch', event => {
     event.respondWith(
 	caches.match(event.request)
-	    .then(response => { return response || fetch(event.request);}).then(resp => {
+	    .then(response => { return response || fetch(event.request); }).then(resp => {
 		return caches.open(cacheName).then(cache => {
 		    cache.put(event.request, resp.clone());
 		    return resp;

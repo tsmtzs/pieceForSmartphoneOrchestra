@@ -52,4 +52,3 @@ ctx.bezierCurveTo(xControl2CD * width, yControl2CD2 * height, xControl1CD * widt
 ctx.bezierCurveTo(xControl2BC * width, yControl2BC2 * height, xControl1BC * width, yControl1BC2 * height, xB * width, yB2 * height);
 ctx.quadraticCurveTo(xControlAB * width, yControlAB2 * height, xA * width, yA * height);
 ctx.fill();
-console.log('Inside directions');
