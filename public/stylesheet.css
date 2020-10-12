@@ -87,8 +87,35 @@ label.switch {
   -o-user-select: none;
 }
 
-#goToInstr {
-    text-align: right;
-    font-size: 0.9rem;
-    padding-right: 10px;
+#links {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 4ex;
+}
+
+#links a {
+    font-size: 1.8rem;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+fn {
+    display: block;
+    margin-top: 100px;
+    padding-top: 10px;
+    border-top: 1px solid maroon;
+    font: 0.85rem sans-serif;
+}
+
+canvas {
+    display: block;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
 }
