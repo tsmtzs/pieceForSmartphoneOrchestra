@@ -63,6 +63,10 @@ app.get('/instrument', function(req, res){
     res.sendFile(__dirname + '/views/instrument.html');
 });
 
+app.get('/directions', function(req, res){
+    res.sendFile(__dirname + '/views/directions.html');
+});
+
 app.get('/root', function(req, res){
     res.sendFile(__dirname + '/certs/root.crt');
 });
