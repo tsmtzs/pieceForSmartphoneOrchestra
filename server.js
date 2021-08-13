@@ -1,5 +1,5 @@
 // //////////////////////////////////////////////////
-//  Piece for smartphone orchestra
+//  Piece for Smartphone Orchestra
 //      by Tassos Tsesmetzis
 //
 // Web server main JavaScript file.
