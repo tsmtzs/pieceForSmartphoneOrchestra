@@ -1,12 +1,16 @@
 html {
     font-size: 12px;
+}
+
+body {
     background-color: seashell;
     color: maroon;
+    padding: 0px 10px 0;
 }
 
 header {
-    height: 15vh;
-    /* background-color: white; */
+    background-color: seashell;
+    margin-top: -10px;
 }
 
 header h1 {
@@ -14,41 +18,104 @@ header h1 {
     font-size: 3.4rem;
 }
 
-header p {
-    margin-top: -1rem;
-    text-align: center;
-    font-size: 1.8rem;
-    font-style: italic;
+main {
+    background-color: seashell;
 }
 
-main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 80vh;
+section {
     background-color: seashell;
+    margin-bottom: 120px;
+}
+
+.italics {
+    font-style: italic;
 }
 
 button {
     margin-left: 25vw;
     margin-right: 25vw;
-    margin-top: 1%;
+    margin-top: 3vh;
     margin-bottom: 1%;
-    height: 35%;
-    background: darkslategray;
+    width: 50%;
+    height: 25vh;
+    background: seashell;
     border-radius: 2em;
+    border: 2px solid black;
 }
 
-button:active {
-    background: darkorange;
+/* Adapted from */
+/* https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Switch_role */
+button.switch {
+  padding: 0;
+  width: 25%;
+  height: 20vh;
+  display: inline-block;
+  margin-right: 0.25em;
+  margin-top: 3vh;
+  margin-left: 26%;
+  line-height: 20px;
+  vertical-align: middle;
+  text-align: center;
+  font: 3.1rem sans-serif;
+  border-radius: 1em;
 }
 
-ul {
-    text-align: center;
+button.switch span {
+  padding: 0 10%;
+  pointer-events: none;
+}
+
+[role="switch"][aria-checked="false"] :first-child,
+[role="switch"][aria-checked="true"] :last-child {
+  background: orange;
+  color: white;
+}
+
+[role="switch"][aria-checked="false"] :last-child,
+[role="switch"][aria-checked="true"] :first-child {
+  color: white;
+}
+
+label.switch {
+  font: 3.2rem sans-serif;
+  line-height: 20px;
+  user-select: none;
+  vertical-align: middle;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+}
+
+#links {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 4ex;
+}
+
+#links a {
+    font-size: 1.8rem;
 }
 
 li {
-    list-style: none;
-    font-size: 2.8rem;
-    margin-bottom: 4%;
+    margin-bottom: 10px;
+}
+
+fn {
+    display: block;
+    margin-top: 100px;
+    padding-top: 10px;
+    border-top: 1px solid maroon;
+    font: 0.85rem sans-serif;
+}
+
+canvas {
+    display: block;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
 }

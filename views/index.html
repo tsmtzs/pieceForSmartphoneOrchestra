@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="vieport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Tassos Tsesmetzis">
+    <title>Piece for smartphone orchestra</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="manifest" href="smartphoneOrchestra.webmanifest" crossorigin="use-credentials">
+    <!-- A workaround to avoid the annoying chrome error message -->
+    <!-- 'favicon not found' -->
+    <link rel="shortcut icon" href="">
+  </head>
+  <body>
+    <header>
+      <h1>Piece for smartphone orchestra</h1>
+      <div id="links"><a href="/directions">Directions</a><a href="/instrument">Instrument</span></a></div>
+    </header>
+    <main>
+      <section>
+	<h2>About</h2>
+	<p><span class="italics">Piece for smartphone orchestra</span> uses the smartphone
+	  as a musical instrument. The player can play a tone by pressing a button. The tone stops
+	  when the button is pressed again. At any moment,
+	  only one tone can be heard from a single device. There are three different tones in total.</p>
+	<p>The instrument is in neutral position, when the screen faces upwards and the title of the
+	  piece on the page points forward. In this way two axis are defined: one horizontal and one
+	  vertical. The player can rotate the device around the horizontal axis from 0 degrees, in
+	  neutral position, to 180 degrees. This rotation sets the
+	  amplitude of a selected tone. Rotating around the vertical axis from 0 to 180 degrees
+	  deviates the frequency of a selected tone from -100 to 100 cents, respectively.</p>
+	<p>At neutral position no sound should be heard, even if a tone button is pressed. This
+	  position might not be the same for all devices. The player is expected to find the exact
+	  position on his device, where no sound is heard and the frequency deviation is 0 cents.</p>
+	<p>The instrument should be thought of as having a very fragile nature. This should be reflected
+	  on the gestures of the player: all rotations and movements must be slow-paced.
+	  Furthermore, a tone starts and stops -by pressing it's button- at neutral position.</p>
+	<p>In order to enable audio, the user should make a gesture on the page. A simple tap is adequate.
+	  After this, the tone buttons will change color signifying that the device is ready to play.</p>
+	<h2>Tests with the instrument</h2>
+	<p>This section provides a reduction of the instrument with just one tone-button. A second
+	  button starts/stops a base tone. These are provided for the benefit of the player in
+	stabilizing the neutral position of his device.</p>
+	  <button type="button" id="instrument"></button>
+	  <!-- The next button is adapted from -->
+	  <!-- https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Switch_role -->
+	  <button type="button" role="switch" aria-checked="false"
+		  id="refTone" class="switch">
+	    <span>off</span>
+	    <span>on</span>
+	  </button>
+	  <label for="refTone" class="switch">Base tone</label>
+	<div id="links"><a href="/directions">Directions</a><a href="/instrument">Instrument</span></a></div>
+      </section>
+    </main>
+    <script type="module" src="./javascript/index.js"></script>
+  </body>
+</html>
