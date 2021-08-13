@@ -1,7 +1,7 @@
 {
-  "name": "studyforsmartphones",
+  "name": "pieceForSmartphoneOrchestra",
   "version": "1.0.0",
-  "description": "An audio piece for a smartphone orchestra.",
+  "description": "A music piece for smartphone orchestra.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,5 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "standard": "^16.0.3"
   }
 }
