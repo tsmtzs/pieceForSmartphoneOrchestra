@@ -4,56 +4,54 @@
 //
 // Web server main JavaScript file.
 // //////////////////////////////////////////////////
-// General
 const path = require('path')
-const bodyParser = require('body-parser')
 const fs = require('fs')
 const express = require('express')
-const app = express()
-// http options
 const http = require('http')
-const httpPort = 80
-// https options
 const https = require('https')
-const httpsPort = 443
+const argv = require('minimist')(process.argv.slice(2))
+
+const app = express()
+const httpPort = argv.p || argv['http-port'] || 8080
+const httpsPort = argv.P || argv['https-port'] || 4443
 const key = './certs/smartphoneOrchestra-key.pem'
 const certificate = './certs/smartphoneOrchestra-crt.pem'
-const serverOptions = {
+const credentials = {
   key: fs.readFileSync(key, 'utf8'),
   cert: fs.readFileSync(certificate, 'utf8')
 }
 
 // Create an HTTP server on port `httpPort` and redirect to HTTPS
-// From
+// Adapted from
 // https://www.grizzlypeaksoftware.com/blog?id=JDcsPW2raSic6oc6MCYaM
 const httpServer = http.createServer((req, res) => {
+  const host = req.headers.host.split(':')[0]
   // 301 redirect (reclassifies google listings)
-  res.writeHead(301, { Location: 'https://' + req.headers.host + req.url })
+  res.writeHead(301, { Location: `https://${host}:${httpsPort}${req.url}` })
   res.end()
 })
 
 httpServer.listen(httpPort, function (err) {
   if (err) {
-    console.error(err)
+    // Catch with the process.setUncaughtExceptionCaptureCallback
+    throw new Error(err)
   }
   console.log('Http server listening on port: ', httpPort)
 })
 
-// Create https web server
-const httpsServer = https.createServer(serverOptions, app)
+const httpsServer = https.createServer(credentials, app)
 
 httpsServer.listen(httpsPort, function (err) {
   if (err) {
-    console.error(err)
+    // Catch with the process.setUncaughtExceptionCaptureCallback
+    throw new Error(err)
   }
   console.log('Https server listening  on port: ', httpsPort)
 })
 
-app.use(bodyParser.json()) // support json encoded bodies
-app.use(bodyParser.urlencoded({ extended: true })) // support encoded bodies
+process.setUncaughtExceptionCaptureCallback(err => { console.error(err.stack) })
 
-app.use(express.static(path.join(__dirname, 'public'), { dotfiles: 'allow' }))
-app.use(express.static(path.join(__dirname, 'node_modules/')))
+app.use(express.static(path.join(__dirname, 'public')))
 
 // error handling - from https://expressjs.com/en/guide/error-handling.html
 app.use((err, req, res, next) => {
@@ -71,8 +69,4 @@ app.get('/instrument', function (req, res) {
 
 app.get('/directions', function (req, res) {
   res.sendFile(path.join(__dirname, '/views/directions.html'))
-})
-
-app.get('/root', function (req, res) {
-  res.sendFile(path.join(__dirname, '/certs/root.crt'))
 })
