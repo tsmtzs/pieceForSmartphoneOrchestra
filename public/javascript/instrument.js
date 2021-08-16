@@ -11,8 +11,8 @@ import {
   sensorListenerFunc
 } from './functionsForPiece.mjs'
 
-import State from './state.mjs'
-import Synth from './synth.mjs'
+import { State } from './state.mjs'
+import { Synth } from './synth.mjs'
 
 // //////////////////////////////////////////////////
 // Set parameters
