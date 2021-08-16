@@ -14,7 +14,7 @@
 // When the argument is the same as current state, change state to neutral (deselect a button)
 import { EventDispatcher } from './eventDispatchers.mjs'
 
-export default class State {
+class State {
   constructor () {
     this.current = -1
     this.all = Array.from(arguments)
@@ -32,3 +32,5 @@ export default class State {
     }
   }
 }
+
+export { State }

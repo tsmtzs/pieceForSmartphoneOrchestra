@@ -3,7 +3,7 @@
 //  Piece for smartphone orchestra
 //      by Tassos Tsesmetzis
 //
-// Main JavaScript file for views/soundCheck.html
+// Main JavaScript file for views/index.html
 // //////////////////////////////////////////////////
 import {
   viewUpdaterFunc,
@@ -11,21 +11,21 @@ import {
   sensorListenerFunc
 } from './functionsForPiece.mjs'
 
-import State from './state.mjs'
-import Synth from './synth.mjs'
+import { State } from './state.mjs'
+import { Synth } from './synth.mjs'
 
 // Register the ServiveWorker
 // from https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerContainer/register
-if ('serviceWorker' in navigator) {
-  // Register a service worker hosted at the root of the
-  // site using the default scope.
-  navigator.serviceWorker
-    .register('/sw.js')
-  // .then(registration => console.log('Service worker registration succeeded:', registration))
-    .catch(error => console.log('Service worker registration failed:', error))
-} else {
-  console.log('Service workers are not supported.')
-}
+// if ('serviceWorker' in navigator) {
+//   // Register a service worker hosted at the root of the
+//   // site using the default scope.
+//   navigator.serviceWorker
+//     .register('/sw.js')
+//   // .then(registration => console.log('Service worker registration succeeded:', registration))
+//     .catch(error => console.log('Service worker registration failed:', error))
+// } else {
+//   console.log('Service workers are not supported.')
+// }
 
 // //////////////////////////////////////////////////
 // Set parameters
@@ -40,14 +40,13 @@ const fadeOut = 1
 // Button //////////////////////////////////////
 const btnColorOn = 'darkorange'
 const btnColorOff = 'darkslategray'
-// // Element 'body' is attached a pointer event.
-const body = document.getElementsByTagName('body')[0]
+const body = document.querySelector('body')
 // Base tone 'pointer' listener function.
 // Adapted from
 // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Switch_role
 const switchClickEvent = (sound, freq) => {
-  return evt => {
-    const el = evt.target
+  return event => {
+    const el = event.target
 
     if (el.getAttribute('aria-checked') === 'true') {
       el.setAttribute('aria-checked', 'false')
@@ -65,8 +64,8 @@ const switchClickEvent = (sound, freq) => {
 // New 'State' object with one state 0 and neutral state -1
 const state = new State(0)
 // Buttons
-const instrButton = document.getElementById('instrument')
-const refButton = document.getElementById('refTone')
+const instrButton = document.querySelector('#instrument')
+const refButton = document.querySelector('#refTone')
 
 // Extend 'instrButton' object and add event listeners
 Object.assign(instrButton, { isEnabled: false, index: 0 })
@@ -88,18 +87,16 @@ instrButton.disable = function () {
 instrButton.addEventListener('pointerdown', buttonListenerFunc(state))
 
 // Sensor //////////////////////////////////////
-const sensorOptions = { frequency: 60, referenceFrame: 'screen' }
+const sensorOptions = { frequency: 60, referenceFrame: 'device' }
 const sensor = new window.AbsoluteOrientationSensor(sensorOptions)
-// This vector will be rotated as the user moves the device.
 const screenUpVector = [0, 0, 1]
-// This vector will be rotated as the user moves the device.
 const deviceHeadVector = [0, -1, 0]
 
 // //////////////////////////////////////////////////
-;(() => new Promise(resolve => {
+;(new Promise(resolve => {
   body.addEventListener('pointerdown', resolve, { once: true })
 })
-)()
+)
   .then(event => {
     [instrButton, refButton].forEach(btn => {
       btn.style.backgroundColor = btnColorOff
@@ -135,7 +132,11 @@ const deviceHeadVector = [0, -1, 0]
 
     sensor.addEventListener('error', event => {
       if (event.error.name === 'SecurityError') {
-        console.error('No permissions to use AbsoluteOrientationSensor.')
+        console.error(`No permissions to use ${event.target.toString()}.`)
+      } else if (event.error.name === 'NotReadableError') {
+        console.error(`${event.target.toString()}  is not available on this device.`)
+      } else {
+        console.error(event.error)
       }
     })
 

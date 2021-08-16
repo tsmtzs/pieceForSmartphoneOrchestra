@@ -6,7 +6,7 @@
 // Sound object.
 // //////////////////////////////////////////////////
 // Object 'Synth' models sound.
-export default class Synth {
+class Synth {
   constructor (baseFreq, fadeIn, fadeOut, audioCtx) {
     this.baseFreq = baseFreq
     this.fadeIn = fadeIn
@@ -64,3 +64,5 @@ export default class Synth {
     object.oscillator.addEventListener('ended', this.nodeListener)
   }
 }
+
+export { Synth }
