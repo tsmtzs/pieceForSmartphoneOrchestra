@@ -28,7 +28,7 @@ self.addEventListener('install', event => {
           '/javascript/functionsForPiece.mjs',
           '/javascript/generalFunctions.mjs',
           '/javascript/state.mjs',
-          '/javascript/synth.mjs',
+          '/javascript/sound.mjs',
           '/icons/smartphoneOrchestraIcon_192x192.png',
           '/icons/smartphoneOrchestraIcon_512x512.png'
         ])

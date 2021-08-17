@@ -12,7 +12,7 @@ import {
 } from './functionsForPiece.mjs'
 
 import { State } from './state.mjs'
-import { Synth } from './synth.mjs'
+import { Synth } from './sound.mjs'
 
 // //////////////////////////////////////////////////
 // Set parameters

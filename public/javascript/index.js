@@ -1,6 +1,6 @@
 /* eslint-env browser */
 // //////////////////////////////////////////////////
-//  Piece for smartphone orchestra
+//  Piece for Smartphone Orchestra
 //      by Tassos Tsesmetzis
 //
 // Main JavaScript file for views/index.html
@@ -8,11 +8,12 @@
 import {
   viewUpdaterFunc,
   buttonListenerFunc,
-  sensorListenerFunc
+  sensorListenerFunc,
+  sensorErrorListener
 } from './functionsForPiece.mjs'
 
 import { State } from './state.mjs'
-import { Synth } from './synth.mjs'
+import { Sound } from './sound.mjs'
 
 // Register the ServiveWorker
 // from https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerContainer/register
@@ -34,7 +35,7 @@ import { Synth } from './synth.mjs'
 // Eflat 6
 const baseFreq = 1244.5079348883
 const maxAmp = 0.9
-const refToneAmp = 0.1
+const refToneAmp = 0.3
 const fadeIn = 1
 const fadeOut = 1
 // Button //////////////////////////////////////
@@ -44,18 +45,18 @@ const body = document.querySelector('body')
 // Base tone 'pointer' listener function.
 // Adapted from
 // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Switch_role
-const switchClickEvent = (sound, freq) => {
+const switchClickEvent = sound => {
   return event => {
     const el = event.target
 
     if (el.getAttribute('aria-checked') === 'true') {
       el.setAttribute('aria-checked', 'false')
       // stop sound
-      sound.stop(0)
+      sound.stop()
     } else {
       el.setAttribute('aria-checked', 'true')
       // play sound
-      sound.play(0, freq)
+      sound.start()
     }
   }
 }
@@ -89,8 +90,6 @@ instrButton.addEventListener('pointerdown', buttonListenerFunc(state))
 // Sensor //////////////////////////////////////
 const sensorOptions = { frequency: 60, referenceFrame: 'device' }
 const sensor = new window.AbsoluteOrientationSensor(sensorOptions)
-const screenUpVector = [0, 0, 1]
-const deviceHeadVector = [0, -1, 0]
 
 // //////////////////////////////////////////////////
 ;(new Promise(resolve => {
@@ -106,40 +105,35 @@ const deviceHeadVector = [0, -1, 0]
     return event
   })
   .then(event => {
-    const audioCtx = new AudioContext()
-    const sound = new Synth(baseFreq, fadeIn, fadeOut, audioCtx)
-    const refSound = new Synth(baseFreq, fadeIn, fadeOut, audioCtx)
+    Sound.init()
 
-    state.listeners.attach(viewUpdaterFunc([instrButton], sound))
+    // CAUTION: state.all is a Set instance of positive integers.
+    const testSounds = Array.from(state.all)
+      .map(aStateIndex => Sound.of({
+        type: 'Oscillator',
+        name: aStateIndex,
+        params: { freq: (aStateIndex + 1) * baseFreq, amp: maxAmp, fadeIn: fadeIn, fadeOut: fadeOut }
+      })
+      )
+    const refSound = Sound.of({
+      type: 'Oscillator',
+      name: 'refSound',
+      params: { freq: baseFreq, amp: refToneAmp, fadeIn: fadeIn, fadeOut: fadeOut }
+    })
 
-    // Set 'amp' for base tone.
-    refSound.amp = refToneAmp
+    state.listeners.attach(viewUpdaterFunc([instrButton], Sound))
 
-    // Add 'pointer' listener on base note button.
     // Adapted from
     // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Switch_role
     document.querySelectorAll('.switch').forEach(function (theSwitch) {
-      theSwitch.addEventListener('pointerdown', switchClickEvent(refSound, baseFreq), false)
+      theSwitch.addEventListener('pointerdown', switchClickEvent(refSound), false)
     })
 
-    return sound
+    return testSounds
   })
-  .then(sound => {
-    // Start sensor.
-    // From
-    // https://w3c.github.io/orientation-sensor/
+  .then(sounds => {
     sensor.start()
-
-    sensor.addEventListener('error', event => {
-      if (event.error.name === 'SecurityError') {
-        console.error(`No permissions to use ${event.target.toString()}.`)
-      } else if (event.error.name === 'NotReadableError') {
-        console.error(`${event.target.toString()}  is not available on this device.`)
-      } else {
-        console.error(event.error)
-      }
-    })
-
-    sensor.addEventListener('reading', sensorListenerFunc(sound, maxAmp, sensorOptions, screenUpVector, deviceHeadVector))
+    sensor.addEventListener('error', sensorErrorListener)
+    sensor.addEventListener('reading', sensorListenerFunc(sounds, maxAmp, sensorOptions))
   })
   .catch(console.error)
