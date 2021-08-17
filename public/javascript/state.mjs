@@ -1,6 +1,6 @@
 /* eslint-env browser */
 // //////////////////////////////////////////////////
-//  Piece for smartphone orchestra
+//  Piece for Smartphone Orchestra
 //      by Tassos Tsesmetzis
 //
 // This file defines the object 'State'. It is a
@@ -15,15 +15,15 @@
 import { EventDispatcher } from './eventDispatchers.mjs'
 
 class State {
-  constructor () {
+  constructor (...states) {
     this.current = -1
-    this.all = Array.from(arguments)
+    this.all = new Set(states)
     this.hasChanged = false
     this.listeners = new EventDispatcher(this)
   }
 
   change (anInteger) {
-    if (this.all.includes(anInteger)) {
+    if (this.all.has(anInteger)) {
       this.current = this.current === anInteger ? (this.hasChanged = false, -1) : (this.hasChanged = true, anInteger)
 
       this.listeners.notify(anInteger)
