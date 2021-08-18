@@ -7,16 +7,51 @@
 // to the piece.
 // //////////////////////////////////////////////////
 import {
+  baseFreq,
+  maxAmp,
+  fadeIn,
+  fadeOut,
+  btnColorOn,
+  btnColorOff,
+  sensorOptions
+} from './parameters.mjs'
+
+import {
   map,
   rotateVector,
   angleBetweenVectors
 } from './generalFunctions.mjs'
 
+import { Sound } from './sound.mjs'
+
+function extendBtns (buttons, state) {
+  // Extend 'Button' objects and add event listeners
+  buttons.forEach((btn, i) => {
+    Object.assign(btn, { isEnabled: false, index: i })
+
+    btn.enable = function () {
+      this.isEnabled = true
+
+      // Change button color
+      this.style.backgroundColor = btnColorOn
+    }
+
+    btn.disable = function () {
+      this.isEnabled = false
+
+      // Change button color
+      this.style.backgroundColor = btnColorOff
+    }
+
+    btn.addEventListener('pointerdown', buttonListenerFunc(state))
+  })
+}
+
 function viewUpdaterFunc (buttons, sound) {
   let previousState = -1
 
   return state => {
-    console.log('*** State', state, '\tOldState:', previousState)
+    // console.log('*** State', state, '\tOldState:', previousState, '\tSound:', sound)
     if (previousState > -1) sound.stop(previousState)
 
     if (state.hasChanged) {
@@ -28,15 +63,14 @@ function viewUpdaterFunc (buttons, sound) {
       // start new synth
       sound.start(state.current)
 
-      // Change color of enabled buttons and disable (if any)
-      const button = buttons.filter(btn => indices.includes(btn.index))
+      // Change color of enabled buttons and disable them (if any)
+      buttons
+        .filter(btn => indices.includes(btn.index))
         .find(btn => btn.isEnabled)
-
-      if (button) button.disable()
+        ?.disable()
 
       buttons[state.current].enable()
     } else {
-      // Change color to button
       buttons[previousState]?.disable()
 
       console.log('State did not change')
@@ -95,9 +129,71 @@ function sensorErrorListener (event) {
   }
 }
 
+function addListenerToBody () {
+  const body = document.querySelector('body')
+
+  return new Promise(resolve => {
+    body.addEventListener('pointerdown', resolve, { once: true })
+  })
+}
+
+function setButtonStyle (buttons) {
+  return event => {
+    buttons.forEach(btn => {
+      btn.style.backgroundColor = btnColorOff
+      btn.style.border = '0'
+    })
+
+    return event
+  }
+}
+
+function initSound (event) {
+  Sound.init()
+
+  return Sound
+}
+
+function attachListenersToState (state, buttons) {
+  return sound => {
+    state.listeners.attach(viewUpdaterFunc(buttons, sound))
+    return sound
+  }
+}
+
+function createSoundObjects (state) {
+  return sound => {
+    // CAUTION: state.all is a Set instance of positive integers.
+    const sounds = Array.from(state.all)
+      .map(aStateIndex => sound.of({
+        type: 'Oscillator',
+        name: aStateIndex,
+        params: { freq: (aStateIndex + 1) * baseFreq, amp: 0.0, fadeIn: fadeIn, fadeOut: fadeOut }
+      })
+      )
+
+    return sounds
+  }
+}
+
+function initSensorsAndAttachListeners (sounds) {
+  const sensor = new window.AbsoluteOrientationSensor(sensorOptions)
+
+  sensor.start()
+  sensor.addEventListener('error', sensorErrorListener)
+  sensor.addEventListener('reading', sensorListenerFunc(sounds, maxAmp, sensorOptions))
+}
+
 export {
+  extendBtns,
   viewUpdaterFunc,
   buttonListenerFunc,
   sensorListenerFunc,
-  sensorErrorListener
+  sensorErrorListener,
+  addListenerToBody,
+  setButtonStyle,
+  initSound,
+  attachListenersToState,
+  createSoundObjects,
+  initSensorsAndAttachListeners
 }
