@@ -21,6 +21,7 @@ self.addEventListener('install', event => {
           '/directions',
           '/smartphoneOrchestra.webmanifest',
           '/stylesheet.css',
+          '/javascript/parameters.mjs',
           '/javascript/index.js',
           '/javascript/instrument.js',
           '/javascript/discription.js',
@@ -41,11 +42,13 @@ self.addEventListener('install', event => {
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request)
-      .then(response => { return response || fetch(event.request) }).then(resp => {
-        return caches.open(cacheName).then(cache => {
-          cache.put(event.request, resp.clone())
-          return resp
-        })
+      .then(response => { return response || fetch(event.request) })
+      .then(resp => {
+        return caches.open(cacheName)
+          .then(cache => {
+            cache.put(event.request, resp.clone())
+            return resp
+          })
       })
       .catch(console.log)
   )
@@ -55,6 +58,8 @@ self.addEventListener('fetch', event => {
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keyList => {
+      // TODO: replace 'map' with
+      // 'filter...map'
       return Promise.all(keyList.map(key => {
         if (key !== cacheName) return caches.delete(key)
       }))
