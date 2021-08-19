@@ -1,6 +1,6 @@
 /* eslint-env browser */
 // //////////////////////////////////////////////////
-//  Piece for smartphone orchestra
+//  Piece for Smartphone Orchestra
 //      by Tassos Tsesmetzis
 //
 // This file defines the object 'State'. It is a
@@ -14,16 +14,16 @@
 // When the argument is the same as current state, change state to neutral (deselect a button)
 import { EventDispatcher } from './eventDispatchers.mjs'
 
-export default class State {
-  constructor () {
+class State {
+  constructor (...states) {
     this.current = -1
-    this.all = Array.from(arguments)
+    this.all = new Set(states)
     this.hasChanged = false
     this.listeners = new EventDispatcher(this)
   }
 
   change (anInteger) {
-    if (this.all.includes(anInteger)) {
+    if (this.all.has(anInteger)) {
       this.current = this.current === anInteger ? (this.hasChanged = false, -1) : (this.hasChanged = true, anInteger)
 
       this.listeners.notify(anInteger)
@@ -32,3 +32,5 @@ export default class State {
     }
   }
 }
+
+export { State }

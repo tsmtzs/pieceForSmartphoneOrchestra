@@ -1,49 +1,77 @@
 /* eslint-env browser */
 // //////////////////////////////////////////////////
-//  Piece for smartphone orchestra
-//      Tassos Tsesmetzis
+//  Piece for Smartphone Orchestra
+//      by Tassos Tsesmetzis
 //
 // This files collects several functions specific
 // to the piece.
 // //////////////////////////////////////////////////
-import { map, rotateVector, angleBetweenVectors } from './generalFunctions.mjs'
+import {
+  baseFreq,
+  maxAmp,
+  fadeIn,
+  fadeOut,
+  btnColorOn,
+  btnColorOff,
+  sensorOptions
+} from './parameters.mjs'
+
+import {
+  map,
+  rotateVector,
+  angleBetweenVectors
+} from './generalFunctions.mjs'
+
+import { Sound } from './sound.mjs'
+
+function extendBtns (buttons, state) {
+  // Extend 'Button' objects and add event listeners
+  buttons.forEach((btn, i) => {
+    Object.assign(btn, { isEnabled: false, index: i })
+
+    btn.enable = function () {
+      this.isEnabled = true
+
+      // Change button color
+      this.style.backgroundColor = btnColorOn
+    }
+
+    btn.disable = function () {
+      this.isEnabled = false
+
+      // Change button color
+      this.style.backgroundColor = btnColorOff
+    }
+
+    btn.addEventListener('pointerdown', buttonListenerFunc(state))
+  })
+}
 
 function viewUpdaterFunc (buttons, sound) {
   let previousState = -1
 
   return state => {
-    console.log('*** State', state, '\tOldState:', previousState)
-    // Stop playing synth if any
+    // console.log('*** State', state, '\tOldState:', previousState, '\tSound:', sound)
     if (previousState > -1) sound.stop(previousState)
 
     if (state.hasChanged) {
-      const indices = state.all.filter(st => st !== state.current)
+      const indices = Array.from(state.all).filter(st => st !== state.current)
 
       // Set 'previousState'
       previousState = state.current
 
       // start new synth
-      sound.play(state.current, (state.current + 1) * sound.baseFreq)
+      sound.start(state.current)
 
-      // // Stop playing synths if any
-      // const sndIndxs = Object.values(sound.playing)
-      //   .filter(snd => indices.includes(snd.oscillator.index))
-      //   .map(snd => snd.oscillator.index)
-
-      console.log('State changed.\tPlaying: ', sound.playing)
-      // sndIndxs.forEach(i => sound.stop(i))
-
-      // Change color of enabled buttons and disable (if any)
-      const button = buttons.filter(btn => indices.includes(btn.index))
+      // Change color of enabled buttons and disable them (if any)
+      buttons
+        .filter(btn => indices.includes(btn.index))
         .find(btn => btn.isEnabled)
+        ?.disable()
 
-      if (button) button.disable()
-
-      // enable new button
       buttons[state.current].enable()
     } else {
-      // Change color to button
-      buttons[previousState].disable()
+      buttons[previousState]?.disable()
 
       console.log('State did not change')
     }
@@ -56,15 +84,18 @@ function buttonListenerFunc (state) {
   }
 }
 
-function sensorListenerFunc (sound, maxAmp, sensorOptions, ampVector, detuneVector) {
-  const delta = 0.1 / sensorOptions.frequency
+const screenUpVector = [0, 0, 1]
+const deviceHeadVector = [0, -1, 0]
+
+function sensorListenerFunc (sounds, maxAmp, sensorOptions) {
+  const delta = 1 / sensorOptions.frequency
 
   return event => {
     const amp = maxAmp * Math.pow(
       map(
         angleBetweenVectors(
-          rotateVector(event.target.quaternion, ampVector),
-          ampVector
+          rotateVector(event.target.quaternion, screenUpVector),
+          screenUpVector
         ),
         0, Math.PI,
         0, 1
@@ -74,37 +105,95 @@ function sensorListenerFunc (sound, maxAmp, sensorOptions, ampVector, detuneVect
 
     const detune = map(
       angleBetweenVectors(
-        rotateVector(event.target.quaternion, detuneVector),
-        detuneVector
+        rotateVector(event.target.quaternion, deviceHeadVector),
+        deviceHeadVector
       ),
       0, Math.PI,
       -100, 100
     )
 
-    // console.log(detune)
-
-    for (const synth of sound.playing) {
-      if (synth) {
-        sound.detune = detune
-        synth.oscillator.detune.cancelScheduledValues(0.0)
-        synth.oscillator.detune.linearRampToValueAtTime(
-          detune,
-          delta
-        )
-
-        sound.amp = amp
-        synth.gain.gain.cancelScheduledValues(0.0)
-        synth.gain.gain.linearRampToValueAtTime(
-          amp,
-          sound.context.currentTime + delta
-        )
-      }
-    }
+    sounds.forEach(aSound => {
+      aSound.perform('setDetune', { detune: detune, dt: delta })
+      aSound.perform('setAmp', { amp: amp, dt: delta })
+    })
   }
 }
 
+function sensorErrorListener (event) {
+  if (event.error.name === 'SecurityError') {
+    console.error(`No permissions to use ${event.target.toString()}.`)
+  } else if (event.error.name === 'NotReadableError') {
+    console.error(`${event.target.toString()}  is not available on this device.`)
+  } else {
+    console.error(event.error)
+  }
+}
+
+function addListenerToBody () {
+  const body = document.querySelector('body')
+
+  return new Promise(resolve => {
+    body.addEventListener('pointerdown', resolve, { once: true })
+  })
+}
+
+function setButtonStyle (buttons) {
+  return event => {
+    buttons.forEach(btn => {
+      btn.style.backgroundColor = btnColorOff
+      btn.style.border = '0'
+    })
+
+    return event
+  }
+}
+
+function initSound (event) {
+  Sound.init()
+
+  return Sound
+}
+
+function attachListenersToState (state, buttons) {
+  return sound => {
+    state.listeners.attach(viewUpdaterFunc(buttons, sound))
+    return sound
+  }
+}
+
+function createSoundObjects (state) {
+  return sound => {
+    // CAUTION: state.all is a Set instance of positive integers.
+    const sounds = Array.from(state.all)
+      .map(aStateIndex => sound.of({
+        type: 'Oscillator',
+        name: aStateIndex,
+        params: { freq: (aStateIndex + 1) * baseFreq, amp: 0.0, fadeIn: fadeIn, fadeOut: fadeOut }
+      })
+      )
+
+    return sounds
+  }
+}
+
+function initSensorsAndAttachListeners (sounds) {
+  const sensor = new window.AbsoluteOrientationSensor(sensorOptions)
+
+  sensor.start()
+  sensor.addEventListener('error', sensorErrorListener)
+  sensor.addEventListener('reading', sensorListenerFunc(sounds, maxAmp, sensorOptions))
+}
+
 export {
+  extendBtns,
   viewUpdaterFunc,
   buttonListenerFunc,
-  sensorListenerFunc
+  sensorListenerFunc,
+  sensorErrorListener,
+  addListenerToBody,
+  setButtonStyle,
+  initSound,
+  attachListenersToState,
+  createSoundObjects,
+  initSensorsAndAttachListeners
 }
