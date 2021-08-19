@@ -124,8 +124,16 @@ function sensorErrorListener (event) {
     console.error(`No permissions to use ${event.target.toString()}.`)
   } else if (event.error.name === 'NotReadableError') {
     console.error(`${event.target.toString()}  is not available on this device.`)
+    alertUser(`${event.target.constructor.name}  is not available on this device.`)
   } else {
     console.error(event.error)
+  }
+}
+
+function alertUser (msg) {
+  if (!sessionStorage.isRevealed) {
+    alert(msg)
+    sessionStorage.isRevealed = true
   }
 }
 
