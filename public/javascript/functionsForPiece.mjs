@@ -103,19 +103,41 @@ function sensorListenerFunc (sounds, maxAmp, sensorOptions) {
       2
     )
 
-    const detune = map(
+    const detune = Math.round(map(
       angleBetweenVectors(
         rotateVector(event.target.quaternion, deviceHeadVector),
         deviceHeadVector
       ),
       0, Math.PI,
       -100, 100
-    )
+    ))
 
     sounds.forEach(aSound => {
       aSound.perform('setDetune', { detune: detune, dt: delta })
       aSound.perform('setAmp', { amp: amp, dt: delta })
     })
+  }
+}
+
+function sensorBarListenerFunc (document) {
+  const bar = document.querySelector('#bar')
+
+  if (bar) {
+    const position = document.querySelector('#barPoint')
+    const endPosition = bar.offsetWidth - position.offsetWidth
+
+    return event => {
+      const marginLeft = Math.round(map(
+        angleBetweenVectors(
+          rotateVector(event.target.quaternion, deviceHeadVector),
+          deviceHeadVector
+        ),
+        0, Math.PI,
+        0, endPosition
+      ))
+      // console.log("Inside 'sensorBarListenerFunc'", marginLeft)
+      position.style.marginLeft = `${marginLeft}px`
+    }
   }
 }
 
@@ -184,12 +206,17 @@ function createSoundObjects (state) {
   }
 }
 
-function initSensorsAndAttachListeners (sounds) {
-  const sensor = new window.AbsoluteOrientationSensor(sensorOptions)
+function initSensorsAndAttachListeners (document) {
+  return sounds => {
+    const sensor = new window.AbsoluteOrientationSensor(sensorOptions)
 
-  sensor.start()
-  sensor.addEventListener('error', sensorErrorListener)
-  sensor.addEventListener('reading', sensorListenerFunc(sounds, maxAmp, sensorOptions))
+    sensor.start()
+    sensor.addEventListener('error', sensorErrorListener)
+    sensor.addEventListener('reading', sensorListenerFunc(sounds, maxAmp, sensorOptions))
+    sensor.addEventListener('reading', sensorBarListenerFunc(document))
+
+    return sensor
+  }
 }
 
 export {
