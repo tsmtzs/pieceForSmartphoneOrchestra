@@ -5,7 +5,11 @@ html {
 body {
     background-color: seashell;
     color: maroon;
-    padding: 0px 10px 0;
+    /* padding: 0px 10px 0; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 header {
@@ -37,7 +41,7 @@ button {
     margin-top: 3vh;
     margin-bottom: 1%;
     width: 50%;
-    height: 25vh;
+    height: 23vh;
     background: seashell;
     border-radius: 2em;
     border: 2px solid black;
@@ -118,4 +122,29 @@ canvas {
     margin-left: auto;
     margin-right: auto;
     width: 80%;
+}
+
+#bar {
+    border: solid black 1px;
+    height: 2em;
+    width: 80%;
+    position: relative;
+    margin: 0 auto;
+}
+
+#barPoint {
+    background-color: orange;
+    margin-left: 8%;
+    height: 100%;
+    width: 4%;
+    position: absolute;
+}
+
+#barCenter {
+    margin-left: 48%;
+    border: solid maroon 3px;
+    height: 100%;
+    width: 4%;
+    position: absolute;
+    box-sizing: border-box;
 }
