@@ -5,11 +5,7 @@ html {
 body {
     background-color: seashell;
     color: maroon;
-    /* padding: 0px 10px 0; */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
+    padding: 0px 10px 0;
 }
 
 header {
@@ -130,11 +126,12 @@ canvas {
     width: 80%;
     position: relative;
     margin: 0 auto;
+    visibility: visible;
 }
 
 #barPoint {
     background-color: orange;
-    margin-left: 8%;
+    margin-left: 48%;
     height: 100%;
     width: 4%;
     position: absolute;

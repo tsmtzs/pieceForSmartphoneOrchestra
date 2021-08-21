@@ -85,7 +85,7 @@ function buttonListenerFunc (state) {
 }
 
 const screenUpVector = [0, 0, 1]
-const deviceHeadVector = [0, -1, 0]
+const displayTopVector = [0, 1, 0]
 
 function sensorListenerFunc (sounds, maxAmp, sensorOptions) {
   const delta = 1 / sensorOptions.frequency
@@ -105,8 +105,8 @@ function sensorListenerFunc (sounds, maxAmp, sensorOptions) {
 
     const detune = Math.round(map(
       angleBetweenVectors(
-        rotateVector(event.target.quaternion, deviceHeadVector),
-        deviceHeadVector
+        rotateVector(event.target.quaternion, displayTopVector),
+        displayTopVector
       ),
       0, Math.PI,
       -100, 100
@@ -129,14 +129,25 @@ function sensorBarListenerFunc (document) {
     return event => {
       const marginLeft = Math.round(map(
         angleBetweenVectors(
-          rotateVector(event.target.quaternion, deviceHeadVector),
-          deviceHeadVector
+          rotateVector(event.target.quaternion, displayTopVector),
+          displayTopVector
         ),
         0, Math.PI,
         0, endPosition
       ))
       // console.log("Inside 'sensorBarListenerFunc'", marginLeft)
       position.style.marginLeft = `${marginLeft}px`
+    }
+  }
+}
+
+function sensorActivateListenerFunc (document) {
+  // TODO: duplication here with 'sensorBarListenerFunc'.
+  // 'bar' is read twice.
+  const bar = document.querySelector('#bar')
+  return event => {
+    if (bar) {
+      bar.style.visibility = 'visible'
     }
   }
 }
@@ -209,9 +220,9 @@ function createSoundObjects (state) {
 function initSensorsAndAttachListeners (document) {
   return sounds => {
     const sensor = new window.AbsoluteOrientationSensor(sensorOptions)
-
     sensor.start()
     sensor.addEventListener('error', sensorErrorListener)
+    sensor.addEventListener('activate', sensorActivateListenerFunc(document), { once: true })
     sensor.addEventListener('reading', sensorListenerFunc(sounds, maxAmp, sensorOptions))
     sensor.addEventListener('reading', sensorBarListenerFunc(document))
 
