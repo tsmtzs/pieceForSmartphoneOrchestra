@@ -1,81 +1,99 @@
 // 'EventDispatcher' adapted from
 // http://www.awwwards.com/build-a-simple-javascript-app-the-mvc-way.html
-const _sender = Symbol();
-const _listeners = Symbol();
-const _dumpFulfilled = Symbol();
+// TODO: Add an abstract parent class 'AbstractDispatcher'
+const sender_ = Symbol('sender')
+const listeners_ = Symbol('listeners')
+const dumpFulfilled_ = Symbol('dumpFulfilled')
 
-class EventDispatcher {
-    constructor (sender) {
-	this[_sender] = sender;
-	this[_listeners] = [];
-    }
-    attach (listener) {
-        this[_listeners].push(listener);
-	return this;
-    }
-    notify () {
-	this[_listeners].forEach(listener => {
-            listener(this[_sender], ...Array.from(arguments));
-	})
-    }
+class AbstractEventDispatcher {
+  constructor (sender) {
+    this[sender_] = sender
+    this[listeners_] = new Set()
+  }
 
-    clear () {
-	this[_listeners] = [];
-    }
+  get listeners () {
+    return Array.from(this[listeners_])
+  }
 
-    isEmpty () {
-	return this[_listeners].length == 0;
-    }
+  get sender () {
+    return this[sender_]
+  }
+
+  clear () {
+    this[listeners_].clear()
+  }
+
+  attach (listener) {
+    throw new Error('Subclass repsonsibility')
+  }
+
+  remove (listener) {
+    throw new Error('Subclass repsonsibility')
+  }
+
+  notify (listener) {
+    throw new Error('Subclass repsonsibility')
+  }
+
+  isEmpty () {
+    return this[listeners_].size === 0
+  }
+
+  listenerSize () {
+    return this[listeners_].size
+  }
+}
+
+class EventDispatcher extends AbstractEventDispatcher {
+  attach (listener) {
+    if (listener.constructor !== Function) throw new Error('EventDispatcher.attach argument type error')
+
+    this[listeners_].add(listener)
+    return this
+  }
+
+  remove (listener) {
+    return this[listeners_].delete(listener)
+  }
+
+  notify (...args) {
+    this[listeners_].forEach(listener => {
+      listener(this[sender_], ...args)
+    })
+  }
 }
 
 // Object 'OneShotEventDispatcher' collects listeners that should run
-// only once. The method 'attach' pushes a listener function into to
-// the '_listeners' container, along with a Boolean function 'conditionFunc'.
-// 'conditionFunc' accepts the same arguments as the 'listener'. When an
-// 'OneShotEventDispatcher' object notifies it's listeners, it traverses the
-// '_listeners' list and collects all the elements for which the 'condition'
-// returns 'true'. Then redefines '_listeners' as the array of the remaining
-// listeners.
-class OneShotEventDispatcher {
-    constructor (sender) {
-	this[_sender] = sender;
-	this[_listeners] = [];
+// only once. The method 'attach' pushes listener functions into to
+// the 'listeners_' container, along with a Boolean function 'conditionFunc'.
+// 'conditionFunc' accepts the same arguments as the listeners.
+class OneShotEventDispatcher extends AbstractEventDispatcher {
+  attach (conditionFunc, ...listeners) {
+    if (listeners.some(func => func.constructor !== Function)) {
+      throw new Error('OneShotEventDispatcher.attach argument type error')
     }
 
-    attach (conditionFunc, ...listeners) {
-	listeners.forEach(
-	    listener => this[_listeners].push({condition: conditionFunc, listener: listener})
-	);
+    this[listeners_].add({ condition: conditionFunc, listeners: listeners })
 
-	return this;
-    }
+    return this
+  }
 
-    notify () {
-	const args = Array.from(arguments);
-	const booleanFuncs = [];
+  notify (...args) {
+    const fulfilled = []
 
-	this[_listeners].filter(pair => {
-	    return pair.condition(this[_sender], ...args) === true;
-	})
-	    .forEach(pair => {
-		booleanFuncs.push(pair.condition);
-		pair.listener(this[_sender], ...args);
-	    });
+    this[listeners_].forEach(pair => {
+      if (pair.condition(this[sender_], ...args)) {
+        fulfilled.push(pair)
+        pair.listeners.forEach(listener => listener(this[sender_], ...args))
+      }
+    })
 
-	this[_dumpFulfilled](booleanFuncs);
-    }
+    this[dumpFulfilled_](fulfilled)
+  }
 
-    [_dumpFulfilled] (funcs) {
-	this[_listeners] = this[_listeners].filter(pair => { return !funcs.includes(pair.condition) });
-    }
-
-    clear () {
-	this[_listeners] = [];
-    }
-
-    isEmpty () {
-	return this[_listeners].length == 0;
-    }
+  [dumpFulfilled_] (listeners) {
+    listeners.forEach(pair => this[listeners_].delete(pair))
+  }
 }
 
-export { EventDispatcher, OneShotEventDispatcher };
+export { EventDispatcher, OneShotEventDispatcher }
