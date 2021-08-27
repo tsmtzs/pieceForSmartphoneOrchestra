@@ -30,7 +30,7 @@ if ('serviceWorker' in navigator) {
   // Register a service worker hosted at the root of the
   // site using the default scope.
   navigator.serviceWorker
-    .register(new URL('../sw.js', import.meta.url), { type: 'module' })
+    .register(new URL('../serviceWorker.js', import.meta.url), { scope: '/' })
     .then(registration => console.log('Service worker registration succeeded:', registration))
     .catch(error => console.log('Service worker registration failed:', error))
 } else {

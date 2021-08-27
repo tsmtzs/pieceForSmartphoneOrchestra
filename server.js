@@ -53,7 +53,12 @@ httpsServer.listen(httpsPort, function (err) {
 
 process.setUncaughtExceptionCaptureCallback(err => { console.error(err.stack) })
 
-app.use(express.static(path.join(__dirname, serveFileDir)))
+app.use(express.static(
+  path.join(__dirname, serveFileDir),
+  {
+    setHeaders: (res, path, stat) => { res.set('Service-Worker-Allowed', '/') }
+  }
+))
 
 // error handling - from https://expressjs.com/en/guide/error-handling.html
 app.use((err, req, res, next) => {
