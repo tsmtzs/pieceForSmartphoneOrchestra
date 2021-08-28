@@ -5,16 +5,16 @@
     "display": "fullscreen",
     "background_color": "#fff5ee",
     "icons": [
-	{
-	    "src": "/icons/smartphoneOrchestraIcon_512x512.png",
+    	{
+	    "src": "./icons/smartphoneOrchestraIcon_512x512.png",
 	    "sizes": "512x512",
 	    "type": "image/png"
 	},
 	{
-	    "src": "/icons/smartphoneOrchestraIcon_192x192.png",
+	    "src": "./icons/smartphoneOrchestraIcon_192x192.png",
 	    "sizes": "192x192",
 	    "type": "image/png"
 	}
     ],
-    "start_url": "/"
+    "start_url": "../index.html"
 }

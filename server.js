@@ -11,6 +11,8 @@ const http = require('http')
 const https = require('https')
 const argv = require('minimist')(process.argv.slice(2))
 
+const serveFileDir = process.env.NODE_ENV === 'production' ? 'build' : 'dist'
+
 const app = express()
 const httpPort = argv.p || argv['http-port'] || 8080
 const httpsPort = argv.P || argv['https-port'] || 4443
@@ -51,7 +53,12 @@ httpsServer.listen(httpsPort, function (err) {
 
 process.setUncaughtExceptionCaptureCallback(err => { console.error(err.stack) })
 
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(
+  path.join(__dirname, serveFileDir),
+  {
+    setHeaders: (res, path, stat) => { res.set('Service-Worker-Allowed', '/') }
+  }
+))
 
 // error handling - from https://expressjs.com/en/guide/error-handling.html
 app.use((err, req, res, next) => {
@@ -60,13 +67,13 @@ app.use((err, req, res, next) => {
 })
 
 app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, '/views/index.html'))
+  res.sendFile(path.join(__dirname, serveFileDir, '/index.html'))
 })
 
 app.get('/instrument', function (req, res) {
-  res.sendFile(path.join(__dirname, '/views/instrument.html'))
+  res.sendFile(path.join(__dirname, serveFileDir, '/instrument.html'))
 })
 
 app.get('/directions', function (req, res) {
-  res.sendFile(path.join(__dirname, '/views/directions.html'))
+  res.sendFile(path.join(__dirname, serveFileDir, '/directions.html'))
 })
