@@ -8,7 +8,9 @@
     "prestart-dev": "if [[ ! -d dist ]]; then echo Directory 'dir' does not exist. Run: 'npm run parcel-watch'.; false; else true; fi",
     "start-dev": "if [[ $? == 0 ]]; then node server.js; fi",
     "prestart-prod": "if [[ ! -d build ]]; then echo Directory 'build' does not exist. Switch to branch master or run: 'npm run parcel-build'.; false; else true; fi",
-    "start-prod": "if [[ $? == 0 ]]; then NODE_ENV=production node server.js; fi"
+    "start-prod": "if [[ $? == 0 ]]; then NODE_ENV=production node server.js; fi",
+    "premkcert": "if [[ ! -d certs ]]; then mkdir ./certs; fi",
+    "mkcert": "mkcert -key-file certs/smartphoneOrchestra-key.pem --cert-file certs/smartphoneOrchestra-crt.pem localhost 192.168.10.2"
   },
   "author": "Tassos Tsesmetzis",
   "license": "ISC",

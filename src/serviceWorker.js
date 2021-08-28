@@ -8,7 +8,13 @@
 const precacheVersion = self.__precacheManifest
   .map(p => p.revision)
   .join('')
-const precacheFiles = self.__precacheManifest.map(p => p.url)
+// TODO: Precache files /directions and /directions.html are the same.
+// Also, the same are /instrument and /instrument.html, / and /index.html.
+// Eliminate duplicates?
+const precacheFiles = self.__precacheManifest
+  .map(p => p.url)
+  .concat(['/directions', '/instrument'])
+  .map(string => self.origin.concat(string))
 
 // Adapted from
 // https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers

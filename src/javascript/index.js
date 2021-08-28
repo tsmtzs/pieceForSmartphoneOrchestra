@@ -31,7 +31,7 @@ if ('serviceWorker' in navigator) {
   // site using the default scope.
   navigator.serviceWorker
     .register(new URL('../serviceWorker.js', import.meta.url), { scope: '/' })
-    .then(registration => console.log('Service worker registration succeeded:', registration))
+    // .then(registration => console.log('Service worker registration succeeded:', registration))
     .catch(error => console.log('Service worker registration failed:', error))
 } else {
   console.log('Service workers are not supported.')
