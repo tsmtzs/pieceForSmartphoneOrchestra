@@ -11,7 +11,7 @@ const http = require('http')
 const https = require('https')
 const argv = require('minimist')(process.argv.slice(2))
 
-const serveFileDir = 'dist'
+const serveFileDir = process.env.NODE_ENV === 'production' ? 'build' : 'dist'
 
 const app = express()
 const httpPort = argv.p || argv['http-port'] || 8080

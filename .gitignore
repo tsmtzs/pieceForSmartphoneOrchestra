@@ -1,0 +1,10 @@
+.parcel-cache
+dist/*
+certs/*
+**/*.*~
+tikz/*.pdf
+**/*.aux
+**/*.log
+**/*.aiff
+**/*.wav
+**/*.mp3
