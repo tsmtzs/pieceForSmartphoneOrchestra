@@ -76,6 +76,7 @@ button.switch span {
 [role="switch"][aria-checked="true"] :last-child {
   background: orange;
   color: white;
+  border-radius: 1rem;
 }
 
 [role="switch"][aria-checked="false"] :last-child,
