@@ -1,25 +1,32 @@
 html {
-    font-size: 12px;
+    font-size: 16px;
 }
 
 body {
     background-color: seashell;
     color: maroon;
-    padding: 0px 10px 0;
+    padding: 0% 16px;
 }
 
 header {
     background-color: seashell;
-    margin-top: -10px;
 }
 
 header h1 {
     text-align: center;
-    font-size: 3.4rem;
+    font-size: 2.8rem;
 }
 
 main {
     background-color: seashell;
+}
+
+main h2 {
+    font-size: 1.2rem;
+}
+
+main h2.otherH2 {
+    margin-top: 2em;
 }
 
 section {
@@ -69,6 +76,7 @@ button.switch span {
 [role="switch"][aria-checked="true"] :last-child {
   background: orange;
   color: white;
+  border-radius: 1rem;
 }
 
 [role="switch"][aria-checked="false"] :last-child,
@@ -89,7 +97,7 @@ label.switch {
 
 #links {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     width: 90%;
     margin-left: auto;
     margin-right: auto;
