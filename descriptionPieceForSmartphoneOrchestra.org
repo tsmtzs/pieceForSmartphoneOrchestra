@@ -1,6 +1,6 @@
 # ##################################################
-#	Piece for smartphone orchestra
-#			Tassos Tsesmetzis
+# Piece for smartphone orchestra
+#    by Tassos Tsesmetzis
 # Description of the piece
 # ##################################################
 
