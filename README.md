@@ -22,18 +22,19 @@ Players can start/stop a tone by pressing a button. By rotating the device they 
 the amplitude and frequency deviation of a playing tone.
 
 **link to _DISCUSSION.md_**
-The `SuperCollider` document [pieceSimulation.scd]() can produce an approximate of the resulting sound.
+The `SuperCollider` document [pieceSimulation.scd](supercollider/pieceSimulation.scd) can 
+produce an approximation of the resulting sound.
 
 ## Software
 
 The software synthesizer of *Piece for Smartphone Orchestra* is a
-[progressive web app]((https://en.wikipedia.org/wiki/Progressive_web_application)). The homepage offers
+[progressive web app](https://en.wikipedia.org/wiki/Progressive_web_application). The homepage offers
 a brief description of the piece along with a reduction of the instrument. Two links direct the player
 to the *text score* and the *instrument*.
 
 The web server is developed on the [`node.js`](https://nodejs.org/en/) runtime environment
 with the [`express.js`](https://expressjs.com/) web framework. Web content is distributed over
-a `TLS` network. Locally trusted certificates for this are generated with
+a `TLS` network. Locally trusted certificates can be generated with
 [`mkcert`](https://github.com/FiloSottile/mkcert).
 
 For more details on the application, please read the [SOFTWARE_SETUP_GUIDE.md]()
@@ -59,8 +60,9 @@ npm start
 	τρόπος που γίνονται οι πρόβες, όχι διευθυντής ορχήστρας,
 
 ## License
+[![License: CC BY-SA 4.0](https://licensebuttons.net/l/by-sa/4.0/80x15.png)](https://creativecommons.org/licenses/by-sa/4.0/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-CC -- MIT
-
-*Piece for Smartphone Orchestra* is distributed under the terms of CC license except the code
-which is distributed under the terms of the MIT license.
+*Piece for Smartphone Orchestra* is distributed under the terms of the
+[Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/legalcode)
+license except the code which is distributed under the terms of the [MIT license]().
