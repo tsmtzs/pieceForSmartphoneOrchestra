@@ -30,12 +30,11 @@ produce an approximation of the resulting sound.
 The software synthesizer of *Piece for Smartphone Orchestra* is a
 [progressive web app](https://en.wikipedia.org/wiki/Progressive_web_application). The homepage offers
 a brief description of the piece along with a reduction of the instrument. Two links direct the player
-to the *text score* and the *instrument*.
+to the *text score* and *instrument* pages.
 
 The web server is developed on the [`node.js`](https://nodejs.org/en/) runtime environment
 with the [`express.js`](https://expressjs.com/) web framework. Web content is distributed over
-a `TLS` network. Locally trusted certificates can be generated with
-[`mkcert`](https://github.com/FiloSottile/mkcert).
+a `TLS` network.
 
 For more details on the application, please read the [SOFTWARE_SETUP_GUIDE.md]()
 

@@ -1,13 +1,14 @@
-# Software setup
+# Software setup guide
 
 **Table of Contents**
 
 - [Install the required software](#install-the-required-software)
-- [Clone repository](#clone-repository)
+- [Clone the repository](#clone-the-repository)
 - [Install `node.js` packages](#install-node.js-packages)
 - [Work on a separate `git branch`](#work-on-a-separate-git-branch)
 - [Configuration](#configuration)
-- [Preparing a performance](#preparing-a-performance)
+- [Build the app](#build-the-app)
+- [Start the web server](#start-the-web-server)
 - [After a performance](#after-a-performance)
 
 ## Install the required software
@@ -22,12 +23,7 @@
 2. [`node.js`](https://nodejs.org/en/) (version `16.7.0`)
 
 	`node.js` is a `JavaScript` runtime environment. Prebuild binaries should be found
-	in software repositories of the most common `Linux` distributions.
-	On [`Debian`](https://www.debian.org/) based systems, install it with
-	
-	```bash
-	sudo apt-get install nodejs
-	```
+	in package repositories of the most common `Linux` distributions.
 
 3. [`npm`](https://docs.npmjs.com/cli/v7/commands/npm) (version `7.21.0`)
 
@@ -37,7 +33,7 @@
 4. [`mkcert`](https://github.com/FiloSottile/mkcert) (version `1.4.3`)
 
 	The web server of *Piece for Smartphone Orchestra* distributes content over a TLS network.
-	`mkcert` is an easy to use program that produces TLS certificates for local networks.
+	`mkcert` is an easy to use program that produces TLS certificates for localy trusted networks.
 	To install it follow the directions in
 	[mkcert-installation](https://github.com/FiloSottile/mkcert#installation).
 	
@@ -59,7 +55,7 @@
 	[icon](src/icons/smartphoneOrchestraIcon_192x192.png), respectively. Both
 	`TeX` documents use the `tikz` package for graphics.
 
-## Clone repository
+## Clone the repository
 
 Open a `bash` shell and change directory to an appropriate place. Run
 
@@ -67,7 +63,7 @@ Open a `bash` shell and change directory to an appropriate place. Run
 git clone ???
 ```
 
-to download the `pieceForSmartphoneOrchestra` repository. Now, change directory
+to download the `pieceForSmartphoneOrchestra` repository. Change directory
 to `pieceForSmartphoneOrchestra`
 
 ```bash
@@ -102,3 +98,60 @@ git checkout -b performance@MonsAgnes
 ```
 
 ## Configuration
+
+The *Piece for Smartphone Orchestra* web application uses four environment variables. These are
+
+- `httpPort`: The port number for the non encrypted `HTTP` requests. Default value `8080`.
+- `httpsPort`: Port number for the TLS encrypted `HTTP` requests. Default value `8443`.
+- `serverIP`: The IP of the web server. Default value `192.168.10.2`.
+- `domainName`: The domain name of the application. Default value `""` (empty string).
+
+They are defined and set in [package.json](package.json) under the `config` key.
+
+## Build the app
+
+At this step we assume that you are inside the `pieceForSmartphoneOrchestra` directory, have
+installed the necessary `node.js` packages and switched to a newly created `git` branch named
+`performance@MonsAgnes` on top of `master`. 
+
+Open a terminal and run the `npm` script `build`:
+
+```bash
+npm run build
+```
+
+This will:
+
+- create the directory `certs`,
+- call `mkcert` to create the certificates `certs/smartphoneOrchestra-crt.pem` and
+	`certs/smartphoneOrchestra-key.pem` valid for `localhost`, `serverIP` and `domainName`.
+- create the directory `build`,
+- call `parcel` to bundle the web app and save production files under `build`,
+- copy `mkcert`'s root certificate `rootCA.pem` under `build`.
+
+## Start the web server
+
+Start the server with
+
+```bash
+npm start
+```
+
+Players can, now, open the browser and navigate to `http://serverIP:httpPort`, 
+`https://serverIP:httpsPort` or `http://domainName:httpPort`. In this guide these
+should be `http://192.168.10.2:8080` etc. Upon first visit, a warning like *Your connection is not private*
+or *Your connection is not secure* might appear. This happens because the browser can't recognize the
+TLS certificates generated with `mkcert`. Bypass the warning by clicking `Advanced` and then
+`Proceed to https://192.168.10.2:8443`.
+
+Users can download the app use it offline. For this to work they should, first, install `mkcert`'s
+root certificate to their trust store. They can download the certificate by navigating to
+`https://192.168.10.2:8443/rootCA.pem`. The installation to the trust store is device depended.
+In some cases, a message to install it will appear after the download is complete. In other cases
+the user should manually install it from the `Settings` menu. After the certificate is installed, 
+users can visit `https://192.168.10.2:8443` and select `Add to home screen` from browser's menu.
+
+========================================
+Add sections (?):
+preperation
+After the performance
