@@ -48,10 +48,11 @@
 	and programming language for audio synthesis and algorithmic composition. Install it
 	if you would like to hear a crude approximation of the piece. In such a case, use the
 	`SuperCollider` document [pieceSimulation.scd](supercollider/pieceSimulation.scd).
-- [`TeX Live`](https://www.tug.org/texlive/) is `TeX` distribution. It is used with the
+- [`TeX Live`](https://www.tug.org/texlive/) is a `TeX` distribution. Use `XeLaTeX` (part of `TeX Live`)
+	to render the
 	documents [pieceForSmartphoneOrchestra.tex](score/pieceForSmartphoneOrchestra.tex)
-	and [pieceForSmartphoneOrchestraIcon.tex](tikz/pieceForSmartphoneOrchestraIcon.tex)
-	to produce the [text score](score/pieceForSmartphoneOrchestra.pdf) and the PWA
+	and [pieceForSmartphoneOrchestraIcon.tex](tikz/pieceForSmartphoneOrchestraIcon.tex).
+	The output will be the [text score](score/pieceForSmartphoneOrchestra.pdf) and the PWA
 	[icon](src/icons/smartphoneOrchestraIcon_192x192.png), respectively. Both
 	`TeX` documents use the `tikz` package for graphics.
 
@@ -101,10 +102,10 @@ git checkout -b performance@MonsAgnes
 
 The *Piece for Smartphone Orchestra* web application uses four environment variables. These are
 
-- `httpPort`: The port number for the non encrypted `HTTP` requests. Default value `8080`.
-- `httpsPort`: Port number for the TLS encrypted `HTTP` requests. Default value `8443`.
-- `serverIP`: The IP of the web server. Default value `192.168.10.2`.
-- `domainName`: The domain name of the application. Default value `""` (empty string).
+- `httpPort`: The port number for the non encrypted `HTTP` requests. Default value: `8080`.
+- `httpsPort`: Port number for the TLS encrypted `HTTP` requests. Default value: `8443`.
+- `serverIP`: The IP of the web server. Default value: `192.168.10.2`.
+- `domainName`: The domain name of the application. Default value: `""` (empty string).
 
 They are defined and set in [package.json](package.json) under the `config` key.
 
@@ -146,12 +147,21 @@ TLS certificates generated with `mkcert`. Bypass the warning by clicking `Advanc
 
 Users can download the app use it offline. For this to work they should, first, install `mkcert`'s
 root certificate to their trust store. They can download the certificate by navigating to
-`https://192.168.10.2:8443/rootCA.pem`. The installation to the trust store is device depended.
-In some cases, a message to install it will appear after the download is complete. In other cases
-the user should manually install it from the `Settings` menu. After the certificate is installed, 
+`https://192.168.10.2:8443/rootCA.pem`. Installation to the trust store is device depended.
+In some cases, a message for installation will appear after the download is complete. In other cases
+the user should manually install it from the `Settings` menu of their device. After the certificate
+is installed, 
 users can visit `https://192.168.10.2:8443` and select `Add to home screen` from browser's menu.
 
-========================================
-Add sections (?):
-preperation
-After the performance
+## After a performance
+
+Checkout the branch `master` and delete the branch of the performance
+```bash
+git checkout master
+git branch -D performance@MonsAgnes
+```
+
+Assist performers to
+
+- delete the *Piece for Smartphone Orchestra* app,
+- delete the root certificate from their device trust store.
