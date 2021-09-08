@@ -7,7 +7,8 @@ It expands on the notion of a *system* to produce a dynamic musical structure. A
 [Merriam-Webster](https://www.merriam-webster.com/dictionary/system) online dictionary, a *system* is
 "*a regularly interacting or interdependent group of items forming a unified whole*".
 In *Piece for Smartphone Orchestra* the performers form the interacting group of items.
-They are distibuted among the audience and act according to a [~text score~]().
+They are distibuted among the audience and act according to a
+[text score](score/pieceForSmartphoneOrchestra.pdf).
 The piece can be regarded as a potential aural game on
 [*beat tones*](https://en.wikipedia.org/wiki/Beat_(acoustics)) and
 [*otoacoustic emission effects*](https://en.wikipedia.org/wiki/Otoacoustic_emission).
@@ -15,20 +16,21 @@ The piece can be regarded as a potential aural game on
 Players use the smartphone to control a specially designed musical instrument. This is a software
 synthesizer that can play three sine tones at `1244.507 Hz`, `2489.014 Hz` and `3733.521 Hz`
 (an E flat in three octaves). The synth is developed using web technologies. In particular, it is
-a [PWA](https://en.wikipedia.org/wiki/Progressive_web_application) that players can add to their
-home screen and use offline. Sound is produced using the
+a [progressive web app](https://en.wikipedia.org/wiki/Progressive_web_application) that players
+can add to their home screen and use offline. Sound is produced using the
 [Web Audio API](https://webaudio.github.io/web-audio-api/).
 Players can start/stop a tone by pressing a button. By rotating the device they control
 the amplitude and frequency deviation of a playing tone.
 
 **link to _DISCUSSION.md_**
 The `SuperCollider` document [pieceSimulation.scd](supercollider/pieceSimulation.scd) can 
-produce an approximation of the resulting sound.
+generate an approximation of the resulting sound.
 
 ## Software
 
 The software synthesizer of *Piece for Smartphone Orchestra* is a
-[progressive web app](https://en.wikipedia.org/wiki/Progressive_web_application). The homepage offers
+[PWA](https://en.wikipedia.org/wiki/Progressive_web_application). In particular, it is a website
+with three pages. The homepage offers
 a brief description of the piece along with a reduction of the instrument. Two links direct the player
 to the *text score* and *instrument* pages.
 
@@ -36,7 +38,7 @@ The web server is developed on the [`node.js`](https://nodejs.org/en/) runtime e
 with the [`express.js`](https://expressjs.com/) web framework. Web content is distributed over
 a `TLS` network.
 
-For more details on the application, please read the [SOFTWARE_SETUP_GUIDE.md]()
+For more details on the application, please read the [SOFTWARE_SETUP_GUIDE.md](SOFTWARE_SETUP_GUIDE.md)
 
 With all the required software installed, use a terminal to run
 
