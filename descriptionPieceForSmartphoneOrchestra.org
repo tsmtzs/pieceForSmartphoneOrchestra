@@ -1,5 +1,5 @@
 # ##################################################
-# Piece for smartphone orchestra
+# Piece for Smartphone Orchestra
 #    by Tassos Tsesmetzis
 # Description of the piece
 # ##################################################
