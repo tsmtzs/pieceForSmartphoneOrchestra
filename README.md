@@ -57,4 +57,4 @@ npm start
 
 *Piece for Smartphone Orchestra* is distributed under the terms of the
 [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/legalcode)
-except the code which is distributed under the terms of the [MIT license]().
+except the code which is distributed under the terms of the [MIT license](LICENSE).
