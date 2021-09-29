@@ -16,7 +16,7 @@
 1. `Linux`
 
 	*Piece for Smartphone Orchestra* is developed on a `Linux` environment. In
-	particular, scripts from [package.json]() employ 
+	particular, scripts from [package.json](package.json) employ 
 	[`bash`](https://www.gnu.org/software/bash/) commands. Normally, the `bash` shell should
 	be part of any `Linux` distribution.
 	
