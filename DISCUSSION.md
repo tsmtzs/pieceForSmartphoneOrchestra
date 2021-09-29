@@ -33,7 +33,7 @@ during the rehearsals and performances of the piece. This web of *mental spaces*
 
 ## Complex systems
 
-*Systems science* is an ubrella term for studying aggregations of interacting elements. It encompasses ideas and methodologies
+*Systems science* is an umbrella term for the study of aggregations of interacting elements. It encompasses ideas and methodologies
 from *dynamical systems*, *cybernetics* and *chaos theory*.
 A *complex system* is "*one made up of a large number of parts that interact in a nonsimple way*"[^simon].
 Holland[^holland1] refers to these interacting elements as *agents*.
@@ -65,7 +65,8 @@ For scale we assume *spatial scale*.
 
 On one end there is the whole performance space. At this level *Piece for Smartphone Orchestra* appears
 as an arc-like structure that unfolds during the evolution of the piece. Tones, beats and (possible) auditory distortion products come and
-disappear as frequencies, frequency deviations and amplitudes follow the arc-like structure. These are global emergent properties of the system.
+disappear as frequencies, frequency deviations and amplitudes follow the arc-like structure.
+These beats and auditory distorion products can be viewed as global emergent properties of the system.
 
 At the other end we have the space around an individual agent.
 At this level, behaviour is set by the directions in the [score](score/pieceForSmartphoneOrchestra.pdf).
@@ -76,7 +77,7 @@ fixed and may overlap. These *localities of sound* depend on the distance betwee
 the playing tones, as well as, the direction or the movements of the players. Localities of sound may encompass single tones, beats or even
 auditory distortion products. They should be regarded as local emergent properties of the system.
 
-The last few paragraphs suggest a multi-scale approach to the sound structure of the piece. Different scales are dependent and form the input
+The last few paragraphs suggest a multi-scale approach to the sound structure of the piece. Different scales are interdependent and form the input
 information of the agents. This information is different for each agent. Taken together with player's action form a *feedback loop*.
 
 [^kendall-et-al]: Kendall GS, Haworth C, Cádiz RF. "Sound Synthesis with Auditory Distortion Products". Computer Music Journal 38, 4 (2014):5–23.

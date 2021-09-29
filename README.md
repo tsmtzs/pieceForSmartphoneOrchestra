@@ -29,8 +29,8 @@ generate an approximation of the resulting sound.
 ## Software
 
 The software synthesizer of *Piece for Smartphone Orchestra* is a
-[PWA](https://en.wikipedia.org/wiki/Progressive_web_application). In particular, it is a website
-with three pages. The homepage offers
+[PWA](https://en.wikipedia.org/wiki/Progressive_web_application). In particular, it is a three page website.
+The homepage offers
 a brief description of the piece along with a reduction of the instrument. Two links direct the player
 to the *text score* and *instrument* pages.
 

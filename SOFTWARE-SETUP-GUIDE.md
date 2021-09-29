@@ -48,12 +48,15 @@
 	and programming language for audio synthesis and algorithmic composition. Install it
 	if you would like to hear a crude approximation of the piece. In such a case, use the
 	`SuperCollider` document [pieceSimulation.scd](supercollider/pieceSimulation.scd).
+	The document [otoacousticEmissionTests.scd](supercollider/otoacousticEmissionTests.scd)
+	offers some simple tests on *auditory distortion products*.
 - [`TeX Live`](https://www.tug.org/texlive/) is a `TeX` distribution. Use `XeLaTeX` (part of `TeX Live`)
 	to render the
 	documents [pieceForSmartphoneOrchestra.tex](score/pieceForSmartphoneOrchestra.tex)
 	and [pieceForSmartphoneOrchestraIcon.tex](tikz/pieceForSmartphoneOrchestraIcon.tex).
-	The output will be the [text score](score/pieceForSmartphoneOrchestra.pdf) and the PWA
-	[icon](src/icons/smartphoneOrchestraIcon_192x192.png), respectively. Both
+	The output of the first will be the [text score](score/pieceForSmartphoneOrchestra.pdf).
+	The second one will produce the PWA
+	[icon](src/icons/smartphoneOrchestraIcon_192x192.png) of the website. Both
 	`TeX` documents use the `tikz` package for graphics.
 
 ## Clone the repository
@@ -70,6 +73,7 @@ to `pieceForSmartphoneOrchestra`
 ```bash
 cd pieceForSmartphoneOrchestra
 ```
+
 ## Install `node.js` packages
 
 The web application of the piece is developed on [`node.js`](https://nodejs.org/en/) with
@@ -86,7 +90,7 @@ npm install
 
 ## Work on a separate `git branch`
 
-For a performance it is convenient to fork off the `master` `git` branch. First, switch to branch `master`
+For a performance it is convenient to fork off the `master` `git` branch. First, switch to `master`
 
 ```bash
 git switch master
@@ -113,7 +117,7 @@ They are defined and set in [package.json](package.json) under the `config` key.
 
 At this step we assume that you are inside the `pieceForSmartphoneOrchestra` directory, have
 installed the necessary `node.js` packages and switched to a newly created `git` branch named
-`performance@MonsAgnes` on top of `master`. 
+`performance@MonsAgnes` on top of `master`. Environment variables hold their default values.
 
 Open a terminal and run the `npm` script `build`:
 
@@ -145,11 +149,11 @@ or *Your connection is not secure* might appear. This happens because the browse
 TLS certificates generated with `mkcert`. Bypass the warning by clicking `Advanced` and then
 `Proceed to https://192.168.10.2:8443`.
 
-Users can download the app use it offline. For this to work they should, first, install `mkcert`'s
-root certificate to their trust store. They can download the certificate by navigating to
+Users can download the app and use it offline. For this to work they should, first, install `mkcert`'s
+root certificate to their device trust store. To download the certificate navigate to
 `https://192.168.10.2:8443/rootCA.pem`. Installation to the trust store is device depended.
 In some cases, a message for installation will appear after the download is complete. In other cases
-the user should manually install it from the `Settings` menu of their device. After the certificate
+the user should manually install it from the `Settings` menu of his/hers device. After the certificate
 is installed, 
 users can visit `https://192.168.10.2:8443` and select `Add to home screen` from browser's menu.
 
