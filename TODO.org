@@ -1,0 +1,21 @@
+# ##################################################
+# Piece for Smartphone Orchestra
+#	by Tassos Tsesmetzis
+# ##################################################
+* Web client
+** TODO Fix h1 header size in instrument.html
+   H1 header /Piece for Smartphone Orchestra/ renders smaller in /instrument than in /index
+   or /directions. (mobile chrome)
+
+** TODO Style <a> elements
+   Links between pages of the website appear very old-fashioned. Style them using responsive design?
+   Add a drop down menu when screen size is small? ...
+
+** TODO Use different colors?
+   Take into account that the screen will be seen from the audience, the performance might take place
+   in a concert hall possibly with dim lights.
+
+** TODO Use some more advanced typography?
+   Choose the right typeface(s). Use different fonts for paragraphs, headers, anchor elements...
+
+** TODO Make a nice web app icon

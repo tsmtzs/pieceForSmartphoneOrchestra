@@ -27,7 +27,7 @@ var cdt = 2 * f1 - f2;
 	Pan2.ar(sig * env, pan);
 })
 
- // For two given sinusoids with
+// For two given sinusoids with
 // frequencies f1, f2, otoacoustic emission effects can be more
 // easily perceived when frequency ratio is close to 1.3 and
 // amplitude is relatively high [1].
