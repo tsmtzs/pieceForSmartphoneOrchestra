@@ -64,7 +64,7 @@
 Open a `bash` shell and change directory to an appropriate place. Run
 
 ```bash
-git clone ???
+git clone https://github.com/tsmtzs/pieceForSmartphoneOrchestra.git
 ```
 
 to download the `pieceForSmartphoneOrchestra` repository. Change directory
