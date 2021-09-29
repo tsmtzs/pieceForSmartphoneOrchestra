@@ -38,7 +38,7 @@ The web server is developed on the [`node.js`](https://nodejs.org/en/) runtime e
 with the [`express.js`](https://expressjs.com/) web framework. Web content is distributed over
 a `TLS` network.
 
-For more details about the application, please read the [SOFTWARE_SETUP_GUIDE.md](SOFTWARE_SETUP_GUIDE.md).
+For more details about the application, please read the [SOFTWARE-SETUP-GUIDE.md](SOFTWARE-SETUP-GUIDE.md).
 
 With all the required software installed, use a terminal to run
 
