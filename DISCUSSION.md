@@ -14,9 +14,9 @@ radius `100 cents` around the center frequency. The piece may be perceived as a 
 *otoacoustic emission effects*[^kendall-et-al]. It is an attempt to create with very little material, a varying iridescent soundscape.
 
 Ideas that relate to *systems science* and were influnential to
-*Piece for Smartphone Orchestra* should be traced in the writings of Horacio Vaggione[^vaggione1],[^vaggione2] and Agostino
-DiScipio[^discipio1],[^discipio2]. Also, in the same vein should be regarded work that builds upon *artificial swarms*
-[^blackwell],[^blackwell-bentley],[^blackwell-young] and *artificial ecosystems*[^bown-cormack],[^cormack],[^eldridge-bown].
+*Piece for Smartphone Orchestra* should be traced in the writings of Horacio Vaggione[^vaggione1][^vaggione2] and Agostino
+DiScipio[^discipio1][^discipio2]. Also, in the same vein should be regarded work that builds upon *artificial swarms*
+[^blackwell][^blackwell-bentley][^blackwell-young] and *artificial ecosystems*[^bown-cormack][^cormack][^eldridge-bown].
 These authors reify the concept of a *system* to a computer simulation or a computational process.
 As such, most of the elements of the *system*
 and the interactions among them can be defined and manipulated by computer algorithms. In *Piece for Smartphone Orchestra* the interacting
@@ -94,7 +94,7 @@ information of the agents. This information is different for each agent. Taken t
 Eldridge, Alice, and Oliver Bown. “Biologically Inspired and Agent-Based Algorithms for Music.” Oxford Handbooks Online, 2018. https://doi.org/10.1093/oxfordhb/9780190226992.013.18
 [^fauconnier]: Fauconnier, Gilles. “Mental Spaces.” Oxford Handbooks Online, 2010. https://doi.org/10.1093/oxfordhb/9780199738632.013.0014
 [^simon]: Simon H.A. The Architecture of Complexity. In: *Facets of Systems Science*. International Federation for Systems Research International Series on Systems Science and Engineering, vol 7. Springer, Boston, MA; 1991. https://doi.org/10.1007/978-1-4899-0718-9_31
-[^oliveros]: Oliveros P, Pertl B. Anthology of text scores. New York: Deep Listening Publications; 2013.
+[^oliveros]: Oliveros P, Pertl B. *Anthology of text scores*. New York: Deep Listening Publications; 2013.
 [^holland1]: See chapter 1 in:\
 Holland JH. *Hidden order: how adaptation builds complexity*. Cambridge, MA: Perseus Books; 2003.
 [^miller-page1]: See chapter 4 in:\
