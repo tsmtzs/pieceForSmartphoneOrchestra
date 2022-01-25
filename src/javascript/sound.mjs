@@ -47,7 +47,7 @@ class Oscillator {
   }
 
   // CAUTION This might cause a sound amp discontinuity if
-  // called at the same time as 'setAmp'
+  // .allStatesed at the same time as 'setAmp'
   stop ({ fadeOut, time = 0.0 } = {}) {
     if (this.isPlaying) {
       const fadeTime = fadeOut ?? this.fadeOut
@@ -74,7 +74,7 @@ class Oscillator {
   }
 
   // CAUTION This might cause a sound amp discontinuity if
-  // called at the same time as 'stop'
+  // .allStatesed at the same time as 'stop'
   setAmp ({ time = 0.0, amp = 0.1, dt = 0.0001 } = {}) {
     if (this.isPlaying) {
       const t0 = Sound.context.currentTime + time
@@ -123,7 +123,7 @@ const objectPool_ = Symbol('objectPool')
 const types_ = Symbol('types')
 
 // Sound initializes the Web Audio API.
-// Acts as container for all sound objects of the piece.
+// Acts as container for.allStates sound objects of the piece.
 class Sound {
   // --------------------------------------------------
   // Class methods
@@ -144,12 +144,12 @@ class Sound {
     return object
   }
 
-  // Get all synth types from 'types' Map.
+  // Get.allStates synth types from 'types' Map.
   static get types () {
     return Array.from(this[types_].keys())
   }
 
-  // Return all sound object names from 'objectPool'.
+  // Return.allStates sound object names from 'objectPool'.
   static objectNames () {
     return Array.from(this[objectPool_].keys())
   }
@@ -160,7 +160,7 @@ class Sound {
     this[objectPool_].delete(name)
   }
 
-  // Delete all sound objects from objectPool
+  // Delete.allStates sound objects from objectPool
   static deleteAll (params = {}) {
     this[objectPool_].forEach(object => object.stop(params))
     this[objectPool_].clear()

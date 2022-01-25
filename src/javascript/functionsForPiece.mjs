@@ -55,7 +55,7 @@ function viewUpdaterFunc (buttons, sound) {
     if (previousState > -1) sound.stop(previousState)
 
     if (state.changed) {
-      const indices = Array.from(state.all).filter(st => st !== state.current)
+      const indices = state.allStates.filter(st => st !== state.current)
 
       // Set 'previousState'
       previousState = state.current
@@ -204,8 +204,7 @@ function attachListenersToState (state, buttons) {
 
 function createSoundObjects (state) {
   return sound => {
-    // CAUTION: state.all is a Set instance of positive integers.
-    const sounds = Array.from(state.all)
+    const sounds = state.allStates
       .map(aStateIndex => sound.of({
         type: 'Oscillator',
         name: aStateIndex,

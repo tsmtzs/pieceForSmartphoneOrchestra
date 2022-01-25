@@ -12,16 +12,17 @@
 import { EventDispatcher } from './eventDispatchers.mjs'
 
 class State {
-    #changed = false
+  #changed = false
+  #allStates
 
   constructor (...states) {
     this.current = -1
-    this.all = new Set(states)
+    this.#allStates = new Set(states)
     this.listeners = new EventDispatcher(this)
   }
 
   changeTo (anInteger) {
-    if (this.all.has(anInteger)) {
+    if (this.isValid(anInteger)) {
       this.current = this.current === anInteger ? (this.#changed = false, -1) : (this.#changed = true, anInteger)
 
       this.listeners.notify(anInteger)
@@ -30,8 +31,16 @@ class State {
     }
   }
 
+  isValid (anInteger) {
+    return this.#allStates.has(anInteger)
+  }
+
   get changed () {
     return this.#changed
+  }
+
+  get allStates () {
+    return Array.from(this.#allStates)
   }
 }
 

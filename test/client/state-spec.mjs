@@ -18,7 +18,7 @@ describe('State', function () {
   let state
 
   before(function () {
-    states = [0, 1, 2]
+    states = [5, 6, 7]
     state = new State(...states)
   })
 
@@ -31,10 +31,19 @@ describe('State', function () {
   it("Getter 'changed' should be false when property 'current' is '-1', and true when 'current' holds a member of 'all'.", function () {
     expect(state.changed).to.be.false
 
-    state.changeTo(1)
+    state.changeTo(5)
     expect(state.changed).to.be.true
 
-    state.changeTo(1)
+    state.changeTo(5)
     expect(state.changed).to.be.false
+  })
+
+  it("Getter method 'allStates' should return an Array instance with elements the elements of the property 'allStates'.", function () {
+    const statesArray = state.allStates
+
+    expect(statesArray instanceof Array).to.be.true
+    expect(statesArray.length).to.equal(states.length)
+    expect(statesArray.every(elem => states.includes(elem))).to.be.true
+    expect(states.every(elem => statesArray.includes(elem))).to.be.true
   })
 })
