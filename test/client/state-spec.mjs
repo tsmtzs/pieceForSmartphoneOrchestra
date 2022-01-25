@@ -27,4 +27,14 @@ describe('State', function () {
     expect(() => { state.changeTo(300) }).to.throw()
     expect(() => { state.changeTo(-1) }).to.throw()
   })
+
+  it("Getter 'changed' should be false when property 'current' is '-1', and true when 'current' holds a member of 'all'.", function () {
+    expect(state.changed).to.be.false
+
+    state.changeTo(1)
+    expect(state.changed).to.be.true
+
+    state.changeTo(1)
+    expect(state.changed).to.be.false
+  })
 })

@@ -54,7 +54,7 @@ function viewUpdaterFunc (buttons, sound) {
     // console.log('*** State', state, '\tOldState:', previousState, '\tSound:', sound)
     if (previousState > -1) sound.stop(previousState)
 
-    if (state.hasChanged) {
+    if (state.changed) {
       const indices = Array.from(state.all).filter(st => st !== state.current)
 
       // Set 'previousState'

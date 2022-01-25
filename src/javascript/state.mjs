@@ -12,21 +12,26 @@
 import { EventDispatcher } from './eventDispatchers.mjs'
 
 class State {
+    #changed = false
+
   constructor (...states) {
     this.current = -1
     this.all = new Set(states)
-    this.hasChanged = false
     this.listeners = new EventDispatcher(this)
   }
 
   changeTo (anInteger) {
     if (this.all.has(anInteger)) {
-      this.current = this.current === anInteger ? (this.hasChanged = false, -1) : (this.hasChanged = true, anInteger)
+      this.current = this.current === anInteger ? (this.#changed = false, -1) : (this.#changed = true, anInteger)
 
       this.listeners.notify(anInteger)
     } else {
       throw new Error(`Argument ${anInteger} is not a valid state.`)
     }
+  }
+
+  get changed () {
+    return this.#changed
   }
 }
 
