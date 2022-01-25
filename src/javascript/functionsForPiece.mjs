@@ -80,7 +80,7 @@ function viewUpdaterFunc (buttons, sound) {
 
 function buttonListenerFunc (state) {
   return event => {
-    state.change(event.target.index)
+    state.changeTo(event.target.index)
   }
 }
 

@@ -32,6 +32,8 @@
     "@parcel/packager-raw-url": "^2.0.0-rc.0",
     "@parcel/transformer-image": "^2.0.0-rc.0",
     "@parcel/transformer-webmanifest": "^2.0.0-rc.0",
+    "chai": "^4.3.4",
+    "mocha": "^9.2.0",
     "standard": "^16.0.3"
   }
 }
