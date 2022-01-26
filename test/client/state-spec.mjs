@@ -32,16 +32,6 @@ describe('State', function () {
     expect(() => { state.changeTo(-1) }).to.throw()
   })
 
-  it("Getter 'changed' should be false when property 'current' is '-1', and true when 'current' holds a member of 'all'.", function () {
-    expect(state.changed).to.be.false
-
-    state.changeTo(5)
-    expect(state.changed).to.be.true
-
-    state.changeTo(5)
-    expect(state.changed).to.be.false
-  })
-
   it("Getter method 'allStates' should return an Array instance with elements the elements of the property 'allStates'.", function () {
     const statesArray = state.allStates
 

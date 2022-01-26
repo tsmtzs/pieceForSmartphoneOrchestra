@@ -17,7 +17,6 @@ class State {
   #current = State.NEUTRAL
   #listeners
   #allStates
-  #changed = false
 
   constructor (...states) {
     if (states.includes(State.NEUTRAL)) {
@@ -30,8 +29,7 @@ class State {
 
   changeTo (anInteger) {
     if (this.isValid(anInteger)) {
-      this.#current = this.#current === anInteger ? (this.#changed = false, State.NEUTRAL) : (this.#changed = true, anInteger)
-
+      this.#current = this.#current === anInteger ? State.NEUTRAL : anInteger
       this.#listeners.notify(anInteger)
     } else {
       throw new Error(`Argument ${anInteger} is not a valid state.`)
@@ -40,10 +38,6 @@ class State {
 
   isValid (anInteger) {
     return this.#allStates.has(anInteger)
-  }
-
-  get changed () {
-    return this.#changed
   }
 
   get allStates () {
