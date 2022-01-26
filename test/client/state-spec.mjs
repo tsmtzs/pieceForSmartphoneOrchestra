@@ -22,6 +22,10 @@ describe('State', function () {
     state = new State(...states)
   })
 
+  it('Constructor should throw when the neutral state is given as an argument.', function () {
+    expect(() => { new State(State.NEUTRAL, 0, 1) }).to.throw()
+  })
+
   it("Method 'changeTo' should throw an Error when argument is not a valid state.", function () {
     expect(state.changeTo.bind(state)).to.throw()
     expect(() => { state.changeTo(300) }).to.throw()
@@ -45,5 +49,27 @@ describe('State', function () {
     expect(statesArray.length).to.equal(states.length)
     expect(statesArray.every(elem => states.includes(elem))).to.be.true
     expect(states.every(elem => statesArray.includes(elem))).to.be.true
+  })
+
+  it("Getter 'current' should return the neutral state when state is not set.", function () {
+    expect(state.current).to.equal(State.NEUTRAL)
+  })
+
+  it("Getter 'current' should return the current state.", function () {
+    state.changeTo(5)
+    expect(state.current).to.equal(5)
+
+    state.changeTo(5)
+    expect(state.current).to.equal(State.NEUTRAL)
+  })
+
+  it("Method 'isNeutral' should return true if current equals the neutral state, and false otherwise.", function () {
+    expect(state.isNeutral()).to.be.true
+
+    state.changeTo(5)
+    expect(state.isNeutral()).to.be.false
+
+    state.changeTo(5)
+    expect(state.isNeutral()).to.be.true
   })
 })

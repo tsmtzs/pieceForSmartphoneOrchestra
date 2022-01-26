@@ -54,7 +54,11 @@ function viewUpdaterFunc (buttons, sound) {
     // console.log('*** State', state, '\tOldState:', previousState, '\tSound:', sound)
     if (previousState > -1) sound.stop(previousState)
 
-    if (state.changed) {
+    if (state.isNeutral()) {
+      buttons[previousState]?.disable()
+
+      console.log('State did not change')
+    } else {
       const indices = state.allStates.filter(st => st !== state.current)
 
       // Set 'previousState'
@@ -70,10 +74,6 @@ function viewUpdaterFunc (buttons, sound) {
         ?.disable()
 
       buttons[state.current].enable()
-    } else {
-      buttons[previousState]?.disable()
-
-      console.log('State did not change')
     }
   }
 }
