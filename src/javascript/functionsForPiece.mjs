@@ -197,7 +197,7 @@ function initSound (event) {
 
 function attachListenersToState (state, buttons) {
   return sound => {
-    state.listeners.attach(viewUpdaterFunc(buttons, sound))
+    state.attachToListeners(viewUpdaterFunc(buttons, sound))
     return sound
   }
 }
