@@ -54,8 +54,12 @@ function viewUpdaterFunc (buttons, sound) {
     // console.log('*** State', state, '\tOldState:', previousState, '\tSound:', sound)
     if (previousState > -1) sound.stop(previousState)
 
-    if (state.hasChanged) {
-      const indices = Array.from(state.all).filter(st => st !== state.current)
+    if (state.isNeutral()) {
+      buttons[previousState]?.disable()
+
+      console.log('State did not change')
+    } else {
+      const indices = state.allStates.filter(st => st !== state.current)
 
       // Set 'previousState'
       previousState = state.current
@@ -70,17 +74,13 @@ function viewUpdaterFunc (buttons, sound) {
         ?.disable()
 
       buttons[state.current].enable()
-    } else {
-      buttons[previousState]?.disable()
-
-      console.log('State did not change')
     }
   }
 }
 
 function buttonListenerFunc (state) {
   return event => {
-    state.change(event.target.index)
+    state.changeTo(event.target.index)
   }
 }
 
@@ -197,15 +197,14 @@ function initSound (event) {
 
 function attachListenersToState (state, buttons) {
   return sound => {
-    state.listeners.attach(viewUpdaterFunc(buttons, sound))
+    state.attachToListeners(viewUpdaterFunc(buttons, sound))
     return sound
   }
 }
 
 function createSoundObjects (state) {
   return sound => {
-    // CAUTION: state.all is a Set instance of positive integers.
-    const sounds = Array.from(state.all)
+    const sounds = state.allStates
       .map(aStateIndex => sound.of({
         type: 'Oscillator',
         name: aStateIndex,
