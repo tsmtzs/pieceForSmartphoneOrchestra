@@ -17,7 +17,7 @@ describe('State', function () {
   let states
   let state
 
-  before(function () {
+  beforeEach(function () {
     states = [5, 6, 7]
     state = new State(...states)
   })
