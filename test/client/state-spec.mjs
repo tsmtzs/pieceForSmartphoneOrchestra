@@ -2,7 +2,7 @@
 // The next line is needed for the chai related assertions
 /* eslint-disable no-unused-expressions */
 // //////////////////////////////////////////////////
-//        Human Sound Sculpture
+//        Piece For Smartphone Orchestra
 //
 // Tests for State.
 // //////////////////////////////////////////////////

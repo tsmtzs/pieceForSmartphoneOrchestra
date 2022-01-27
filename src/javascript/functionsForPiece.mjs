@@ -20,7 +20,7 @@ import {
   map,
   rotateVector,
   angleBetweenVectors
-} from './generalFunctions.mjs'
+} from './mathFunctions.mjs'
 
 import { Sound } from './sound.mjs'
 
