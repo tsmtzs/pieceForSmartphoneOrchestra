@@ -7,15 +7,15 @@
 // to the piece.
 // //////////////////////////////////////////////////
 import {
-  baseFreq,
-  maxAmp,
-  fadeIn,
-  fadeOut,
-  btnColorOn,
-  btnColorOff,
-  sensorOptions,
-  screenUpVector,
-  displayTopVector
+  BASE_FREQ,
+  MAX_AMP,
+  FADE_IN,
+  FADE_OUT,
+  BTN_COLOR_ON,
+  BTN_COLOR_OFF,
+  SENSOR_OPTIONS,
+  SCREEN_UP_VECTOR,
+  DISPLAY_TOP_VECTOR
 } from './parameters.mjs'
 
 import {
@@ -35,14 +35,14 @@ function extendBtns (buttons, state) {
       this.isEnabled = true
 
       // Change button color
-      this.style.backgroundColor = btnColorOn
+      this.style.backgroundColor = BTN_COLOR_ON
     }
 
     btn.disable = function () {
       this.isEnabled = false
 
       // Change button color
-      this.style.backgroundColor = btnColorOff
+      this.style.backgroundColor = BTN_COLOR_OFF
     }
 
     btn.addEventListener('pointerdown', buttonListenerFunc(state))
@@ -86,15 +86,15 @@ function buttonListenerFunc (state) {
   }
 }
 
-function sensorListenerFunc (sounds, maxAmp, sensorOptions) {
-  const delta = 1 / sensorOptions.frequency
+function sensorListenerFunc (sounds, MAX_AMP, SENSOR_OPTIONS) {
+  const delta = 1 / SENSOR_OPTIONS.frequency
 
   return event => {
-    const amp = maxAmp * Math.pow(
+    const amp = MAX_AMP * Math.pow(
       map(
         angleBetweenVectors(
-          rotateVector(event.target.quaternion, screenUpVector),
-          screenUpVector
+          rotateVector(event.target.quaternion, SCREEN_UP_VECTOR),
+          SCREEN_UP_VECTOR
         ),
         0, Math.PI,
         0, 1
@@ -104,8 +104,8 @@ function sensorListenerFunc (sounds, maxAmp, sensorOptions) {
 
     const detune = Math.round(map(
       angleBetweenVectors(
-        rotateVector(event.target.quaternion, displayTopVector),
-        displayTopVector
+        rotateVector(event.target.quaternion, DISPLAY_TOP_VECTOR),
+        DISPLAY_TOP_VECTOR
       ),
       0, Math.PI,
       -100, 100
@@ -128,8 +128,8 @@ function sensorBarListenerFunc (document) {
     return event => {
       const marginLeft = Math.round(map(
         angleBetweenVectors(
-          rotateVector(event.target.quaternion, displayTopVector),
-          displayTopVector
+          rotateVector(event.target.quaternion, DISPLAY_TOP_VECTOR),
+          DISPLAY_TOP_VECTOR
         ),
         0, Math.PI,
         0, endPosition
@@ -180,7 +180,7 @@ function addListenerToBody () {
 function setButtonStyle (buttons) {
   return event => {
     buttons.forEach(btn => {
-      btn.style.backgroundColor = btnColorOff
+      btn.style.backgroundColor = BTN_COLOR_OFF
       btn.style.border = '0'
     })
 
@@ -207,7 +207,7 @@ function createSoundObjects (state) {
       .map(aStateIndex => sound.of({
         type: 'Oscillator',
         name: aStateIndex,
-        params: { freq: (aStateIndex + 1) * baseFreq, amp: 0.0, fadeIn: fadeIn, fadeOut: fadeOut }
+        params: { freq: (aStateIndex + 1) * BASE_FREQ, amp: 0.0, fadeIn: FADE_IN, fadeOut: FADE_OUT }
       })
       )
 
@@ -217,11 +217,11 @@ function createSoundObjects (state) {
 
 function initSensorsAndAttachListeners (document) {
   return sounds => {
-    const sensor = new window.AbsoluteOrientationSensor(sensorOptions)
+    const sensor = new window.AbsoluteOrientationSensor(SENSOR_OPTIONS)
     sensor.start()
     sensor.addEventListener('error', sensorErrorListener)
     sensor.addEventListener('activate', sensorActivateListenerFunc(document), { once: true })
-    sensor.addEventListener('reading', sensorListenerFunc(sounds, maxAmp, sensorOptions))
+    sensor.addEventListener('reading', sensorListenerFunc(sounds, MAX_AMP, SENSOR_OPTIONS))
     sensor.addEventListener('reading', sensorBarListenerFunc(document))
 
     return sensor
