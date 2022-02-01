@@ -6,10 +6,10 @@
 // Main JavaScript file for views/index.html
 // //////////////////////////////////////////////////
 import {
-  baseFreq,
-  refToneAmp,
-  fadeIn,
-  fadeOut
+  BASE_FREQ,
+  REFTONE_AMP,
+  FADE_IN,
+  FADE_OUT
 } from './parameters.mjs'
 
 import {
@@ -69,7 +69,7 @@ addListenerToBody()
     const refSound = sound.of({
       type: 'Oscillator',
       name: 'refSound',
-      params: { freq: baseFreq, amp: refToneAmp, fadeIn: fadeIn, fadeOut: fadeOut }
+      params: { freq: BASE_FREQ, amp: REFTONE_AMP, fadeIn: FADE_IN, fadeOut: FADE_OUT }
     })
 
     // Adapted from
