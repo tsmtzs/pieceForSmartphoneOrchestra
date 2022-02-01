@@ -16,6 +16,9 @@ const btnColorOn = 'darkorange'
 const btnColorOff = 'darkslategray'
 // Sensors
 const sensorOptions = { frequency: 60, referenceFrame: 'device' }
+// Display
+const screenUpVector = [0, 0, 1]
+const displayTopVector = [0, 1, 0]
 
 export {
   baseFreq,
@@ -25,5 +28,7 @@ export {
   fadeOut,
   btnColorOn,
   btnColorOff,
-  sensorOptions
+  sensorOptions,
+  screenUpVector,
+  displayTopVector
 }
