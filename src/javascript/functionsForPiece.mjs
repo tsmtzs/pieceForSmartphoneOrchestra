@@ -13,7 +13,9 @@ import {
   fadeOut,
   btnColorOn,
   btnColorOff,
-  sensorOptions
+  sensorOptions,
+  screenUpVector,
+  displayTopVector
 } from './parameters.mjs'
 
 import {
@@ -83,9 +85,6 @@ function buttonListenerFunc (state) {
     state.changeTo(event.target.index)
   }
 }
-
-const screenUpVector = [0, 0, 1]
-const displayTopVector = [0, 1, 0]
 
 function sensorListenerFunc (sounds, maxAmp, sensorOptions) {
   const delta = 1 / sensorOptions.frequency
