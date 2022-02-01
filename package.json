@@ -9,6 +9,7 @@
     "domainName": ""
   },
   "scripts": {
+    "test:client": "mocha test/client/*mjs",	
     "premkcert": "if [[ ! -d certs ]]; then mkdir ./certs; fi",
     "mkcert": "mkcert -key-file certs/smartphoneOrchestra-key.pem -cert-file certs/smartphoneOrchestra-crt.pem localhost $npm_package_config_serverIP $npm_package_config_domainName",
     "prebuild": "npm run mkcert",
