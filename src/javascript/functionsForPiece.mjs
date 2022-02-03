@@ -58,18 +58,12 @@ function viewUpdaterFunc (buttons, sound) {
 
     if (state.isNeutral()) {
       buttons[previousState]?.disable()
-
-      console.log('State did not change')
     } else {
       const indices = state.allStates.filter(st => st !== state.current)
 
-      // Set 'previousState'
       previousState = state.current
-
-      // start new synth
       sound.start(state.current)
 
-      // Change color of enabled buttons and disable them (if any)
       buttons
         .filter(btn => indices.includes(btn.index))
         .find(btn => btn.isEnabled)

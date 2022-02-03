@@ -43,6 +43,10 @@ describe('State', function () {
 
   it("Getter 'current' should return the neutral state when state is not set.", function () {
     expect(state.current).to.equal(State.NEUTRAL)
+
+    state.changeTo(5)
+    state.changeTo(5)
+    expect(state.current).to.equal(State.NEUTRAL)
   })
 
   it("Getter 'current' should return the current state.", function () {
@@ -51,6 +55,25 @@ describe('State', function () {
 
     state.changeTo(5)
     expect(state.current).to.equal(State.NEUTRAL)
+  })
+
+  it("Getter 'previous' should return the neutral state when the previous state upon initialization.", function () {
+    expect(state.previous).to.equal(State.NEUTRAL)
+  })
+
+  it("Getter 'previous' should return the neutral state after three consecutive messages of 'changeTo' with the same argument.", function () {
+    state.changeTo(5)
+    state.changeTo(5)
+    state.changeTo(5)
+    expect(state.previous).to.equal(State.NEUTRAL)
+  })
+
+  it("Getter 'previous' should return the previous state after two calls to 'changeTo' with different arguments.", function () {
+    state.changeTo(5)
+    expect(state.previous).to.equal(State.NEUTRAL)
+
+    state.changeTo(6)
+    expect(state.previous).to.equal(5)
   })
 
   it("Method 'isNeutral' should return true if current equals the neutral state, and false otherwise.", function () {
