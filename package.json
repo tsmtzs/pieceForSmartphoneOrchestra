@@ -9,7 +9,7 @@
     "domainName": ""
   },
   "scripts": {
-    "test:client": "mocha test/client/*mjs",	
+    "test:client": "mocha test/client/*mjs",
     "premkcert": "if [[ ! -d certs ]]; then mkdir ./certs; fi",
     "mkcert": "mkcert -key-file certs/smartphoneOrchestra-key.pem -cert-file certs/smartphoneOrchestra-crt.pem localhost $npm_package_config_serverIP $npm_package_config_domainName",
     "prebuild": "npm run mkcert",
@@ -35,6 +35,7 @@
     "@parcel/transformer-webmanifest": "^2.0.0-rc.0",
     "chai": "^4.3.4",
     "mocha": "^9.2.0",
+    "sinon": "^13.0.1",
     "standard": "^16.0.3"
   }
 }

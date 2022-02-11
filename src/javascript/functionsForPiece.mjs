@@ -27,26 +27,27 @@ import {
 import { Sound } from './sound.mjs'
 
 function extendBtns (buttons, state) {
-  // Extend 'Button' objects and add event listeners
   buttons.forEach((btn, i) => {
     Object.assign(btn, { isEnabled: false, index: i })
 
     btn.enable = function () {
       this.isEnabled = true
-
-      // Change button color
       this.style.backgroundColor = BTN_COLOR_ON
     }
 
     btn.disable = function () {
       this.isEnabled = false
-
-      // Change button color
       this.style.backgroundColor = BTN_COLOR_OFF
     }
 
-    btn.addEventListener('pointerdown', buttonListenerFunc(state))
+    btn.addEventListener('pointerdown', getButtonListener(state))
   })
+}
+
+function getButtonListener (state) {
+  return event => {
+    state.changeTo(event.target.index)
+  }
 }
 
 function viewUpdaterFunc (buttons, sound) {
@@ -71,12 +72,6 @@ function viewUpdaterFunc (buttons, sound) {
 
       buttons[state.current].enable()
     }
-  }
-}
-
-function buttonListenerFunc (state) {
-  return event => {
-    state.changeTo(event.target.index)
   }
 }
 
@@ -225,7 +220,7 @@ function initSensorsAndAttachListeners (document) {
 export {
   extendBtns,
   viewUpdaterFunc,
-  buttonListenerFunc,
+  getButtonListener,
   sensorListenerFunc,
   sensorErrorListener,
   addListenerToBody,
