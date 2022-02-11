@@ -50,19 +50,14 @@ function getButtonListener (state) {
   }
 }
 
-function viewUpdaterFunc (buttons, sound) {
-  let previousState = -1
-
+function getViewUpdater (buttons, sound) {
   return state => {
-    // console.log('*** State', state, '\tOldState:', previousState, '\tSound:', sound)
-    if (previousState > -1) sound.stop(previousState)
+    if (!state.wasNeutral()) sound.stop(state.previous)
 
     if (state.isNeutral()) {
-      buttons[previousState]?.disable()
+      buttons[state.previous]?.disable()
     } else {
       const indices = state.allStates.filter(st => st !== state.current)
-
-      previousState = state.current
       sound.start(state.current)
 
       buttons
@@ -185,7 +180,7 @@ function initSound (event) {
 
 function attachListenersToState (state, buttons) {
   return sound => {
-    state.attachToListeners(viewUpdaterFunc(buttons, sound))
+    state.attachToListeners(getViewUpdater(buttons, sound))
     return sound
   }
 }
@@ -219,7 +214,7 @@ function initSensorsAndAttachListeners (document) {
 
 export {
   extendBtns,
-  viewUpdaterFunc,
+  getViewUpdater,
   getButtonListener,
   sensorListenerFunc,
   sensorErrorListener,
