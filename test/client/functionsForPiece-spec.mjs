@@ -11,12 +11,16 @@ import {
   extendBtns
 } from '../../src/javascript/functionsForPiece.mjs'
 
+import sinon from 'sinon'
+
 import pkg from 'chai'
 const { expect } = pkg
 
-import sinon from 'sinon'
-
 describe("Tests for module 'functionsForPiece'.", function () {
+  afterEach(function () {
+    sinon.restore()
+  })
+
   describe("Function 'getButtonListener'.", function () {
     let state
     let listener

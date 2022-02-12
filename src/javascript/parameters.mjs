@@ -14,6 +14,7 @@ const FADE_OUT = 0.05
 // Button
 const BTN_COLOR_ON = 'darkorange'
 const BTN_COLOR_OFF = 'darkslategray'
+const BTN_BORDER = '0'
 // Sensors
 const SENSOR_OPTIONS = { frequency: 60, referenceFrame: 'device' }
 // Display
@@ -28,6 +29,7 @@ export {
   FADE_OUT,
   BTN_COLOR_ON,
   BTN_COLOR_OFF,
+  BTN_BORDER,
   SENSOR_OPTIONS,
   SCREEN_UP_VECTOR,
   DISPLAY_TOP_VECTOR

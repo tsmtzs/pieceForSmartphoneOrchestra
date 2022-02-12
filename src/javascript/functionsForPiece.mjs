@@ -13,6 +13,7 @@ import {
   FADE_OUT,
   BTN_COLOR_ON,
   BTN_COLOR_OFF,
+  BTN_BORDER,
   SENSOR_OPTIONS,
   SCREEN_UP_VECTOR,
   DISPLAY_TOP_VECTOR
@@ -70,7 +71,7 @@ function getViewUpdater (buttons, sound) {
   }
 }
 
-function sensorListenerFunc (sounds, MAX_AMP, SENSOR_OPTIONS) {
+function getSensorListener (sounds, MAX_AMP, SENSOR_OPTIONS) {
   const delta = 1 / SENSOR_OPTIONS.frequency
 
   return event => {
@@ -102,7 +103,7 @@ function sensorListenerFunc (sounds, MAX_AMP, SENSOR_OPTIONS) {
   }
 }
 
-function sensorBarListenerFunc (document) {
+function getSensorBarListener (document) {
   const bar = document.querySelector('#bar')
 
   if (bar) {
@@ -118,14 +119,14 @@ function sensorBarListenerFunc (document) {
         0, Math.PI,
         0, endPosition
       ))
-      // console.log("Inside 'sensorBarListenerFunc'", marginLeft)
+      // console.log("Inside 'getSensorBarListener'", marginLeft)
       position.style.marginLeft = `${marginLeft}px`
     }
   }
 }
 
-function sensorActivateListenerFunc (document) {
-  // TODO: duplication here with 'sensorBarListenerFunc'.
+function getSensorActivateListener (document) {
+  // TODO: duplication here with 'getSensorBarListener'.
   // 'bar' is read twice.
   const bar = document.querySelector('#bar')
   return event => {
@@ -165,7 +166,7 @@ function setButtonStyle (buttons) {
   return event => {
     buttons.forEach(btn => {
       btn.style.backgroundColor = BTN_COLOR_OFF
-      btn.style.border = '0'
+      btn.style.border = BTN_BORDER
     })
 
     return event
@@ -204,9 +205,9 @@ function initSensorsAndAttachListeners (document) {
     const sensor = new window.AbsoluteOrientationSensor(SENSOR_OPTIONS)
     sensor.start()
     sensor.addEventListener('error', sensorErrorListener)
-    sensor.addEventListener('activate', sensorActivateListenerFunc(document), { once: true })
-    sensor.addEventListener('reading', sensorListenerFunc(sounds, MAX_AMP, SENSOR_OPTIONS))
-    sensor.addEventListener('reading', sensorBarListenerFunc(document))
+    sensor.addEventListener('activate', getSensorActivateListener(document), { once: true })
+    sensor.addEventListener('reading', getSensorListener(sounds, MAX_AMP, SENSOR_OPTIONS))
+    sensor.addEventListener('reading', getSensorBarListener(document))
 
     return sensor
   }
@@ -216,7 +217,7 @@ export {
   extendBtns,
   getViewUpdater,
   getButtonListener,
-  sensorListenerFunc,
+  getSensorListener,
   sensorErrorListener,
   addListenerToBody,
   setButtonStyle,
