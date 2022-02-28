@@ -8,7 +8,8 @@
 // //////////////////////////////////////////////////
 import {
   getButtonListener,
-  extendBtns
+  extendBtns,
+  getViewUpdater
 } from '../../src/javascript/functionsForPiece.mjs'
 
 import sinon from 'sinon'
@@ -34,6 +35,10 @@ describe("Tests for module 'functionsForPiece'.", function () {
       listener = getButtonListener(state)
     })
 
+    afterEach(() => {
+      sinon.restore()
+    })
+
     it('Should return a Function object.', function () {
       expect(listener.constructor).to.equal(Function)
     })
@@ -54,6 +59,10 @@ describe("Tests for module 'functionsForPiece'.", function () {
         addEventListener: sinon.fake()
       }
       state = { }
+    })
+
+    afterEach(() => {
+      sinon.restore()
     })
 
     it("Should add the property 'isEnabled' to each button of the 'buttons' argument.", function () {
@@ -84,6 +93,109 @@ describe("Tests for module 'functionsForPiece'.", function () {
       expect(button.addEventListener.callCount).to.equal(1)
       expect(button.addEventListener.firstArg).to.equal('pointerdown')
       expect(button.addEventListener.lastArg.constructor).to.equal(Function)
+    })
+  })
+
+  describe("Function 'getViewUpdater'.", function () {
+    afterEach(() => {
+      sinon.restore()
+    })
+
+    it('Should return a Function instance.', function () {
+      const listener = getViewUpdater()
+
+      expect(listener instanceof Function).to.be.true
+    })
+
+    it('The returned function, when called, should stop the sound at index state.previous, IF previous state is not neutral.', function () {
+      const sound = {
+        stop: sinon.fake()
+      }
+      const state = {
+        previous: 0,
+        wasNeutral: sinon.fake.returns(false),
+        isNeutral: sinon.fake.returns(true)
+      }
+      const btn = { }
+      const listener = getViewUpdater([btn], sound)
+      listener(state)
+      expect(state.wasNeutral.callCount).to.equal(1)
+      expect(sound.stop.callCount).to.equal(1)
+      expect(sound.stop.firstArg).to.equal(state.previous)
+    })
+
+    it('The returned function, when called, should NOT stop any sound, IF previous state is neutral.', function () {
+      const sound = {
+        stop: sinon.fake()
+      }
+      const state = {
+        previous: 0,
+        wasNeutral: sinon.fake.returns(true),
+        isNeutral: sinon.fake.returns(true)
+      }
+      const btn = { }
+      const listener = getViewUpdater([btn], sound)
+      listener(state)
+      expect(state.wasNeutral.callCount).to.equal(1)
+      expect(sound.stop.callCount).to.equal(0)
+    })
+
+    it('The returned function, when called, should disable the button at position state.previous, IF current state is neutral.', function () {
+      const sound = {
+        stop: () => { }
+      }
+      const state = {
+        previous: 0,
+        wasNeutral: () => false,
+        isNeutral: sinon.fake.returns(true)
+      }
+      const btn = {
+        disable: sinon.fake()
+      }
+      const listener = getViewUpdater([btn], sound)
+      listener(state)
+      expect(state.isNeutral.callCount).to.equal(1)
+      expect(btn.disable.callCount).to.equal(1)
+    })
+
+    it('The returned function, when called, should disable all buttons at position !== state.current and enable the button at position state.current, IF current state is not neutral.', function () {
+      const sound = {
+        stop: () => { },
+        start: sinon.fake()
+      }
+      const state = {
+        current: 0,
+        previous: 0,
+        allStates: [0, 1, 2],
+        wasNeutral: () => false,
+        isNeutral: sinon.fake.returns(false)
+      }
+      const disable = sinon.fake()
+      const enable = sinon.fake()
+      const btn1 = {
+        enable,
+        disable,
+        isEnabled: true,
+        index: 0
+      }
+      const btn2 = {
+        enable,
+        disable,
+        isEnabled: true,
+        index: 1
+      }
+      const btn3 = {
+        enable,
+        disable,
+        isEnabled: false,
+        index: 2
+      }
+      const listener = getViewUpdater([btn1, btn2, btn3], sound)
+      listener(state)
+      expect(state.isNeutral.callCount).to.equal(1)
+      expect(sound.start.callCount).to.equal(1)
+      expect(disable.callCount).to.equal(1)
+      expect(enable.callCount).to.equal(1)
     })
   })
 })
