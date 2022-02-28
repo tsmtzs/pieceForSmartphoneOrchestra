@@ -56,7 +56,7 @@ function getViewUpdater (buttons, sound) {
     if (!state.wasNeutral()) sound.stop(state.previous)
 
     if (state.isNeutral()) {
-      buttons[state.previous]?.disable()
+      buttons[state.previous]?.disable?.()
     } else {
       const indices = state.allStates.filter(st => st !== state.current)
       sound.start(state.current)
@@ -64,7 +64,7 @@ function getViewUpdater (buttons, sound) {
       buttons
         .filter(btn => indices.includes(btn.index))
         .find(btn => btn.isEnabled)
-        ?.disable()
+        ?.disable?.()
 
       buttons[state.current].enable()
     }
