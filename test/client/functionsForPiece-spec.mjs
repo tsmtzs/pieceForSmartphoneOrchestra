@@ -9,7 +9,8 @@
 import {
   getButtonListener,
   extendBtns,
-  getViewUpdater
+  getViewUpdater,
+  getSensorListener
 } from '../../src/javascript/functionsForPiece.mjs'
 
 import sinon from 'sinon'
@@ -196,6 +197,37 @@ describe("Tests for module 'functionsForPiece'.", function () {
       expect(sound.start.callCount).to.equal(1)
       expect(disable.callCount).to.equal(1)
       expect(enable.callCount).to.equal(1)
+    })
+  })
+
+  describe("Function 'getSensorListener'.", function () {
+    let listener
+    let snd
+    let event
+
+    beforeEach(function () {
+      event = {
+        target: { quaternion: [0, 1, 2, 3] }
+      }
+      snd = {
+        perform: sinon.spy()
+      }
+      listener = getSensorListener([snd])
+    })
+
+    afterEach(function () {
+      sinon.restore()
+    })
+
+    it('Should return a function instance.', function () {
+      expect(listener instanceof Function).to.be.true
+    })
+
+    it("The returned function, when called, should send twice the 'perform' message to each element of the 'sounds' argument.", function () {
+      listener(event)
+      expect(snd.perform.callCount).to.equal(2)
+      expect(snd.perform.withArgs('setDetune').calledOnce).to.be.true
+      expect(snd.perform.withArgs('setAmp').calledOnce).to.be.true
     })
   })
 })

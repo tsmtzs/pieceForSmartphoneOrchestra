@@ -71,7 +71,7 @@ function getViewUpdater (buttons, sound) {
   }
 }
 
-function getSensorListener (sounds, MAX_AMP, SENSOR_OPTIONS) {
+function getSensorListener (sounds) {
   const delta = 1 / SENSOR_OPTIONS.frequency
 
   return event => {
@@ -106,11 +106,11 @@ function getSensorListener (sounds, MAX_AMP, SENSOR_OPTIONS) {
 function getSensorBarListener (document) {
   const bar = document.querySelector('#bar')
 
-  if (bar) {
-    const position = document.querySelector('#barPoint')
-    const endPosition = bar.offsetWidth - position.offsetWidth
+  return event => {
+    if (bar) {
+      const position = document.querySelector('#barPoint')
+      const endPosition = bar.offsetWidth - position.offsetWidth
 
-    return event => {
       const marginLeft = Math.round(map(
         angleBetweenVectors(
           rotateVector(event.target.quaternion, DISPLAY_TOP_VECTOR),
@@ -206,7 +206,7 @@ function initSensorsAndAttachListeners (document) {
     sensor.start()
     sensor.addEventListener('error', sensorErrorListener)
     sensor.addEventListener('activate', getSensorActivateListener(document), { once: true })
-    sensor.addEventListener('reading', getSensorListener(sounds, MAX_AMP, SENSOR_OPTIONS))
+    sensor.addEventListener('reading', getSensorListener(sounds))
     sensor.addEventListener('reading', getSensorBarListener(document))
 
     return sensor
