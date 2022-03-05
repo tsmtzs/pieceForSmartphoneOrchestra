@@ -142,11 +142,9 @@ function alertUser (msg) {
   }
 }
 
-function addListenerToBody () {
-  const body = document.querySelector('body')
-
+function addListenerToBody (bodyElement) {
   return new Promise(resolve => {
-    body.addEventListener('pointerdown', resolve, { once: true })
+    bodyElement.addEventListener('pointerdown', resolve, { once: true })
   })
 }
 

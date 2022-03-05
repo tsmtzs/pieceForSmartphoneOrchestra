@@ -22,8 +22,9 @@ const buttons = Array.from(document.querySelectorAll('button'))
 
 extendBtns(buttons, state)
 
-// //////////////////////////////////////////////////
-addListenerToBody()
+const body = document.querySelector('body')
+
+addListenerToBody(body)
   .then(setButtonStyle(buttons))
   .then(initSound)
   .then(attachListenersToState(state, buttons))

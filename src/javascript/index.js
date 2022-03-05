@@ -62,7 +62,9 @@ const refButton = document.querySelector('#refTone')
 extendBtns([instrButton], state)
 
 // //////////////////////////////////////////////////
-addListenerToBody()
+const body = document.querySelector('body')
+
+addListenerToBody(body)
   .then(setButtonStyle([instrButton, refButton]))
   .then(initSound)
   .then(sound => {
