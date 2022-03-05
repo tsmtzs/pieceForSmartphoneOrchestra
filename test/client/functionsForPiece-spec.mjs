@@ -10,7 +10,8 @@ import {
   getButtonListener,
   extendBtns,
   getViewUpdater,
-  getSensorListener
+  getSensorListener,
+  getSensorBarListener
 } from '../../src/javascript/functionsForPiece.mjs'
 
 import sinon from 'sinon'
@@ -228,6 +229,37 @@ describe("Tests for module 'functionsForPiece'.", function () {
       expect(snd.perform.callCount).to.equal(2)
       expect(snd.perform.withArgs('setDetune').calledOnce).to.be.true
       expect(snd.perform.withArgs('setAmp').calledOnce).to.be.true
+    })
+  })
+
+  describe("Function 'getSensorBarListener'.", function () {
+    let bar
+    let position
+
+    beforeEach(function () {
+      bar = {
+        offsetWidth: 10
+      }
+      position = {
+        offsetWidth: 0,
+        style: { }
+      }
+    })
+
+    it('Should return a Function instance when called, with argument document', function () {
+      const listener = getSensorBarListener(bar, position)
+      expect(listener instanceof Function).to.be.true
+    })
+
+    it("The returned function should set the 'margin-left' CSS property of the '#barPoint' element.", function () {
+      const listener = getSensorBarListener(bar, position)
+      const event = {
+        target: { quaternion: [0, 1, 2, 3] }
+      }
+
+      expect(position.style.margiLeft).to.be.undefined
+      listener(event)
+      expect(position.style.marginLeft).to.not.be.undefined
     })
   })
 })
