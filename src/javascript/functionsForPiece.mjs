@@ -103,25 +103,20 @@ function getSensorListener (sounds) {
   }
 }
 
-function getSensorBarListener (document) {
-  const bar = document.querySelector('#bar')
-
+function getSensorBarListener (barElement, barPointElement) {
   return event => {
-    if (bar) {
-      const position = document.querySelector('#barPoint')
-      const endPosition = bar.offsetWidth - position.offsetWidth
+    const endPosition = barElement.offsetWidth - barPointElement.offsetWidth
 
-      const marginLeft = Math.round(map(
-        angleBetweenVectors(
-          rotateVector(event.target.quaternion, DISPLAY_TOP_VECTOR),
-          DISPLAY_TOP_VECTOR
-        ),
-        0, Math.PI,
-        0, endPosition
-      ))
-      // console.log("Inside 'getSensorBarListener'", marginLeft)
-      position.style.marginLeft = `${marginLeft}px`
-    }
+    const marginLeft = Math.round(map(
+      angleBetweenVectors(
+        rotateVector(event.target.quaternion, DISPLAY_TOP_VECTOR),
+        DISPLAY_TOP_VECTOR
+      ),
+      0, Math.PI,
+      0, endPosition
+    ))
+    // console.log("Inside 'getSensorBarListener'", marginLeft)
+    barPointElement.style.marginLeft = `${marginLeft}px`
   }
 }
 
@@ -203,11 +198,14 @@ function createSoundObjects (state) {
 function initSensorsAndAttachListeners (document) {
   return sounds => {
     const sensor = new window.AbsoluteOrientationSensor(SENSOR_OPTIONS)
+    const bar = document.querySelector('#bar')
+    const position = document.querySelector('#barPoint')
+
     sensor.start()
     sensor.addEventListener('error', sensorErrorListener)
     sensor.addEventListener('activate', getSensorActivateListener(document), { once: true })
     sensor.addEventListener('reading', getSensorListener(sounds))
-    sensor.addEventListener('reading', getSensorBarListener(document))
+    sensor.addEventListener('reading', getSensorBarListener(bar, position))
 
     return sensor
   }
@@ -218,6 +216,7 @@ export {
   getViewUpdater,
   getButtonListener,
   getSensorListener,
+  getSensorBarListener,
   sensorErrorListener,
   addListenerToBody,
   setButtonStyle,
