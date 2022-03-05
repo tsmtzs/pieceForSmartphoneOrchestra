@@ -13,7 +13,7 @@ import {
   getSensorListener,
   getSensorBarListener,
   getSensorActivateListener,
-  addListenerToBody
+  addPointerdownListenerToBody
 } from '../../src/javascript/functionsForPiece.mjs'
 
 import sinon from 'sinon'
@@ -288,7 +288,7 @@ describe("Tests for module 'functionsForPiece'.", function () {
     })
   })
 
-  describe("Function 'addListenerToBody'.", function () {
+  describe("Function 'addPointerdownListenerToBody'.", function () {
     let body
     let promise
 
@@ -296,7 +296,7 @@ describe("Tests for module 'functionsForPiece'.", function () {
       body = {
         addEventListener: sinon.spy()
       }
-      promise = addListenerToBody(body)
+      promise = addPointerdownListenerToBody(body)
     })
 
     afterEach(function () {

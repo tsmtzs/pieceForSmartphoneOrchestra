@@ -142,7 +142,7 @@ function alertUser (msg) {
   }
 }
 
-function addListenerToBody (bodyElement) {
+function addPointerdownListenerToBody (bodyElement) {
   return new Promise(resolve => {
     bodyElement.addEventListener('pointerdown', resolve, { once: true })
   })
@@ -210,7 +210,7 @@ export {
   getSensorBarListener,
   getSensorActivateListener,
   sensorErrorListener,
-  addListenerToBody,
+  addPointerdownListenerToBody,
   setButtonStyle,
   initSound,
   attachListenersToState,
