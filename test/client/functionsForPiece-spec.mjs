@@ -12,7 +12,8 @@ import {
   getViewUpdater,
   getSensorListener,
   getSensorBarListener,
-  getSensorActivateListener
+  getSensorActivateListener,
+  addListenerToBody
 } from '../../src/javascript/functionsForPiece.mjs'
 
 import sinon from 'sinon'
@@ -284,6 +285,33 @@ describe("Tests for module 'functionsForPiece'.", function () {
       const listener = getSensorActivateListener(bar)
       listener()
       expect(bar.style.visibility).to.equal('visible')
+    })
+  })
+
+  describe("Function 'addListenerToBody'.", function () {
+    let body
+    let promise
+
+    beforeEach(function () {
+      body = {
+        addEventListener: sinon.spy()
+      }
+      promise = addListenerToBody(body)
+    })
+
+    afterEach(function () {
+      sinon.restore()
+    })
+
+    it('It should return a Promise instance when called', function () {
+      expect(promise instanceof Promise).to.be.true
+    })
+
+    it("The returned Promise is fullfiled by calling 'addEventListener' of the 'pointerdown' event.", async function () {
+      expect(body.addEventListener.calledOnce).to.be.true
+      promise.then(() => {
+        expect(body.addEventListener.firstArg).to.equal('pointerdown')
+      })
     })
   })
 })
