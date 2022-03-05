@@ -120,15 +120,8 @@ function getSensorBarListener (barElement, barPointElement) {
   }
 }
 
-function getSensorActivateListener (document) {
-  // TODO: duplication here with 'getSensorBarListener'.
-  // 'bar' is read twice.
-  const bar = document.querySelector('#bar')
-  return event => {
-    if (bar) {
-      bar.style.visibility = 'visible'
-    }
-  }
+function getSensorActivateListener (barElement) {
+  return event => { barElement.style.visibility = 'visible' }
 }
 
 function sensorErrorListener (event) {
@@ -203,7 +196,7 @@ function initSensorsAndAttachListeners (document) {
 
     sensor.start()
     sensor.addEventListener('error', sensorErrorListener)
-    sensor.addEventListener('activate', getSensorActivateListener(document), { once: true })
+    sensor.addEventListener('activate', getSensorActivateListener(bar), { once: true })
     sensor.addEventListener('reading', getSensorListener(sounds))
     sensor.addEventListener('reading', getSensorBarListener(bar, position))
 
@@ -217,6 +210,7 @@ export {
   getButtonListener,
   getSensorListener,
   getSensorBarListener,
+  getSensorActivateListener,
   sensorErrorListener,
   addListenerToBody,
   setButtonStyle,
