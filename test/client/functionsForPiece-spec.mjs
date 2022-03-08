@@ -13,7 +13,8 @@ import {
   getSensorListener,
   getSensorBarListener,
   getSensorActivateListener,
-  addPointerdownListenerToBody
+  addPointerdownListenerToBody,
+  setBackgroundColorAndBorderToButtons
 } from '../../src/javascript/functionsForPiece.mjs'
 
 import sinon from 'sinon'
@@ -312,6 +313,31 @@ describe("Tests for module 'functionsForPiece'.", function () {
       promise.then(() => {
         expect(body.addEventListener.firstArg).to.equal('pointerdown')
       })
+    })
+  })
+
+  describe("Function 'setBackgroundColorAndBorderToButtons'.", function () {
+    let btn
+    let listener
+
+    beforeEach(function () {
+      btn = {
+        style: { }
+      }
+      listener = setBackgroundColorAndBorderToButtons([btn])
+    })
+
+    it('Should return a Function instance.', function () {
+      expect(listener instanceof Function).to.be.true
+    })
+
+    it("The returned function, when called, should set the CSS properties 'backgroundColor' and 'border'.", function () {
+      expect(btn.style.backgroundColor).to.be.undefined
+      expect(btn.style.border).to.be.undefined
+
+      listener()
+      expect(btn.style.backgroundColor).to.not.be.undefined
+      expect(btn.style.border).to.not.be.undefined
     })
   })
 })

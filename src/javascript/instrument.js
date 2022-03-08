@@ -8,7 +8,7 @@
 import {
   extendBtns,
   addPointerdownListenerToBody,
-  setButtonStyle,
+  setBackgroundColorAndBorderToButtons,
   initSound,
   attachListenersToState,
   createSoundObjects,
@@ -25,7 +25,7 @@ extendBtns(buttons, state)
 const body = document.querySelector('body')
 
 addPointerdownListenerToBody(body)
-  .then(setButtonStyle(buttons))
+  .then(setBackgroundColorAndBorderToButtons(buttons))
   .then(initSound)
   .then(attachListenersToState(state, buttons))
   .then(createSoundObjects(state))
