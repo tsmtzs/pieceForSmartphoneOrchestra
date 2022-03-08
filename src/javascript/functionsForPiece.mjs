@@ -148,7 +148,7 @@ function addPointerdownListenerToBody (bodyElement) {
   })
 }
 
-function setButtonStyle (buttons) {
+function setBackgroundColorAndBorderToButtons (buttons) {
   return event => {
     buttons.forEach(btn => {
       btn.style.backgroundColor = BTN_COLOR_OFF
@@ -211,7 +211,7 @@ export {
   getSensorActivateListener,
   sensorErrorListener,
   addPointerdownListenerToBody,
-  setButtonStyle,
+  setBackgroundColorAndBorderToButtons,
   initSound,
   attachListenersToState,
   createSoundObjects,
