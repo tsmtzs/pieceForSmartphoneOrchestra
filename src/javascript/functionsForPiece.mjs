@@ -143,9 +143,11 @@ function alertUser (msg) {
 }
 
 function addPointerdownListenerToBody (bodyElement) {
-  return new Promise(resolve => {
-    bodyElement.addEventListener('pointerdown', resolve, { once: true })
-  })
+  return () => {
+    return new Promise(resolve => {
+      bodyElement.addEventListener('pointerdown', resolve, { once: true })
+    })
+  }
 }
 
 function setBackgroundColorAndBorderToButtons (buttons) {
@@ -159,10 +161,10 @@ function setBackgroundColorAndBorderToButtons (buttons) {
   }
 }
 
-function initSound (event) {
+function initSound () {
   Sound.init()
 
-  return Sound
+  return Promise.resolve(Sound)
 }
 
 function attachListenersToState (state, buttons) {
@@ -186,20 +188,26 @@ function createSoundObjects (state) {
   }
 }
 
-function initSensorsAndAttachListeners (document) {
-  return sounds => {
-    const sensor = new window.AbsoluteOrientationSensor(SENSOR_OPTIONS)
-    const bar = document.querySelector('#bar')
-    const position = document.querySelector('#barPoint')
-
+function connectSensor (sensor) {
+  const promise = new Promise((resolve, reject) => {
     sensor.start()
-    sensor.addEventListener('error', sensorErrorListener)
-    sensor.addEventListener('activate', getSensorActivateListener(bar), { once: true })
-    sensor.addEventListener('reading', getSensorListener(sounds))
-    sensor.addEventListener('reading', getSensorBarListener(bar, position))
 
-    return sensor
+    sensor.addEventListener('error', reject)
+    sensor.addEventListener('activate', resolve, { once: true })
+  })
+
+  return promise// .catch(sensorErrorListener)
+}
+
+function addReadingListenersToSensor (sensor, barElement, barPointElement) {
+  return sounds => {
+    sensor.addEventListener('reading', getSensorListener(sounds))
+    sensor.addEventListener('reading', getSensorBarListener(barElement, barPointElement))
   }
+}
+
+function setHiddenAttributeToElement (bool, element) {
+  element.hidden = bool
 }
 
 export {
@@ -215,5 +223,7 @@ export {
   initSound,
   attachListenersToState,
   createSoundObjects,
-  initSensorsAndAttachListeners
+  connectSensor,
+  addReadingListenersToSensor,
+  setHiddenAttributeToElement
 }

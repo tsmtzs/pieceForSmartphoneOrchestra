@@ -12,7 +12,10 @@ import {
   initSound,
   attachListenersToState,
   createSoundObjects,
-  initSensorsAndAttachListeners
+  connectSensor,
+  addReadingListenersToSensor,
+  sensorErrorListener,
+  setHiddenAttributeToElement
 } from './functionsForPiece.mjs'
 
 import { State } from './state.mjs'
@@ -23,11 +26,20 @@ const buttons = Array.from(document.querySelectorAll('button'))
 extendBtns(buttons, state)
 
 const body = document.querySelector('body')
+const main = document.querySelector('main')
+const bar = document.querySelector('#bar')
+const position = document.querySelector('#barPoint')
+const sensor = new window.AbsoluteOrientationSensor()
 
-addPointerdownListenerToBody(body)
+connectSensor(sensor)
+  .then(addPointerdownListenerToBody(body))
   .then(setBackgroundColorAndBorderToButtons(buttons))
+  .then(event => {
+    setHiddenAttributeToElement(false, main)
+    return event
+  })
   .then(initSound)
   .then(attachListenersToState(state, buttons))
   .then(createSoundObjects(state))
-  .then(initSensorsAndAttachListeners(document))
-  .catch(console.error)
+  .then(addReadingListenersToSensor(sensor, bar, position))
+  .catch(sensorErrorListener)

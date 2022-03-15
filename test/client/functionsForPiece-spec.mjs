@@ -291,20 +291,26 @@ describe("Tests for module 'functionsForPiece'.", function () {
 
   describe("Function 'addPointerdownListenerToBody'.", function () {
     let body
+    let listener
     let promise
 
     beforeEach(function () {
       body = {
         addEventListener: sinon.spy()
       }
-      promise = addPointerdownListenerToBody(body)
+      listener = addPointerdownListenerToBody(body)
+      promise = listener()
     })
 
     afterEach(function () {
       sinon.restore()
     })
 
-    it('It should return a Promise instance when called', function () {
+    it('It should return a Function instance when called', function () {
+      expect(listener instanceof Function).to.be.true
+    })
+
+    it('The returned function should return a Promise instance when called', function () {
       expect(promise instanceof Promise).to.be.true
     })
 
