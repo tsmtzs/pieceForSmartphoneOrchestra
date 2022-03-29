@@ -14,7 +14,7 @@ import {
 
 import {
   extendBtns,
-  addPointerdownListenerToBody,
+  addPointerdownListenerToElement,
   setBackgroundColorAndBorderToButtons,
   initSound,
   attachListenersToState,
@@ -64,7 +64,7 @@ extendBtns([instrButton], state)
 // //////////////////////////////////////////////////
 const body = document.querySelector('body')
 
-addPointerdownListenerToBody(body)
+addPointerdownListenerToElement(body)
   .then(setBackgroundColorAndBorderToButtons([instrButton, refButton]))
   .then(initSound)
   .then(sound => {
