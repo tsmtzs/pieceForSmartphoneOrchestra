@@ -121,33 +121,37 @@ function getSensorBarListener (barElement, barPointElement) {
 }
 
 function getSensorActivateListener (barElement) {
-  return event => { barElement.style.visibility = 'visible' }
+  return event => {
+    barElement.style.visibility = 'visible'
+    return event
+  }
 }
 
-function sensorErrorListener (event) {
+function logErrorAfterElement (element) {
+  return event => {
+    const msg = getErrorMsg(event)
+    const p = createStyledParagraphWithText(msg)
+    element.after(p)
+  }
+}
+
+function getErrorMsg (event) {
   if (event.error.name === 'SecurityError') {
-    console.error(`No permissions to use ${event.target.toString()}.`)
+    return `No permissions to use ${event.target.toString()}.`
   } else if (event.error.name === 'NotReadableError') {
-    console.error(`${event.target.toString()}  is not available on this device.`)
-    alertUser(`${event.target.constructor.name}  is not available on this device.`)
+    return `${event.target.toString()}  is not available on this device.`
   } else {
-    console.error(event.error)
+    return  event.error
   }
 }
 
-function alertUser (msg) {
-  if (!sessionStorage.isRevealed) {
-    alert(msg)
-    sessionStorage.isRevealed = true
-  }
-}
-
-function addPointerdownListenerToBody (bodyElement) {
-  return () => {
-    return new Promise(resolve => {
-      bodyElement.addEventListener('pointerdown', resolve, { once: true })
-    })
-  }
+function createStyledParagraphWithText (text) {
+  const p = document.createElement('p');
+  p.textContent = text
+  p.style.fontSize = '140%'
+  p.style.textAlign = 'center'
+  p.style.color = 'maroon'
+  return p
 }
 
 function setBackgroundColorAndBorderToButtons (buttons) {
@@ -207,7 +211,14 @@ function addReadingListenersToSensor (sensor, barElement, barPointElement) {
 }
 
 function setHiddenAttributeToElement (bool, element) {
-  element.hidden = bool
+  element.hidden = false
+}
+
+function revealElement (element) {
+  return event => {
+    setHiddenAttributeToElement(false, element)
+    return event
+  }
 }
 
 export {
@@ -217,13 +228,14 @@ export {
   getSensorListener,
   getSensorBarListener,
   getSensorActivateListener,
-  sensorErrorListener,
-  addPointerdownListenerToBody,
+  logErrorAfterElement,
+  addPointerdownListenerToElement,
   setBackgroundColorAndBorderToButtons,
   initSound,
   attachListenersToState,
   createSoundObjects,
   connectSensor,
   addReadingListenersToSensor,
-  setHiddenAttributeToElement
+  setHiddenAttributeToElement,
+  revealElement
 }
