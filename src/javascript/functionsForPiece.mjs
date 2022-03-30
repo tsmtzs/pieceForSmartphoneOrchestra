@@ -9,6 +9,7 @@
 import {
   BASE_FREQ,
   MAX_AMP,
+  REFTONE_AMP,
   FADE_IN,
   FADE_OUT,
   BTN_COLOR_ON,
@@ -172,16 +173,16 @@ function initSound () {
 }
 
 function attachListenersToState (state, buttons) {
-  return sound => {
-    state.attachToListeners(getViewUpdater(buttons, sound))
-    return sound
+  return () => {
+    state.attachToListeners(getViewUpdater(buttons, Sound))
+    return Sound
   }
 }
 
 function createSoundObjects (state) {
-  return sound => {
+  return () => {
     const sounds = state.allStates
-      .map(aStateIndex => sound.of({
+      .map(aStateIndex => Sound.of({
         type: 'Oscillator',
         name: aStateIndex,
         params: { freq: (aStateIndex + 1) * BASE_FREQ, amp: 0.0, fadeIn: FADE_IN, fadeOut: FADE_OUT }
@@ -221,6 +222,45 @@ function revealElement (element) {
   }
 }
 
+// Base tone 'pointer' listener function.
+// Adapted from
+// https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Switch_role
+function getSwitchClickEventListener (sound) {
+  return event => {
+    const el = event.target
+
+    if (el.getAttribute('aria-checked') === 'true') {
+      el.setAttribute('aria-checked', 'false')
+      sound.stop()
+    } else {
+      el.setAttribute('aria-checked', 'true')
+      sound.start()
+    }
+  }
+}
+
+function createReferenceSoundAndAddPointerdownListener (sounds) {
+  const refSound = Sound.of({
+    type: 'Oscillator',
+    name: 'refSound',
+    params: { freq: BASE_FREQ, amp: REFTONE_AMP, fadeIn: FADE_IN, fadeOut: FADE_OUT }
+  })
+
+  addPointerdownListenerToReferenceSound(refSound)
+
+  return sounds.concat(refSound)
+}
+
+function addPointerdownListenerToReferenceSound (refSound) {
+  // Adapted from
+  // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Switch_role
+  document.querySelectorAll('.switch').forEach(theSwitch => {
+    theSwitch.addEventListener('pointerdown', getSwitchClickEventListener(refSound), false)
+  })
+
+  return Sound
+}
+
 export {
   extendBtns,
   getViewUpdater,
@@ -237,5 +277,7 @@ export {
   connectSensor,
   addReadingListenersToSensor,
   setHiddenAttributeToElement,
-  revealElement
+  revealElement,
+  getSwitchClickEventListener,
+  createReferenceSoundAndAddPointerdownListener
 }
