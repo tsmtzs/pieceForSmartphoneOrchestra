@@ -46,16 +46,18 @@
     <h2 class="otherH2">Tests with the instrument</h2>
     <p>This section provides a reduction of the instrument with just one tone-button. A second
       button starts/stops a base tone.</p>
-    <div id="bar"><div id="barPoint"></div><div id="barCenter"></div></div>
-    <button type="button" id="instrument"></button>
-    <!-- The next button is adapted from -->
-    <!-- https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Switch_role -->
-    <button type="button" role="switch" aria-checked="false"
-	    id="refTone" class="switch">
-      <span>off</span>
-      <span>on</span>
-    </button>
-    <label for="refTone" class="switch">Base tone</label>
+    <div id="buttons" hidden>
+      <div id="bar"><div id="barPoint"></div><div id="barCenter"></div></div>
+      <button type="button" id="instrument"></button>
+      <!-- The next button is adapted from -->
+      <!-- https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Switch_role -->
+      <button type="button" role="switch" aria-checked="false"
+	      id="refTone" class="switch">
+	<span>off</span>
+	<span>on</span>
+      </button>
+      <label for="refTone" class="switch">Base tone</label>
+    </div>
   </section>
 </main>
 <script type="module" src="../javascript/index.js"></script>
