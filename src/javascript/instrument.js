@@ -10,10 +10,10 @@ import {
   setBackgroundColorAndBorderToButtons,
   initSound,
   attachListenersToState,
-  createSoundObjects,
+  createSoundObjectsForState,
   connectSensor,
   addReadingListenersToSensor,
-  getSensorActivateListener,
+  getSensorActivateListenerForElement,
   logErrorAfterElement,
   setHiddenAttributeToElement,
   revealElement
@@ -33,11 +33,11 @@ const position = document.querySelector('#barPoint')
 const sensor = new window.AbsoluteOrientationSensor()
 
 connectSensor(sensor)
-  .then(getSensorActivateListener(bar))
+  .then(getSensorActivateListenerForElement(bar))
   .then(setBackgroundColorAndBorderToButtons(buttons))
   .then(revealElement(main))
   .then(initSound)
   .then(attachListenersToState(state, buttons))
-  .then(createSoundObjects(state))
+  .then(createSoundObjectsForState(state))
   .then(addReadingListenersToSensor(sensor, bar, position))
   .catch(logErrorAfterElement(body))
