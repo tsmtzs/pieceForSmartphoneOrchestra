@@ -9,7 +9,6 @@
 import {
   BASE_FREQ,
   MAX_AMP,
-  REFTONE_AMP,
   FADE_IN,
   FADE_OUT,
   BTN_COLOR_ON,
@@ -121,7 +120,7 @@ function getSensorBarListener (barElement, barPointElement) {
   }
 }
 
-function getSensorActivateListener (barElement) {
+function getSensorActivateListenerForElement (barElement) {
   return event => {
     barElement.style.visibility = 'visible'
     return event
@@ -166,21 +165,21 @@ function setBackgroundColorAndBorderToButtons (buttons) {
   }
 }
 
-function initSound () {
+function initSound (event) {
   Sound.init()
 
-  return Promise.resolve(Sound)
+  return event
 }
 
 function attachListenersToState (state, buttons) {
-  return () => {
+  return event => {
     state.attachToListeners(getViewUpdater(buttons, Sound))
-    return Sound
+    return event
   }
 }
 
-function createSoundObjects (state) {
-  return () => {
+function createSoundObjectsForState (state) {
+  return event => {
     const sounds = state.allStates
       .map(aStateIndex => Sound.of({
         type: 'Oscillator',
@@ -243,7 +242,7 @@ function createReferenceSoundAndAddPointerdownListener (sounds) {
   const refSound = Sound.of({
     type: 'Oscillator',
     name: 'refSound',
-    params: { freq: BASE_FREQ, amp: REFTONE_AMP, fadeIn: FADE_IN, fadeOut: FADE_OUT }
+    params: { freq: BASE_FREQ, amp: 0.0, fadeIn: FADE_IN, fadeOut: FADE_OUT }
   })
 
   addPointerdownListenerToReferenceSound(refSound)
@@ -267,13 +266,13 @@ export {
   getButtonListener,
   getSensorListener,
   getSensorBarListener,
-  getSensorActivateListener,
+  getSensorActivateListenerForElement,
   logErrorAfterElement,
   addPointerdownListenerToElement,
   setBackgroundColorAndBorderToButtons,
   initSound,
   attachListenersToState,
-  createSoundObjects,
+  createSoundObjectsForState,
   connectSensor,
   addReadingListenersToSensor,
   setHiddenAttributeToElement,

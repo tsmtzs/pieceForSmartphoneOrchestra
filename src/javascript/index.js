@@ -9,12 +9,12 @@ import {
   extendBtns,
   connectSensor,
   logErrorAfterElement,
-  getSensorActivateListener,
+  getSensorActivateListenerForElement,
   revealElement,
   setBackgroundColorAndBorderToButtons,
   initSound,
   attachListenersToState,
-  createSoundObjects,
+  createSoundObjectsForState,
   createReferenceSoundAndAddPointerdownListener
 } from './functionsForPiece.mjs'
 
@@ -42,11 +42,11 @@ const buttonSection = document.querySelector('#buttons')
 const sensor = new window.AbsoluteOrientationSensor()
 
 connectSensor(sensor)
-  .then(getSensorActivateListener(bar))
+  .then(getSensorActivateListenerForElement(bar))
   .then(setBackgroundColorAndBorderToButtons([instrButton, refButton]))
   .then(revealElement(buttonSection))
   .then(initSound)
   .then(attachListenersToState(state, [instrButton]))
   .then(createReferenceSoundAndAddPointerdownListener)
-  .then(createSoundObjects(state))
+  .then(createSoundObjectsForState(state))
   .catch(logErrorAfterElement(body))
