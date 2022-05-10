@@ -120,9 +120,9 @@ function getSensorBarListener (barElement, barPointElement) {
   }
 }
 
-function getSensorActivateListenerForElement (barElement) {
+function getSensorActivateListenerForElement (element) {
   return event => {
-    barElement.style.visibility = 'visible'
+    element.style.visibility = 'visible'
     return event
   }
 }
@@ -268,7 +268,6 @@ export {
   getSensorBarListener,
   getSensorActivateListenerForElement,
   logErrorAfterElement,
-  addPointerdownListenerToElement,
   setBackgroundColorAndBorderToButtons,
   initSound,
   attachListenersToState,

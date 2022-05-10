@@ -12,8 +12,7 @@ import {
   getViewUpdater,
   getSensorListener,
   getSensorBarListener,
-  getSensorActivateListener,
-  addPointerdownListenerToBody,
+  getSensorActivateListenerForElement,
   setBackgroundColorAndBorderToButtons
 } from '../../src/javascript/functionsForPiece.mjs'
 
@@ -266,7 +265,7 @@ describe("Tests for module 'functionsForPiece'.", function () {
     })
   })
 
-  describe("Function 'getSensorActivateListener'.", function () {
+  describe("Function 'getSensorActivateListenerForElement'.", function () {
     let bar
 
     beforeEach(function () {
@@ -276,49 +275,16 @@ describe("Tests for module 'functionsForPiece'.", function () {
     })
 
     it('Should return a Function instance.', function () {
-      const listener = getSensorActivateListener(bar)
+      const listener = getSensorActivateListenerForElement(bar)
       expect(listener instanceof Function).to.be.true
     })
 
     it("The returned function, when called, should set the 'visibility' CSS property of the '#bar' element.", function () {
       expect(bar.style.visibility).to.be.undefined
 
-      const listener = getSensorActivateListener(bar)
+      const listener = getSensorActivateListenerForElement(bar)
       listener()
       expect(bar.style.visibility).to.equal('visible')
-    })
-  })
-
-  describe("Function 'addPointerdownListenerToBody'.", function () {
-    let body
-    let listener
-    let promise
-
-    beforeEach(function () {
-      body = {
-        addEventListener: sinon.spy()
-      }
-      listener = addPointerdownListenerToBody(body)
-      promise = listener()
-    })
-
-    afterEach(function () {
-      sinon.restore()
-    })
-
-    it('It should return a Function instance when called', function () {
-      expect(listener instanceof Function).to.be.true
-    })
-
-    it('The returned function should return a Promise instance when called', function () {
-      expect(promise instanceof Promise).to.be.true
-    })
-
-    it("The returned Promise is fullfiled by calling 'addEventListener' of the 'pointerdown' event.", async function () {
-      expect(body.addEventListener.calledOnce).to.be.true
-      promise.then(() => {
-        expect(body.addEventListener.firstArg).to.equal('pointerdown')
-      })
     })
   })
 

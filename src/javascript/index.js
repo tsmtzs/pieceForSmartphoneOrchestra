@@ -15,7 +15,8 @@ import {
   initSound,
   attachListenersToState,
   createSoundObjectsForState,
-  createReferenceSoundAndAddPointerdownListener
+  createReferenceSoundAndAddPointerdownListener,
+  addReadingListenersToSensor
 } from './functionsForPiece.mjs'
 
 import { State } from './state.mjs'
@@ -38,6 +39,7 @@ extendBtns([instrButton], state)
 
 const body = document.querySelector('body')
 const bar =  document.querySelector('#bar')
+const position = document.querySelector('#barPoint')
 const buttonSection = document.querySelector('#buttons')
 const sensor = new window.AbsoluteOrientationSensor()
 
@@ -47,6 +49,7 @@ connectSensor(sensor)
   .then(revealElement(buttonSection))
   .then(initSound)
   .then(attachListenersToState(state, [instrButton]))
-  .then(createReferenceSoundAndAddPointerdownListener)
   .then(createSoundObjectsForState(state))
+  .then(createReferenceSoundAndAddPointerdownListener)
+  .then(addReadingListenersToSensor(sensor, bar, position))
   .catch(logErrorAfterElement(body))
