@@ -7,12 +7,15 @@
 // //////////////////////////////////////////////////
 import {
   extendBtns,
-  addListenerToBody,
-  setButtonStyle,
+  setBackgroundColorAndBorderToButtons,
   initSound,
   attachListenersToState,
-  createSoundObjects,
-  initSensorsAndAttachListeners
+  createSoundObjectsForState,
+  connectSensor,
+  addReadingListenersToSensor,
+  getSensorActivateListenerForElement,
+  logErrorAfterElement,
+  revealElement
 } from './functionsForPiece.mjs'
 
 import { State } from './state.mjs'
@@ -22,11 +25,18 @@ const buttons = Array.from(document.querySelectorAll('button'))
 
 extendBtns(buttons, state)
 
-// //////////////////////////////////////////////////
-addListenerToBody()
-  .then(setButtonStyle(buttons))
+const body = document.querySelector('body')
+const main = document.querySelector('main')
+const bar = document.querySelector('#bar')
+const position = document.querySelector('#barPoint')
+const sensor = new window.AbsoluteOrientationSensor()
+
+connectSensor(sensor)
+  .then(getSensorActivateListenerForElement(bar))
+  .then(setBackgroundColorAndBorderToButtons(buttons))
+  .then(revealElement(main))
   .then(initSound)
   .then(attachListenersToState(state, buttons))
-  .then(createSoundObjects(state))
-  .then(initSensorsAndAttachListeners(document))
-  .catch(console.error)
+  .then(createSoundObjectsForState(state))
+  .then(addReadingListenersToSensor(sensor, bar, position))
+  .catch(logErrorAfterElement(body))

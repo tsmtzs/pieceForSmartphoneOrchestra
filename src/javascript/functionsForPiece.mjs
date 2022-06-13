@@ -13,6 +13,7 @@ import {
   FADE_OUT,
   BTN_COLOR_ON,
   BTN_COLOR_OFF,
+  BTN_BORDER,
   SENSOR_OPTIONS,
   SCREEN_UP_VECTOR,
   DISPLAY_TOP_VECTOR
@@ -27,66 +28,50 @@ import {
 import { Sound } from './sound.mjs'
 
 function extendBtns (buttons, state) {
-  // Extend 'Button' objects and add event listeners
   buttons.forEach((btn, i) => {
     Object.assign(btn, { isEnabled: false, index: i })
 
     btn.enable = function () {
       this.isEnabled = true
-
-      // Change button color
       this.style.backgroundColor = BTN_COLOR_ON
     }
 
     btn.disable = function () {
       this.isEnabled = false
-
-      // Change button color
       this.style.backgroundColor = BTN_COLOR_OFF
     }
 
-    btn.addEventListener('pointerdown', buttonListenerFunc(state))
+    btn.addEventListener('pointerdown', getButtonListener(state))
   })
 }
 
-function viewUpdaterFunc (buttons, sound) {
-  let previousState = -1
+function getButtonListener (state) {
+  return event => {
+    state.changeTo(event.target.index)
+  }
+}
 
+function getViewUpdater (buttons, sound) {
   return state => {
-    // console.log('*** State', state, '\tOldState:', previousState, '\tSound:', sound)
-    if (previousState > -1) sound.stop(previousState)
+    if (!state.wasNeutral()) sound.stop(state.previous)
 
     if (state.isNeutral()) {
-      buttons[previousState]?.disable()
-
-      console.log('State did not change')
+      buttons[state.previous]?.disable?.()
     } else {
       const indices = state.allStates.filter(st => st !== state.current)
-
-      // Set 'previousState'
-      previousState = state.current
-
-      // start new synth
       sound.start(state.current)
 
-      // Change color of enabled buttons and disable them (if any)
       buttons
         .filter(btn => indices.includes(btn.index))
         .find(btn => btn.isEnabled)
-        ?.disable()
+        ?.disable?.()
 
       buttons[state.current].enable()
     }
   }
 }
 
-function buttonListenerFunc (state) {
-  return event => {
-    state.changeTo(event.target.index)
-  }
-}
-
-function sensorListenerFunc (sounds, MAX_AMP, SENSOR_OPTIONS) {
+function getSensorListener (sounds) {
   const delta = 1 / SENSOR_OPTIONS.frequency
 
   return event => {
@@ -112,76 +97,68 @@ function sensorListenerFunc (sounds, MAX_AMP, SENSOR_OPTIONS) {
     ))
 
     sounds.forEach(aSound => {
-      aSound.perform('setDetune', { detune: detune, dt: delta })
-      aSound.perform('setAmp', { amp: amp, dt: delta })
+      aSound.perform('setDetune', { detune, dt: delta })
+      aSound.perform('setAmp', { amp, dt: delta })
     })
   }
 }
 
-function sensorBarListenerFunc (document) {
-  const bar = document.querySelector('#bar')
-
-  if (bar) {
-    const position = document.querySelector('#barPoint')
-    const endPosition = bar.offsetWidth - position.offsetWidth
-
-    return event => {
-      const marginLeft = Math.round(map(
-        angleBetweenVectors(
-          rotateVector(event.target.quaternion, DISPLAY_TOP_VECTOR),
-          DISPLAY_TOP_VECTOR
-        ),
-        0, Math.PI,
-        0, endPosition
-      ))
-      // console.log("Inside 'sensorBarListenerFunc'", marginLeft)
-      position.style.marginLeft = `${marginLeft}px`
-    }
-  }
-}
-
-function sensorActivateListenerFunc (document) {
-  // TODO: duplication here with 'sensorBarListenerFunc'.
-  // 'bar' is read twice.
-  const bar = document.querySelector('#bar')
+function getSensorBarListener (barElement, barPointElement) {
   return event => {
-    if (bar) {
-      bar.style.visibility = 'visible'
-    }
+    const endPosition = barElement.offsetWidth - barPointElement.offsetWidth
+
+    const marginLeft = Math.round(map(
+      angleBetweenVectors(
+        rotateVector(event.target.quaternion, DISPLAY_TOP_VECTOR),
+        DISPLAY_TOP_VECTOR
+      ),
+      0, Math.PI,
+      0, endPosition
+    ))
+    // console.log("Inside 'getSensorBarListener'", marginLeft)
+    barPointElement.style.marginLeft = `${marginLeft}px`
   }
 }
 
-function sensorErrorListener (event) {
+function getSensorActivateListenerForElement (element) {
+  return event => {
+    element.style.visibility = 'visible'
+    return event
+  }
+}
+
+function logErrorAfterElement (element) {
+  return event => {
+    const msg = getErrorMsg(event)
+    const p = createStyledParagraphWithText(msg)
+    element.after(p)
+  }
+}
+
+function getErrorMsg (event) {
   if (event.error.name === 'SecurityError') {
-    console.error(`No permissions to use ${event.target.toString()}.`)
+    return `No permissions to use ${event.target.toString()}.`
   } else if (event.error.name === 'NotReadableError') {
-    console.error(`${event.target.toString()}  is not available on this device.`)
-    alertUser(`${event.target.constructor.name}  is not available on this device.`)
+    return `${event.target.toString()}  is not available on this device.`
   } else {
-    console.error(event.error)
+    return event.error
   }
 }
 
-function alertUser (msg) {
-  if (!sessionStorage.isRevealed) {
-    alert(msg)
-    sessionStorage.isRevealed = true
-  }
+function createStyledParagraphWithText (text) {
+  const p = document.createElement('p')
+  p.textContent = text
+  p.style.fontSize = '140%'
+  p.style.textAlign = 'center'
+  p.style.color = 'maroon'
+  return p
 }
 
-function addListenerToBody () {
-  const body = document.querySelector('body')
-
-  return new Promise(resolve => {
-    body.addEventListener('pointerdown', resolve, { once: true })
-  })
-}
-
-function setButtonStyle (buttons) {
+function setBackgroundColorAndBorderToButtons (buttons) {
   return event => {
     buttons.forEach(btn => {
       btn.style.backgroundColor = BTN_COLOR_OFF
-      btn.style.border = '0'
+      btn.style.border = BTN_BORDER
     })
 
     return event
@@ -191,20 +168,20 @@ function setButtonStyle (buttons) {
 function initSound (event) {
   Sound.init()
 
-  return Sound
+  return event
 }
 
 function attachListenersToState (state, buttons) {
-  return sound => {
-    state.attachToListeners(viewUpdaterFunc(buttons, sound))
-    return sound
+  return event => {
+    state.attachToListeners(getViewUpdater(buttons, Sound))
+    return event
   }
 }
 
-function createSoundObjects (state) {
-  return sound => {
+function createSoundObjectsForState (state) {
+  return event => {
     const sounds = state.allStates
-      .map(aStateIndex => sound.of({
+      .map(aStateIndex => Sound.of({
         type: 'Oscillator',
         name: aStateIndex,
         params: { freq: (aStateIndex + 1) * BASE_FREQ, amp: 0.0, fadeIn: FADE_IN, fadeOut: FADE_OUT }
@@ -215,29 +192,90 @@ function createSoundObjects (state) {
   }
 }
 
-function initSensorsAndAttachListeners (document) {
-  return sounds => {
-    const sensor = new window.AbsoluteOrientationSensor(SENSOR_OPTIONS)
+function connectSensor (sensor) {
+  const promise = new Promise((resolve, reject) => {
     sensor.start()
-    sensor.addEventListener('error', sensorErrorListener)
-    sensor.addEventListener('activate', sensorActivateListenerFunc(document), { once: true })
-    sensor.addEventListener('reading', sensorListenerFunc(sounds, MAX_AMP, SENSOR_OPTIONS))
-    sensor.addEventListener('reading', sensorBarListenerFunc(document))
 
-    return sensor
+    sensor.addEventListener('error', reject)
+    sensor.addEventListener('activate', resolve, { once: true })
+  })
+
+  return promise// .catch(sensorErrorListener)
+}
+
+function addReadingListenersToSensor (sensor, barElement, barPointElement) {
+  return sounds => {
+    sensor.addEventListener('reading', getSensorListener(sounds))
+    sensor.addEventListener('reading', getSensorBarListener(barElement, barPointElement))
   }
+}
+
+function setHiddenAttributeToElement (bool, element) {
+  element.hidden = bool
+}
+
+function revealElement (element) {
+  return event => {
+    setHiddenAttributeToElement(false, element)
+    return event
+  }
+}
+
+// Base tone 'pointer' listener function.
+// Adapted from
+// https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Switch_role
+function getSwitchClickEventListener (sound) {
+  return event => {
+    const el = event.target
+
+    if (el.getAttribute('aria-checked') === 'true') {
+      el.setAttribute('aria-checked', 'false')
+      sound.stop()
+    } else {
+      el.setAttribute('aria-checked', 'true')
+      sound.start()
+    }
+  }
+}
+
+function createReferenceSoundAndAddPointerdownListener (sounds) {
+  const refSound = Sound.of({
+    type: 'Oscillator',
+    name: 'refSound',
+    params: { freq: BASE_FREQ, amp: 0.0, fadeIn: FADE_IN, fadeOut: FADE_OUT }
+  })
+
+  addPointerdownListenerToReferenceSound(refSound)
+
+  return sounds.concat(refSound)
+}
+
+function addPointerdownListenerToReferenceSound (refSound) {
+  // Adapted from
+  // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Switch_role
+  document.querySelectorAll('.switch').forEach(theSwitch => {
+    theSwitch.addEventListener('pointerdown', getSwitchClickEventListener(refSound), false)
+  })
+
+  return Sound
 }
 
 export {
   extendBtns,
-  viewUpdaterFunc,
-  buttonListenerFunc,
-  sensorListenerFunc,
-  sensorErrorListener,
-  addListenerToBody,
-  setButtonStyle,
+  getViewUpdater,
+  getButtonListener,
+  getSensorListener,
+  getSensorBarListener,
+  getSensorActivateListenerForElement,
+  logErrorAfterElement,
+  setBackgroundColorAndBorderToButtons,
   initSound,
   attachListenersToState,
-  createSoundObjects,
-  initSensorsAndAttachListeners
+  createSoundObjectsForState,
+  connectSensor,
+  addReadingListenersToSensor,
+  setHiddenAttributeToElement,
+  revealElement,
+  getSwitchClickEventListener,
+  createReferenceSoundAndAddPointerdownListener
 }

@@ -15,6 +15,7 @@ class State {
   static NEUTRAL = -1
 
   #current = State.NEUTRAL
+  #previous = State.NEUTRAL
   #listeners
   #allStates
 
@@ -29,6 +30,7 @@ class State {
 
   changeTo (anInteger) {
     if (this.isValid(anInteger)) {
+      this.#previous = this.#current
       this.#current = this.#current === anInteger ? State.NEUTRAL : anInteger
       this.#listeners.notify(anInteger)
     } else {
@@ -60,8 +62,16 @@ class State {
     return this.#current
   }
 
+  get previous () {
+    return this.#previous
+  }
+
   isNeutral () {
-    return this.current === State.NEUTRAL
+    return this.#current === State.NEUTRAL
+  }
+
+  wasNeutral () {
+    return this.#previous === State.NEUTRAL
   }
 }
 
