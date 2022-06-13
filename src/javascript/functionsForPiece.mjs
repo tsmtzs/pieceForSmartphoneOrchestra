@@ -97,8 +97,8 @@ function getSensorListener (sounds) {
     ))
 
     sounds.forEach(aSound => {
-      aSound.perform('setDetune', { detune: detune, dt: delta })
-      aSound.perform('setAmp', { amp: amp, dt: delta })
+      aSound.perform('setDetune', { detune, dt: delta })
+      aSound.perform('setAmp', { amp, dt: delta })
     })
   }
 }
@@ -141,12 +141,12 @@ function getErrorMsg (event) {
   } else if (event.error.name === 'NotReadableError') {
     return `${event.target.toString()}  is not available on this device.`
   } else {
-    return  event.error
+    return event.error
   }
 }
 
 function createStyledParagraphWithText (text) {
-  const p = document.createElement('p');
+  const p = document.createElement('p')
   p.textContent = text
   p.style.fontSize = '140%'
   p.style.textAlign = 'center'
@@ -211,7 +211,7 @@ function addReadingListenersToSensor (sensor, barElement, barPointElement) {
 }
 
 function setHiddenAttributeToElement (bool, element) {
-  element.hidden = false
+  element.hidden = bool
 }
 
 function revealElement (element) {
