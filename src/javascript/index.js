@@ -38,7 +38,7 @@ const refButton = document.querySelector('#refTone')
 extendBtns([instrButton], state)
 
 const body = document.querySelector('body')
-const bar =  document.querySelector('#bar')
+const bar = document.querySelector('#bar')
 const position = document.querySelector('#barPoint')
 const buttonSection = document.querySelector('#buttons')
 const sensor = new window.AbsoluteOrientationSensor()

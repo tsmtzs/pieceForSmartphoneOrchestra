@@ -15,7 +15,6 @@ import {
   addReadingListenersToSensor,
   getSensorActivateListenerForElement,
   logErrorAfterElement,
-  setHiddenAttributeToElement,
   revealElement
 } from './functionsForPiece.mjs'
 
