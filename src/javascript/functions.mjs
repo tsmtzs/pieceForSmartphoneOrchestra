@@ -171,9 +171,9 @@ function initSound (event) {
   return event
 }
 
-function attachListenersToState (state, buttons) {
+function attachListenerToState (listener, state) {
   return event => {
-    state.attachToListeners(getViewUpdater(buttons, Sound))
+    state.attachToListeners(listener)
     return event
   }
 }
@@ -203,10 +203,16 @@ function connectSensor (sensor) {
   return promise// .catch(sensorErrorListener)
 }
 
-function addReadingListenersToSensor (sensor, barElement, barPointElement) {
+function addSoundListenerToSensor (sensor) {
   return sounds => {
     sensor.addEventListener('reading', getSensorListener(sounds))
-    sensor.addEventListener('reading', getSensorBarListener(barElement, barPointElement))
+    return sounds
+  }
+}
+
+function addReadingListenerToSensor (listener, sensor) {
+  return sounds => {
+    sensor.addEventListener('reading', listener)
   }
 }
 
@@ -270,10 +276,11 @@ export {
   logErrorAfterElement,
   setBackgroundColorAndBorderToButtons,
   initSound,
-  attachListenersToState,
+  attachListenerToState,
   createSoundObjectsForState,
   connectSensor,
-  addReadingListenersToSensor,
+  addSoundListenerToSensor,
+  addReadingListenerToSensor,
   setHiddenAttributeToElement,
   revealElement,
   getSwitchClickEventListener,

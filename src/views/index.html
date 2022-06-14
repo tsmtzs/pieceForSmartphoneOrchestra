@@ -43,21 +43,6 @@
       Furthermore, a tone always starts and stops with the screen facing upwards.</p>
     <p>In order to enable audio, the user should make a gesture on the page. A simple tap is adequate.
       After this, the tone buttons will change color signifying that the device is ready to play.</p>
-    <h2 class="otherH2">Tests with the instrument</h2>
-    <p>This section provides a reduction of the instrument with just one tone-button. A second
-      button starts/stops a base tone.</p>
-    <div id="buttons" hidden>
-      <div id="bar"><div id="barPoint"></div><div id="barCenter"></div></div>
-      <button type="button" id="instrument"></button>
-      <!-- The next button is adapted from -->
-      <!-- https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Switch_role -->
-      <button type="button" role="switch" aria-checked="false"
-	      id="refTone" class="switch">
-	<span>off</span>
-	<span>on</span>
-      </button>
-      <label for="refTone" class="switch">Base tone</label>
-    </div>
   </section>
 </main>
 <script type="module" src="../javascript/index.js"></script>

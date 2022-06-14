@@ -9,15 +9,19 @@ import {
   extendBtns,
   setBackgroundColorAndBorderToButtons,
   initSound,
-  attachListenersToState,
+  attachListenerToState,
   createSoundObjectsForState,
   connectSensor,
-  addReadingListenersToSensor,
+  addSoundListenerToSensor,
+  addReadingListenerToSensor,
   getSensorActivateListenerForElement,
   logErrorAfterElement,
-  revealElement
-} from './functionsForPiece.mjs'
+  revealElement,
+  getViewUpdater,
+  getSensorBarListener
+} from './functions.mjs'
 
+import { Sound } from './sound.mjs'
 import { State } from './state.mjs'
 
 const state = new State(0, 1, 2)
@@ -30,13 +34,16 @@ const main = document.querySelector('main')
 const bar = document.querySelector('#bar')
 const position = document.querySelector('#barPoint')
 const sensor = new window.AbsoluteOrientationSensor()
+const updateView = getViewUpdater(buttons, Sound)
+const updateBar = getSensorBarListener(bar, position)
 
 connectSensor(sensor)
   .then(getSensorActivateListenerForElement(bar))
   .then(setBackgroundColorAndBorderToButtons(buttons))
   .then(revealElement(main))
   .then(initSound)
-  .then(attachListenersToState(state, buttons))
+  .then(attachListenerToState(updateView, state))
   .then(createSoundObjectsForState(state))
-  .then(addReadingListenersToSensor(sensor, bar, position))
+  .then(addSoundListenerToSensor(sensor))
+  .then(addReadingListenerToSensor(updateBar, sensor))
   .catch(logErrorAfterElement(body))

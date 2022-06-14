@@ -13,8 +13,11 @@ import {
   getSensorListener,
   getSensorBarListener,
   getSensorActivateListenerForElement,
-  setBackgroundColorAndBorderToButtons
-} from '../../src/javascript/functionsForPiece.mjs'
+  setBackgroundColorAndBorderToButtons,
+  attachListenerToState,
+  addSoundListenerToSensor,
+  addReadingListenerToSensor
+} from '../../src/javascript/functions.mjs'
 
 import sinon from 'sinon'
 
@@ -22,10 +25,6 @@ import pkg from 'chai'
 const { expect } = pkg
 
 describe("Tests for module 'functionsForPiece'.", function () {
-  afterEach(function () {
-    sinon.restore()
-  })
-
   describe("Function 'getButtonListener'.", function () {
     let state
     let listener
@@ -310,6 +309,86 @@ describe("Tests for module 'functionsForPiece'.", function () {
       listener()
       expect(btn.style.backgroundColor).to.not.be.undefined
       expect(btn.style.border).to.not.be.undefined
+    })
+  })
+
+  describe("Function 'attachListenerToState'.", function () {
+    let state
+
+    beforeEach(function () {
+      state = { attachToListeners: sinon.fake() }
+    })
+
+    afterEach(function () {
+      sinon.restore()
+    })
+
+    it('Should return a function instance', function () {
+      const func = attachListenerToState()
+      expect(func instanceof Function).to.be.true
+    })
+
+    it("The returned function, when called, should call the method 'attachListeners' of State, passing the first argument of 'attachListenersToState'.", function () {
+      const listener = sinon.fake()
+      const func = attachListenerToState(listener, state)
+      func({})
+      expect(state.attachToListeners.calledOnce).to.be.true
+      expect(state.attachToListeners.firstArg).to.equal(listener)
+    })
+  })
+
+  describe("Function 'addSoundListenerToSensor'.", function () {
+    let sensor
+    let func
+
+    beforeEach(function () {
+      sensor = {
+        addEventListener: sinon.fake()
+      }
+      func = addSoundListenerToSensor(sensor)
+    })
+
+    afterEach(function () {
+      sinon.restore()
+    })
+
+    it('Should return a function instance.', function () {
+      expect(func instanceof Function).to.be.true
+    })
+
+    it("The returned function when called should call the 'addEventListener' method of Sensor.", function () {
+      func()
+      expect(sensor.addEventListener.calledOnce).to.be.true
+      expect(sensor.addEventListener.firstArg).to.equal('reading')
+    })
+  })
+
+  describe("Function 'addReadingListenerToSensor'.", function () {
+    let sensor
+    let func
+    let listener
+
+    beforeEach(function () {
+      listener = () => { }
+      sensor = {
+        addEventListener: sinon.fake()
+      }
+      func = addReadingListenerToSensor(listener, sensor)
+    })
+
+    afterEach(function () {
+      sinon.restore()
+    })
+
+    it('Should return a function instance.', function () {
+      expect(func instanceof Function).to.be.true
+    })
+
+    it("The returned function when called should call the 'addEventListener' method of Sensor passing the second argument of 'addReadingListenerToSensor'.", function () {
+      func()
+      expect(sensor.addEventListener.calledOnce).to.be.true
+      expect(sensor.addEventListener.firstArg).to.equal('reading')
+      expect(sensor.addEventListener.lastArg).to.equal(listener)
     })
   })
 })
