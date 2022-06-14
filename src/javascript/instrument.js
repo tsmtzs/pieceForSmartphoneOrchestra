@@ -14,7 +14,6 @@ import {
   connectSensor,
   addSoundListenerToSensor,
   addReadingListenerToSensor,
-  getSensorActivateListenerForElement,
   logErrorAfterElement,
   revealElement,
   getViewUpdater,
@@ -38,7 +37,6 @@ const updateView = getViewUpdater(buttons, Sound)
 const updateBar = getSensorBarListener(bar, position)
 
 connectSensor(sensor)
-  .then(getSensorActivateListenerForElement(bar))
   .then(setBackgroundColorAndBorderToButtons(buttons))
   .then(revealElement(main))
   .then(initSound)

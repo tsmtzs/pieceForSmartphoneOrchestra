@@ -85,7 +85,6 @@ canvas {
     width: 80%;
     position: relative;
     margin: 0 auto;
-    visibility: hidden;
 }
 
 #barPoint {

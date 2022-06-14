@@ -12,7 +12,6 @@ import {
   getViewUpdater,
   getSensorListener,
   getSensorBarListener,
-  getSensorActivateListenerForElement,
   setBackgroundColorAndBorderToButtons,
   attachListenerToState,
   addSoundListenerToSensor,
@@ -261,29 +260,6 @@ describe("Tests for module 'functionsForPiece'.", function () {
       expect(position.style.margiLeft).to.be.undefined
       listener(event)
       expect(position.style.marginLeft).to.not.be.undefined
-    })
-  })
-
-  describe("Function 'getSensorActivateListenerForElement'.", function () {
-    let bar
-
-    beforeEach(function () {
-      bar = {
-        style: { }
-      }
-    })
-
-    it('Should return a Function instance.', function () {
-      const listener = getSensorActivateListenerForElement(bar)
-      expect(listener instanceof Function).to.be.true
-    })
-
-    it("The returned function, when called, should set the 'visibility' CSS property of the '#bar' element.", function () {
-      expect(bar.style.visibility).to.be.undefined
-
-      const listener = getSensorActivateListenerForElement(bar)
-      listener()
-      expect(bar.style.visibility).to.equal('visible')
     })
   })
 

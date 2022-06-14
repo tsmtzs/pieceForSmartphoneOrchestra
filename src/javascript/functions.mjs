@@ -120,13 +120,6 @@ function getSensorBarListener (barElement, barPointElement) {
   }
 }
 
-function getSensorActivateListenerForElement (element) {
-  return event => {
-    element.style.visibility = 'visible'
-    return event
-  }
-}
-
 function logErrorAfterElement (element) {
   return event => {
     const msg = getErrorMsg(event)
@@ -272,7 +265,6 @@ export {
   getButtonListener,
   getSensorListener,
   getSensorBarListener,
-  getSensorActivateListenerForElement,
   logErrorAfterElement,
   setBackgroundColorAndBorderToButtons,
   initSound,
