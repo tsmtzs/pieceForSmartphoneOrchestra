@@ -17,7 +17,8 @@ import {
   getSensorActivateListenerForElement,
   logErrorAfterElement,
   revealElement,
-  getViewUpdater
+  getViewUpdater,
+  getSensorBarListener
 } from './functions.mjs'
 
 import { Sound } from './sound.mjs'
@@ -34,6 +35,7 @@ const bar = document.querySelector('#bar')
 const position = document.querySelector('#barPoint')
 const sensor = new window.AbsoluteOrientationSensor()
 const updateView = getViewUpdater(buttons, Sound)
+const updateBar = getSensorBarListener(bar, position)
 
 connectSensor(sensor)
   .then(getSensorActivateListenerForElement(bar))
@@ -43,5 +45,5 @@ connectSensor(sensor)
   .then(attachListenerToState(updateView, state))
   .then(createSoundObjectsForState(state))
   .then(addSoundListenerToSensor(sensor))
-  .then(addReadingListenerToSensor(sensor, bar, position))
+  .then(addReadingListenerToSensor(updateBar, sensor))
   .catch(logErrorAfterElement(body))

@@ -15,7 +15,8 @@ import {
   getSensorActivateListenerForElement,
   setBackgroundColorAndBorderToButtons,
   attachListenerToState,
-  addSoundListenerToSensor
+  addSoundListenerToSensor,
+  addReadingListenerToSensor
 } from '../../src/javascript/functions.mjs'
 
 import sinon from 'sinon'
@@ -359,6 +360,35 @@ describe("Tests for module 'functionsForPiece'.", function () {
       func()
       expect(sensor.addEventListener.calledOnce).to.be.true
       expect(sensor.addEventListener.firstArg).to.equal('reading')
+    })
+  })
+
+  describe("Function 'addReadingListenerToSensor'.", function () {
+    let sensor
+    let func
+    let listener
+
+    beforeEach(function () {
+      listener = () => { }
+      sensor = {
+        addEventListener: sinon.fake()
+      }
+      func = addReadingListenerToSensor(listener, sensor)
+    })
+
+    afterEach(function () {
+      sinon.restore()
+    })
+
+    it('Should return a function instance.', function () {
+      expect(func instanceof Function).to.be.true
+    })
+
+    it("The returned function when called should call the 'addEventListener' method of Sensor passing the second argument of 'addReadingListenerToSensor'.", function () {
+      func()
+      expect(sensor.addEventListener.calledOnce).to.be.true
+      expect(sensor.addEventListener.firstArg).to.equal('reading')
+      expect(sensor.addEventListener.lastArg).to.equal(listener)
     })
   })
 })
