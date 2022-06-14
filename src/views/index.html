@@ -24,25 +24,26 @@
       three buttons and a horizontal bar. A tone starts to play when a button is pressed.
       It stops when the button is pressed again. At any moment,
       at most one tone can be heard from a single device. There are three different tones in total.
-      Horizontal bar depicts deviation from the center frequency of a playing tone. Deviation is
+    </p>
+    <p>
+      The horizontal bar depicts the deviation from the center frequency of a playing tone. Deviation is
       reflected on the position of a small moving
-      rectangle inside it. When the moving rectangle lies on the center of the bar, deviation is zero.</p>
+      rectangle inside the bar. When the moving rectangle lies on the center, deviation is zero.</p>
     <p>The instrument is in neutral position, when the screen faces upwards and frequency deviation is zero.
-      In this position the screen defines a horizontal plane. The player can rotate the device around
-      a line on the horizontal plane. Rotation angles can take values from 0 degrees, in neutral position, to 180 degrees.
+      In this position the screen defines a horizontal plane. Let <span class="italics">y'y</span> be the
+      line of the horizontal plane that passes through the center of the screen and points to the center of the horizontal bar.
+      The player can rotate the device around the <span class="italics">y'y</span> axis.
+      Rotation angles can take values from 0 degrees, in neutral position, to &plusmn 180 degrees.
       This rotation sets the amplitude of the selected tone. At neutral position no sound should be heard,
       even if a tone button is pressed.</p>
-    <p>Define two perpendicular axes <span class="italics">y'y</span>, <span class="italics">z'z</span>
-      that intersect at the center of the screen, such that <span class="italics">y'y</span> lies on the
-      horizontal plane and points to the center of the horizontal bar.
+    <p>Define the axis <span class="italics">z'z</span> as the line that is perpendicular to the horizontal plane
+      and intersects  <span class="italics">y'y</span> at the center of the screen.
       Rotating the device around the <span class="italics">z'z</span> axis affects the frequency of a playing tone.
-      Rotation angle from 0 to &plusmn 180 degrees
-      deviates the frequency of a selected tone from 0 to &plusmn 100 cents, respectively.</p>
+      Rotation angles from 0 to &plusmn 180 degrees
+      deviate the frequency of a selected tone from 0 to &plusmn 100 cents, respectively.</p>
     <p>The instrument should be thought of as having a very fragile nature. This should be reflected
       on the gestures of the player: all rotations and movements must be slow-paced.
       Furthermore, a tone always starts and stops with the screen facing upwards.</p>
-    <p>In order to enable audio, the user should make a gesture on the page. A simple tap is adequate.
-      After this, the tone buttons will change color signifying that the device is ready to play.</p>
   </section>
 </main>
 <script type="module" src="../javascript/index.js"></script>
