@@ -12,7 +12,8 @@ import {
   attachListenerToState,
   createSoundObjectsForState,
   connectSensor,
-  addReadingListenersToSensor,
+  addSoundListenerToSensor,
+  addReadingListenerToSensor,
   getSensorActivateListenerForElement,
   logErrorAfterElement,
   revealElement,
@@ -41,5 +42,6 @@ connectSensor(sensor)
   .then(initSound)
   .then(attachListenerToState(updateView, state))
   .then(createSoundObjectsForState(state))
-  .then(addReadingListenersToSensor(sensor, bar, position))
+  .then(addSoundListenerToSensor(sensor))
+  .then(addReadingListenerToSensor(sensor, bar, position))
   .catch(logErrorAfterElement(body))

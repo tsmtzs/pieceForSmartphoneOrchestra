@@ -14,7 +14,8 @@ import {
   getSensorBarListener,
   getSensorActivateListenerForElement,
   setBackgroundColorAndBorderToButtons,
-  attachListenerToState
+  attachListenerToState,
+  addSoundListenerToSensor
 } from '../../src/javascript/functions.mjs'
 
 import sinon from 'sinon'
@@ -312,10 +313,8 @@ describe("Tests for module 'functionsForPiece'.", function () {
 
   describe("Function 'attachListenerToState'.", function () {
     let state
-    let event
 
     beforeEach(function () {
-      event = { target: { index: 0 } }
       state = { attachToListeners: sinon.fake() }
     })
 
@@ -324,7 +323,7 @@ describe("Tests for module 'functionsForPiece'.", function () {
     })
 
     it('Should return a function instance', function () {
-      const func = attachListenerToState(state, { })
+      const func = attachListenerToState()
       expect(func instanceof Function).to.be.true
     })
 
@@ -334,6 +333,32 @@ describe("Tests for module 'functionsForPiece'.", function () {
       func({})
       expect(state.attachToListeners.calledOnce).to.be.true
       expect(state.attachToListeners.firstArg).to.equal(listener)
+    })
+  })
+
+  describe("Function 'addSoundListenerToSensor'.", function () {
+    let sensor
+    let func
+
+    beforeEach(function () {
+      sensor = {
+        addEventListener: sinon.fake()
+      }
+      func = addSoundListenerToSensor(sensor)
+    })
+
+    afterEach(function () {
+      sinon.restore()
+    })
+
+    it('Should return a function instance.', function () {
+      expect(func instanceof Function).to.be.true
+    })
+
+    it("The returned function when called should call the 'addEventListener' method of Sensor.", function () {
+      func()
+      expect(sensor.addEventListener.calledOnce).to.be.true
+      expect(sensor.addEventListener.firstArg).to.equal('reading')
     })
   })
 })
