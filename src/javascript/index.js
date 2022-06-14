@@ -13,11 +13,11 @@ import {
   revealElement,
   setBackgroundColorAndBorderToButtons,
   initSound,
-  attachListenersToState,
+  attachListenerToState,
   createSoundObjectsForState,
   createReferenceSoundAndAddPointerdownListener,
   addReadingListenersToSensor
-} from './functionsForPiece.mjs'
+} from './functions.mjs'
 
 import { State } from './state.mjs'
 
@@ -48,7 +48,7 @@ connectSensor(sensor)
   .then(setBackgroundColorAndBorderToButtons([instrButton, refButton]))
   .then(revealElement(buttonSection))
   .then(initSound)
-  .then(attachListenersToState(state, [instrButton]))
+  .then(attachListenerToState(state, [instrButton]))
   .then(createSoundObjectsForState(state))
   .then(createReferenceSoundAndAddPointerdownListener)
   .then(addReadingListenersToSensor(sensor, bar, position))
