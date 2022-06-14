@@ -203,7 +203,14 @@ function connectSensor (sensor) {
   return promise// .catch(sensorErrorListener)
 }
 
-function addReadingListenersToSensor (sensor, barElement, barPointElement) {
+function addSoundListenerToSensor (sensor) {
+  return sounds => {
+    sensor.addEventListener('reading', getSensorListener(sounds))
+    return sounds
+  }
+}
+
+function addReadingListenerToSensor (sensor, barElement, barPointElement) {
   return sounds => {
     sensor.addEventListener('reading', getSensorListener(sounds))
     sensor.addEventListener('reading', getSensorBarListener(barElement, barPointElement))
@@ -273,7 +280,8 @@ export {
   attachListenerToState,
   createSoundObjectsForState,
   connectSensor,
-  addReadingListenersToSensor,
+  addSoundListenerToSensor,
+  addReadingListenerToSensor,
   setHiddenAttributeToElement,
   revealElement,
   getSwitchClickEventListener,

@@ -16,7 +16,7 @@ import {
   attachListenerToState,
   createSoundObjectsForState,
   createReferenceSoundAndAddPointerdownListener,
-  addReadingListenersToSensor
+  addReadingListenerToSensor
 } from './functions.mjs'
 
 import { State } from './state.mjs'
@@ -51,5 +51,5 @@ connectSensor(sensor)
   .then(attachListenerToState(state, [instrButton]))
   .then(createSoundObjectsForState(state))
   .then(createReferenceSoundAndAddPointerdownListener)
-  .then(addReadingListenersToSensor(sensor, bar, position))
+  .then(addReadingListenerToSensor(sensor, bar, position))
   .catch(logErrorAfterElement(body))
