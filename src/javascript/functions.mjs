@@ -171,9 +171,9 @@ function initSound (event) {
   return event
 }
 
-function attachListenersToState (state, buttons) {
+function attachListenerToState (listener, state) {
   return event => {
-    state.attachToListeners(getViewUpdater(buttons, Sound))
+    state.attachToListeners(listener)
     return event
   }
 }
@@ -270,7 +270,7 @@ export {
   logErrorAfterElement,
   setBackgroundColorAndBorderToButtons,
   initSound,
-  attachListenersToState,
+  attachListenerToState,
   createSoundObjectsForState,
   connectSensor,
   addReadingListenersToSensor,
