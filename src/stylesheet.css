@@ -14,7 +14,7 @@ header {
 
 header h1 {
     text-align: center;
-    font-size: 2.8rem;
+    font-size: 1.8rem;
 }
 
 main {
@@ -40,7 +40,7 @@ button {
     margin-top: 3vh;
     margin-bottom: 1%;
     width: 50%;
-    height: 23vh;
+    height: 20vh;
     background: seashell;
     border-radius: 2em;
     border: 2px solid black;
@@ -52,11 +52,11 @@ button {
     width: 90%;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 4ex;
+    margin-bottom: 3ex;
 }
 
 #links a {
-    font-size: 1.8rem;
+    font-size: 1rem;
 }
 
 li {
@@ -81,7 +81,7 @@ canvas {
 
 #bar {
     border: solid black 1px;
-    height: 2em;
+    height: 1em;
     width: 80%;
     position: relative;
     margin: 0 auto;
