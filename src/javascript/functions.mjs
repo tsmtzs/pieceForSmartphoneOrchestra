@@ -210,10 +210,9 @@ function addSoundListenerToSensor (sensor) {
   }
 }
 
-function addReadingListenerToSensor (sensor, barElement, barPointElement) {
+function addReadingListenerToSensor (listener, sensor) {
   return sounds => {
-    sensor.addEventListener('reading', getSensorListener(sounds))
-    sensor.addEventListener('reading', getSensorBarListener(barElement, barPointElement))
+    sensor.addEventListener('reading', listener)
   }
 }
 
