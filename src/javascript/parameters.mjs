@@ -20,7 +20,6 @@ const SENSOR_OPTIONS = { frequency: 60, referenceFrame: 'device' }
 // Display
 const SCREEN_UP_VECTOR = [0, 0, 1]
 const DISPLAY_TOP_VECTOR = [0, 1, 0]
-
 export {
   BASE_FREQ,
   MAX_AMP,
