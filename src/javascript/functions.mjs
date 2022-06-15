@@ -75,23 +75,25 @@ function getSensorListener (sounds) {
   const delta = 1 / SENSOR_OPTIONS.frequency
 
   return event => {
+    const rotationAngleForAmp = angleBetweenVectors(
+      rotateVector(event.target.quaternion, SCREEN_UP_VECTOR),
+      SCREEN_UP_VECTOR
+    )
     const amp = MAX_AMP * Math.pow(
       map(
-        angleBetweenVectors(
-          rotateVector(event.target.quaternion, SCREEN_UP_VECTOR),
-          SCREEN_UP_VECTOR
-        ),
+        rotationAngleForAmp,
         0, Math.PI,
         0, 1
       ),
       2
     )
 
+    const rotationAngleForDetune = angleBetweenVectors(
+      rotateVector(event.target.quaternion, DISPLAY_TOP_VECTOR),
+      DISPLAY_TOP_VECTOR
+    )
     const detune = Math.round(map(
-      angleBetweenVectors(
-        rotateVector(event.target.quaternion, DISPLAY_TOP_VECTOR),
-        DISPLAY_TOP_VECTOR
-      ),
+      rotationAngleForDetune,
       0, Math.PI,
       -100, 100
     ))
