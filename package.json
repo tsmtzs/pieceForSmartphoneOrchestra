@@ -18,9 +18,9 @@
     "postbuild": "cp $(mkcert -CAROOT)/rootCA.pem ./build",
     "watch": "parcel watch src/views/index.html src/views/directions.html src/views/instrument.html --dist-dir dist",
     "prestart-dev": "if [[ ! -d dist ]]; then echo Directory 'dir' does not exist. Run: 'npm run watch'.; false; else true; fi",
-    "start-dev": "if [[ $? == 0 ]]; then node server.js --http-port $npm_package_config_httpPort --https-port $npm_package_config_httpsPort; fi",
+    "start-dev": "if [[ $? == 0 ]]; then node backend/server.mjs --http-port $npm_package_config_httpPort --https-port $npm_package_config_httpsPort; fi",
     "prestart": "if [[ ! -d build ]]; then echo Directory 'build' does not exist. Run: 'npm run build'; false; else true; fi",
-    "start": "if [[ $? == 0 ]]; then NODE_ENV=production node server.js --http-port $npm_package_config_httpPort --https-port $npm_package_config_httpsPort; fi"
+    "start": "if [[ $? == 0 ]]; then NODE_ENV=production node backend/server.mjs --http-port $npm_package_config_httpPort --https-port $npm_package_config_httpsPort; fi"
   },
   "author": "Tassos Tsesmetzis",
   "license": "ISC",

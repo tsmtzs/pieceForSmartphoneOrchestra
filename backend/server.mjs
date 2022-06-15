@@ -4,18 +4,16 @@
 //
 // Web server main JavaScript file.
 // //////////////////////////////////////////////////
-const path = require('path')
-const fs = require('fs')
-const express = require('express')
-const http = require('http')
-const https = require('https')
-const argv = require('minimist')(process.argv.slice(2))
+import fs from 'fs'
+import http from 'http'
+import https from 'https'
+import parseArgs from 'minimist'
 
-const serveFileDir = process.env.NODE_ENV === 'production' ? 'build' : 'dist'
+import { app } from './app.mjs'
 
-const app = express()
-const httpPort = argv.p || argv['http-port'] || 8080
-const httpsPort = argv.P || argv['https-port'] || 4443
+const argv = parseArgs(process.argv.slice(2))
+const httpPort = argv.p ?? argv['http-port'] ?? 8080
+const httpsPort = argv.P ?? argv['https-port'] ?? 4443
 const key = './certs/smartphoneOrchestra-key.pem'
 const certificate = './certs/smartphoneOrchestra-crt.pem'
 const credentials = {
@@ -52,28 +50,4 @@ httpsServer.listen(httpsPort, function (err) {
 })
 
 process.setUncaughtExceptionCaptureCallback(err => { console.error(err.stack) })
-
-app.use(express.static(
-  path.join(__dirname, serveFileDir),
-  {
-    setHeaders: (res, path, stat) => { res.set('Service-Worker-Allowed', '/') }
-  }
-))
-
-// error handling - from https://expressjs.com/en/guide/error-handling.html
-app.use((err, req, res, next) => {
-  console.error(err.stack)
-  res.status(500).send('Oops! Something went wrong.')
-})
-
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, serveFileDir, '/index.html'))
-})
-
-app.get('/instrument', function (req, res) {
-  res.sendFile(path.join(__dirname, serveFileDir, '/instrument.html'))
-})
-
-app.get('/directions', function (req, res) {
-  res.sendFile(path.join(__dirname, serveFileDir, '/directions.html'))
-})
+process.on('unhandledRejection', (reason, promise) => { console.log(reason, promise) })
