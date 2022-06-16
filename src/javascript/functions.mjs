@@ -108,12 +108,12 @@ function getSensorListener (sounds) {
 function getSensorBarListener (barElement, barPointElement) {
   return event => {
     const endPosition = barElement.offsetWidth - barPointElement.offsetWidth
-
+    const rotationAngle = angleBetweenVectors(
+      rotateVector(event.target.quaternion, DISPLAY_TOP_VECTOR),
+      DISPLAY_TOP_VECTOR
+    )
     const marginLeft = Math.round(map(
-      angleBetweenVectors(
-        rotateVector(event.target.quaternion, DISPLAY_TOP_VECTOR),
-        DISPLAY_TOP_VECTOR
-      ),
+      rotationAngle,
       0, Math.PI,
       0, endPosition
     ))
@@ -222,45 +222,6 @@ function revealElement (element) {
   }
 }
 
-// Base tone 'pointer' listener function.
-// Adapted from
-// https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Switch_role
-function getSwitchClickEventListener (sound) {
-  return event => {
-    const el = event.target
-
-    if (el.getAttribute('aria-checked') === 'true') {
-      el.setAttribute('aria-checked', 'false')
-      sound.stop()
-    } else {
-      el.setAttribute('aria-checked', 'true')
-      sound.start()
-    }
-  }
-}
-
-function createReferenceSoundAndAddPointerdownListener (sounds) {
-  const refSound = Sound.of({
-    type: 'Oscillator',
-    name: 'refSound',
-    params: { freq: BASE_FREQ, amp: 0.0, fadeIn: FADE_IN, fadeOut: FADE_OUT }
-  })
-
-  addPointerdownListenerToReferenceSound(refSound)
-
-  return sounds.concat(refSound)
-}
-
-function addPointerdownListenerToReferenceSound (refSound) {
-  // Adapted from
-  // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Switch_role
-  document.querySelectorAll('.switch').forEach(theSwitch => {
-    theSwitch.addEventListener('pointerdown', getSwitchClickEventListener(refSound), false)
-  })
-
-  return Sound
-}
-
 export {
   extendBtns,
   getViewUpdater,
@@ -276,7 +237,5 @@ export {
   addSoundListenerToSensor,
   addReadingListenerToSensor,
   setHiddenAttributeToElement,
-  revealElement,
-  getSwitchClickEventListener,
-  createReferenceSoundAndAddPointerdownListener
+  revealElement
 }
