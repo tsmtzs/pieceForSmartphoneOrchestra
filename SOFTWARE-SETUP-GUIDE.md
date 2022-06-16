@@ -111,7 +111,7 @@ The *Piece for Smartphone Orchestra* web application uses four environment varia
 - `serverIP`: The IP of the web server. Default value: `192.168.10.2`.
 - `domainName`: The domain name of the application. Default value: `""` (empty string).
 
-They are defined and set in [package.json](package.json) under the `config` key.
+These are defined and set in [package.json](package.json) under the `config` key.
 
 ## Build the app
 

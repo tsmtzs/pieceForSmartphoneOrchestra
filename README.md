@@ -31,7 +31,7 @@ generate an approximation of the resulting sound.
 The software synthesizer of *Piece for Smartphone Orchestra* is a
 [PWA](https://en.wikipedia.org/wiki/Progressive_web_application). In particular, it is a three page website.
 The homepage offers
-a brief description of the piece along with a reduction of the instrument. Two links direct the player
+a brief description of the piece. Two links direct the player
 to the *text score* and *instrument* pages.
 
 The web server is developed on the [`node.js`](https://nodejs.org/en/) runtime environment
