@@ -29,7 +29,6 @@ import { State } from './state.mjs'
 
 const state = new State(0, 1, 2)
 const buttons = Array.from(document.querySelectorAll('button'))
-
 extendBtns(buttons, state)
 
 const body = document.querySelector('body')
