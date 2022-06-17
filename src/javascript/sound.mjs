@@ -124,13 +124,23 @@ class Oscillator {
   }
 }
 
-const soundObject_ = Symbol('soundObject')
-const objectPool_ = Symbol('objectPool')
-const types_ = Symbol('types')
-
 // Sound initializes the Web Audio API.
 // Acts as container for.allStates sound objects of the piece.
 class Sound {
+  // 'objectPool' holds instances of Sound.
+  // key: A user supplied name for a synth
+  // value: An instance of Sound which holds a synth.
+  // key-value pairs are added in 'soundObject' whenever
+  // the user provides a 'name' key in Sound.of argument
+  // object.
+  // E.x: Sound.of({ type: Oscillator, name: 'synth1', params: { freq: 400 } })
+  static #objectPool = new Map()
+  // Each key of 'types' is the name for a synth.
+  // The value points to a synth object (Oscillator, FmSynth...)
+  static #types = new Map()
+
+  #soundObject
+
   // --------------------------------------------------
   // Class methods
   // --------------------------------------------------
@@ -145,64 +155,69 @@ class Sound {
     // CAUTION This may cause an error if 'type' does not exist.
     const object = new Sound({ type, params })
 
-    this[objectPool_].set(name, object)
+    this.#objectPool.set(name, object)
 
     return object
   }
 
   // Get.allStates synth types from 'types' Map.
   static get types () {
-    return Array.from(this[types_].keys())
+    return Array.from(this.#types.keys())
   }
 
   // Return.allStates sound object names from 'objectPool'.
   static objectNames () {
-    return Array.from(this[objectPool_].keys())
+    return Array.from(this.#objectPool.keys())
   }
 
   // Delete the sound object with the supplied name.
   static delete (name, params = {}) {
-    this[objectPool_].get(name)?.stop(params)
-    this[objectPool_].delete(name)
+    this.#objectPool.get(name)?.stop(params)
+    this.#objectPool.delete(name)
   }
 
   // Delete.allStates sound objects from objectPool
   static deleteAll (params = {}) {
-    this[objectPool_].forEach(object => object.stop(params))
-    this[objectPool_].clear()
+    this.#objectPool.forEach(object => object.stop(params))
+    this.#objectPool.clear()
   }
 
   static start (name, params = {}) {
-    this[objectPool_].get(name)?.start(params)
+    this.#objectPool.get(name)?.start(params)
   }
 
   static stop (name, params = {}) {
-    this[objectPool_].get(name)?.stop(params)
+    this.#objectPool.get(name)?.stop(params)
   }
 
   static perform (name, params = {}) {
-    this[objectPool_].get(name)?.perform(params)
+    this.#objectPool.get(name)?.perform(params)
   }
 
   static get (name) {
-    return this[objectPool_].get(name)
+    return this.#objectPool.get(name)
   }
 
-  // --------------------------------------------------
-  // Instance methods
-  // --------------------------------------------------
+  static getType (type) {
+    return this.#types.get(type)
+  }
+
+  static setType (type, synth) {
+    this.#types.set(type, synth)
+  }
+
   constructor ({ type, params } = {}) {
-    this[soundObject_] = Sound[types_].get(type)?.of(params)
+    this.#soundObject = Sound.getType(type)?.of(params)
   }
 
   start (params = {}) {
-    this[soundObject_]?.start(params)
+    this.#soundObject?.start(params)
 
     return this
   }
 
   stop (params = {}) {
-    this[soundObject_]?.stop(params)
+    this.#soundObject?.stop(params)
 
     return this
   }
@@ -212,27 +227,13 @@ class Sound {
   perform (method, params = {}) {
     // CAUTION Error when soundObj[method] doesn't accept an object as
     // argument
-    this[soundObject_][method]?.(params)
+    this.#soundObject[method]?.(params)
 
     return this
   }
 }
 
-// --------------------------------------------------
-// Class properties
-// --------------------------------------------------
-// Each key of 'types' is the name of a synth.
-// The value points to a synth object (Oscillator, FmSynth...)
-Sound[types_] = new Map()
-
-// 'objectPool' holds instances of Sound.
-// key: A user supplied name for a synth
-// value: An instance of Sound which holds a synth.
-// key-value pairs are added in 'soundObject' whenever
-Sound[objectPool_] = new Map()
-
-Sound[types_]
-  .set('Oscillator', Oscillator)
+Sound.setType('Oscillator', Oscillator)
 
 export {
   Sound
