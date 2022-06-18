@@ -1,6 +1,8 @@
+node_modules/
+build/
 .parcel-cache
-dist/*
-certs/*
+dist/
+certs/
 **/*.*~
 tikz/*.pdf
 **/*.aux
