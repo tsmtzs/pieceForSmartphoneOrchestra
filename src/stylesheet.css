@@ -34,6 +34,12 @@ section {
     font-style: italic;
 }
 
+#name {
+    margin-right: 25px;
+    text-align: right;
+    font-size:90%;
+}
+
 button {
     margin-left: 25vw;
     margin-right: 25vw;
