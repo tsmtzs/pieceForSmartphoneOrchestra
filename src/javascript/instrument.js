@@ -7,26 +7,44 @@
 // //////////////////////////////////////////////////
 import {
   extendBtns,
-  addListenerToBody,
-  setButtonStyle,
+  setBackgroundColorAndBorderToButtons,
   initSound,
-  attachListenersToState,
-  createSoundObjects,
-  initSensorsAndAttachListeners
-} from './functionsForPiece.mjs'
+  attachListenerToState,
+  createSoundObjectsForState,
+  connectSensor,
+  addSoundListenerToSensor,
+  addReadingListenerToSensor,
+  logErrorAfterElement,
+  revealElement,
+  getViewUpdater,
+  getSensorBarListener
+} from './functions.mjs'
 
+import {
+  SENSOR_OPTIONS
+} from './parameters.mjs'
+
+import { Sound } from './sound.mjs'
 import { State } from './state.mjs'
 
 const state = new State(0, 1, 2)
 const buttons = Array.from(document.querySelectorAll('button'))
-
 extendBtns(buttons, state)
 
-// //////////////////////////////////////////////////
-addListenerToBody()
-  .then(setButtonStyle(buttons))
+const body = document.querySelector('body')
+const main = document.querySelector('main')
+const bar = document.querySelector('#bar')
+const position = document.querySelector('#barPoint')
+const sensor = new window.RelativeOrientationSensor(SENSOR_OPTIONS)
+const updateView = getViewUpdater(buttons, Sound)
+const updateBar = getSensorBarListener(bar, position)
+
+connectSensor(sensor)
+  .then(setBackgroundColorAndBorderToButtons(buttons))
+  .then(revealElement(main))
   .then(initSound)
-  .then(attachListenersToState(state, buttons))
-  .then(createSoundObjects(state))
-  .then(initSensorsAndAttachListeners(document))
-  .catch(console.error)
+  .then(attachListenerToState(updateView, state))
+  .then(createSoundObjectsForState(state))
+  .then(addSoundListenerToSensor(sensor))
+  .then(addReadingListenerToSensor(updateBar, sensor))
+  .catch(logErrorAfterElement(body))

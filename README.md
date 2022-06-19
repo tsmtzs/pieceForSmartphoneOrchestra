@@ -16,13 +16,15 @@ The document [DISCUSSION.md](DISCUSSION.md) offers a more detailed account on th
 between *Piece for Smartphone Orchestra* and systems.
 
 Players use the smartphone to control a specially designed musical instrument. This is a software
-synthesizer that can play three sine tones at `1244.507 Hz`, `2489.014 Hz` and `3733.521 Hz`.
+synthesizer that can play three sine tones at `1244.507 Hz`, `2489.014 Hz` and `4978.031 Hz`.
 The synth is developed using web technologies. In particular, it is
 a [progressive web app](https://en.wikipedia.org/wiki/Progressive_web_application) that players
 can add to their home screen and use offline. Sound is produced using the
 [Web Audio API](https://webaudio.github.io/web-audio-api/).
 Players can start/stop a tone by pressing a button. By rotating the device they control
-the amplitude and frequency deviation of a playing tone.
+the amplitude and frequency deviation of a playing tone. The web app of *Piece for Smartphone Orchestra*
+can be found at <https://tsmtzs.github.io/pieceForSmartphoneOrchestra>.
+
 The `SuperCollider` document [pieceSimulation.scd](supercollider/pieceSimulation.scd) can
 generate an approximation of the resulting sound.
 
@@ -31,7 +33,7 @@ generate an approximation of the resulting sound.
 The software synthesizer of *Piece for Smartphone Orchestra* is a
 [PWA](https://en.wikipedia.org/wiki/Progressive_web_application). In particular, it is a three page website.
 The homepage offers
-a brief description of the piece along with a reduction of the instrument. Two links direct the player
+a brief description of the piece. Two links direct the player
 to the *text score* and *instrument* pages.
 
 The web server is developed on the [`node.js`](https://nodejs.org/en/) runtime environment

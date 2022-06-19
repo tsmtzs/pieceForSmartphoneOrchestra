@@ -1,6 +1,6 @@
 {
   "name": "pieceForSmartphoneOrchestra",
-  "version": "1.0.0",
+  "version": "2.1.0",
   "description": "A music piece for smartphone orchestra.",
   "config": {
     "httpPort": "8080",
@@ -9,29 +9,37 @@
     "domainName": ""
   },
   "scripts": {
+    "standard": "npx standard src/javascript/*",
+    "test:client": "mocha test/client/*mjs",
     "premkcert": "if [[ ! -d certs ]]; then mkdir ./certs; fi",
     "mkcert": "mkcert -key-file certs/smartphoneOrchestra-key.pem -cert-file certs/smartphoneOrchestra-crt.pem localhost $npm_package_config_serverIP $npm_package_config_domainName",
     "prebuild": "npm run mkcert",
     "build": "parcel build src/views/index.html src/views/directions.html src/views/instrument.html --dist-dir build",
     "postbuild": "cp $(mkcert -CAROOT)/rootCA.pem ./build",
-    "parcel-watch": "parcel watch src/views/index.html src/views/directions.html src/views/instrument.html --dist-dir dist",
-    "prestart-dev": "if [[ ! -d dist ]]; then echo Directory 'dir' does not exist. Run: 'npm run parcel-watch'.; false; else true; fi",
-    "start-dev": "if [[ $? == 0 ]]; then node server.js --http-port $npm_package_config_httpPort --https-port $npm_package_config_httpsPort; fi",
+    "watch": "parcel watch src/views/index.html src/views/directions.html src/views/instrument.html --dist-dir dist",
+    "prestart-dev": "if [[ ! -d dist ]]; then echo Directory 'dir' does not exist. Run: 'npm run watch'.; false; else true; fi",
+    "start-dev": "if [[ $? == 0 ]]; then node backend/server.mjs --http-port $npm_package_config_httpPort --https-port $npm_package_config_httpsPort; fi",
     "prestart": "if [[ ! -d build ]]; then echo Directory 'build' does not exist. Run: 'npm run build'; false; else true; fi",
-    "start": "if [[ $? == 0 ]]; then NODE_ENV=production node server.js --http-port $npm_package_config_httpPort --https-port $npm_package_config_httpsPort; fi"
+    "start": "if [[ $? == 0 ]]; then NODE_ENV=production node backend/server.mjs --http-port $npm_package_config_httpPort --https-port $npm_package_config_httpsPort; fi",
+    "predeploy": "rm -rf build && parcel build src/views/index.html src/views/directions.html src/views/instrument.html --dist-dir build --public-url tsmtzs.github.io/pieceForSmartphoneOrchestra",
+    "deploy": "gh-pages -d build"
   },
   "author": "Tassos Tsesmetzis",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
-    "minimist": "^1.2.5",
-    "parcel": "^2.0.0-rc.0",
+    "express": "^4.18.1",
+    "minimist": "^1.2.6",
+    "parcel": "^2.6.0",
     "parcel-config-precache-manifest": "^0.0.4"
   },
   "devDependencies": {
-    "@parcel/packager-raw-url": "^2.0.0-rc.0",
-    "@parcel/transformer-image": "^2.0.0-rc.0",
-    "@parcel/transformer-webmanifest": "^2.0.0-rc.0",
-    "standard": "^16.0.3"
+    "@parcel/packager-raw-url": "^2.6.0",
+    "@parcel/transformer-image": "^2.6.0",
+    "@parcel/transformer-webmanifest": "^2.6.0",
+    "chai": "^4.3.6",
+    "gh-pages": "^4.0.0",
+    "mocha": "^10.0.0",
+    "sinon": "^14.0.0",
+    "standard": "^17.0.0"
   }
 }

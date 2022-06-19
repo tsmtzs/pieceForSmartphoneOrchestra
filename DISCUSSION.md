@@ -9,7 +9,7 @@ a vague idea about the form of the piece. The duration of the performance is ind
 
 Each player uses a smartphone to control a software synthesizer. The interface includes three buttons. It utilizes smartphone sensors to map
 device rotation angles to amplitude and frequency deviation. Each button starts/stops a tone. Tone frequencies center around
-`1244.507 Hz`, `2489.014 Hz` and `3733.521 Hz`. Rotation of the device modifies the frequency of each button to an interval with
+`1244.507 Hz`, `2489.014 Hz` and `4978.031 Hz`. Rotation of the device modifies the frequency of each button to an interval with
 radius `100 cents` around the center frequency. The piece may be perceived as a potential aural game on *beat tones* and
 *otoacoustic emission effects*[^kendall-et-al]. It is an attempt to create with very little material, a varying iridescent soundscape.
 
@@ -22,7 +22,7 @@ As such, most of the elements of the *system*
 and the interactions among them can be defined and manipulated by computer algorithms. In *Piece for Smartphone Orchestra* the interacting
 elements are the performers. In order to steer the performance towards an aesthetic goal we choose to shape the interactions
 between the performers and the performers with the environment by using text and graphics. Our approach is similar to the text scores
-of Pauline Oliveros[^oliveros]. The players react to the global sound and act according to the directions given in text.
+of Pauline Oliveros[^oliveros]. The players react to the global sound and act according to the directions given in the text.
 
 We assume that the interpretation of the
 [score](score/pieceForSmartphoneOrchestra.pdf)
@@ -72,7 +72,7 @@ At the other end we have the space around an individual agent.
 At this level, behaviour is set by the directions in the [score](score/pieceForSmartphoneOrchestra.pdf).
 This could be a single sine tone or silence.
 
-Between these two extremes we can define potential areas inside the performance space were certain sounds can only be heared. They are not
+Between these two extremes we can define potential areas inside the performance space were certain sounds can only be heared. These are not
 fixed and may overlap. These *localities of sound* depend on the distance between the agents, the amplitudes and frequencies of
 the playing tones, as well as, the direction or the movements of the players. Localities of sound may encompass single tones, beats or even
 auditory distortion products. They should be regarded as local emergent properties of the system.

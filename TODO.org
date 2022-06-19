@@ -3,7 +3,7 @@
 #	by Tassos Tsesmetzis
 # ##################################################
 * Web client
-** TODO Fix h1 header size in instrument.html
+** DONE Fix h1 header size in instrument.html
    H1 header /Piece for Smartphone Orchestra/ renders smaller in /instrument than in /index
    or /directions. (mobile chrome)
 

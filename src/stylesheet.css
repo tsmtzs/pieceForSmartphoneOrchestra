@@ -14,7 +14,7 @@ header {
 
 header h1 {
     text-align: center;
-    font-size: 2.8rem;
+    font-size: 1.8rem;
 }
 
 main {
@@ -23,10 +23,6 @@ main {
 
 main h2 {
     font-size: 1.2rem;
-}
-
-main h2.otherH2 {
-    margin-top: 2em;
 }
 
 section {
@@ -38,61 +34,22 @@ section {
     font-style: italic;
 }
 
+#name {
+    margin-right: 25px;
+    text-align: right;
+    font-size:90%;
+}
+
 button {
     margin-left: 25vw;
     margin-right: 25vw;
     margin-top: 3vh;
     margin-bottom: 1%;
     width: 50%;
-    height: 23vh;
+    height: 20vh;
     background: seashell;
     border-radius: 2em;
     border: 2px solid black;
-}
-
-/* Adapted from */
-/* https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Switch_role */
-button.switch {
-  padding: 0;
-  width: 25%;
-  height: 20vh;
-  display: inline-block;
-  margin-right: 0.25em;
-  margin-top: 3vh;
-  margin-left: 26%;
-  line-height: 20px;
-  vertical-align: middle;
-  text-align: center;
-  font: 3.1rem sans-serif;
-  border-radius: 1em;
-}
-
-button.switch span {
-  padding: 0 10%;
-  pointer-events: none;
-}
-
-[role="switch"][aria-checked="false"] :first-child,
-[role="switch"][aria-checked="true"] :last-child {
-  background: orange;
-  color: white;
-  border-radius: 1rem;
-}
-
-[role="switch"][aria-checked="false"] :last-child,
-[role="switch"][aria-checked="true"] :first-child {
-  color: white;
-}
-
-label.switch {
-  font: 3.2rem sans-serif;
-  line-height: 20px;
-  user-select: none;
-  vertical-align: middle;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -webkit-user-select: none;
-  -o-user-select: none;
 }
 
 #links {
@@ -101,11 +58,11 @@ label.switch {
     width: 90%;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 4ex;
+    margin-bottom: 3ex;
 }
 
 #links a {
-    font-size: 1.8rem;
+    font-size: 1rem;
 }
 
 li {
@@ -130,11 +87,10 @@ canvas {
 
 #bar {
     border: solid black 1px;
-    height: 2em;
+    height: 1em;
     width: 80%;
     position: relative;
     margin: 0 auto;
-    visibility: hidden;
 }
 
 #barPoint {

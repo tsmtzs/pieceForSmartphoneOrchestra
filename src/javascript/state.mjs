@@ -2,34 +2,76 @@
 // //////////////////////////////////////////////////
 //  Piece for Smartphone Orchestra
 //      by Tassos Tsesmetzis
-//
-// This file defines the object 'State'. It is a
-// hybrid of radio button and check box object.
 // //////////////////////////////////////////////////
 // 'State' object models a hybrid of check boxes and radio buttons.
 // Upon initialization you give a number of valid states (aka check boxes - radio buttons).
 // State '-1'  is neutral (no button is pressed).
-// The method 'change' changes state (presses - deselects a button).
-// When the argument is different than current state, pass it to current state (press radio button).
-// When the argument is the same as current state, change state to neutral (deselect a button)
+// The method 'changeTo' changes state (presses - deselects a button).
+// When the argument is different from the current state, pass it to current state (press radio button).
+// When the argument is the same as the current state, change state to neutral (deselect a button)
 import { EventDispatcher } from './eventDispatchers.mjs'
 
 class State {
+  static NEUTRAL = -1
+
+  #current = State.NEUTRAL
+  #previous = State.NEUTRAL
+  #listeners
+  #allStates
+
   constructor (...states) {
-    this.current = -1
-    this.all = new Set(states)
-    this.hasChanged = false
-    this.listeners = new EventDispatcher(this)
+    if (states.includes(State.NEUTRAL)) {
+      throw new Error(`State: The neutral state ${State.NEUTRAL} should not be given as a state.`)
+    } else {
+      this.#allStates = new Set(states)
+      this.#listeners = new EventDispatcher(this)
+    }
   }
 
-  change (anInteger) {
-    if (this.all.has(anInteger)) {
-      this.current = this.current === anInteger ? (this.hasChanged = false, -1) : (this.hasChanged = true, anInteger)
-
-      this.listeners.notify(anInteger)
+  changeTo (anInteger) {
+    if (this.isValid(anInteger)) {
+      this.#previous = this.#current
+      this.#current = this.#current === anInteger ? State.NEUTRAL : anInteger
+      this.#listeners.notify(anInteger)
     } else {
-      throw new Error('Argument is not a valid state.')
+      throw new Error(`Argument ${anInteger} is not a valid state.`)
     }
+  }
+
+  isValid (anInteger) {
+    return this.#allStates.has(anInteger)
+  }
+
+  get allStates () {
+    return Array.from(this.#allStates)
+  }
+
+  attachToListeners (listener) {
+    this.#listeners.attach(listener)
+  }
+
+  removeFromListeners (listener) {
+    this.#listeners.remove(listener)
+  }
+
+  clearListeners () {
+    this.#listeners.clear()
+  }
+
+  get current () {
+    return this.#current
+  }
+
+  get previous () {
+    return this.#previous
+  }
+
+  isNeutral () {
+    return this.#current === State.NEUTRAL
+  }
+
+  wasNeutral () {
+    return this.#previous === State.NEUTRAL
   }
 }
 
