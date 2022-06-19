@@ -32,7 +32,7 @@ Ppar({ |i|
 	Pbind(
 		\time, Pseg([0, 1, 0], [firstPart, secondPart], [2, -3]),
 		\instrument, Pwrand([\sine,Rest()], [0.7, 0.3], inf),
-		\midinote, 12 * Prand([1, 2, 3], inf) + baseFreq.cpsmidi,
+		\midinote, 12 * Prand((..2), inf) + baseFreq.cpsmidi,
 		\ctranspose, Pfunc { |ev| ev.time.cubed.rand2 },
 		\amp, Pfunc { |ev| 0.002.rrand(0.03) * ev.time } + Pwrand([0.002, 0.0], [0.1, 0.9], inf),
 		\attack, Pmeanrand(2, 12),

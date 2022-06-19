@@ -16,7 +16,7 @@ The document [DISCUSSION.md](DISCUSSION.md) offers a more detailed account on th
 between *Piece for Smartphone Orchestra* and systems.
 
 Players use the smartphone to control a specially designed musical instrument. This is a software
-synthesizer that can play three sine tones at `1244.507 Hz`, `2489.014 Hz` and `3733.521 Hz`.
+synthesizer that can play three sine tones at `1244.507 Hz`, `2489.014 Hz` and `4978.031 Hz`.
 The synth is developed using web technologies. In particular, it is
 a [progressive web app](https://en.wikipedia.org/wiki/Progressive_web_application) that players
 can add to their home screen and use offline. Sound is produced using the
