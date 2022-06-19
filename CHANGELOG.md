@@ -9,7 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Changed
 ### Removed
 
-## [2.1.0] - 2022-06-??
+## [2.1.0] - 2022-06-19
 ### Added
 - File `backend/app.mjs`.
 - Files `src/javascript/functions.mjs` and `src/javascript/mathFunctions.mjs`.
@@ -26,6 +26,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
   - The file imports objects from `functions.mjs`, `parameters.mjs`, `sounds.mjs` and `state.mjs`.
   - Constant `sensor` holds an instance of `RelativeOrientationSensor`.
 - File `src/javascript/parameters.mjs`: All constants renamed. Capital letters were used.
+- File `src/javascript/functions.mjs`:
+	- Function `createSoundObjectsForState`: Key `freq` changes to `(2 ** aStateIndex) * BASE_FREQ`.
 - Files `src/views/index.html`, `src/views/directions.html`, `src/views/instrument.html`: Bug corrected in the element `meta name=viewport`.
 ### Removed
 - From file `src/javascript/eventDispatchers`: class `OneShotEventDispatcher`.
