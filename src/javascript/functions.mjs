@@ -179,7 +179,7 @@ function createSoundObjectsForState (state) {
       .map(aStateIndex => Sound.of({
         type: 'Oscillator',
         name: aStateIndex,
-        params: { freq: (aStateIndex + 1) * BASE_FREQ, amp: 0.0, fadeIn: FADE_IN, fadeOut: FADE_OUT }
+        params: { freq: (2 ** aStateIndex) * BASE_FREQ, amp: 0.0, fadeIn: FADE_IN, fadeOut: FADE_OUT }
       })
       )
 
