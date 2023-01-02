@@ -1,15 +1,20 @@
+:root {
+    --background-color: seashell;
+    --text-color: maroon;
+}
+
 html {
     font-size: 16px;
 }
 
 body {
-    background-color: seashell;
-    color: maroon;
+    background-color: var(--background-color);
+    color: var(--text-color);
     padding: 0% 16px;
 }
 
 header {
-    background-color: seashell;
+    background-color: var(--background-color);
 }
 
 header h1 {
@@ -18,7 +23,7 @@ header h1 {
 }
 
 main {
-    background-color: seashell;
+    background-color: var(--background-color);
 }
 
 main h2 {
@@ -26,7 +31,7 @@ main h2 {
 }
 
 section {
-    background-color: seashell;
+    background-color: var(--background-color);
     margin-bottom: 120px;
     max-width: 900px;
     margin: auto;
@@ -49,7 +54,7 @@ button {
     margin-bottom: 1%;
     width: 50%;
     height: 20vh;
-    background: seashell;
+    background: var(--background-color);
     border-radius: 2em;
     border: 2px solid black;
 }
@@ -67,6 +72,14 @@ button {
     font-size: 1rem;
 }
 
+a:link {
+    color: var(--text-color);
+}
+
+a:visited {
+    color: rgba(var(--text-color), 0.85);
+}
+
 li {
     margin-bottom: 10px;
 }
@@ -75,7 +88,7 @@ fn {
     display: block;
     margin-top: 100px;
     padding-top: 10px;
-    border-top: 1px solid maroon;
+    border-top: 1px solid var(--text-color);
     font: 0.85rem sans-serif;
 }
 
@@ -105,7 +118,7 @@ canvas {
 
 #barCenter {
     margin-left: 48%;
-    border: solid maroon 3px;
+    border: solid var(--text-color) 3px;
     height: 100%;
     width: 4%;
     position: absolute;
