@@ -28,6 +28,8 @@ main h2 {
 section {
     background-color: seashell;
     margin-bottom: 120px;
+    max-width: 900px;
+    margin: auto;
 }
 
 .italics {
