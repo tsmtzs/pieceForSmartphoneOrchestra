@@ -145,7 +145,7 @@ function createStyledParagraphWithText (text) {
   p.textContent = text
   p.style.fontSize = '140%'
   p.style.textAlign = 'center'
-  p.style.color = 'maroon'
+  p.style.color = '#f2f2f2'
   return p
 }
 

@@ -1,6 +1,6 @@
 :root {
-    --background-color: seashell;
-    --text-color: maroon;
+    --background-color: #393e46;
+    --text-color: #f2f2f2;
 }
 
 html {
@@ -101,7 +101,7 @@ canvas {
 }
 
 #bar {
-    border: solid black 1px;
+    border: solid var(--text-color) 1px;
     height: 1em;
     width: 80%;
     position: relative;
@@ -109,7 +109,7 @@ canvas {
 }
 
 #barPoint {
-    background-color: orange;
+    background-color: #f96d00;
     margin-left: 48%;
     height: 100%;
     width: 4%;

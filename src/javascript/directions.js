@@ -17,7 +17,7 @@ const height = canvas.height
 
 // Coordinates
 const innerPos = (a, b, x) => map(x, 0, 1, a, b)
-const xA = 0.13
+const xA = 0.15
 const yA = 0.5
 const xB = 0.25
 const yBDiv = 0.04
@@ -52,14 +52,14 @@ const yControl2CD2 = yA + yControl2CDDiv
 
 // Gradient
 const radialGrad = ctx.createRadialGradient(0.55 * width, 0.5 * height, 0.0 * width, 0.9 * height, 0.4 * height, 0.88 * width)
-radialGrad.addColorStop(0, '#000000')
-radialGrad.addColorStop(0.5, '#FFFFFF')
+radialGrad.addColorStop(0, '#222831')
+radialGrad.addColorStop(0.5, '#f2f2f2')
 
 // Background
-ctx.fillStyle = 'seashell'
+ctx.fillStyle = '#393e46'
 ctx.fillRect(0, 0, width, height)
 // Font
-ctx.fillStyle = 'maroon'
+ctx.fillStyle = '#f2f2f2'
 ctx.font = '0.9rem serif'
 ctx.textBaseline = 'middle'
 ctx.fillText('START', 0.01 * width, 0.5 * height)
