@@ -34,11 +34,13 @@ function extendBtns (buttons, state) {
     btn.enable = function () {
       this.isEnabled = true
       this.style.backgroundColor = BTN_COLOR_ON
+      this.style.transform = 'scale(0.9)'
     }
 
     btn.disable = function () {
       this.isEnabled = false
       this.style.backgroundColor = BTN_COLOR_OFF
+      this.style.transform = 'scale(1.0)'
     }
 
     btn.addEventListener('pointerdown', getButtonListener(state))
