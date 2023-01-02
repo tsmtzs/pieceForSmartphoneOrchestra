@@ -11,8 +11,8 @@ const MAX_AMP = 0.9
 const FADE_IN = 0.05
 const FADE_OUT = 0.05
 // Button
-const BTN_COLOR_ON = 'darkorange'
-const BTN_COLOR_OFF = 'darkslategray'
+const BTN_COLOR_ON = '#f96d00'
+const BTN_COLOR_OFF = '#222831'
 const BTN_BORDER = '0'
 // Sensors
 const SENSOR_OPTIONS = { frequency: 60, referenceFrame: 'device' }

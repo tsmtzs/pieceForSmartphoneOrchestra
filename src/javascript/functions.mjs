@@ -34,11 +34,13 @@ function extendBtns (buttons, state) {
     btn.enable = function () {
       this.isEnabled = true
       this.style.backgroundColor = BTN_COLOR_ON
+      this.style.transform = 'scale(0.9)'
     }
 
     btn.disable = function () {
       this.isEnabled = false
       this.style.backgroundColor = BTN_COLOR_OFF
+      this.style.transform = 'scale(1.0)'
     }
 
     btn.addEventListener('pointerdown', getButtonListener(state))
@@ -145,7 +147,7 @@ function createStyledParagraphWithText (text) {
   p.textContent = text
   p.style.fontSize = '140%'
   p.style.textAlign = 'center'
-  p.style.color = 'maroon'
+  p.style.color = '#f2f2f2'
   return p
 }
 
