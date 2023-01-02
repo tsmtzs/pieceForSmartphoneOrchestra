@@ -36,7 +36,7 @@
     "@parcel/packager-raw-url": "^2.6.0",
     "@parcel/transformer-image": "^2.6.0",
     "@parcel/transformer-webmanifest": "^2.6.0",
-    "chai": "^4.3.6",
+    "chai": "^4.3.7",
     "gh-pages": "^4.0.0",
     "mocha": "^10.0.0",
     "sinon": "^14.0.0",
