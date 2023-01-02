@@ -27,7 +27,7 @@
   "author": "Tassos Tsesmetzis",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.1",
+    "express": "^4.18.2",
     "minimist": "^1.2.6",
     "parcel": "^2.6.0",
     "parcel-config-precache-manifest": "^0.0.4"
