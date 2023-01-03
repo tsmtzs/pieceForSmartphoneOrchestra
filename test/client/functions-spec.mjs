@@ -6,13 +6,13 @@
 //
 // Tests for module functionsForPiece.mjs.
 // //////////////////////////////////////////////////
+import './globalObjectFakes.mjs'
 import {
   getButtonListener,
   extendBtns,
   getViewUpdater,
   getSensorListener,
   getSensorBarListener,
-  setBackgroundColorAndBorderToButtons,
   attachListenerToState,
   addSoundListenerToSensor,
   addReadingListenerToSensor
@@ -58,7 +58,11 @@ describe("Tests for module 'functionsForPiece'.", function () {
     beforeEach(function () {
       button = {
         style: { },
-        addEventListener: sinon.fake()
+        addEventListener: sinon.fake(),
+        classList: {
+          remove: sinon.fake(),
+          add: sinon.fake()
+        }
       }
       state = { }
     })
@@ -260,31 +264,6 @@ describe("Tests for module 'functionsForPiece'.", function () {
       expect(position.style.margiLeft).to.be.undefined
       listener(event)
       expect(position.style.marginLeft).to.not.be.undefined
-    })
-  })
-
-  describe("Function 'setBackgroundColorAndBorderToButtons'.", function () {
-    let btn
-    let listener
-
-    beforeEach(function () {
-      btn = {
-        style: { }
-      }
-      listener = setBackgroundColorAndBorderToButtons([btn])
-    })
-
-    it('Should return a Function instance.', function () {
-      expect(listener instanceof Function).to.be.true
-    })
-
-    it("The returned function, when called, should set the CSS properties 'backgroundColor' and 'border'.", function () {
-      expect(btn.style.backgroundColor).to.be.undefined
-      expect(btn.style.border).to.be.undefined
-
-      listener()
-      expect(btn.style.backgroundColor).to.not.be.undefined
-      expect(btn.style.border).to.not.be.undefined
     })
   })
 
