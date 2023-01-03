@@ -11,9 +11,6 @@ import {
   MAX_AMP,
   FADE_IN,
   FADE_OUT,
-  BTN_COLOR_ON,
-  BTN_COLOR_OFF,
-  BTN_BORDER,
   SENSOR_OPTIONS,
   SCREEN_UP_VECTOR,
   DISPLAY_TOP_VECTOR
@@ -33,15 +30,17 @@ function extendBtns (buttons, state) {
 
     btn.enable = function () {
       this.isEnabled = true
-      this.style.backgroundColor = BTN_COLOR_ON
-      this.style.transform = 'scale(0.9)'
+      this.classList.remove('dark')
+      this.classList.add('light')
     }
 
     btn.disable = function () {
       this.isEnabled = false
-      this.style.backgroundColor = BTN_COLOR_OFF
-      this.style.transform = 'scale(1.0)'
+      this.classList.remove('light')
+      this.classList.add('dark')
     }
+
+    btn.disable()
 
     btn.addEventListener('pointerdown', getButtonListener(state))
   })
@@ -151,17 +150,6 @@ function createStyledParagraphWithText (text) {
   return p
 }
 
-function setBackgroundColorAndBorderToButtons (buttons) {
-  return event => {
-    buttons.forEach(btn => {
-      btn.style.backgroundColor = BTN_COLOR_OFF
-      btn.style.border = BTN_BORDER
-    })
-
-    return event
-  }
-}
-
 function initSound (event) {
   Sound.init()
 
@@ -231,7 +219,6 @@ export {
   getSensorListener,
   getSensorBarListener,
   logErrorAfterElement,
-  setBackgroundColorAndBorderToButtons,
   initSound,
   attachListenerToState,
   createSoundObjectsForState,
