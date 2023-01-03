@@ -8,7 +8,7 @@
 import {
   BACKGROUND_COLOR,
   TEXT_COLOR,
-  BTN_COLOR_OFF
+  DARK_COLOR
 } from './parameters.mjs'
 import { map } from './mathFunctions.mjs'
 
@@ -19,7 +19,7 @@ const height = canvas.height
 
 const backgroundColor = BACKGROUND_COLOR
 const fontColor = TEXT_COLOR
-const gradientColor1 = BTN_COLOR_OFF
+const gradientColor1 = DARK_COLOR
 const gradientColor2 = fontColor
 
 // Coordinates

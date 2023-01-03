@@ -60,9 +60,19 @@ section {
 button {
     width: 50%;
     height: 20vh;
-    background: var(--background-color);
+    background: var(--dark-color);
     border-radius: 2em;
-    border: 2px solid black;
+    border: 0 solid var(--background-color);
+}
+
+.dark {
+    background-color: var(--dark-color);
+    transform: scale(1.0);
+}
+
+.light {
+    background-color: var(--shiny-color);
+    transform: scale(0.9);
 }
 
 #links {

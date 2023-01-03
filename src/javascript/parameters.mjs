@@ -16,9 +16,8 @@ const MAX_AMP = 0.9
 const FADE_IN = 0.05
 const FADE_OUT = 0.05
 // Button
-const BTN_COLOR_ON = get('--shiny-color')
-const BTN_COLOR_OFF = get('--dark-color')
-const BTN_BORDER = '0'
+const SHINY_COLOR = get('--shiny-color')
+const DARK_COLOR = get('--dark-color')
 // Sensors
 const SENSOR_OPTIONS = { frequency: 60, referenceFrame: 'device' }
 // Display
@@ -31,9 +30,8 @@ export {
   FADE_OUT,
   BACKGROUND_COLOR,
   TEXT_COLOR,
-  BTN_COLOR_ON,
-  BTN_COLOR_OFF,
-  BTN_BORDER,
+  SHINY_COLOR,
+  DARK_COLOR,
   SENSOR_OPTIONS,
   SCREEN_UP_VECTOR,
   DISPLAY_TOP_VECTOR

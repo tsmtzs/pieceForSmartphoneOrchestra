@@ -7,7 +7,6 @@
 // //////////////////////////////////////////////////
 import {
   extendBtns,
-  setBackgroundColorAndBorderToButtons,
   initSound,
   attachListenerToState,
   createSoundObjectsForState,
@@ -40,7 +39,6 @@ const updateView = getViewUpdater(buttons, Sound)
 const updateBar = getSensorBarListener(bar, position)
 
 connectSensor(sensor)
-  .then(setBackgroundColorAndBorderToButtons(buttons))
   .then(revealElement(main))
   .then(initSound)
   .then(attachListenerToState(updateView, state))
