@@ -5,14 +5,19 @@
 //
 // Parameters and constants.
 // //////////////////////////////////////////////////
+const rootElementStyle = getComputedStyle(document.querySelector(':root'))
+const get = string => rootElementStyle.getPropertyValue(string)
+
+const BACKGROUND_COLOR = get('--background-color')
+const TEXT_COLOR = get('--text-color')
 // Sound:
 const BASE_FREQ = 1244.5079348883 // Eflat 6
 const MAX_AMP = 0.9
 const FADE_IN = 0.05
 const FADE_OUT = 0.05
 // Button
-const BTN_COLOR_ON = '#f96d00'
-const BTN_COLOR_OFF = '#222831'
+const BTN_COLOR_ON = get('--shiny-color')
+const BTN_COLOR_OFF = get('--dark-color')
 const BTN_BORDER = '0'
 // Sensors
 const SENSOR_OPTIONS = { frequency: 60, referenceFrame: 'device' }
@@ -24,6 +29,8 @@ export {
   MAX_AMP,
   FADE_IN,
   FADE_OUT,
+  BACKGROUND_COLOR,
+  TEXT_COLOR,
   BTN_COLOR_ON,
   BTN_COLOR_OFF,
   BTN_BORDER,
