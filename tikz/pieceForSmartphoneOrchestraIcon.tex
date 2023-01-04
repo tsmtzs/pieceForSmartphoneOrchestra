@@ -5,7 +5,7 @@
 % used in the PWA web manifest file.
 % 
 % Convert the output pdf file to png:
-%       pdftoppm -r 720 -png pieceForSmartphoneOrchestra.pdf smartphoneOrchestra
+%       pdftoppm -r 720 -png pieceForSmartphoneOrchestraIcon.pdf smartphoneOrchestra
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass{standalone}
 \usepackage{fontspec}
@@ -17,16 +17,14 @@
 \usepackage{tikz}
 \usetikzlibrary{calc}
 
-\setmainfont[Mapping=tex-text]{Linux Biolinum O}
-
 % Picture size.
 \def\squareSize{10cm}
 % Half the diagonal of the inner square
-\def\diagonal{3cm}
+\def\diagonal{2cm}
 
 % Colors
-\definecolor{seashell}{HTML}{FFF5EE}
-\definecolor{darkslategray}{HTML}{2F4F4F}
+\definecolor{background}{HTML}{222831}
+\definecolor{square}{HTML}{F96D00}
 
 \begin{document}
 \begin{tikzpicture}
@@ -34,7 +32,7 @@
   \coordinate (K) at (0.5*\squareSize, 0.5*\squareSize);
   % Diagonal distance as point
   \coordinate (D) at (\diagonal, \diagonal);
-  \fill [seashell] (0,0) rectangle (\squareSize, \squareSize);
-  \fill [darkslategray, rounded corners=2ex] ($(K) - (D)$) rectangle ($(K) + (D)$);
+  \fill [background] (0,0) rectangle (\squareSize, \squareSize);
+  \fill [square, rounded corners=2ex] ($(K) - (D)$) rectangle ($(K) + (D)$);
 \end{tikzpicture}
 \end{document}
