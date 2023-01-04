@@ -1,20 +1,37 @@
 {
-    "name": "Piece for Smartphone Orchestra",
-    "short_name": "Smartphone Orchestra",
-    "description": "A music piece for a smartphone orchestra.",
-    "display": "fullscreen",
-    "background_color": "#fff5ee",
-    "icons": [
-    	{
-	    "src": "./icons/smartphoneOrchestraIcon_512x512.png",
-	    "sizes": "512x512",
-	    "type": "image/png"
-	},
-	{
-	    "src": "./icons/smartphoneOrchestraIcon_192x192.png",
-	    "sizes": "192x192",
-	    "type": "image/png"
-	}
-    ],
-    "scope": "../"
+  "name": "Piece for Smartphone Orchestra",
+  "short_name": "Smartphone Orchestra",
+  "description": "A sound piece for a smartphone orchestra.",
+  "display": "standalone",
+  "background_color": "#393e46",
+  "theme_color": "#222831",
+  "icons": [
+    {
+      "src": "./icons/smartphoneOrchestra_1024x1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/smartphoneOrchestra_180x180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/smartphoneOrchestra_192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/smartphoneOrchestra_384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/smartphoneOrchestra_512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "../",
+  "orientation": "portrait"
 }
