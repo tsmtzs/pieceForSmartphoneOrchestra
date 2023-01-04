@@ -8,9 +8,6 @@
 const precacheVersion = self.__precacheManifest
   .map(p => p.revision)
   .join('')
-// TODO: Precache files /directions and /directions.html are the same.
-// Also, the same are /instrument and /instrument.html, / and /index.html.
-// Eliminate duplicates?
 const precacheFiles = self.__precacheManifest
   .map(p => p.url)
   .concat(['/directions', '/instrument'])
