@@ -1,7 +1,7 @@
 {
   "name": "pieceForSmartphoneOrchestra",
-  "version": "2.1.0",
-  "description": "A music piece for smartphone orchestra.",
+  "version": "2.2.0",
+  "description": "A sound piece for smartphone orchestra.",
   "config": {
     "httpPort": "8080",
     "httpsPort": "8443",
