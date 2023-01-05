@@ -9,6 +9,38 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Changed
 ### Removed
 
+## [2.2.0] - 2023-01-05
+### Added
+-  Element `link` with `rel="apple-touch-icon"` added to all `HTML` pages.
+-  File `src/views/instrument.html`:
+	-  Element `div` with `id=button-container`.
+- File `src/stylesheet.css`:
+	-  Class selectors `:root`, `.dark`, `.light`, `button-container`, `a:link`, `a:visited`.
+- File `src/javascript/parameters.mjs`:
+	- Constants `BACKGROUND_COLOR`, `TEXT_COLOR`. 
+- [`mocha`](https://mochajs.org/) tests:
+	- Side effect module `test/client/globalObjectFakes.mjs`.
+### Changed
+-  Element `link` with `rel=manifest` added to `src/views/directions.html`, `src/views/instrument.html`.
+- File `src/stylesheet.css`:
+	- Selectors `button`, `section`.
+- File `src/smartphoneOrchestra.webmanifest`.
+- Class `Oscillator` from `src/javascript/sound.mjs`. Private property `#context` replaced `Sound.context`.
+- File `src/javascript/parameters.mjs`:
+	- Constants `BTN_COLOR_ON`, `BTN_COLOR_OFF` renamed as `SHINY_COLOR` and `DARK_COLOR`, respectively.
+- File `src/javascript/functions.mjs`:
+	- Function `createSoundObjectsForState` replaced by `createSoundObjectsFor`.
+	- Function  `getViewUpdater` replaced by `getViewUpdaterFor`
+	- Functions `extendBtns`, `revealElement`, `addSoundListenerToSensor`, `getSensorListener`, `createStyledParagraphWithText`.
+- [`mocha`](https://mochajs.org/) tests:
+	- Updates in `test/client/functions-spec.mjs`.
+### Removed
+- File `src/javascript/parameters.mjs`:
+	-  Constant `BTN_BORDER`.
+- Class `Sound` from `src/javascript/sound.mjs`.
+- File `src/javascript/functions.mjs`:
+	-  Functions `initSound`, `setHiddenAttributeToElement`,  `setBackgroundColorAndBorderToButtons`.
+
 ## [2.1.0] - 2022-06-19
 ### Added
 - File `backend/app.mjs`.
