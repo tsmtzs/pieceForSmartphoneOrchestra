@@ -2,8 +2,8 @@
 
 ## About
 
-*Piece for Smartphone Orchestra* is a musical work of indeterminate duration for any number of players.
-It expands on the idea of a *system* to produce a dynamic musical structure. According to the
+*Piece for Smartphone Orchestra* is a sound work of indeterminate duration for any number of players.
+It expands on the idea of a *system* to produce a dynamic sound structure. According to the
 [Merriam-Webster](https://www.merriam-webster.com/dictionary/system) online dictionary, a *system* is
 "*a regularly interacting or interdependent group of items forming a unified whole*".
 In *Piece for Smartphone Orchestra* the performers form the interacting group of items.

@@ -6,13 +6,13 @@
 //
 // Tests for module functionsForPiece.mjs.
 // //////////////////////////////////////////////////
+import './globalObjectFakes.mjs'
 import {
   getButtonListener,
   extendBtns,
-  getViewUpdater,
+  getViewUpdaterFor,
   getSensorListener,
   getSensorBarListener,
-  setBackgroundColorAndBorderToButtons,
   attachListenerToState,
   addSoundListenerToSensor,
   addReadingListenerToSensor
@@ -58,7 +58,11 @@ describe("Tests for module 'functionsForPiece'.", function () {
     beforeEach(function () {
       button = {
         style: { },
-        addEventListener: sinon.fake()
+        addEventListener: sinon.fake(),
+        classList: {
+          remove: sinon.fake(),
+          add: sinon.fake()
+        }
       }
       state = { }
     })
@@ -98,73 +102,92 @@ describe("Tests for module 'functionsForPiece'.", function () {
     })
   })
 
-  describe("Function 'getViewUpdater'.", function () {
+  describe("Function 'getViewUpdaterFor'.", function () {
+    let listener
+    let btn1, btn2, btn3
+    let enable, disable
+    let start, stop
+    let soundFactory
+
+    beforeEach(function () {
+      disable = sinon.fake()
+      enable = sinon.fake()
+      btn1 = {
+        enable,
+        disable,
+        isEnabled: true,
+        index: 0
+      }
+      btn2 = {
+        enable,
+        disable,
+        isEnabled: true,
+        index: 1
+      }
+      btn3 = {
+        enable,
+        disable,
+        isEnabled: false,
+        index: 2
+      }
+
+      start = sinon.fake()
+      stop = sinon.fake()
+      soundFactory = () => {
+        return {
+          start,
+          stop
+        }
+      }
+
+      const buttons = [btn1, btn2, btn3]
+      listener = getViewUpdaterFor(buttons, buttons.map(() => soundFactory()))
+    })
+
     afterEach(() => {
       sinon.restore()
     })
 
     it('Should return a Function instance.', function () {
-      const listener = getViewUpdater()
+      const listener = getViewUpdaterFor()
 
       expect(listener instanceof Function).to.be.true
     })
 
     it('The returned function, when called, should stop the sound at index state.previous, IF previous state is not neutral.', function () {
-      const sound = {
-        stop: sinon.fake()
-      }
       const state = {
         previous: 0,
         wasNeutral: sinon.fake.returns(false),
         isNeutral: sinon.fake.returns(true)
       }
-      const btn = { }
-      const listener = getViewUpdater([btn], sound)
       listener(state)
       expect(state.wasNeutral.callCount).to.equal(1)
-      expect(sound.stop.callCount).to.equal(1)
-      expect(sound.stop.firstArg).to.equal(state.previous)
+      expect(stop.callCount).to.equal(1)
     })
 
     it('The returned function, when called, should NOT stop any sound, IF previous state is neutral.', function () {
-      const sound = {
-        stop: sinon.fake()
-      }
       const state = {
         previous: 0,
         wasNeutral: sinon.fake.returns(true),
         isNeutral: sinon.fake.returns(true)
       }
-      const btn = { }
-      const listener = getViewUpdater([btn], sound)
       listener(state)
       expect(state.wasNeutral.callCount).to.equal(1)
-      expect(sound.stop.callCount).to.equal(0)
+      expect(stop.callCount).to.equal(0)
     })
 
     it('The returned function, when called, should disable the button at position state.previous, IF current state is neutral.', function () {
-      const sound = {
-        stop: () => { }
-      }
       const state = {
         previous: 0,
         wasNeutral: () => false,
         isNeutral: sinon.fake.returns(true)
       }
-      const btn = {
-        disable: sinon.fake()
-      }
-      const listener = getViewUpdater([btn], sound)
       listener(state)
       expect(state.isNeutral.callCount).to.equal(1)
-      expect(btn.disable.callCount).to.equal(1)
+      expect(disable.callCount).to.equal(1)
     })
 
     it('The returned function, when called, should disable all buttons at position !== state.current and enable the button at position state.current, IF current state is not neutral.', function () {
-      const sound = {
-        stop: () => { },
-        start: sinon.fake()
-      }
       const state = {
         current: 0,
         previous: 0,
@@ -172,30 +195,9 @@ describe("Tests for module 'functionsForPiece'.", function () {
         wasNeutral: () => false,
         isNeutral: sinon.fake.returns(false)
       }
-      const disable = sinon.fake()
-      const enable = sinon.fake()
-      const btn1 = {
-        enable,
-        disable,
-        isEnabled: true,
-        index: 0
-      }
-      const btn2 = {
-        enable,
-        disable,
-        isEnabled: true,
-        index: 1
-      }
-      const btn3 = {
-        enable,
-        disable,
-        isEnabled: false,
-        index: 2
-      }
-      const listener = getViewUpdater([btn1, btn2, btn3], sound)
       listener(state)
       expect(state.isNeutral.callCount).to.equal(1)
-      expect(sound.start.callCount).to.equal(1)
+      expect(start.callCount).to.equal(1)
       expect(disable.callCount).to.equal(1)
       expect(enable.callCount).to.equal(1)
     })
@@ -211,7 +213,8 @@ describe("Tests for module 'functionsForPiece'.", function () {
         target: { quaternion: [0, 1, 2, 3] }
       }
       snd = {
-        perform: sinon.spy()
+        setAmp: sinon.fake(),
+        setDetune: sinon.fake()
       }
       listener = getSensorListener([snd])
     })
@@ -226,9 +229,8 @@ describe("Tests for module 'functionsForPiece'.", function () {
 
     it("The returned function, when called, should send twice the 'perform' message to each element of the 'sounds' argument.", function () {
       listener(event)
-      expect(snd.perform.callCount).to.equal(2)
-      expect(snd.perform.withArgs('setDetune').calledOnce).to.be.true
-      expect(snd.perform.withArgs('setAmp').calledOnce).to.be.true
+      expect(snd.setDetune.calledOnce).to.be.true
+      expect(snd.setAmp.calledOnce).to.be.true
     })
   })
 
@@ -263,31 +265,6 @@ describe("Tests for module 'functionsForPiece'.", function () {
     })
   })
 
-  describe("Function 'setBackgroundColorAndBorderToButtons'.", function () {
-    let btn
-    let listener
-
-    beforeEach(function () {
-      btn = {
-        style: { }
-      }
-      listener = setBackgroundColorAndBorderToButtons([btn])
-    })
-
-    it('Should return a Function instance.', function () {
-      expect(listener instanceof Function).to.be.true
-    })
-
-    it("The returned function, when called, should set the CSS properties 'backgroundColor' and 'border'.", function () {
-      expect(btn.style.backgroundColor).to.be.undefined
-      expect(btn.style.border).to.be.undefined
-
-      listener()
-      expect(btn.style.backgroundColor).to.not.be.undefined
-      expect(btn.style.border).to.not.be.undefined
-    })
-  })
-
   describe("Function 'attachListenerToState'.", function () {
     let state
 
@@ -315,13 +292,15 @@ describe("Tests for module 'functionsForPiece'.", function () {
 
   describe("Function 'addSoundListenerToSensor'.", function () {
     let sensor
+    let sound
     let func
 
     beforeEach(function () {
+      sound = { }
       sensor = {
         addEventListener: sinon.fake()
       }
-      func = addSoundListenerToSensor(sensor)
+      func = addSoundListenerToSensor([sound], sensor)
     })
 
     afterEach(function () {

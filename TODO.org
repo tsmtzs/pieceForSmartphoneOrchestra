@@ -11,7 +11,7 @@
    Links between pages of the website appear very old-fashioned. Style them using responsive design?
    Add a drop down menu when screen size is small? ...
 
-** TODO Use different colors?
+** DONE Use different colors?
    Take into account that the screen will be seen from the audience, the performance might take place
    in a concert hall possibly with dim lights.
 

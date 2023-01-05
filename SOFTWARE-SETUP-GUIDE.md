@@ -20,12 +20,12 @@
 	[`bash`](https://www.gnu.org/software/bash/) commands. Normally, the `bash` shell should
 	be part of any `Linux` distribution.
 	
-2. [`node.js`](https://nodejs.org/en/) (version `16.7.0`)
+2. [`node.js`](https://nodejs.org/en/) (version `19.3.0`)
 
 	`node.js` is a `JavaScript` runtime environment. Prebuild binaries should be found
 	in package repositories of the most common `Linux` distributions.
 
-3. [`npm`](https://docs.npmjs.com/cli/v7/commands/npm) (version `7.21.0`)
+3. [`npm`](https://docs.npmjs.com/cli/v7/commands/npm) (version `8.19.2`)
 
 	`npm` is a package manager for `node.js`. Install it from the package repository
 	of your `Linux` distribution.
@@ -37,14 +37,14 @@
 	To install it follow the directions in
 	[mkcert-installation](https://github.com/FiloSottile/mkcert#installation).
 	
-5. [`git`](https://git-scm.com/) (version `2.33.0`)
+5. [`git`](https://git-scm.com/) (version `2.39.0`)
 
 	`git` is a version control system. Install it from the package repository of your `Linux`
 	distribution.
 
 ### Optional
 
-- [`SuperCollider`](https://supercollider.github.io/) (version `3.12.0`) is an environment
+- [`SuperCollider`](https://supercollider.github.io/) (version `3.12.2`) is an environment
 	and programming language for audio synthesis and algorithmic composition. Install it
 	if you would like to hear a crude approximation of the piece. In such a case, use the
 	`SuperCollider` document [pieceSimulation.scd](supercollider/pieceSimulation.scd).
@@ -56,7 +56,7 @@
 	and [pieceForSmartphoneOrchestraIcon.tex](tikz/pieceForSmartphoneOrchestraIcon.tex).
 	The output of the first will be the [text score](score/pieceForSmartphoneOrchestra.pdf).
 	The second one will produce the PWA
-	[icon](src/icons/smartphoneOrchestraIcon_192x192.png) of the website. Both
+	[icon](src/icons/smartphoneOrchestra_192x192.png) of the website. Both
 	`TeX` documents use the `tikz` package for graphics.
 
 ## Clone the repository

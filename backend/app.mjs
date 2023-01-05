@@ -21,12 +21,6 @@ app.use(express.static(
   }
 ))
 
-// error handling - from https://expressjs.com/en/guide/error-handling.html
-app.use((err, req, res, next) => {
-  console.error(err.stack)
-  res.status(500).send('Oops! Something went wrong.')
-})
-
 app.get('/', function (req, res) {
   res.sendFile(path.join(serveFileDir, '/index.html'))
 })
@@ -37,6 +31,12 @@ app.get('/instrument', function (req, res) {
 
 app.get('/directions', function (req, res) {
   res.sendFile(path.join(serveFileDir, '/directions.html'))
+})
+
+// error handling - from https://expressjs.com/en/guide/error-handling.html
+app.use((err, req, res, next) => {
+  console.error(err.stack)
+  res.status(500).send('Oops! Something went wrong.')
 })
 
 export { app }

@@ -2,8 +2,8 @@
 
 ## Introduction
 
-*Piece for Smartphone Orchestra* is a musical work for any number of players.
-It is a manifestation of a *systems* approach to music making. Form is a dynamic structure that depends on the interactions and choices of the
+*Piece for Smartphone Orchestra* is a sound work for any number of players.
+It is a manifestation of a *complex systems* view of the artowork. Form is a dynamic structure that depends on the interactions and choices of the
 performers. A [text score](score/pieceForSmartphoneOrchestra.pdf) directs the actions of the players. Also, by means of a graphic shape, it offers
 a vague idea about the form of the piece. The duration of the performance is indeterminate.
 
