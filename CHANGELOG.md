@@ -9,6 +9,12 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Changed
 ### Removed
 
+## [2.3.0] - 2023-06-07
+### Added
+-  Element `meta` that sets `Content-Security-Policy` to `upgrade-insecure-requests` added to all `HTML` pages.
+### Removed
+- Unused `XeLaTeX` packages removed from `tikz/pieceForSmartphoneOrchestraIcon.tex`.
+
 ## [2.2.0] - 2023-01-05
 ### Added
 -  Element `link` with `rel="apple-touch-icon"` added to all `HTML` pages.
@@ -17,7 +23,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - File `src/stylesheet.css`:
 	-  Class selectors `:root`, `.dark`, `.light`, `button-container`, `a:link`, `a:visited`.
 - File `src/javascript/parameters.mjs`:
-	- Constants `BACKGROUND_COLOR`, `TEXT_COLOR`. 
+	- Constants `BACKGROUND_COLOR`, `TEXT_COLOR`.
 - [`mocha`](https://mochajs.org/) tests:
 	- Side effect module `test/client/globalObjectFakes.mjs`.
 ### Changed
