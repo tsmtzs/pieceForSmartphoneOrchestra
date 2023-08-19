@@ -1,13 +1,13 @@
 :root {
     --background-color: #393e46;
-    --text-color: #f2f2f2;
+    --text-color: #f0f0f0;
     --dark-color: #222831;
     --shiny-color: #f96d00;
 }
 
 html {
     font-family: Verdana, Arial, sans-serif;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.5;
     box-sizing: border-box;
 }
@@ -30,7 +30,7 @@ header {
 
 header h1 {
     text-align: center;
-    font-size: 1.8rem;
+    font-size: min(2.125rem, calc(1.3rem + 2vw));
 }
 
 main {
@@ -38,7 +38,7 @@ main {
 }
 
 main h2 {
-    font-size: 1.2rem;
+    font-size: min(1.875rem, calc(0.95rem + 1vw));
 }
 
 section {
@@ -84,17 +84,16 @@ button {
     transform: scale(0.9);
 }
 
-#links {
+nav {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 3ex;
+    margin: 0 auto;
 }
 
-#links a {
-    font-size: 1rem;
+a {
+    font-size: 1.0rem;
 }
 
 a:link {
@@ -102,7 +101,19 @@ a:link {
 }
 
 a:visited {
-    color: rgba(var(--text-color), 0.85);
+    color: #fefefe;
+}
+
+a:focus {
+    color: var(--text-color);
+}
+
+a:hover {
+    color: #b9b9b9;
+}
+
+a:active {
+    color: #a0a0a0;
 }
 
 li {
