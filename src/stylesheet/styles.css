@@ -6,7 +6,16 @@
 }
 
 html {
+    font-family: Verdana, Arial, sans-serif;
     font-size: 16px;
+    line-height: 1.5;
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
 }
 
 body {
@@ -105,7 +114,8 @@ fn {
     margin-top: 100px;
     padding-top: 10px;
     border-top: 1px solid var(--text-color);
-    font: 0.85rem sans-serif;
+    font-size: 0.85rem;
+    line-height: inherit;
 }
 
 canvas {
@@ -125,7 +135,7 @@ canvas {
 }
 
 #barPoint {
-    background-color: #f96d00;
+    background-color: var(--shiny-color);
     margin-left: 48%;
     height: 100%;
     width: 4%;
