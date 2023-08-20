@@ -1,18 +1,29 @@
 :root {
     --background-color: #393e46;
-    --text-color: #f2f2f2;
+    --text-color: #f0f0f0;
     --dark-color: #222831;
     --shiny-color: #f96d00;
 }
 
 html {
+    font-family: Verdana, Arial, sans-serif;
     font-size: 16px;
+    line-height: 1.5;
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
 }
 
 body {
     background-color: var(--background-color);
     color: var(--text-color);
-    padding: 0% 16px;
+    padding: 0 16px;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 header {
@@ -21,7 +32,7 @@ header {
 
 header h1 {
     text-align: center;
-    font-size: 1.8rem;
+    font-size: min(2.125rem, calc(1.3rem + 2vw));
 }
 
 main {
@@ -29,13 +40,18 @@ main {
 }
 
 main h2 {
-    font-size: 1.2rem;
+    font-size: min(1.875rem, calc(0.95rem + 1vw));
+    margin-bottom: 0rem;
+}
+
+main h2 + p,
+main h2 + ul {
+    margin-top: 0.0rem;
 }
 
 section {
     background-color: var(--background-color);
     margin-bottom: 120px;
-    max-width: 900px;
     margin: auto;
 }
 
@@ -44,7 +60,7 @@ section {
 }
 
 #name {
-    margin-right: 25px;
+    padding-right: 15px;
     text-align: right;
     font-size:90%;
 }
@@ -75,17 +91,16 @@ button {
     transform: scale(0.9);
 }
 
-#links {
+nav {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 3ex;
+    margin: 0 auto;
 }
 
-#links a {
-    font-size: 1rem;
+a {
+    font-size: 1.0rem;
 }
 
 a:link {
@@ -93,11 +108,33 @@ a:link {
 }
 
 a:visited {
-    color: rgba(var(--text-color), 0.85);
+    color: #fefefe;
+}
+
+a:focus {
+    color: var(--text-color);
+}
+
+a:hover {
+    color: #b9b9b9;
+}
+
+a:active {
+    color: #a0a0a0;
+}
+
+ul {
+    padding: inherit;
+    list-style-position: outside;
 }
 
 li {
-    margin-bottom: 10px;
+    line-height: 1.9;
+    margin-left: 1em;
+}
+
+sup a {
+    font-size: 0.8rem;
 }
 
 fn {
@@ -105,15 +142,16 @@ fn {
     margin-top: 100px;
     padding-top: 10px;
     border-top: 1px solid var(--text-color);
-    font: 0.85rem sans-serif;
+    font-size: 0.9rem;
+    line-height: inherit;
 }
 
 canvas {
     display: block;
-    margin-top: 10px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 80%;
+    margin: 0 auto;;
+    width: 90%;
+    max-width: 400px;
+    min-width: 200px;
 }
 
 #bar {
@@ -121,11 +159,11 @@ canvas {
     height: 1em;
     width: 80%;
     position: relative;
-    margin: 0 auto;
+    margin: 15px auto 0 auto;
 }
 
 #barPoint {
-    background-color: #f96d00;
+    background-color: var(--shiny-color);
     margin-left: 48%;
     height: 100%;
     width: 4%;
@@ -139,4 +177,15 @@ canvas {
     width: 4%;
     position: absolute;
     box-sizing: border-box;
+}
+
+@media (min-width: 800px) {
+    nav {
+	justify-content: flex-end;
+	margin-right: 0;
+    }
+
+    nav > a:first-child {
+	margin-right: 0.5rem;
+    }
 }

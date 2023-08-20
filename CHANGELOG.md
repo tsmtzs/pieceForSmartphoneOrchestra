@@ -9,6 +9,19 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Changed
 ### Removed
 
+## [2.4.0] - 2023-08-20
+### Changed
+- File `src/stylesheet.css` renamed as `styles.css` and moved under `src/stylesheet`.
+- Files `src/views/*.html`:
+	- Element `meta` with `name=description` added.
+	- Element `div` with `id=links` replaced by `nav` element.
+- File `src/stylesheet/styles.css`:
+	- `box-sizing` is set to `boder-box` to all elements.
+	- Rulesets for `#links`, `#links a` removed.
+	- Media query ruleset for `min-width: 800px` added.
+	- Rulesets for `main h2 + p, main h2 + ul`, `nav`, `a`, `a:focus`, `a:hover`, `a:active`, `sup a` added.
+	- Changes in rulesets for `html`, `body`, `header h1`, `section`, `#name`, `ul`, `li`, `fn`, `canvas`, `#bar`, `#barPoint`.
+
 ## [2.3.0] - 2023-06-07
 ### Added
 -  Element `meta` that sets `Content-Security-Policy` to `upgrade-insecure-requests` added to all `HTML` pages.
