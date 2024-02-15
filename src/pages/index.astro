@@ -3,9 +3,10 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 import '../styles/globalStyles.css'
 
 const pageTitle = 'Piece for Smartphone Orchestra'
+const pathName = Astro.url.pathname
 ---
 
-<BaseLayout pageTitle={pageTitle}
+<BaseLayout pageTitle={pageTitle} pathName={pathName}
     <main>
 	<section>
 	    <h2>About</h2>
