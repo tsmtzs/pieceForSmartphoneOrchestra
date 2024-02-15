@@ -1,0 +1,28 @@
+---
+const { pageTitle } = Astro.props
+---
+
+<html lang="en">
+    <head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="author" content="Tassos Tsesmetzis" />
+	<meta name="description"
+	      content="Piece for Smartphone Orchestra is a sound work for any number of players and indeterminate duration." />
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+        <meta name="generator" content={Astro.generator} />
+	<title>Piece for smartphone orchestra</title>
+	<link rel="manifest" href="../smartphoneOrchestra.webmanifest" crossorigin="use-credentials" />
+	<link rel="apple-touch-icon" href="./icons/smartphoneOrchestra_180x180.png" />
+    </head>
+    <body>
+	<header>
+	    <h1>{pageTitle}</h1>
+	    <nav>
+		<a href="/directions/">Directions</a>
+		<a href="/instrument/">Instrument</a>
+	    </nav>
+	</header>
+	<slot />
+    </body>
+</html>
