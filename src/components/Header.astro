@@ -1,0 +1,10 @@
+---
+import Navigation from './Navigation.astro'
+
+const { title, pathNamePairs } = Astro.props
+---
+
+<header>
+    <h1>{title}</h1>
+    <Navigation pathNamePairs={pathNamePairs} />
+</header>

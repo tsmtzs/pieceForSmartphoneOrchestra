@@ -1,0 +1,7 @@
+---
+const { pathNamePairs } = Astro.props
+---
+
+<nav>
+    {pathNamePairs.map(path => <a href={path[0]}>{path[1]}</a>)}
+</nav>

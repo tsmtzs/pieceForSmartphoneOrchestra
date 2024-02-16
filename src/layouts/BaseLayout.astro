@@ -1,14 +1,14 @@
 ---
+import Header from '../components/Header.astro'
+
 const { pageTitle, pathName } = Astro.props
 const allPathNamePairs = ['/', '/directions/', '/instrument/']
 .map(path => {
-    const name = path.slice(1, - 1)
+    const name = path.slice(1, -1)
     return [path, name === '' ? 'Home' : name.replace(name[0], name[0].toUpperCase())]
 })
 const navPathNamePairs = allPathNamePairs.filter(pair => pair[0] !== pathName)
 const pageName = allPathNamePairs.find(pair => pair[0] === pathName)[1]
-
-console.log(allPathNamePairs)
 ---
 
 <html lang='en'>
@@ -25,12 +25,7 @@ console.log(allPathNamePairs)
 	<link rel='apple-touch-icon' href='./icons/smartphoneOrchestra_180x180.png' />
     </head>
     <body>
-	<header>
-	    <h1>{pageTitle}</h1>
-	    <nav>
-		{navPathNamePairs.map(path => <a href={path[0]}>{path[1]}</a>)}
-	    </nav>
-	</header>
+	<Header title={pageTitle} pathNamePairs={navPathNamePairs} />
 	<slot />
     </body>
 </html>
