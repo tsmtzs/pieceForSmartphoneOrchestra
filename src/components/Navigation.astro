@@ -1,7 +1,50 @@
 ---
-const { pathNamePairs } = Astro.props
+const { pageName, pathNamePairs } = Astro.props
 ---
 
 <nav>
-    {pathNamePairs.map(path => <a href={path[0]}>{path[1]}</a>)}
+  {pathNamePairs.map(path => {
+  const currentPage = pageName === path[1]
+  ? 'currentPage'
+  : ''
+  return <a href={path[0]} class={currentPage}>{path[1]}</a>
+  })}
 </nav>
+
+<style>
+ nav {
+   width: 95%;
+   margin-top: 0;
+   position: fixed;
+   top: 0;
+   border-bottom: 0.2px solid var(--text-color);
+   padding: 0.3rem 2px 0.5rem 0;
+   background-color: inherit;
+   display: flex;
+   justify-content: flex-end;
+   column-gap: 0.8rem;
+   align-items: stretch;
+ }
+
+ a {
+   font-size: small;
+   text-decoration: none;
+ }
+
+ .currentPage {
+   --symbol-char: '\00B7';/* dot character */
+   --symbol-margin: 2px;
+   letter-spacing: 0.8px;
+   pointer-events: none;
+ }
+
+ .currentPage::before {
+   content: var(--symbol-char);
+   margin-right: var(--symbol-margin);
+ }
+
+ .currentPage::after {
+   content: var(--symbol-char);
+   margin-left: var(--symbol-margin);
+ }
+</style>
