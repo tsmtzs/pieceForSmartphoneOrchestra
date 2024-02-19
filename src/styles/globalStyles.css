@@ -31,57 +31,32 @@ body {
 
 h1 {
    margin-top: 3.3rem;
-   font-size: var(--h1-font-size);
+   font-size: min(max(var(--h1-font-size), 1.8vw), 2rem);
    line-height: 1;
    text-align: center;
    letter-spacing: 0.08rem;
 }
 
 h2 {
-    font-size: var(--h2-font-size);
+    font-size: min(max(var(--h2-font-size), 1.8vw), 1.28rem);
     margin: 0;
     padding: 0;
     letter-spacing: 0.04rem;
     font-style: normal;
     font-weight: normal;
     margin: 0 0 -1.0rem 0;
-    /* margin-bottom: 0; */
-    /* background-color: gray; */
 }
 
 h2:first-child {
     margin-top: 0.0rem;
-    /* background-color: gray; */
 }
-
-/* header { */
-/*     background-color: var(--background-color); */
-/* } */
-
-/* header h1 { */
-/*     text-align: center; */
-/*     font-size: min(1.5rem, calc(1.3rem + 2vw)); */
-/*     /\* font-size: min(2.125rem, calc(1.3rem + 2vw)); *\/ */
-/* } */
 
 main {
     background-color: var(--background-color);
 }
 
-/* main h2 { */
-/*     font-size: min(1.875rem, calc(0.95rem + 1vw)); */
-/*     margin-bottom: 0rem; */
-/* } */
-
-/* main h2 + p, */
-/* main h2 + ul { */
-/*     margin-top: 0.0rem; */
-/* } */
-
 section {
     background-color: var(--background-color);
-    /* margin-bottom: 120px; */
-    /* margin: auto; */
     padding: 0 0.5rem;
 }
 
@@ -97,7 +72,7 @@ section {
 }
 
 #button-container {
-    height: 72vh;
+    height: 75vh;
     display: flex;
     flex-direction: column-reverse;
     justify-content: space-evenly;
@@ -121,14 +96,6 @@ button {
     background-color: var(--shiny-color);
     transform: scale(0.9);
 }
-
-/* nav { */
-/*     display: flex; */
-/*     flex-wrap: wrap; */
-/*     justify-content: space-around; */
-/*     width: 90%; */
-/*     margin: 0 auto; */
-/* } */
 
 a {
     font-size: 1.0rem;
@@ -159,7 +126,6 @@ sup a {
 }
 
 ul {
-    /* background-color: darkgray; */
     padding: inherit;
     list-style-position: outside;
 }
@@ -184,31 +150,6 @@ canvas {
     width: 90%;
     max-width: 400px;
     min-width: 200px;
-}
-
-#bar {
-    border: solid var(--text-color) 1px;
-    height: 1em;
-    width: 80%;
-    position: relative;
-    margin: 15px auto 0 auto;
-}
-
-#barPoint {
-    background-color: var(--shiny-color);
-    margin-left: 48%;
-    height: 100%;
-    width: 4%;
-    position: absolute;
-}
-
-#barCenter {
-    margin-left: 48%;
-    border: solid var(--text-color) 3px;
-    height: 100%;
-    width: 4%;
-    position: absolute;
-    box-sizing: border-box;
 }
 
 @media (min-width: 800px) {
