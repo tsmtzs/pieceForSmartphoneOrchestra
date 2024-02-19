@@ -92,7 +92,8 @@ section {
 #name {
     padding-right: 15px;
     text-align: right;
-    font-size:90%;
+    font-size: 0.9rem;
+    margin-top: -0.5rem;
 }
 
 #button-container {
@@ -153,6 +154,10 @@ a:active {
     color: #a0a0a0;
 }
 
+sup a {
+    font-size: 0.8rem;
+}
+
 ul {
     /* background-color: darkgray; */
     padding: inherit;
@@ -161,11 +166,7 @@ ul {
 
 li {
     line-height: 1.9;
-    margin-left: 1em;
-}
-
-sup a {
-    font-size: 0.8rem;
+    margin-left: 1rem;
 }
 
 fn {
@@ -210,13 +211,8 @@ canvas {
     box-sizing: border-box;
 }
 
-/* @media (min-width: 800px) { */
-/*     nav { */
-/* 	justify-content: flex-end; */
-/* 	margin-right: 0; */
-/*     } */
-
-/*     nav > a:first-child { */
-/* 	margin-right: 0.5rem; */
-/*     } */
-/* } */
+@media (min-width: 800px) {
+    body {
+        margin: 0 auto;
+    }
+}
