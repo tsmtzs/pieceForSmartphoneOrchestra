@@ -14,20 +14,22 @@ const { pageName, pathNamePairs } = Astro.props
 <style>
  nav {
    width: 95%;
+   max-width: inherit;
    margin-top: 0;
    position: fixed;
    top: 0;
    border-bottom: 0.2px solid var(--text-color);
-   padding: 0.3rem 2px 0.5rem 0;
+   padding-right: 2px;
+   height: 2.5rem;
    background-color: inherit;
    display: flex;
    justify-content: flex-end;
    column-gap: 0.8rem;
-   align-items: stretch;
+   align-items: center;
  }
 
  a {
-   font-size: small;
+   font-size: 0.9rem;
    text-decoration: none;
  }
 
