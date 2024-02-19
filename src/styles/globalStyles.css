@@ -15,7 +15,7 @@ html {
 *,
 *::before,
 *::after {
-  box-sizing: inherit;
+    box-sizing: inherit;
 }
 
 body {
@@ -32,7 +32,8 @@ header {
 
 header h1 {
     text-align: center;
-    font-size: min(2.125rem, calc(1.3rem + 2vw));
+    font-size: min(1.5rem, calc(1.3rem + 2vw));
+    /* font-size: min(2.125rem, calc(1.3rem + 2vw)); */
 }
 
 main {
@@ -91,13 +92,13 @@ button {
     transform: scale(0.9);
 }
 
-nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    width: 90%;
-    margin: 0 auto;
-}
+/* nav { */
+/*     display: flex; */
+/*     flex-wrap: wrap; */
+/*     justify-content: space-around; */
+/*     width: 90%; */
+/*     margin: 0 auto; */
+/* } */
 
 a {
     font-size: 1.0rem;

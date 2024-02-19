@@ -1,0 +1,32 @@
+---
+import Navigation from '../components/Navigation.astro'
+import Header from '../components/Header.astro'
+
+const { pageTitle, pathName } = Astro.props
+const allPathNamePairs = ['/', '/directions/', '/instrument/']
+.map(path => {
+  const name = path.slice(1, -1)
+  return [path, name === '' ? 'About' : name.replace(name[0], name[0].toUpperCase())]
+})
+const pageName = allPathNamePairs.find(pair => pair[0] === pathName)[1]
+---
+
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <meta name='author' content='Tassos Tsesmetzis' />
+    <meta name='description'
+	  content='Piece for Smartphone Orchestra is a sound work for any number of players and indeterminate duration.' />
+    <meta http-equiv='Content-Security-Policy' content='upgrade-insecure-requests' />
+    <meta name='generator' content={Astro.generator} />
+    <title>Piece for smartphone orchestra {pathName !== '/' ? ' | ' + pageName : ''}</title>
+    <link rel='manifest' href='../smartphoneOrchestra.webmanifest' crossorigin='use-credentials' />
+    <link rel='apple-touch-icon' href='./icons/smartphoneOrchestra_180x180.png' />
+  </head>
+  <body>
+    <Navigation pageName={pageName} pathNamePairs={allPathNamePairs} />
+    <Header title={pageTitle} pathNamePairs={allPathNamePairs} />
+    <slot />
+  </body>
+</html>
