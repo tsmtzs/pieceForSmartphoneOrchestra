@@ -32,7 +32,6 @@
       "type": "image/png"
     }
   ],
-  "start_url": "../",
-  "id": "/up_",
+  "start_url": "/",
   "orientation": "portrait"
 }

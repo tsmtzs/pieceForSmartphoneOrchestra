@@ -21,7 +21,7 @@ const pageName = allPathNamePairs.find(pair => pair[0] === pathName)[1]
     <meta http-equiv='Content-Security-Policy' content='upgrade-insecure-requests' />
     <meta name='generator' content={Astro.generator} />
     <title>{pageTitle} {pathName !== '/' ? ' | ' + pageName : ''}</title>
-    <link rel='manifest' href='../smartphoneOrchestra.webmanifest' crossorigin='use-credentials' />
+    <link rel='manifest' href='./smartphoneOrchestra.webmanifest' crossorigin='use-credentials' />
     <link rel='apple-touch-icon' href='./icons/smartphoneOrchestra_180x180.png' />
   </head>
   <body>
