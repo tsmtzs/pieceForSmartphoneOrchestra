@@ -3,7 +3,7 @@
 %
 % This XeLaTex file produces a pdf file with an icon. It should be
 % used in the PWA web manifest file.
-% 
+%
 % Convert the output pdf file to png:
 %       pdftoppm -r 720 -png pieceForSmartphoneOrchestraIcon.pdf smartphoneOrchestra
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -20,7 +20,7 @@
 
 % Colors
 \definecolor{background}{HTML}{222831}
-\definecolor{square}{HTML}{F96D00}
+\definecolor{color1}{HTML}{F96D00}
 
 \begin{document}
 \begin{tikzpicture}
@@ -29,6 +29,11 @@
   % Diagonal distance as point
   \coordinate (D) at (\diagonal, \diagonal);
   \fill [background] (0,0) rectangle (\squareSize, \squareSize);
-  \fill [square, rounded corners=2ex] ($(K) - (D)$) rectangle ($(K) + (D)$);
+  \fill [color1, rounded corners=2ex] ($(K) - (D)$) rectangle ($(K) + (D)$);
+  % \fill [background, rounded corners=2ex,rotate=45] ($(K) - (D)$) rectangle ($(K) + (D)$);
+  \fill [background,rounded corners=2ex,transform canvas={rotate around={45:(K)}}] ($(K) - 1*(D)$) rectangle ($(K) + 1*(D)$);
+  \fill [background,rounded corners=2ex,transform canvas={rotate around={0:(K)}}] ($(K) - 0.95*(D)$) rectangle ($(K) + 0.95*(D)$);
+  \fill [color1,rounded corners=2ex] ($(K) - 0.8*(D)$) rectangle ($(K) + 0.8*(D)$);
+  \draw [background,rounded corners=2ex,line width=0.05cm] ($(K) - 0.72*(D)$) rectangle ($(K) + 0.72*(D)$);
 \end{tikzpicture}
 \end{document}
