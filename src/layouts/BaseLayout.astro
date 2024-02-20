@@ -20,13 +20,12 @@ const pageName = allPathNamePairs.find(pair => pair[0] === pathName)[1]
 	  content='Piece for Smartphone Orchestra is a sound work for any number of players and indeterminate duration.' />
     <meta http-equiv='Content-Security-Policy' content='upgrade-insecure-requests' />
     <meta name='generator' content={Astro.generator} />
-    <title>Piece for smartphone orchestra {pathName !== '/' ? ' | ' + pageName : ''}</title>
+    <title>{pageTitle} {pathName !== '/' ? ' | ' + pageName : ''}</title>
     <link rel='manifest' href='../smartphoneOrchestra.webmanifest' crossorigin='use-credentials' />
     <link rel='apple-touch-icon' href='./icons/smartphoneOrchestra_180x180.png' />
   </head>
   <body>
-    <Navigation pageName={pageName} pathNamePairs={allPathNamePairs} />
-    <Header title={pageTitle} pathNamePairs={allPathNamePairs} />
+    <Header title={pageTitle} pageName={pageName} pathNamePairs={allPathNamePairs} />
     <slot />
   </body>
 </html>
