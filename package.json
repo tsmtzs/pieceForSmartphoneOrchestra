@@ -11,6 +11,7 @@
   "scripts": {
     "standard": "npx standard src/javascript/*.mjs",
     "test:client": "mocha test/client/*mjs",
+    "pwa-svg-icon": "xelatex --output-directory=./tikz tikz/pieceForSmartphoneOrchestraIcon && dvisvgm --pdf tikz/pieceForSmartphoneOrchestraIcon",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
