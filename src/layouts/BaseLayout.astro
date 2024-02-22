@@ -26,6 +26,8 @@ const pageName = allPathNamePairs.find(pair => pair[0] === pathName)[1]
   </head>
   <body>
     <Header title={pageTitle} pageName={pageName} pathNamePairs={allPathNamePairs} />
-    <slot />
+    <main>
+      <slot />
+    </main>
   </body>
 </html>
