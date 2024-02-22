@@ -12,6 +12,7 @@
     "standard": "npx standard src/javascript/*.mjs",
     "test:client": "mocha test/client/*mjs",
     "pwa-svg-icon": "xelatex --output-directory=./tikz tikz/pieceForSmartphoneOrchestraIcon && dvisvgm --pdf tikz/pieceForSmartphoneOrchestraIcon",
+    "build-png-icons": "for size in 48 72 96 144 192 256 384 512; do ffmpeg -i tikz/pieceForSmartphoneOrchestraIcon.svg -vf scale=${size}:-1 public/icons/smartphoneOrchestraIcon-${size}x${size}.png; done",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
