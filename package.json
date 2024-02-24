@@ -2,29 +2,23 @@
   "name": "pieceForSmartphoneOrchestra",
   "version": "2.2.0",
   "description": "A sound piece for smartphone orchestra.",
-  "config": {
-    "port": "8080",
-    "httpsPort": "8443",
-    "ip": "127.0.0.1",
-    "domainName": ""
-  },
   "scripts": {
     "standard": "npx standard src/javascript/*.mjs",
     "test:client": "mocha test/client/*mjs",
-    "mkcert": "mkcert -key-file certs/key.pem -cert-file certs/cert.pem localhost $npm_package_config_ip", 
     "create-icons-dir": "if [ ! -d public/icons ]; then mkdir public/icons; fi",
     "make-pdf-icon": "if [ ! -f tikz/pieceForSmartphoneOrchestraIcon.pdf ]; then xelatex --output-directory=./tikz tikz/pieceForSmartphoneOrchestraIcon; fi",
     "pwa-svg-icon": "npm run make-pdf-icon && dvisvgm --pdf tikz/pieceForSmartphoneOrchestraIcon",
     "premake-png-icons": "npm run make-pdf-icon && pdftoppm -r 720 -png -singlefile tikz/pieceForSmartphoneOrchestraIcon.pdf tikz/pieceForSmartphoneOrchestraIcon",
     "make-png-icons": "if [ ! -f public/icons/smartphoneOrchestraIcon-*.png ]; then for size in 32 48 72 96 144 192 256 384 512; do ffmpeg -i tikz/pieceForSmartphoneOrchestraIcon.png -vf scale=${size}:-1 public/icons/smartphoneOrchestra_${size}x${size}.png; done; fi",
-    "dev": "astro dev",
+    "dev": "astro dev --host",
     "start": "astro dev",
     "build": "npm run create-icons-dir && npm run make-png-icons && astro build",
-    "preview": "astro preview --host $npm_package_config_ip --port $npm_package_config_port"
+    "preview": "astro preview --host"
   },
   "author": "Tassos Tsesmetzis",
   "license": "ISC",
   "dependencies": {
+    "@vitejs/plugin-basic-ssl": "^1.1.0",
     "astro": "^4.3.6",
     "astrojs-service-worker": "^2.0.0"
   },
