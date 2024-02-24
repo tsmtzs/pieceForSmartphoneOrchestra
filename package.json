@@ -3,14 +3,15 @@
   "version": "2.2.0",
   "description": "A sound piece for smartphone orchestra.",
   "config": {
-    "httpPort": "8080",
+    "port": "8080",
     "httpsPort": "8443",
-    "serverIP": "192.168.10.2",
+    "ip": "127.0.0.1",
     "domainName": ""
   },
   "scripts": {
     "standard": "npx standard src/javascript/*.mjs",
     "test:client": "mocha test/client/*mjs",
+    "mkcert": "mkcert -key-file certs/key.pem -cert-file certs/cert.pem localhost $npm_package_config_ip", 
     "create-icons-dir": "if [ ! -d public/icons ]; then mkdir public/icons; fi",
     "make-pdf-icon": "if [ ! -f tikz/pieceForSmartphoneOrchestraIcon.pdf ]; then xelatex --output-directory=./tikz tikz/pieceForSmartphoneOrchestraIcon; fi",
     "pwa-svg-icon": "npm run make-pdf-icon && dvisvgm --pdf tikz/pieceForSmartphoneOrchestraIcon",
@@ -19,7 +20,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "npm run create-icons-dir && npm run make-png-icons && astro build",
-    "preview": "astro preview"
+    "preview": "astro preview --host $npm_package_config_ip --port $npm_package_config_port"
   },
   "author": "Tassos Tsesmetzis",
   "license": "ISC",

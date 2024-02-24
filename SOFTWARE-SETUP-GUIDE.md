@@ -16,35 +16,28 @@
 1. `Linux`
 
 	*Piece for Smartphone Orchestra* is developed on a `Linux` environment. In
-	particular, scripts from [package.json](package.json) employ 
+	particular, scripts from [package.json](package.json) employ
 	[`bash`](https://www.gnu.org/software/bash/) commands. Normally, the `bash` shell should
 	be part of any `Linux` distribution.
-	
-2. [`node.js`](https://nodejs.org/en/) (version `19.3.0`)
+
+2. [`node.js`](https://nodejs.org/en/) (version `21.6.0`)
 
 	`node.js` is a `JavaScript` runtime environment. Prebuild binaries should be found
 	in package repositories of the most common `Linux` distributions.
 
-3. [`npm`](https://docs.npmjs.com/cli/v7/commands/npm) (version `8.19.2`)
+3. [`npm`](https://docs.npmjs.com/cli/v7/commands/npm) (version `10.3.0`)
 
 	`npm` is a package manager for `node.js`. Install it from the package repository
 	of your `Linux` distribution.
 
-4. [`mkcert`](https://github.com/FiloSottile/mkcert) (version `1.4.3`)
-
-	The web server of *Piece for Smartphone Orchestra* distributes content over a TLS network.
-	`mkcert` is an easy to use program that produces TLS certificates for localy trusted networks.
-	To install it follow the directions in
-	[mkcert-installation](https://github.com/FiloSottile/mkcert#installation).
-	
-5. [`git`](https://git-scm.com/) (version `2.39.0`)
+5. [`git`](https://git-scm.com/) (version `2.43.0`)
 
 	`git` is a version control system. Install it from the package repository of your `Linux`
 	distribution.
 
 ### Optional
 
-- [`SuperCollider`](https://supercollider.github.io/) (version `3.12.2`) is an environment
+- [`SuperCollider`](https://supercollider.github.io/) (version `3.13.0`) is an environment
 	and programming language for audio synthesis and algorithmic composition. Install it
 	if you would like to hear a crude approximation of the piece. In such a case, use the
 	`SuperCollider` document [pieceSimulation.scd](supercollider/pieceSimulation.scd).
@@ -76,13 +69,8 @@ cd pieceForSmartphoneOrchestra
 
 ## Install `node.js` packages
 
-The web application of the piece is developed on [`node.js`](https://nodejs.org/en/) with
- the [`express`](https://expressjs.com/) framework. [`minimist`](https://github.com/substack/minimist)
-is used for parsing command line arguments. The application is bundled with
-[`parcel`](https://parceljs.org/). A manifest for the PWA service worker is generated with
-[`parcel-config-precache-manifest`](https://github.com/101arrowz/precache-manifest/tree/master/packages/parcel-config-precache-manifest).
-	
-To install all the required `node.js` packages run
+The web application of the piece is developed with the [`Astro`](https://astro.build/) web framework.
+To install all the required packages run
 
 ```bash
 npm install
@@ -142,7 +130,7 @@ Start the server with
 npm start
 ```
 
-Players can, now, open the browser and navigate to `http://serverIP:httpPort`, 
+Players can, now, open the browser and navigate to `http://serverIP:httpPort`,
 `https://serverIP:httpsPort` or `http://domainName:httpPort`. In this guide these
 should be `http://192.168.10.2:8080` etc. Upon first visit, a warning like *Your connection is not private*
 or *Your connection is not secure* might appear. This happens because the browser can't recognize the
@@ -154,7 +142,7 @@ root certificate to their device trust store. To download the certificate naviga
 `https://192.168.10.2:8443/rootCA.pem`. Installation to the trust store is device depended.
 In some cases, a message for installation will appear after the download is complete. In other cases
 the user should manually install it from the `Settings` menu of his/hers device. After the certificate
-is installed, 
+is installed,
 users can visit `https://192.168.10.2:8443` and select `Add to home screen` from browser's menu.
 
 ## After a performance
