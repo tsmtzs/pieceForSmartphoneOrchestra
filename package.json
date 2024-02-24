@@ -2,12 +2,6 @@
   "name": "pieceForSmartphoneOrchestra",
   "version": "2.2.0",
   "description": "A sound piece for smartphone orchestra.",
-  "config": {
-    "httpPort": "8080",
-    "httpsPort": "8443",
-    "serverIP": "192.168.10.2",
-    "domainName": ""
-  },
   "scripts": {
     "standard": "npx standard src/javascript/*.mjs",
     "test:client": "mocha test/client/*mjs",
@@ -16,22 +10,20 @@
     "pwa-svg-icon": "npm run make-pdf-icon && dvisvgm --pdf tikz/pieceForSmartphoneOrchestraIcon",
     "premake-png-icons": "npm run make-pdf-icon && pdftoppm -r 720 -png -singlefile tikz/pieceForSmartphoneOrchestraIcon.pdf tikz/pieceForSmartphoneOrchestraIcon",
     "make-png-icons": "if [ ! -f public/icons/smartphoneOrchestraIcon-*.png ]; then for size in 32 48 72 96 144 192 256 384 512; do ffmpeg -i tikz/pieceForSmartphoneOrchestraIcon.png -vf scale=${size}:-1 public/icons/smartphoneOrchestra_${size}x${size}.png; done; fi",
-    "dev": "astro dev",
+    "dev": "astro dev --host",
     "start": "astro dev",
     "build": "npm run create-icons-dir && npm run make-png-icons && astro build",
-    "preview": "astro preview"
+    "preview": "astro preview --host"
   },
   "author": "Tassos Tsesmetzis",
   "license": "ISC",
   "dependencies": {
+    "@vitejs/plugin-basic-ssl": "^1.1.0",
     "astro": "^4.3.6",
-    "astrojs-service-worker": "^2.0.0",
-    "express": "^4.18.2",
-    "minimist": "^1.2.8"
+    "astrojs-service-worker": "^2.0.0"
   },
   "devDependencies": {
     "chai": "^4.3.7",
-    "gh-pages": "^5.0.0",
     "mocha": "^10.2.0",
     "sinon": "^15.2.0",
     "standard": "^17.1.0"
