@@ -7,7 +7,7 @@
    H1 header /Piece for Smartphone Orchestra/ renders smaller in /instrument than in /index
    or /directions. (mobile chrome)
 
-** TODO Style <a> elements
+** DONE Style <a> elements
    Links between pages of the website appear very old-fashioned. Style them using responsive design?
    Add a drop down menu when screen size is small? ...
 
