@@ -19,7 +19,7 @@
   "license": "ISC",
   "dependencies": {
     "@vitejs/plugin-basic-ssl": "^1.1.0",
-    "astro": "^4.3.6",
+    "astro": "^4.4.4",
     "astrojs-service-worker": "^2.0.0"
   },
   "devDependencies": {
