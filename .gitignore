@@ -1,6 +1,5 @@
 node_modules/
 build/
-.parcel-cache
 dist/
 certs/
 **/*.*~
@@ -10,4 +9,3 @@ tikz/*.pdf
 **/*.aiff
 **/*.wav
 **/*.mp3
-**/*.png

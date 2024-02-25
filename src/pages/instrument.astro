@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import '../styles/globalStyles.css'
+
+const pageTitle = 'Piece for Smartphone Orchestra'
+const pathName = Astro.url.pathname
+---
+
+<BaseLayout pageTitle={pageTitle} pathName={pathName}>
+  <script is:inline>
+   const main = document.querySelector('main');
+   main.setAttribute('hidden', true)
+  </script>
+
+  <div id="bar"><div id="barPoint"></div><div id="barCenter"></div></div>
+  <div id="button-container">
+    <button type="button"></button>
+    <button type="button"></button>
+    <button type="button"></button>
+  </div>
+</BaseLayout>
+
+<script>
+ import "../javascript/instrument.js"
+</script>
+
+<style>
+ #bar {
+   border: solid var(--text-color) 1px;
+   height: 1em;
+   width: 80%;
+   position: relative;
+   margin: 20px auto 0 auto;
+ }
+
+ #barPoint {
+   background-color: var(--shiny-color);
+   margin-left: 48%;
+   height: 100%;
+   width: 4%;
+   position: absolute;
+ }
+
+ #barCenter {
+   margin-left: 48%;
+   border: solid var(--text-color) 3px;
+   height: 100%;
+   width: 4%;
+   position: absolute;
+   box-sizing: border-box;
+ }
+</style>

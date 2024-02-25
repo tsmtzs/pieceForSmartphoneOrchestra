@@ -1,0 +1,17 @@
+---
+import Navigation from './Navigation.astro'
+const { title, pageName, pathNamePairs } = Astro.props
+---
+
+<header>
+  <Navigation pageName={pageName} pathNamePairs={pathNamePairs} />
+  <h1>{title}</h1>
+</header>
+
+
+<style>
+ header {
+  max-width: inherit;
+  background-color: var(--background-color);
+ }
+</style>

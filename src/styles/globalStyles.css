@@ -3,11 +3,14 @@
     --text-color: #f0f0f0;
     --dark-color: #222831;
     --shiny-color: #f96d00;
+    --h1-font-size: 1.3rem;
+    --h2-font-size: 1.15rem;
 }
 
 html {
-    font-family: Verdana, Arial, sans-serif;
+    font-family: sans-serif;
     font-size: 16px;
+    letter-spacing: 0.03rem;
     line-height: 1.5;
     box-sizing: border-box;
 }
@@ -15,44 +18,46 @@ html {
 *,
 *::before,
 *::after {
-  box-sizing: inherit;
+    box-sizing: inherit;
 }
 
 body {
     background-color: var(--background-color);
     color: var(--text-color);
-    padding: 0 16px;
+    padding: 0 0.5rem;
     max-width: 800px;
-    margin: 0 auto;
+    margin: 0 0;
 }
 
-header {
-    background-color: var(--background-color);
+h1 {
+   margin-top: 3.3rem;
+   font-size: min(max(var(--h1-font-size), 1.8vw), 2rem);
+   line-height: 1;
+   text-align: center;
+   letter-spacing: 0.08rem;
 }
 
-header h1 {
-    text-align: center;
-    font-size: min(2.125rem, calc(1.3rem + 2vw));
+h2 {
+    font-size: min(max(var(--h2-font-size), 1.8vw), 1.28rem);
+    margin: 0;
+    padding: 0;
+    letter-spacing: 0.04rem;
+    font-style: normal;
+    font-weight: normal;
+    margin: 0 0 -1.0rem 0;
+}
+
+h2:first-child {
+    margin-top: 0.0rem;
 }
 
 main {
     background-color: var(--background-color);
 }
 
-main h2 {
-    font-size: min(1.875rem, calc(0.95rem + 1vw));
-    margin-bottom: 0rem;
-}
-
-main h2 + p,
-main h2 + ul {
-    margin-top: 0.0rem;
-}
-
 section {
     background-color: var(--background-color);
-    margin-bottom: 120px;
-    margin: auto;
+    padding: 0 0.5rem;
 }
 
 .italics {
@@ -62,11 +67,12 @@ section {
 #name {
     padding-right: 15px;
     text-align: right;
-    font-size:90%;
+    font-size: 0.9rem;
+    margin-top: -0.5rem;
 }
 
 #button-container {
-    height: 72vh;
+    height: 75vh;
     display: flex;
     flex-direction: column-reverse;
     justify-content: space-evenly;
@@ -89,14 +95,6 @@ button {
 .light {
     background-color: var(--shiny-color);
     transform: scale(0.9);
-}
-
-nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    width: 90%;
-    margin: 0 auto;
 }
 
 a {
@@ -123,6 +121,10 @@ a:active {
     color: #a0a0a0;
 }
 
+sup a {
+    font-size: 0.8rem;
+}
+
 ul {
     padding: inherit;
     list-style-position: outside;
@@ -130,16 +132,12 @@ ul {
 
 li {
     line-height: 1.9;
-    margin-left: 1em;
-}
-
-sup a {
-    font-size: 0.8rem;
+    margin-left: 1rem;
 }
 
 fn {
     display: block;
-    margin-top: 100px;
+    margin: 100px 0 2rem 0;
     padding-top: 10px;
     border-top: 1px solid var(--text-color);
     font-size: 0.9rem;
@@ -154,38 +152,8 @@ canvas {
     min-width: 200px;
 }
 
-#bar {
-    border: solid var(--text-color) 1px;
-    height: 1em;
-    width: 80%;
-    position: relative;
-    margin: 15px auto 0 auto;
-}
-
-#barPoint {
-    background-color: var(--shiny-color);
-    margin-left: 48%;
-    height: 100%;
-    width: 4%;
-    position: absolute;
-}
-
-#barCenter {
-    margin-left: 48%;
-    border: solid var(--text-color) 3px;
-    height: 100%;
-    width: 4%;
-    position: absolute;
-    box-sizing: border-box;
-}
-
 @media (min-width: 800px) {
-    nav {
-	justify-content: flex-end;
-	margin-right: 0;
-    }
-
-    nav > a:first-child {
-	margin-right: 0.5rem;
+    body {
+        margin: 0 auto;
     }
 }

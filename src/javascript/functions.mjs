@@ -193,7 +193,7 @@ function getErrorMsg (event) {
 function createStyledParagraphWithText (text) {
   const p = document.createElement('p')
   p.textContent = text
-  p.style.fontSize = '140%'
+  p.style.fontSize = '1.1rem'
   p.style.textAlign = 'center'
   p.style.color = TEXT_COLOR
   return p

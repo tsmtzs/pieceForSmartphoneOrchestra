@@ -14,8 +14,7 @@ import {
   angleBetweenVectors
 } from '../../src/javascript/mathFunctions.mjs'
 
-import pkg from 'chai'
-const { expect } = pkg
+import { expect } from 'chai'
 
 describe('Math functions.', function () {
   describe('map: Linear mapping [a, b] -> [c, d]', function () {

@@ -8,8 +8,7 @@ import {
   EventDispatcher
 } from '../../src/javascript/eventDispatchers.mjs'
 
-import pkg from 'chai'
-const { expect } = pkg
+import { expect } from 'chai'
 
 describe('EventDispatcher', function () {
   it("Getter 'sender' should return undefined when the object constructor is called with no arguments ", function () {

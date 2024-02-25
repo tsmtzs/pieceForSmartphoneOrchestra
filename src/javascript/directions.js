@@ -24,7 +24,7 @@ const gradientColor2 = fontColor
 
 // Coordinates
 const innerPos = (a, b, x) => map(x, 0, 1, a, b)
-const xA = 0.16
+const xA = 0.147
 const yA = 0.5
 const xB = 0.25
 const yBDiv = 0.04
@@ -32,7 +32,7 @@ const yB = yA - yBDiv
 const xC = 0.45
 const yCDiv = 0.4
 const yC = yA - yCDiv
-const xD = 0.9
+const xD = 0.895
 const yD = yA
 const yB2 = yA + yBDiv
 const yC2 = yA + yCDiv
@@ -67,7 +67,7 @@ ctx.fillStyle = backgroundColor
 ctx.fillRect(0, 0, width, height)
 // Font
 ctx.fillStyle = fontColor
-ctx.font = '0.9rem serif'
+ctx.font = '0.8rem sans-serif'
 ctx.textBaseline = 'middle'
 ctx.fillText('START', 0.01 * width, 0.5 * height)
 ctx.fillText('END', 0.9 * width, 0.5 * height)

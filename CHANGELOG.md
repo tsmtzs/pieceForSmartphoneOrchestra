@@ -9,6 +9,32 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Changed
 ### Removed
 
+## [3.0.0] - 2024-02-25
+### Added
+- The [`Astro`](https://astro.build/) web framework is used.
+	- File `astro.config.mjs`.
+	- Files under `public`:
+		- `icons/smartphoneOrchestra_*.png`,
+		- `robots.txt`.
+	- Files under `src`:
+		- `env.d.ts`
+		- `pages/index.astro`, `pages/instrument.astro`, `pages/directions.astro`,
+		- `layouts/BaseLayout.astro`,
+		- `components/Navigation.astro`, `components/Header.astro`.
+
+### Changed
+- File `src/smartphoneOrchestra.webmanifest` moved to `public`.
+- File `src/stylesheet/styles.css` renamed as `src/styles/globalStyles.css`. Changes in rule sets.
+	- Rules for `header` moved to `src/components/Header.astro`.
+	- Rules for `nav` moved to `src/components/Navigation.astro`.
+	- Rules for `#bar`, `#barPoint`, `#barCenter` moved to `src/pages/instrument.astro`.
+
+### Removed
+- Files `src/views/*.html`.
+- Files `backend/app.mjs` and `backend/server.mjs`.
+- File `src/serviceWorker.js`.
+- File `src/javascript/index.js`.
+
 ## [2.4.0] - 2023-08-20
 ### Changed
 - File `src/stylesheet.css` renamed as `styles.css` and moved under `src/stylesheet`.
