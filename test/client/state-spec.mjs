@@ -10,8 +10,7 @@ import {
   State
 } from '../../src/javascript/state.mjs'
 
-import pkg from 'chai'
-const { expect } = pkg
+import { expect } from 'chai'
 
 describe('State', function () {
   let states

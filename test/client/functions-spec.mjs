@@ -20,8 +20,7 @@ import {
 
 import sinon from 'sinon'
 
-import pkg from 'chai'
-const { expect } = pkg
+import { expect } from 'chai'
 
 describe("Tests for module 'functionsForPiece'.", function () {
   describe("Function 'getButtonListener'.", function () {
