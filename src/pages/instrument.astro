@@ -7,6 +7,11 @@ const pathName = Astro.url.pathname
 ---
 
 <BaseLayout pageTitle={pageTitle} pathName={pathName}>
+  <script is:inline>
+   const main = document.querySelector('main');
+   main.setAttribute('hidden', true)
+  </script>
+
   <div id="bar"><div id="barPoint"></div><div id="barCenter"></div></div>
   <div id="button-container">
     <button type="button"></button>
@@ -14,11 +19,6 @@ const pathName = Astro.url.pathname
     <button type="button"></button>
   </div>
 </BaseLayout>
-
-<script>
- const main = document.querySelector('main');
- main.setAttribute('hidden', true)
-</script>
 
 <script>
  import "../javascript/instrument.js"
