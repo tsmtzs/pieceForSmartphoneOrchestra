@@ -3,7 +3,7 @@ import Navigation from '../components/Navigation.astro'
 import Header from '../components/Header.astro'
 
 const { pageTitle, pathName } = Astro.props
-const allPathNamePairs = ['/pieceForSmartphoneOrchestra/', '/pieceForSmartphoneOrchestra/directions/', '/pieceForSmartphoneOrchestra/instrument/']
+const allPathNamePairs = ['/pieceForSmartphoneOrchestra', '/pieceForSmartphoneOrchestra/directions/', '/pieceForSmartphoneOrchestra/instrument/']
 .map(path => {
   const name = path.slice(29, -1)
   return [path, name === '' ? 'About' : name.replace(name[0], name[0].toUpperCase())]
