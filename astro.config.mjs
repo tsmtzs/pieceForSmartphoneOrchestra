@@ -4,6 +4,8 @@ import basicSsl from '@vitejs/plugin-basic-ssl'
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://tsmtzs.github.io',
+  base: 'pieceForSmartphoneOrchestra',
   integrations: [
     serviceWorker()
   ],
