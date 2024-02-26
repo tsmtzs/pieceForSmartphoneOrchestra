@@ -8,7 +8,7 @@ const allPathNamePairs = ['/pieceForSmartphoneOrchestra/', '/pieceForSmartphoneO
   const name = path.slice(29, -1)
   return [path, name === '' ? 'About' : name.replace(name[0], name[0].toUpperCase())]
 })
-const pageName = allPathNamePairs.find(pair => pair[0].slice(1,-1) === pathName.slice(1))[1]
+const pageName = allPathNamePairs.find(pair => pair[0] === pathName)[1]
 ---
 
 <html lang='en'>
@@ -22,7 +22,7 @@ const pageName = allPathNamePairs.find(pair => pair[0].slice(1,-1) === pathName.
     <link rel="icon" href="/pieceForSmartphoneOrchestra/icons/smartphoneOrchestra_32x32.png" type="image/png" />
     <link rel="manifest" href="/pieceForSmartphoneOrchestra/smartphoneOrchestra.webmanifest" crossorigin="anonymous" />
     <meta name='generator' content={Astro.generator} />
-    <title>{pageTitle} {pathName !== '/' ? ' | ' + pageName : ''}</title>
+    <title>{pageTitle} {pathName !== '/pieceForSmartphoneOrchestra' ? ' | ' + pageName : ''}</title>
   </head>
   <body>
     <Header title={pageTitle} pageName={pageName} pathNamePairs={allPathNamePairs} />
