@@ -8,8 +8,7 @@ const allPathNamePairs = ['/', '/directions/', '/instrument/']
   const name = path.slice(1, -1)
   return [path, name === '' ? 'About' : name.replace(name[0], name[0].toUpperCase())]
 })
-console.log('layout', allPathNamePairs)
-const pageName = allPathNamePairs.find(pair => { console.log('find', pair); return pair[0] === pathName })[1]
+const pageName = allPathNamePairs.find(pair => pair[0] === pathName )[1]
 ---
 
 <html lang='en'>
