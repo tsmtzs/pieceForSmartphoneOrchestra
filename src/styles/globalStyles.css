@@ -42,7 +42,7 @@ h1 {
 h2 {
     font-size: min(max(var(--h2-font-size), 1.8vw), 1.28rem);
     font-weight: bolder;
-    margin: 0;
+    width: 100%;
     padding: 0;
     letter-spacing: 0.04rem;
     margin: 0 0 -1.0rem 0;
@@ -58,7 +58,7 @@ main {
 
 section {
     background-color: var(--background-color);
-    padding: 0 0.5rem;
+    padding: 0 0.1rem;
 }
 
 .italics {
