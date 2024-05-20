@@ -57,6 +57,12 @@ const yControl2BC2 = yA + yControl2BCDiv
 const yControl1CD2 = yA + yControl1CDDiv
 const yControl2CD2 = yA + yControl2CDDiv
 
+const scale = 1.5 * window.devicePixelRatio
+canvas.width = Math.floor(width * scale)
+canvas.height = Math.floor(height * scale)
+
+ctx.scale(scale, scale)
+
 // Gradient
 const radialGrad = ctx.createRadialGradient(0.55 * width, 0.5 * height, 0.0 * width, 0.9 * height, 0.4 * height, 0.88 * width)
 radialGrad.addColorStop(0, gradientColor1)
