@@ -67,7 +67,7 @@ ctx.fillStyle = backgroundColor
 ctx.fillRect(0, 0, width, height)
 // Font
 ctx.fillStyle = fontColor
-ctx.font = '0.8rem sans-serif'
+ctx.font = "0.8rem system-ui, 'Segoe UI', Roboto, Arial, Helvetica, sans-serif"
 ctx.textBaseline = 'middle'
 ctx.fillText('START', 0.01 * width, 0.5 * height)
 ctx.fillText('END', 0.9 * width, 0.5 * height)
