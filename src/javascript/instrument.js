@@ -33,16 +33,24 @@ const main = document.querySelector('main')
 const bar = document.querySelector('#bar')
 const position = document.querySelector('#barPoint')
 
-const sensor = new window.RelativeOrientationSensor(SENSOR_OPTIONS)
-const context = new AudioContext()
+const errorListener = logErrorAfterElement(body)
 
-const sounds = createSoundObjectsFor(state, context)
-const updateView = getViewUpdaterFor(buttons, sounds)
-const updateBar = getSensorBarListener(bar, position)
+window.onerror = errorListener
 
-connectSensor(sensor)
-  .then(revealElement(main))
-  .then(attachListenerToState(updateView, state))
-  .then(addSoundListenerToSensor(sounds, sensor))
-  .then(addReadingListenerToSensor(updateBar, sensor))
-  .catch(logErrorAfterElement(body))
+if (window.RelativeOrientationSensor) {
+  const sensor = new window.RelativeOrientationSensor(SENSOR_OPTIONS)
+  const context = new AudioContext()
+
+  const sounds = createSoundObjectsFor(state, context)
+  const updateView = getViewUpdaterFor(buttons, sounds)
+  const updateBar = getSensorBarListener(bar, position)
+
+  connectSensor(sensor)
+    .then(revealElement(main))
+    .then(attachListenerToState(updateView, state))
+    .then(addSoundListenerToSensor(sounds, sensor))
+    .then(addReadingListenerToSensor(updateBar, sensor))
+    .catch(event => { errorListener(event.error) })
+} else {
+  throw new Error('RelativeOrientationSensor is not available on this device.')
+}
