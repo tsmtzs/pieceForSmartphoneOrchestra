@@ -9,6 +9,16 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Changed
 ### Removed
 
+## [3.1.0] - 2024-05-24
+### Added
+- Files `.github/workflows/astro.yml` and `.github/workflows/deploy`.
+### Changed
+- File `src/javascript/instrument.js`: an 'if' statement added for error handling.
+- File `src/pages/directions.astro`: internal anchor to footnote element modified.
+- File `src/styles/globalStyles.astro`:
+	- A font stack added as value to `font-family`.
+	- `font-weight` utilized to style text.
+
 ## [3.0.0] - 2024-02-25
 ### Added
 - The [`Astro`](https://astro.build/) web framework is used.

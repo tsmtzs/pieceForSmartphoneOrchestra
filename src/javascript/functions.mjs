@@ -112,23 +112,23 @@ function connectSensor (sensor) {
 }
 
 function revealElement (element) {
-  return () => {
+  return event => {
     element.hidden = false
     return Promise.resolve(true)
   }
 }
 
 function attachListenerToState (listener, state) {
-  return value => {
+  return () => {
     state.attachToListeners(listener)
-    return value
+    return Promise.resolve(true)
   }
 }
 
 function addSoundListenerToSensor (sounds, sensor) {
-  return value => {
+  return () => {
     sensor.addEventListener('reading', getSensorListener(sounds))
-    return value
+    return Promise.resolve(true)
   }
 }
 
@@ -167,26 +167,15 @@ function getSensorListener (sounds) {
 }
 
 function addReadingListenerToSensor (listener, sensor) {
-  return value => {
+  return () => {
     sensor.addEventListener('reading', listener)
   }
 }
 
 function logErrorAfterElement (element) {
-  return event => {
-    const msg = getErrorMsg(event)
-    const p = createStyledParagraphWithText(msg)
+  return error => {
+    const p = createStyledParagraphWithText(error.toString())
     element.after(p)
-  }
-}
-
-function getErrorMsg (event) {
-  if (event.error.name === 'SecurityError') {
-    return `No permissions to use ${event.target.toString()}.`
-  } else if (event.error.name === 'NotReadableError') {
-    return `${event.target.toString()}  is not available on this device.`
-  } else {
-    return event.error
   }
 }
 

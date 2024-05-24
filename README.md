@@ -23,8 +23,7 @@ can add to their home screen and use offline. Sound is produced using the
 [Web Audio API](https://webaudio.github.io/web-audio-api/).
 Players can start/stop a tone by pressing a button. By rotating the device they control
 the amplitude and frequency deviation of a playing tone.
-
-[The web app of *Piece for Smartphone Orchestra* can be found at <https://tsmtzs.github.io/pieceForSmartphoneOrchestra>.]: #
+The web app of *Piece for Smartphone Orchestra* can be found at <https://tsmtzs.github.io/pieceForSmartphoneOrchestra>.
 
 The `SuperCollider` document [pieceSimulation.scd](supercollider/pieceSimulation.scd) can
 generate an approximation of the resulting sound.

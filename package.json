@@ -19,13 +19,13 @@
   "license": "ISC",
   "dependencies": {
     "@vitejs/plugin-basic-ssl": "^1.1.0",
-    "astro": "^4.4.4",
+    "astro": "^4.8.7",
     "astrojs-service-worker": "^2.0.0"
   },
   "devDependencies": {
-    "chai": "^5.1.0",
-    "mocha": "^10.3.0",
-    "sinon": "^17.0.1",
+    "chai": "^5.1.1",
+    "mocha": "^10.4.0",
+    "sinon": "^18.0.0",
     "standard": "^17.1.0"
   }
 }
