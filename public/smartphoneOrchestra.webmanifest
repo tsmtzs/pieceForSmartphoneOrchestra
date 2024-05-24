@@ -1,11 +1,16 @@
 {
   "name": "Piece for Smartphone Orchestra",
   "short_name": "Smartphone Orchestra",
-  "description": "A sound piece for a smartphone orchestra.",
+  "description": "A sound piece for a smartphones.",
   "display": "standalone",
   "background_color": "#393e46",
   "theme_color": "#222831",
   "icons": [
+    {
+      "src": "./icons/smartphoneOrchestra_32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
     {
       "src": "./icons/smartphoneOrchestra_48x48.png",
       "sizes": "48x48",
