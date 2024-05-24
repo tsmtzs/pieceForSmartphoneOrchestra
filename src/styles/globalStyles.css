@@ -122,10 +122,6 @@ a:active {
     color: #a0a0a0;
 }
 
-sup a {
-    font-size: 0.7em;
-}
-
 ul {
     padding: inherit;
     list-style-position: outside;
