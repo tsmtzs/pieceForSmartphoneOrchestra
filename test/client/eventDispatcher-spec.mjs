@@ -24,12 +24,12 @@ describe('EventDispatcher', function () {
     expect(dispatcher.sender).to.equal(sender)
   })
 
-  it("Method 'attach' should take function instances as arguments", function () {
+  it("Method 'attach' should accept function instances as arguments", function () {
     const dispatcher = new EventDispatcher()
     const fn = () => 100
 
     expect(() => { dispatcher.attach(fn) }).to.not.throw()
-    // expect(() => { dispatcher.attach(10) }).to.throw()
+    expect(() => { dispatcher.attach(10) }).to.throw()
   })
 
   it("Method 'remove' should remove the given listener function from 'listeners'", function () {
@@ -64,7 +64,7 @@ describe('EventDispatcher', function () {
     expect(dispatcher.listeners[1] === fn2).to.be.true
   })
 
-  it("Method 'clear' should empty the array of listeners", function () {
+  it("Method 'clear' should empty the set of listeners", function () {
     const dispatcher = new EventDispatcher()
     const fn1 = (sender, val) => val + 1
     const fn2 = (sender, val) => val * 3
@@ -80,7 +80,7 @@ describe('EventDispatcher', function () {
     expect(dispatcher.listeners.length).to.equal(0)
   })
 
-  it("Method 'isEmpty' should return the correct value", function () {
+  it("Method 'isEmpty' should return true when there are not attached listeners, and false otherwise", function () {
     const dispatcher = new EventDispatcher()
     const fn1 = (sender, val) => val + 1
     const fn2 = (sender, val) => val * 3
@@ -96,7 +96,7 @@ describe('EventDispatcher', function () {
     expect(dispatcher.isEmpty()).to.be.true
   })
 
-  it("Method 'notify' should call the listeners passing sender as the first argument", function () {
+  it("Method 'notify' should call each listeners passing sender as the first argument", function () {
     const sender = 10
     const dispatcher = new EventDispatcher(sender)
     let testVal = 0
