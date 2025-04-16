@@ -22,7 +22,7 @@ describe('State', function () {
   })
 
   it('Constructor should throw when the neutral state is given as an argument.', function () {
-    expect(() => { new State(State.NEUTRAL, 0, 1) }).to.throw()
+    expect(() => new State(State.NEUTRAL, 0, 1)).to.throw()
   })
 
   it("Method 'changeTo' should throw an Error when argument is not a valid state.", function () {
@@ -34,7 +34,7 @@ describe('State', function () {
   it("Getter method 'allStates' should return an Array instance with elements the elements of the property 'allStates'.", function () {
     const statesArray = state.allStates
 
-    expect(statesArray instanceof Array).to.be.true
+    expect(statesArray).to.be.an('array')
     expect(statesArray.length).to.equal(states.length)
     expect(statesArray.every(elem => states.includes(elem))).to.be.true
     expect(states.every(elem => statesArray.includes(elem))).to.be.true
