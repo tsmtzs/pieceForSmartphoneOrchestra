@@ -3,7 +3,7 @@
   "version": "2.2.0",
   "description": "A sound piece for smartphone orchestra.",
   "scripts": {
-    "standard": "npx standard src/javascript/*.mjs",
+    "lint": "npx standard src/javascript/*.mjs",
     "test:client": "mocha test/client/*mjs",
     "create-icons-dir": "if [ ! -d public/icons ]; then mkdir public/icons; fi",
     "make-pdf-icon": "if [ ! -f tikz/pieceForSmartphoneOrchestraIcon.pdf ]; then xelatex --output-directory=./tikz tikz/pieceForSmartphoneOrchestraIcon; fi",
@@ -18,14 +18,14 @@
   "author": "Tassos Tsesmetzis",
   "license": "ISC",
   "dependencies": {
-    "@vitejs/plugin-basic-ssl": "^1.1.0",
-    "astro": "^4.8.7",
+    "@vitejs/plugin-basic-ssl": "^2.0.0",
+    "astro": "^5.7.0",
     "astrojs-service-worker": "^2.0.0"
   },
   "devDependencies": {
-    "chai": "^5.1.1",
-    "mocha": "^10.4.0",
-    "sinon": "^18.0.0",
-    "standard": "^17.1.0"
+    "chai": "^5.2.0",
+    "mocha": "^11.1.0",
+    "sinon": "^20.0.0",
+    "standard": "^17.1.2"
   }
 }
