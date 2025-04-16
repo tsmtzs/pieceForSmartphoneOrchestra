@@ -101,14 +101,12 @@ function getSensorBarListener (barElement, barPointElement) {
 }
 
 function connectSensor (sensor) {
-  const promise = new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     sensor.start()
 
     sensor.addEventListener('error', reject)
     sensor.addEventListener('activate', resolve, { once: true })
   })
-
-  return promise// .catch(sensorErrorListener)
 }
 
 function revealElement (element) {
