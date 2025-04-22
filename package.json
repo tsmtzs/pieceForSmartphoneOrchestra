@@ -10,8 +10,8 @@
     "pwa-svg-icon": "npm run make-pdf-icon && dvisvgm --pdf tikz/pieceForSmartphoneOrchestraIcon",
     "premake-png-icons": "npm run make-pdf-icon && pdftoppm -r 720 -png -singlefile tikz/pieceForSmartphoneOrchestraIcon.pdf tikz/pieceForSmartphoneOrchestraIcon",
     "make-png-icons": "if [ ! -f public/icons/smartphoneOrchestra_*.png ]; then for size in 32 48 72 96 144 192 256 384 512; do ffmpeg -i tikz/pieceForSmartphoneOrchestraIcon.png -vf scale=${size}:-1 public/icons/smartphoneOrchestra_${size}x${size}.png; done; fi",
-    "dev": "astro dev --host",
-    "start": "astro dev",
+    "start": "astro dev --host --force",
+    "dev": "npm start",
     "build": "npm run create-icons-dir && npm run make-png-icons && astro build",
     "preview": "astro preview --host"
   },

@@ -170,14 +170,14 @@ function addReadingListenerToSensor (listener, sensor) {
   }
 }
 
-function logErrorAfterElement (element) {
+function logErrorAfterElement (element, document) {
   return error => {
-    const p = createStyledParagraphWithText(error.toString())
+    const p = createStyledParagraphWithText(error.toString(), document)
     element.after(p)
   }
 }
 
-function createStyledParagraphWithText (text) {
+function createStyledParagraphWithText (text, document) {
   const p = document.createElement('p')
   p.textContent = text
   p.style.fontSize = '1.1rem'

@@ -33,7 +33,7 @@ const main = document.querySelector('main')
 const bar = document.querySelector('#bar')
 const position = document.querySelector('#barPoint')
 
-const errorListener = logErrorAfterElement(body)
+const errorListener = logErrorAfterElement(body, document)
 
 window.onerror = errorListener
 
