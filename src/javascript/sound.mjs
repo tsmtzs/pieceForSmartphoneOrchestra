@@ -34,7 +34,6 @@ class Oscillator {
 
   start ({ out, freq, amp, detune, fadeIn, type, time = 0.0 } = {}) {
     if (!this.#isPlaying) {
-      this.#context.resume()
       this.#source = this.#context.createOscillator()
       this.#source.type = type ?? this.#type ?? 'sine'
       this.#source.frequency.value = freq ?? this.#freq ?? 440

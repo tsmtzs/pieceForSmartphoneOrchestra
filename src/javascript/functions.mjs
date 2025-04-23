@@ -54,13 +54,12 @@ function getButtonListener (state) {
 }
 
 function createSoundObjectsFor (state, audioContext) {
-  const sounds = state.allStates
+  return state
+    .allStates
     .map(aStateIndex => Oscillator.of({
       freq: (2 ** aStateIndex) * BASE_FREQ, amp: 0.0, fadeIn: FADE_IN, fadeOut: FADE_OUT, context: audioContext
     })
     )
-
-  return sounds
 }
 
 function getViewUpdaterFor (buttons, sounds) {
@@ -100,33 +99,16 @@ function getSensorBarListener (barElement, barPointElement) {
   }
 }
 
-function connectSensor (sensor) {
-  return new Promise((resolve, reject) => {
-    sensor.start()
+function connectSensor (sensor, main) {
+  sensor.start()
 
-    sensor.addEventListener('error', reject)
-    sensor.addEventListener('activate', resolve, { once: true })
-  })
+  sensor.addEventListener('error', event => { throw Error(event.error) })
+  sensor.addEventListener('activate', revealElement(main), { once: true })
 }
 
 function revealElement (element) {
   return event => {
     element.hidden = false
-    return Promise.resolve(true)
-  }
-}
-
-function attachListenerToState (listener, state) {
-  return () => {
-    state.attachToListeners(listener)
-    return Promise.resolve(true)
-  }
-}
-
-function addSoundListenerToSensor (sounds, sensor) {
-  return () => {
-    sensor.addEventListener('reading', getSensorListener(sounds))
-    return Promise.resolve(true)
   }
 }
 
@@ -164,12 +146,6 @@ function getSensorListener (sounds) {
   }
 }
 
-function addReadingListenerToSensor (listener, sensor) {
-  return () => {
-    sensor.addEventListener('reading', listener)
-  }
-}
-
 function logErrorAfterElement (element, document) {
   return error => {
     const p = createStyledParagraphWithText(error.toString(), document)
@@ -193,10 +169,7 @@ export {
   getSensorListener,
   getSensorBarListener,
   logErrorAfterElement,
-  attachListenerToState,
   createSoundObjectsFor,
   connectSensor,
-  addSoundListenerToSensor,
-  addReadingListenerToSensor,
   revealElement
 }
