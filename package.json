@@ -4,21 +4,24 @@
   "description": "A sound piece for smartphone orchestra.",
   "config": {
     "colors": {
-      "background": "#393e46",
-      "text": "#f0f0f0",
-      "dark": "#222831",
+      "background": "393e46",
+      "text": "f0f0f0",
+      "dark": "222831",
       "shiny": "f96d00"
+    },
+    "icon": {
+      "diagonal": "1.5cm"
     }
   },
   "scripts": {
     "lint": "npx standard src/javascript/*.mjs",
     "test:client": "mocha test/client/*mjs",
     "create-icons-dir": "if [ ! -d public/icons ]; then mkdir public/icons; fi",
-    "make-pdf-icon": "if [ ! -f tikz/pieceForSmartphoneOrchestraIcon.pdf ]; then xelatex --output-directory=./tikz tikz/pieceForSmartphoneOrchestraIcon; fi",
+    "make-pdf-icon": "if [ ! -f tikz/pieceForSmartphoneOrchestraIcon.pdf ]; then xelatex --output-directory=./tikz \"\\def\\diagonal{$npm_package_config_icon_diagonal} \\def\\backgroundColor{$npm_package_config_colors_dark} \\def\\frontColor{$npm_package_config_colors_shiny} \\input tikz/pieceForSmartphoneOrchestraIcon.tex\"; fi",
     "pwa-svg-icon": "npm run make-pdf-icon && dvisvgm --pdf tikz/pieceForSmartphoneOrchestraIcon",
     "premake-png-icons": "npm run make-pdf-icon && pdftoppm -r 720 -png -singlefile tikz/pieceForSmartphoneOrchestraIcon.pdf tikz/pieceForSmartphoneOrchestraIcon",
     "make-png-icons": "if [ ! -f public/icons/smartphoneOrchestra_*.png ]; then for size in 32 48 72 96 144 192 256 384 512; do ffmpeg -i tikz/pieceForSmartphoneOrchestraIcon.png -vf scale=${size}:-1 public/icons/smartphoneOrchestra_${size}x${size}.png; done; fi",
-    "start": "BACKGROUND_COLOR=$npm_package_config_colors_background TEXT_COLOR=$npm_package_config_colors_text DARK_COLOR=$npm_package_config_colors_dark SHINY_COLOR=$npm_package_config_colors_shiny astro dev --host --force",
+    "start": "BACKGROUND_COLOR=#$npm_package_config_colors_background TEXT_COLOR=#$npm_package_config_colors_text DARK_COLOR=#$npm_package_config_colors_dark SHINY_COLOR=#$npm_package_config_colors_shiny astro dev --host --force",
     "dev": "npm start",
     "build": "npm run create-icons-dir && npm run make-png-icons && astro build",
     "preview": "astro preview --host"
