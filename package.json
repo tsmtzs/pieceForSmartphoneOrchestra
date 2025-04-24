@@ -10,21 +10,22 @@
       "shiny": "f96d00"
     },
     "icon": {
-      "diagonal": "1.5cm"
+      "diagonal": "2.8cm"
     }
   },
   "scripts": {
     "lint": "npx standard src/javascript/*.mjs",
     "test:client": "mocha test/client/*mjs",
     "create-icons-dir": "if [ ! -d public/icons ]; then mkdir public/icons; fi",
-    "make-pdf-icon": "if [ ! -f tikz/pieceForSmartphoneOrchestraIcon.pdf ]; then xelatex --output-directory=./tikz \"\\def\\diagonal{$npm_package_config_icon_diagonal} \\def\\backgroundColor{$npm_package_config_colors_dark} \\def\\frontColor{$npm_package_config_colors_shiny} \\input tikz/pieceForSmartphoneOrchestraIcon.tex\"; fi",
-    "pwa-svg-icon": "npm run make-pdf-icon && dvisvgm --pdf tikz/pieceForSmartphoneOrchestraIcon",
+    "make-pdf-icon": "xelatex --output-directory=./tikz \"\\def\\diagonal{$npm_package_config_icon_diagonal} \\def\\backgroundColor{$npm_package_config_colors_dark} \\def\\frontColor{$npm_package_config_colors_shiny} \\input tikz/pieceForSmartphoneOrchestraIcon.tex\";",
+    "prepwa-svg-icon": "if [ ! -d src/images ]; then mkdir src/images; fi",
+    "pwa-svg-icon": "npm run make-pdf-icon; dvisvgm --pdf tikz/pieceForSmartphoneOrchestraIcon --stdout >> src/images/pieceForSmartphoneOrchestra.svg",
     "premake-png-icons": "npm run make-pdf-icon && pdftoppm -r 720 -png -singlefile tikz/pieceForSmartphoneOrchestraIcon.pdf tikz/pieceForSmartphoneOrchestraIcon",
-    "make-png-icons": "if [ ! -f public/icons/smartphoneOrchestra_*.png ]; then for size in 32 48 72 96 144 192 256 384 512; do ffmpeg -i tikz/pieceForSmartphoneOrchestraIcon.png -vf scale=${size}:-1 public/icons/smartphoneOrchestra_${size}x${size}.png; done; fi",
+    "make-png-icons": "for size in 32 48 72 96 144 192 256 384 512; do ffmpeg -i tikz/pieceForSmartphoneOrchestraIcon.png -vf scale=${size}:-1 public/icons/smartphoneOrchestra_${size}x${size}.png; done;",
     "start": "BACKGROUND_COLOR=#$npm_package_config_colors_background TEXT_COLOR=#$npm_package_config_colors_text DARK_COLOR=#$npm_package_config_colors_dark SHINY_COLOR=#$npm_package_config_colors_shiny astro dev --host --force",
     "dev": "npm start",
-    "build": "npm run create-icons-dir && npm run make-png-icons && astro build",
-    "preview": "astro preview --host"
+    "build": "npm run create-icons-dir && npm run make-pdf-icon && npm run make-png-icons && astro build",
+    "preview": "astro preview --host --force"
   },
   "author": "Tassos Tsesmetzis",
   "license": "ISC",
@@ -34,7 +35,6 @@
     "astrojs-service-worker": "^2.0.0"
   },
   "devDependencies": {
-    "astro-webmanifest": "^1.0.0",
     "chai": "^5.2.0",
     "mocha": "^11.1.0",
     "sinon": "^20.0.0",
