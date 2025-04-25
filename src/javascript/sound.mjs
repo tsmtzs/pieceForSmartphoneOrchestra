@@ -69,8 +69,10 @@ class Oscillator {
       this.#gain.gain.exponentialRampToValueAtTime(1e-8, t1)
       this.#source.stop(t1)
 
-      setTimeout(this.disconnect.bind(this), (time + fadeTime + 0.01) * 1000)
-      this.#switchIsPlaying()
+      setTimeout(() => {
+        this.disconnect()
+        this.#switchIsPlaying()
+      }, (time + fadeTime + 0.01) * 1000)
     }
   }
 
@@ -123,6 +125,12 @@ class Oscillator {
     }
 
     return this
+  }
+
+  addEndedListener (listener, options) {
+    if (this.#source) {
+      this.#source.addEventListener('ended', listener, options)
+    }
   }
 }
 
