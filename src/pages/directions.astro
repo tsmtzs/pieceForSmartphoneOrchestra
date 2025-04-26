@@ -1,11 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 
-const pageTitle = 'Piece for Smartphone Orchestra'
-const pathName = Astro.url.pathname
+export const order = 1
 ---
 
-<BaseLayout pageTitle={pageTitle} pathName={pathName}>
+<BaseLayout>
   <section>
     <h2>Directions</h2>
     <ul>
@@ -35,5 +34,5 @@ const pathName = Astro.url.pathname
 </BaseLayout>
 
 <script>
- import '../javascript/directions.js'
+ import '../javascript/directions.mjs'
 </script>

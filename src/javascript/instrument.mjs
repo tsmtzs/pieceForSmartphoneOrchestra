@@ -40,7 +40,7 @@ if (window.RelativeOrientationSensor) {
   const context = new AudioContext()
 
   const sounds = createSoundObjectsFor(state, context)
-  const updateView = getViewUpdaterFor(buttons, sounds)
+  const updateView = getViewUpdaterFor(buttons, sounds, context)
   const updateBar = getSensorBarListener(bar, position)
 
   connectSensor(sensor, main)

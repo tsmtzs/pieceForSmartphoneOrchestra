@@ -4,6 +4,7 @@ import basicSsl from '@vitejs/plugin-basic-ssl'
 
 export default defineConfig({
   site: 'https://tsmtzs.github.io/pieceForSmartphoneOrchestra/',
+  trailingSlash: 'never',
   integrations: [
     serviceWorker()
   ],
