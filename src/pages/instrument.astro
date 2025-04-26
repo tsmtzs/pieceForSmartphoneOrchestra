@@ -1,11 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 
-const pageTitle = 'Piece for Smartphone Orchestra'
-const pathName = Astro.url.pathname
+export const order = 2
 ---
 
-<BaseLayout pageTitle={pageTitle} pathName={pathName}>
+<BaseLayout>
   <script is:inline>
    const main = document.querySelector('main');
    main.setAttribute('hidden', true)

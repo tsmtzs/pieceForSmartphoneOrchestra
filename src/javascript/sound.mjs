@@ -134,6 +134,69 @@ class Oscillator {
   }
 }
 
+class SoundCoordinator {
+  #playingSynths = []
+  #synth
+
+  static of (aSoundClass) {
+    return new SoundCoordinator(aSoundClass)
+  }
+
+  constructor (aSoundClass) {
+    if (!aSoundClass) {
+      throw Error('ButtonSoundCoordinator should be called with one argument which is a constructor function that builds objects with methods start, stop, setAmpMultiplier, setFreq, setCutoffFreq.')
+    }
+
+    this.#synth = aSoundClass
+  }
+
+  get synth () {
+    return this.#synth
+  }
+
+  start (params) {
+    this.#playingSynths.push(this.#synth.of(params))
+    this.#playingSynths.at(-1).start()
+  }
+
+  stop (params) {
+    const lastSynth = this.#playingSynths.at(-1)
+    if (lastSynth) {
+      this.#addDestroyedListenerTo(lastSynth)
+
+      lastSynth.stop(params)
+    }
+  }
+
+  #addDestroyedListenerTo (aSynth) {
+    aSynth.addEndedListener(
+      () => {
+        this.#playingSynths = this.#playingSynths.filter(synth => synth !== aSynth)
+      },
+      { once: true }
+    )
+  }
+
+  setFreq (params) {
+    for (const synth of this.#playingSynths) {
+      synth.setFreq(params)
+    }
+  }
+
+  setAmp (params) {
+    for (const synth of this.#playingSynths) {
+      synth.setAmp(params)
+    }
+  }
+
+  setDetune (params) {
+    for (const synth of this.#playingSynths) {
+      synth.setDetune(params)
+    }
+  }
+}
+
 export {
-  Oscillator
+  Oscillator,
+  SoundCoordinator
 }

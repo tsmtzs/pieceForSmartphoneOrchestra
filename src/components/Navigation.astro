@@ -1,13 +1,18 @@
 ---
-const { pageName, pathNamePairs } = Astro.props
+const allRoutes = Object.values(import.meta.glob('../pages/**/*.astro', { eager: true }))
+.filter(page => page.url !== '/sound-test')
+.sort((page1, page2) => page1.order - page2.order)
+.map(page => page.url)
+.map(url => url === '' ? '/' : url)
 ---
 
 <nav>
-  {pathNamePairs.map(path => {
-  const currentPage = pageName === path[1]
+  {allRoutes.map(path => {
+  const currentPage = path === Astro.url.pathname
   ? 'currentPage'
   : ''
-  return <a href={path[0]} class={currentPage}>{path[1]}</a>
+  const linkText = path === '/' ? 'About' : path.charAt(1).toUpperCase() + path.slice(2)
+  return <a href={path} class={currentPage}>{linkText}</a>
   })}
 </nav>
 

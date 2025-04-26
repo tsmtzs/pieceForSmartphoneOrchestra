@@ -6,14 +6,6 @@ const backgroundColor = import.meta.env.BACKGROUND_COLOR
 const textColor = import.meta.env.TEXT_COLOR
 const darkColor = import.meta.env.DARK_COLOR
 const shinyColor = import.meta.env.SHINY_COLOR
-
-const { pageTitle, pathName } = Astro.props
-const allPathNamePairs = ['/', '/directions/', '/instrument/']
-.map(path => {
-  const name = path.slice(1, -1)
-  return [path, name === '' ? 'About' : name.replace(name[0], name[0].toUpperCase())]
-})
-const pageName = allPathNamePairs.find(pair => pair[0] === pathName)[1]
 ---
 
 <html lang='en'>
@@ -27,10 +19,10 @@ const pageName = allPathNamePairs.find(pair => pair[0] === pathName)[1]
     <link rel="icon" href="icons/smartphoneOrchestra_32x32.png" type="image/png" />
     <link rel="manifest" href="smartphoneOrchestra.webmanifest" crossorigin="anonymous" />
     <meta name='generator' content={Astro.generator} />
-    <title>{pageTitle} {pathName !== '/' ? ' | ' + pageName : ''}</title>
+    <title>Piece for Smartphone Orchestra {Astro.url.pathname !== '/' ? ' : ' + Astro.url.pathname.split('/').at(-1) : ''}</title>
   </head>
   <body>
-    <Header title={pageTitle} pageName={pageName} pathNamePairs={allPathNamePairs} />
+    <Header />
     <main>
       <slot />
     </main>

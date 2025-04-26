@@ -23,7 +23,10 @@ import {
   angleBetweenVectors
 } from './mathFunctions.mjs'
 
-import { Oscillator } from './sound.mjs'
+import {
+  Oscillator,
+  SoundCoordinator
+} from './sound.mjs'
 
 function extendBtns (buttons, state) {
   buttons.forEach((btn, i) => {
@@ -56,21 +59,17 @@ function getButtonListener (state) {
 function createSoundObjectsFor (state, audioContext) {
   return state
     .allStates
-    .map(aStateIndex => Oscillator.of({
-      freq: (2 ** aStateIndex) * BASE_FREQ, amp: 0.0, fadeIn: FADE_IN, fadeOut: FADE_OUT, context: audioContext
-    })
-    )
+    .map(aStateIndex => SoundCoordinator.of(Oscillator))
 }
 
-function getViewUpdaterFor (buttons, sounds) {
+function getViewUpdaterFor (buttons, sounds, audioContext) {
   return state => {
-    if (!state.wasNeutral()) sounds[state.previous].stop()
-
+    if (!state.wasNeutral()) sounds[state.previous].stop({ fadeOut: FADE_OUT })
     if (state.isNeutral()) {
       buttons[state.previous]?.disable?.()
     } else {
       const indices = state.allStates.filter(st => st !== state.current)
-      sounds[state.current].start()
+      sounds[state.current].start({ freq: (2 ** state.current) * BASE_FREQ, amp: 0.0, detune: 0.0, fadeIn: FADE_IN, context: audioContext })
 
       buttons
         .filter(btn => indices.includes(btn.index))
