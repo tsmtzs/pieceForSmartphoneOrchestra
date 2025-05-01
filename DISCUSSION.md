@@ -2,14 +2,14 @@
 
 ## Introduction
 
-*Piece for Smartphone Orchestra* is a sound work for any number of players.
+*Piece for Smartphone Orchestra* is a sound art piece for any number of players.
 It is a manifestation of a *complex systems* view of the artwork. Form is a dynamic structure that depends on the interactions and choices of the
-performers. A [text score](score/pieceForSmartphoneOrchestra.pdf) directs the actions of the players. Also, by means of a graphic shape, it offers
+performers. A [text score](score/pieceForSmartphoneOrchestra.pdf) directs the actions of the players. Also, by means of graphics, it offers
 a vague idea about the form of the piece. The duration of the performance is indeterminate.
 
 Each player uses a smartphone to control a software synthesizer. The interface includes three buttons. It utilizes smartphone sensors to map
 device rotation angles to amplitude and frequency deviation. Each button starts/stops a tone. Tone frequencies center around
-`1244.507 Hz`, `2489.014 Hz` and `4978.031 Hz`. Rotation of the device modifies the frequency of each button to an interval with
+`1244.507 Hz`, `2489.014 Hz` and `4978.031 Hz`. Rotation of the device maps the frequency of each button to an interval with
 radius `100 cents` around the center frequency. The piece may be perceived as a potential aural game on *beat tones* and
 *otoacoustic emission effects*[^kendall-et-al]. It is an attempt to create with very little material, a varying iridescent soundscape.
 
