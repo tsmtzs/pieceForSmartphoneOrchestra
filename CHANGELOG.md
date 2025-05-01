@@ -9,6 +9,31 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Changed
 ### Removed
 
+## [3.2.0] - 2025-05-01
+### Added
+- `src/javascript/sound.mjs`: Class `SoundCoordinator`.
+### Changed
+- `src/components/Navigation.astro`:
+	- Component script:
+		- Use of `Astro.props` removed,
+		- constant `allRoutes` added.
+- `src/javascript/sound.mjs`:
+	- Class `Oscillator`:
+		- Method `addEndedListener` added,
+		- method `start`: the callback function of `setTimeout` changed.
+- `src/layouts/BaseLayout.astro`:
+	- Component script:
+		- Environment variables utilized to read colors,
+		- `globalStyles.css` imported.
+- `src/pages/index.astro`, `src/pages/discussion.astro`, `src/pages/instrument.astro`:
+	- Component script: constant `order` exported.
+- `src/javascript/instrument.mjs`:
+	- The Promise chain that initializes the sensor, sound and buttons, replaced with a series of
+	statements.
+- `src/javascript/functions.mjs`:
+	- Function '`getViewUpdaterFor`: argument `audioContext` added,
+	- function `createSoundObjectsFor`: `SoundCoordinator` replaced `Oscillator`.
+
 ## [3.1.0] - 2024-05-24
 ### Added
 - Files `.github/workflows/astro.yml` and `.github/workflows/deploy`.
