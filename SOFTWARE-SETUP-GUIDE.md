@@ -19,17 +19,17 @@
 	[`bash`](https://www.gnu.org/software/bash/) commands. Normally, the `bash` shell should
 	be part of any `Linux` distribution.
 
-2. [`node.js`](https://nodejs.org/en/) (version `21.6.0`)
+2. [`node.js`](https://nodejs.org/en/) (version `23.9.0`)
 
 	`node.js` is a `JavaScript` runtime environment. Prebuild binaries should be found
 	in package repositories of the most common `Linux` distributions.
 
-3. [`npm`](https://docs.npmjs.com/cli/v7/commands/npm) (version `10.3.0`)
+3. [`npm`](https://docs.npmjs.com/cli/v7/commands/npm) (version `11.3.0`)
 
 	`npm` is a package manager for `node.js`. Install it from the package repository
 	of your `Linux` distribution.
 
-5. [`git`](https://git-scm.com/) (version `2.43.0`)
+5. [`git`](https://git-scm.com/) (version `2.49.0`)
 
 	`git` is a version control system. Install it from the package repository of your `Linux`
 	distribution.

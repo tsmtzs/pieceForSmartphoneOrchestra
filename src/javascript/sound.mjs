@@ -34,7 +34,6 @@ class Oscillator {
 
   start ({ out, freq, amp, detune, fadeIn, type, time = 0.0 } = {}) {
     if (!this.#isPlaying) {
-      this.#context.resume()
       this.#source = this.#context.createOscillator()
       this.#source.type = type ?? this.#type ?? 'sine'
       this.#source.frequency.value = freq ?? this.#freq ?? 440
@@ -70,8 +69,10 @@ class Oscillator {
       this.#gain.gain.exponentialRampToValueAtTime(1e-8, t1)
       this.#source.stop(t1)
 
-      setTimeout(this.disconnect.bind(this), (time + fadeTime + 0.01) * 1000)
-      this.#switchIsPlaying()
+      setTimeout(() => {
+        this.disconnect()
+        this.#switchIsPlaying()
+      }, (time + fadeTime + 0.01) * 1000)
     }
   }
 
@@ -125,8 +126,77 @@ class Oscillator {
 
     return this
   }
+
+  addEndedListener (listener, options) {
+    if (this.#source) {
+      this.#source.addEventListener('ended', listener, options)
+    }
+  }
+}
+
+class SoundCoordinator {
+  #playingSynths = []
+  #synth
+
+  static of (aSoundClass) {
+    return new SoundCoordinator(aSoundClass)
+  }
+
+  constructor (aSoundClass) {
+    if (!aSoundClass) {
+      throw Error('ButtonSoundCoordinator should be called with one argument which is a constructor function that builds objects with methods start, stop, setAmpMultiplier, setFreq, setCutoffFreq.')
+    }
+
+    this.#synth = aSoundClass
+  }
+
+  get synth () {
+    return this.#synth
+  }
+
+  start (params) {
+    this.#playingSynths.push(this.#synth.of(params))
+    this.#playingSynths.at(-1).start()
+  }
+
+  stop (params) {
+    const lastSynth = this.#playingSynths.at(-1)
+    if (lastSynth) {
+      this.#addDestroyedListenerTo(lastSynth)
+
+      lastSynth.stop(params)
+    }
+  }
+
+  #addDestroyedListenerTo (aSynth) {
+    aSynth.addEndedListener(
+      () => {
+        this.#playingSynths = this.#playingSynths.filter(synth => synth !== aSynth)
+      },
+      { once: true }
+    )
+  }
+
+  setFreq (params) {
+    for (const synth of this.#playingSynths) {
+      synth.setFreq(params)
+    }
+  }
+
+  setAmp (params) {
+    for (const synth of this.#playingSynths) {
+      synth.setAmp(params)
+    }
+  }
+
+  setDetune (params) {
+    for (const synth of this.#playingSynths) {
+      synth.setDetune(params)
+    }
+  }
 }
 
 export {
-  Oscillator
+  Oscillator,
+  SoundCoordinator
 }

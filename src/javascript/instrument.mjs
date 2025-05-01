@@ -11,10 +11,7 @@ import {
   getViewUpdaterFor,
   getSensorBarListener,
   connectSensor,
-  revealElement,
-  attachListenerToState,
-  addSoundListenerToSensor,
-  addReadingListenerToSensor,
+  getSensorListener,
   logErrorAfterElement
 } from './functions.mjs'
 
@@ -33,24 +30,26 @@ const main = document.querySelector('main')
 const bar = document.querySelector('#bar')
 const position = document.querySelector('#barPoint')
 
-const errorListener = logErrorAfterElement(body)
+const errorListener = logErrorAfterElement(body, document)
 
 window.onerror = errorListener
+window.onunhandledrejection = aPromiseRejectionEvent => { throw Error(aPromiseRejectionEvent.reason) }
 
 if (window.RelativeOrientationSensor) {
   const sensor = new window.RelativeOrientationSensor(SENSOR_OPTIONS)
   const context = new AudioContext()
 
   const sounds = createSoundObjectsFor(state, context)
-  const updateView = getViewUpdaterFor(buttons, sounds)
+  const updateView = getViewUpdaterFor(buttons, sounds, context)
   const updateBar = getSensorBarListener(bar, position)
 
-  connectSensor(sensor)
-    .then(revealElement(main))
-    .then(attachListenerToState(updateView, state))
-    .then(addSoundListenerToSensor(sounds, sensor))
-    .then(addReadingListenerToSensor(updateBar, sensor))
-    .catch(event => { errorListener(event.error) })
+  connectSensor(sensor, main)
+
+  state.attachToListeners(updateView)
+
+  sensor.addEventListener('reading', getSensorListener(sounds))
+
+  sensor.addEventListener('reading', updateBar)
 } else {
   throw new Error('RelativeOrientationSensor is not available on this device.')
 }

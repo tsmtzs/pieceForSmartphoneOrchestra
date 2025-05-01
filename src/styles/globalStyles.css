@@ -110,16 +110,17 @@ a:visited {
     color: #fefefe;
 }
 
-a:focus {
-    color: var(--text-color);
+a:focus, a:focus-visible {
+    outline-color: var(--text-color);
+    outline-width: 0.2px;
 }
 
 a:hover {
-    color: #b9b9b9;
+    color: hsl(from var(--text-color) h s 80%);
 }
 
 a:active {
-    color: #a0a0a0;
+    color: hsl(from var(--text-color) h s 60%);
 }
 
 ul {
