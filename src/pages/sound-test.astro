@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+---
+
+<BaseLayout>
+  <div id="button-container">
+    <button type="button"></button>
+    <button type="button"></button>
+    <button type="button"></button>
+  </div>
+</BaseLayout>
+
+<script>
+ import {
+   extendBtns,
+   createSoundObjectsFor,
+   getViewUpdaterFor,
+   logErrorAfterElement
+ } from '../javascript/functions.mjs'
+
+ import { State } from '../javascript/state.mjs'
+
+ const state = new State(0, 1, 2)
+ const buttons = Array.from(document.querySelectorAll('button'))
+ extendBtns(buttons, state)
+
+ const body = document.querySelector('body')
+ const errorListener = logErrorAfterElement(body, document)
+
+ window.onerror = errorListener
+ window.onunhandledrejection = aPromiseRejectionEvent => { throw Error(aPromiseRejectionEvent.reason) }
+
+ const context = new AudioContext()
+
+ const sounds = createSoundObjectsFor(state, context)
+ const updateView = getViewUpdaterFor(buttons, sounds, context)
+ state.attachToListeners(updateView)
+</script>

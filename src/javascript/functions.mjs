@@ -23,7 +23,10 @@ import {
   angleBetweenVectors
 } from './mathFunctions.mjs'
 
-import { Oscillator } from './sound.mjs'
+import {
+  Oscillator,
+  SoundCoordinator
+} from './sound.mjs'
 
 function extendBtns (buttons, state) {
   buttons.forEach((btn, i) => {
@@ -54,24 +57,19 @@ function getButtonListener (state) {
 }
 
 function createSoundObjectsFor (state, audioContext) {
-  const sounds = state.allStates
-    .map(aStateIndex => Oscillator.of({
-      freq: (2 ** aStateIndex) * BASE_FREQ, amp: 0.0, fadeIn: FADE_IN, fadeOut: FADE_OUT, context: audioContext
-    })
-    )
-
-  return sounds
+  return state
+    .allStates
+    .map(aStateIndex => SoundCoordinator.of(Oscillator))
 }
 
-function getViewUpdaterFor (buttons, sounds) {
+function getViewUpdaterFor (buttons, sounds, audioContext) {
   return state => {
-    if (!state.wasNeutral()) sounds[state.previous].stop()
-
+    if (!state.wasNeutral()) sounds[state.previous].stop({ fadeOut: FADE_OUT })
     if (state.isNeutral()) {
       buttons[state.previous]?.disable?.()
     } else {
       const indices = state.allStates.filter(st => st !== state.current)
-      sounds[state.current].start()
+      sounds[state.current].start({ freq: (2 ** state.current) * BASE_FREQ, amp: 0.0, detune: 0.0, fadeIn: FADE_IN, context: audioContext })
 
       buttons
         .filter(btn => indices.includes(btn.index))
@@ -100,35 +98,16 @@ function getSensorBarListener (barElement, barPointElement) {
   }
 }
 
-function connectSensor (sensor) {
-  const promise = new Promise((resolve, reject) => {
-    sensor.start()
+function connectSensor (sensor, main) {
+  sensor.start()
 
-    sensor.addEventListener('error', reject)
-    sensor.addEventListener('activate', resolve, { once: true })
-  })
-
-  return promise// .catch(sensorErrorListener)
+  sensor.addEventListener('error', event => { throw Error(event.error) })
+  sensor.addEventListener('activate', revealElement(main), { once: true })
 }
 
 function revealElement (element) {
   return event => {
     element.hidden = false
-    return Promise.resolve(true)
-  }
-}
-
-function attachListenerToState (listener, state) {
-  return () => {
-    state.attachToListeners(listener)
-    return Promise.resolve(true)
-  }
-}
-
-function addSoundListenerToSensor (sounds, sensor) {
-  return () => {
-    sensor.addEventListener('reading', getSensorListener(sounds))
-    return Promise.resolve(true)
   }
 }
 
@@ -166,20 +145,14 @@ function getSensorListener (sounds) {
   }
 }
 
-function addReadingListenerToSensor (listener, sensor) {
-  return () => {
-    sensor.addEventListener('reading', listener)
-  }
-}
-
-function logErrorAfterElement (element) {
+function logErrorAfterElement (element, document) {
   return error => {
-    const p = createStyledParagraphWithText(error.toString())
+    const p = createStyledParagraphWithText(error.toString(), document)
     element.after(p)
   }
 }
 
-function createStyledParagraphWithText (text) {
+function createStyledParagraphWithText (text, document) {
   const p = document.createElement('p')
   p.textContent = text
   p.style.fontSize = '1.1rem'
@@ -195,10 +168,7 @@ export {
   getSensorListener,
   getSensorBarListener,
   logErrorAfterElement,
-  attachListenerToState,
   createSoundObjectsFor,
   connectSensor,
-  addSoundListenerToSensor,
-  addReadingListenerToSensor,
   revealElement
 }

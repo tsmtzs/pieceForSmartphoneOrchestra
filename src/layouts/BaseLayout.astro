@@ -1,14 +1,11 @@
 ---
-import Navigation from '../components/Navigation.astro'
 import Header from '../components/Header.astro'
+import '../styles/globalStyles.css'
 
-const { pageTitle, pathName } = Astro.props
-const allPathNamePairs = ['/pieceForSmartphoneOrchestra', '/pieceForSmartphoneOrchestra/directions/', '/pieceForSmartphoneOrchestra/instrument/']
-.map(path => {
-  const name = path.slice(29, -1)
-  return [path, name === '' ? 'About' : name.replace(name[0], name[0].toUpperCase())]
-})
-const pageName = allPathNamePairs.find(pair => pair[0] === pathName)[1]
+const backgroundColor = import.meta.env.BACKGROUND_COLOR
+const textColor = import.meta.env.TEXT_COLOR
+const darkColor = import.meta.env.DARK_COLOR
+const shinyColor = import.meta.env.SHINY_COLOR
 ---
 
 <html lang='en'>
@@ -18,16 +15,25 @@ const pageName = allPathNamePairs.find(pair => pair[0] === pathName)[1]
     <meta name='author' content='Tassos Tsesmetzis' />
     <meta name='description'
 	  content='Piece for Smartphone Orchestra is a sound work for any number of players and indeterminate duration.' />
-    <meta name="theme-color" content="#222831" />
-    <link rel="icon" href="/pieceForSmartphoneOrchestra/icons/smartphoneOrchestra_32x32.png" type="image/png" />
-    <link rel="manifest" href="/pieceForSmartphoneOrchestra/smartphoneOrchestra.webmanifest" crossorigin="anonymous" />
+    <meta name="theme-color" content={darkColor} />
+    <link rel="icon" href="icons/smartphoneOrchestra_32x32.png" type="image/png" />
+    <link rel="manifest" href="smartphoneOrchestra.webmanifest" crossorigin="anonymous" />
     <meta name='generator' content={Astro.generator} />
-    <title>{pageTitle} {pathName !== '/pieceForSmartphoneOrchestra' ? ' | ' + pageName : ''}</title>
+    <title>Piece for Smartphone Orchestra {Astro.url.pathname !== '/' ? ' | ' + Astro.url.pathname.split('/').at(-1) : ''}</title>
   </head>
   <body>
-    <Header title={pageTitle} pageName={pageName} pathNamePairs={allPathNamePairs} />
+    <Header />
     <main>
       <slot />
     </main>
   </body>
 </html>
+
+<style define:vars={{ backgroundColor, textColor, darkColor, shinyColor }}>
+ :root {
+   --background-color: var(--backgroundColor, #393e46);
+   --text-color: var(--textColor, #f0f0f0);
+   --dark-color: var(--darkColor, #222831);
+   --shiny-color: var(--shinyColor, #f96d00);
+ }
+</style>

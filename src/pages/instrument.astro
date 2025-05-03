@@ -1,12 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-import '../styles/globalStyles.css'
 
-const pageTitle = 'Piece for Smartphone Orchestra'
-const pathName = Astro.url.pathname
+export const order = 2
 ---
 
-<BaseLayout pageTitle={pageTitle} pathName={pathName}>
+<BaseLayout>
   <script is:inline>
    const main = document.querySelector('main');
    main.setAttribute('hidden', true)
@@ -21,7 +19,7 @@ const pathName = Astro.url.pathname
 </BaseLayout>
 
 <script>
- import "../javascript/instrument.js"
+ import "../javascript/instrument.mjs"
 </script>
 
 <style>

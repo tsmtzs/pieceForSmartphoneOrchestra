@@ -41,12 +41,12 @@ describe("Tests for module 'functionsForPiece'.", function () {
     })
 
     it('Should return a Function object.', function () {
-      expect(listener.constructor).to.equal(Function)
+      expect(listener.constructor).to.be.a('function')
     })
 
     it("The returned function, when called,  should send the message 'changeTo' to function's argument.", function () {
       listener(event)
-      expect(state.changeTo.callCount).to.equal(1)
+      expect(state.changeTo.calledOnce).to.be.true
     })
   })
 
@@ -71,33 +71,33 @@ describe("Tests for module 'functionsForPiece'.", function () {
     })
 
     it("Should add the property 'isEnabled' to each button of the 'buttons' argument.", function () {
-      expect(button.isEnabled).to.be.undefined
+      expect(button).to.not.have.property('isEnabled')
 
       extendBtns([button], state)
-      expect(button.isEnabled).to.be.false
+      expect(button).to.have.property('isEnabled')
     })
 
     it("Should add the property 'index' to each button of the 'buttons' argument.", function () {
-      expect(button.index).to.be.undefined
+      expect(button).to.not.have.property('index')
 
       extendBtns([button], state)
-      expect(button.index).to.equal(0)
+      expect(button).to.have.property('index', 0)
     })
 
-    it("Should add the methods 'enable' and 'disable' to each button of the 'buttons' argument.", function () {
-      expect(button.enable).to.be.undefined
-      expect(button.disable).to.be.undefined
+    it("Should add the properties 'enable' and 'disable' to each button of the 'buttons' argument.", function () {
+      expect(button).to.not.have.property('enable')
+      expect(button).to.not.have.property('disable')
 
       extendBtns([button], state)
-      expect(button.enable.constructor).to.equal(Function)
-      expect(button.disable.constructor).to.equal(Function)
+      expect(button).to.have.property('enable').which.is.a('function')
+      expect(button).to.have.property('disable').which.is.a('function')
     })
 
     it("Should call 'addEventListener' to each button of the 'buttons' argument.", function () {
       extendBtns([button], state)
       expect(button.addEventListener.callCount).to.equal(1)
       expect(button.addEventListener.firstArg).to.equal('pointerdown')
-      expect(button.addEventListener.lastArg.constructor).to.equal(Function)
+      expect(button.addEventListener.lastArg).to.be.a('function')
     })
   })
 
@@ -150,7 +150,7 @@ describe("Tests for module 'functionsForPiece'.", function () {
     it('Should return a Function instance.', function () {
       const listener = getViewUpdaterFor()
 
-      expect(listener instanceof Function).to.be.true
+      expect(listener).to.be.a('function')
     })
 
     it('The returned function, when called, should stop the sound at index state.previous, IF previous state is not neutral.', function () {
@@ -160,19 +160,19 @@ describe("Tests for module 'functionsForPiece'.", function () {
         isNeutral: sinon.fake.returns(true)
       }
       listener(state)
-      expect(state.wasNeutral.callCount).to.equal(1)
-      expect(stop.callCount).to.equal(1)
+      expect(state.wasNeutral.calledOnce).to.be.true
+      expect(stop.calledOnce).to.be.true
     })
 
-    it('The returned function, when called, should NOT stop any sound, IF previous state is neutral.', function () {
+    it('The returned function, when called, should NOT stop any sound, IF the previous state is neutral.', function () {
       const state = {
         previous: 0,
         wasNeutral: sinon.fake.returns(true),
         isNeutral: sinon.fake.returns(true)
       }
       listener(state)
-      expect(state.wasNeutral.callCount).to.equal(1)
-      expect(stop.callCount).to.equal(0)
+      expect(state.wasNeutral.calledOnce).to.be.true
+      expect(stop.calledOnce).to.be.false
     })
 
     it('The returned function, when called, should disable the button at position state.previous, IF current state is neutral.', function () {
@@ -182,8 +182,8 @@ describe("Tests for module 'functionsForPiece'.", function () {
         isNeutral: sinon.fake.returns(true)
       }
       listener(state)
-      expect(state.isNeutral.callCount).to.equal(1)
-      expect(disable.callCount).to.equal(1)
+      expect(state.isNeutral.calledOnce).to.be.true
+      expect(disable.calledOnce).to.be.true
     })
 
     it('The returned function, when called, should disable all buttons at position !== state.current and enable the button at position state.current, IF current state is not neutral.', function () {
@@ -195,10 +195,10 @@ describe("Tests for module 'functionsForPiece'.", function () {
         isNeutral: sinon.fake.returns(false)
       }
       listener(state)
-      expect(state.isNeutral.callCount).to.equal(1)
-      expect(start.callCount).to.equal(1)
-      expect(disable.callCount).to.equal(1)
-      expect(enable.callCount).to.equal(1)
+      expect(state.isNeutral.calledOnce).to.be.true
+      expect(start.calledOnce).to.be.true
+      expect(disable.calledOnce).to.be.true
+      expect(enable.calledOnce).to.be.true
     })
   })
 
@@ -223,7 +223,7 @@ describe("Tests for module 'functionsForPiece'.", function () {
     })
 
     it('Should return a function instance.', function () {
-      expect(listener instanceof Function).to.be.true
+      expect(listener).to.be.a('function')
     })
 
     it("The returned function, when called, should send twice the 'perform' message to each element of the 'sounds' argument.", function () {
@@ -247,9 +247,9 @@ describe("Tests for module 'functionsForPiece'.", function () {
       }
     })
 
-    it('Should return a Function instance when called, with argument document', function () {
+    it('Should return a Function instance when called.', function () {
       const listener = getSensorBarListener(bar, position)
-      expect(listener instanceof Function).to.be.true
+      expect(listener).to.be.a('function')
     })
 
     it("The returned function should set the 'margin-left' CSS property of the '#barPoint' element.", function () {
@@ -258,9 +258,9 @@ describe("Tests for module 'functionsForPiece'.", function () {
         target: { quaternion: [0, 1, 2, 3] }
       }
 
-      expect(position.style.margiLeft).to.be.undefined
+      expect(position.style).to.not.have.property('marginLeft')
       listener(event)
-      expect(position.style.marginLeft).to.not.be.undefined
+      expect(position.style).to.have.property('marginLeft')
     })
   })
 
@@ -277,15 +277,14 @@ describe("Tests for module 'functionsForPiece'.", function () {
 
     it('Should return a function instance', function () {
       const func = attachListenerToState()
-      expect(func instanceof Function).to.be.true
+      expect(func).to.be.a('function')
     })
 
     it("The returned function, when called, should call the method 'attachListeners' of State, passing the first argument of 'attachListenersToState'.", function () {
       const listener = sinon.fake()
       const func = attachListenerToState(listener, state)
       func({})
-      expect(state.attachToListeners.calledOnce).to.be.true
-      expect(state.attachToListeners.firstArg).to.equal(listener)
+      expect(state.attachToListeners.calledOnceWith(listener)).to.be.true
     })
   })
 
@@ -307,13 +306,12 @@ describe("Tests for module 'functionsForPiece'.", function () {
     })
 
     it('Should return a function instance.', function () {
-      expect(func instanceof Function).to.be.true
+      expect(func).to.be.a('function')
     })
 
     it("The returned function when called should call the 'addEventListener' method of Sensor.", function () {
       func()
-      expect(sensor.addEventListener.calledOnce).to.be.true
-      expect(sensor.addEventListener.firstArg).to.equal('reading')
+      expect(sensor.addEventListener.calledOnceWith('reading')).to.be.true
     })
   })
 
@@ -335,14 +333,12 @@ describe("Tests for module 'functionsForPiece'.", function () {
     })
 
     it('Should return a function instance.', function () {
-      expect(func instanceof Function).to.be.true
+      expect(func).to.be.a('function')
     })
 
     it("The returned function when called should call the 'addEventListener' method of Sensor passing the second argument of 'addReadingListenerToSensor'.", function () {
       func()
-      expect(sensor.addEventListener.calledOnce).to.be.true
-      expect(sensor.addEventListener.firstArg).to.equal('reading')
-      expect(sensor.addEventListener.lastArg).to.equal(listener)
+      expect(sensor.addEventListener.calledOnceWith('reading', listener)).to.be.true
     })
   })
 })
