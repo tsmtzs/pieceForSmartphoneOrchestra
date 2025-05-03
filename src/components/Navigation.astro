@@ -11,8 +11,8 @@ const allRoutes = Object.values(import.meta.glob('../pages/**/*.astro', { eager:
   const currentPage = path === Astro.url.pathname
   ? 'currentPage'
   : ''
-  const route = path.split('/')[1]
-  const linkText = path === 'pieceForSmartphoneOrchestra' ? 'About' : route.charAt(1).toUpperCase() + route.slice(2)
+  const route = path.split('/')[2]
+  const linkText = path === 'pieceForSmartphoneOrchestra' ? 'About' : route.charAt(0).toUpperCase() + route.slice(1)
   return <a href={path} class={currentPage}>{linkText}</a>
   })}
 </nav>
