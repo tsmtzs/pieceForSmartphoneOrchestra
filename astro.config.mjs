@@ -3,7 +3,7 @@ import serviceWorker from 'astrojs-service-worker'
 import basicSsl from '@vitejs/plugin-basic-ssl'
 
 export default defineConfig({
-  base: 'pieceForSmartphoneOrchestra',
+  base: '/pieceForSmartphoneOrchestra/',
   site: 'https://tsmtzs.github.io',
   trailingSlash: 'never',
   integrations: [
