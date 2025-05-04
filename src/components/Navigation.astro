@@ -4,7 +4,7 @@ const allRoutes = Object.values(import.meta.glob('../pages/**/*.astro', { eager:
 .sort((page1, page2) => page1.order - page2.order)
 .map(page => page.url)
 
-console.log('ALL ROUTES', Object.values(import.meta.glob('../pages/**/*.astro', { eager: true })))
+console.log('ALL ROUTES', allRoutes)
 ---
 
 <nav>
