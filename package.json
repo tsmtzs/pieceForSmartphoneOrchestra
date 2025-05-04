@@ -22,7 +22,7 @@
     "make-png-icons": "for size in 32 48 72 96 144 192 256 384 512; do ffmpeg -i tikz/pieceForSmartphoneOrchestraIcon.png -vf scale=${size}:-1 public/icons/smartphoneOrchestra_${size}x${size}.png; done;",
     "start": "BACKGROUND_COLOR=#$npm_package_config_colors_background TEXT_COLOR=#$npm_package_config_colors_text DARK_COLOR=#$npm_package_config_colors_dark SHINY_COLOR=#$npm_package_config_colors_shiny astro dev --host --force",
     "dev": "npm start",
-    "build": "npm run create-icons-dir && npm run make-pdf-icon && npm run make-png-icons && astro build",
+    "build": "astro build",
     "preview": "astro preview --host --force"
   },
   "author": "Tassos Tsesmetzis",
