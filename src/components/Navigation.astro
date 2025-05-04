@@ -3,6 +3,7 @@ const allRoutes = Object.values(import.meta.glob('../pages/**/*.astro', { eager:
 .filter(page => { console.log('URL: ', page.url); page.url !== '/pieceForSmartphoneOrchestra/sound-test'} )
 .sort((page1, page2) => page1.order - page2.order)
 .map(page => page.url)
+
 console.log('ALL ROUTES', Object.values(import.meta.glob('../pages/**/*.astro', { eager: true })))
 ---
 
@@ -11,8 +12,8 @@ console.log('ALL ROUTES', Object.values(import.meta.glob('../pages/**/*.astro', 
   const currentPage = path === Astro.url.pathname
   ? 'currentPage'
   : ''
-  console.log('PATH', Astro.url.pathname)
   const route = path.split('/')[2]
+  console.log('PATH', Astro.url.pathname, route)
   const linkText = path === '/pieceForSmartphoneOrchestra' ? 'About' : route.charAt(0).toUpperCase() + route.slice(1)
   return <a href={path} class={currentPage}>{linkText}</a>
   })}
