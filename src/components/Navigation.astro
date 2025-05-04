@@ -2,8 +2,8 @@
 const allRoutes = Object.values(import.meta.glob('../pages/**/*.astro', { eager: true }))
 .filter(page => { console.log('URL: ', page.url); page.url !== '/pieceForSmartphoneOrchestra/sound-test'} )
 .sort((page1, page2) => page1.order - page2.order)
-//.map(page => page.url)
-console.log('ALL ROUTES', allRoutes)
+.map(page => page.url)
+console.log('ALL ROUTES', Object.values(import.meta.glob('../pages/**/*.astro', { eager: true })))
 ---
 
 <nav>
